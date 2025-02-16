@@ -10,6 +10,7 @@ export default {
         transparent: 'transparent',
         point: '#395EA1',
         black: '#222',
+        red: '#FC0C48',
         gray: '#5E5B65',
         gray2: '#EFF0F0',
         gray3: '#D9D9D9',
