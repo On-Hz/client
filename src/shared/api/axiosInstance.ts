@@ -15,6 +15,8 @@ const requestHandler = (
   request: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
   // const authToken = store.getState().auth.user_info.apikey;
+  // request.baseURL = "https://example.com/api/data";
+
   const headers =
     request.headers instanceof AxiosHeaders
       ? request.headers
