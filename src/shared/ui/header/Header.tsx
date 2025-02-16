@@ -1,7 +1,23 @@
-export const Header = () => {
+import { Link } from "react-router-dom";
+import logo from "public/logo.png";
+import SearchIcon from '@mui/icons-material/Search';
+
+export const Header: React.FC = () => {
   return (
-    <header>
-      <h1>Header</h1>
+    <header className="border-b border-gray3">
+      <div className="flex items-center justify-between px-[20px] py-[38px]">
+        <Link to="/">
+          <img src={logo} alt="On-Hz"/>  
+        </Link>
+        <nav className="flex items-center">
+          <div className="mr-[24px] px-[12px] bg-gray2 rounded-[5px] w-[360px] h-[48px] flex items-center">
+            <input className="w-full h-full bg-transparent" type="text" placeholder="검색어를 입력해주세요."/>
+            <button><SearchIcon /></button>
+            </div>
+          <button className="text-black py-[10px] px-[12px] mr-[5px] transform hover:text-point transition-colors">로그인</button>
+          <button className="bg-black text-white border rounded-[5px] py-[10px] px-[12px] transform hover:bg-point transition-colors">회원가입</button>
+        </nav>
+      </div>
     </header>
   );
 };
