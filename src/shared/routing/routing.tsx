@@ -1,4 +1,5 @@
 import { AlbumPage } from "@/pages/album";
+import { ArtistPage } from "@/pages/artist";
 import { MainPage } from "@/pages/main";
 import { SearchPage } from "@/pages/search";
 import React from "react";
@@ -10,6 +11,7 @@ export const Routing: React.FC = () => {
       <Route path="/" element={<MainPage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/album" element={<AlbumPage />} />
+      <Route path="/artist/?" element={<ArtistPage />} />
     </Routes>
   );
 };
