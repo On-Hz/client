@@ -1,6 +1,6 @@
 import { getNavLinkClass } from "@/shared/helpers";
 import React from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 
 // ------------------- Hero Section -------------------
 function ArtistHero() {

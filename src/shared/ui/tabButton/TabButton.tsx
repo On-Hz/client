@@ -1,32 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 
-interface TabProps {
-    nameArr: string[];
-  }
+interface TabButtonProps {
+  text: string;
+  isActive: boolean;
+  onClick?: () => void;
+}
 
-
-
-export const TabButton = ({nameArr}: TabProps) => {
-    const [activeIdx, setActiveIdx] = useState<number | null>(null);
-
-    const onClick = (idx: number) => {
-        setActiveIdx(idx);
-    }
-
-    return (
-        <div>
-            {nameArr.map((name, idx) => (
-                <button 
-                    key={idx} 
-                    className={
-                        `
-                        ${activeIdx === idx ? "border-point text-point" : "border-gray5 text-black" }
-                        px-[12px] py-[6px] mr-[8px] border rounded-[8px] transform hover:border-point transition-colors  hover:text-point`
-                    }
-                    onClick={() => onClick(idx)}
-                >{name}</button>
-            ))}
-        </div>
-    )
+export const TabButton: React.FC<TabButtonProps> = ({
+  text,
+  isActive,
+  onClick,
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        px-[12px] py-[6px] mr-[8px] border rounded-[8px] transform transition-colors
+        ${
+          isActive
+            ? "border-point text-point"
+            : "border-gray5 text-black hover:border-point hover:text-point"
+        }
+      `}
+    >
+      {text}
+    </button>
+  );
 };
-  
