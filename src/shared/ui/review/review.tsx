@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import Rating from "@mui/material/Rating";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import RatingBox from '../\brating/rating';
 interface ReviewProps {
     userName: string,
     userImage?: string, 
@@ -29,7 +29,17 @@ export const ReviewCard = ({userName, userImage, reviewText, rating}: ReviewProp
                 <p className='font-bold text-gray pl-[12px]'>{userName}</p>
             </div>
             <div className='py-[15px]'>
-                <RatingBox rating={rating} />
+                <Rating 
+                    value={rating} readOnly
+                    sx={{
+                        '& .MuiRating-iconFilled': {
+                          color: '#FFD231', // 채워진 별 색상
+                        },
+                        '& .MuiRating-iconEmpty': {
+                          color: '#a1a1a1', // 비어있는 별 색상
+                        },
+                      }}
+                 />
             </div>
             <div className='min-h-[70px]'>
                 {reviewText}
