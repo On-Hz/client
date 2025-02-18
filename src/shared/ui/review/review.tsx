@@ -1,14 +1,15 @@
+import React, { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import React, { useState } from 'react';
-
+import RatingBox from '../\brating/rating';
 interface ReviewProps {
     userName: string,
     userImage?: string, 
     reviewText: string,
+    rating: number,
 }
 
-export const ReviewCard = ({userName, userImage, reviewText}: ReviewProps) => {
+export const ReviewCard = ({userName, userImage, reviewText, rating}: ReviewProps) => {
     const [liked, setLiked] = useState(false);
 
     const onClick = () => {
@@ -16,7 +17,7 @@ export const ReviewCard = ({userName, userImage, reviewText}: ReviewProps) => {
     }
 
     return (
-       <div className='px-[24px] py-[18px] bg-white border-gray3 border rounded-[8px]'>
+       <div className='mb-[24px] px-[24px] py-[18px] bg-white border-gray3 border rounded-[8px]'>
             <div className='flex items-center'>
                 <span className='w-[64px] h-[64px] rounded-[50%] overflow-hidden border border-gray3'>
                     {userImage ? (
@@ -28,7 +29,7 @@ export const ReviewCard = ({userName, userImage, reviewText}: ReviewProps) => {
                 <p className='font-bold text-gray pl-[12px]'>{userName}</p>
             </div>
             <div className='py-[15px]'>
-                별점 영역
+                <RatingBox rating={rating} />
             </div>
             <div className='min-h-[70px]'>
                 {reviewText}

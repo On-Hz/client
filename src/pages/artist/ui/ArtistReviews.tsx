@@ -1,4 +1,4 @@
-import { ReviewCard } from "@/shared/ui/review/review";
+import { ReviewCard } from "@/shared/ui/review/Review";
 
 interface ReviewProps {
   userName: string;

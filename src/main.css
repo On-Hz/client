@@ -4,7 +4,7 @@
 
 /* reset css */
 @layer base {
-    body { @apply min-w-[1080px] }
+    body { @apply min-w-[1280px] } /*앨범페이지 컨텐츠 찌그러져서 임시 1280*/
     ul li, ol li { @apply list-none m-0 p-0 }
     input::placeholder{ @apply text-gray3}
     button, input, textarea,
