@@ -12,7 +12,7 @@ export const InputBox = ({placeholder="", width, height = "40px"}: InputProps) =
                 height:height
             }}
         >
-           <input className="w-full h-full" placeholder={placeholder}/>
+           <input className="w-full h-full text-[14px]" placeholder={placeholder}/>
         </div>
     )
 };

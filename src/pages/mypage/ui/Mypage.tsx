@@ -5,8 +5,8 @@ import { BarChart, Bar, XAxis, ResponsiveContainer } from "recharts";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import { getNavLinkBlackClass } from "@/shared/helpers/getNavLinkBlackClass";
 import { RoundButton } from "@/shared/ui/roundButton/RoundButton";
-import { ReviewCard } from "@/shared/ui/review/Review";
 import styled from "styled-components";
+import { useModalStore } from "@/shared/stores";
 
 const ConTitle = styled.p`
     font-size:20px;
@@ -20,13 +20,6 @@ interface User {
     user_img?: string,
     email: string,
     password: string
-}
-interface ReviewItem {
-    id: number;
-    reviewer: string; // 리뷰어 이름
-    avatar: string; // 리뷰어 아바타
-    rating: number; // 별점 (0~5)
-    body: string; // 리뷰 내용 (본문만)
 }
 //
 const mockUser: User[] = [
@@ -49,22 +42,10 @@ const ratingData = [
     { rating: "4.5★", count: 3 },
     { rating: "5★", count: 7 },
 ];
-const mockReviews: ReviewItem[] = Array(6)
-.fill(null)
-.map((_, i) => ({
-    id: i,
-    reviewer: `Reviewer name ${i + 1}`,
-    avatar: `https://picsum.photos/40/40?random=${i}`,
-    rating: (i % 5) + 1,
-    body: `Review body ${
-    i + 1
-    } - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 
-    Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`, // 예시로 길게
-}));
 
 //
 const ProfileUi = () => {
+    const { openModal } = useModalStore();
     const user = mockUser[0];
     return (
         <div>
@@ -77,7 +58,11 @@ const ProfileUi = () => {
                             <PersonIcon style={{width:"100%",height:"100%"}} className="text-gray3"/>
                         )}
                     </div>
-                    <button className="text-point text-[13px] mt-5">프로필 수정</button>
+                    <button 
+                        className="text-point text-[13px] mt-5"
+                        onClick={() => openModal("profileModal")}>
+                        프로필 수정
+                    </button>
                 </div>
                 <div>
                     <p className="pb-[14px] text-[24px] font-semibold">{user.user_name}</p>
@@ -154,21 +139,6 @@ const TabMenuUi = () => {
         </div>
     )
 }
-const ReviewsUi = () => {
-    return (
-        <div className="mt-16">
-            <div className='flex justify-between pb-[20px]'>
-                <ConTitle>Reviews</ConTitle>
-                <RoundButton text="정렬" />
-            </div>
-            <div>
-                {mockReviews.map((review) => (
-                    <ReviewCard key={review.id} userName={review.reviewer} userImage={review.avatar} reviewText={review.body} rating={review.rating} />
-                ))}
-            </div>
-        </div>
-    )
-}
 
 export const MyPage: React.FC = () => {
     return (
@@ -179,8 +149,11 @@ export const MyPage: React.FC = () => {
             </div>
             <div>
                 <TabMenuUi />
-                <Outlet /> {/*확인 중 */}
-                <ReviewsUi />
+                <div className='mt-16 flex justify-between pb-[20px]'>
+                    <ConTitle>Reviews</ConTitle>
+                    <RoundButton text="정렬" />
+                </div>
+                <Outlet />
             </div>
        </div>
     )

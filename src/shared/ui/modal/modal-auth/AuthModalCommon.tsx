@@ -13,9 +13,9 @@ export function AuthCommon({ localMode }: AuthCommonProps) {
     <div className="mb-6">
       <div className="px-8 mb-6 text-center">
         {/* 로고 영역 */}
-        <img src={logo} alt="On-Hz" className="w-40 m-auto mb-1" />
+        <img src={logo} alt="On-Hz" className="w-28 m-auto mb-1" />
         {/* 로그인 / 회원가입 타이틀 */}
-        <h1 className="mb-6 text-2xl font-bold">
+        <h1 className="mb-6 text-5 text-gray">
           {localMode === "login" ? "로그인" : "회원가입"}
         </h1>
         {/* 소셜 로그인 버튼들 */}

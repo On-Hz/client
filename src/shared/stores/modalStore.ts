@@ -1,13 +1,18 @@
 import { create } from "zustand";
 
 interface ModalState {
-  isModalOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
+  modals: Record<string, boolean>;
+  // isModalOpen: boolean;
+  openModal: (modalName: string) => void;
+  closeModal: (modalName: string) => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
-  isModalOpen: false,
-  openModal: () => set({ isModalOpen: true }),
-  closeModal: () => set({ isModalOpen: false }),
+  modals: {}, // 모든 모달 상태를 초기화
+  // isModalOpen: false,
+  openModal: (modalName) =>
+    set((state) => ({ modals: { ...state.modals, [modalName]: true, isModalOpen: true} })),
+  closeModal: (modalName) =>
+    set((state) => ({ modals: { ...state.modals, [modalName]: false, isModalOpen: false  } })),
+
 }));

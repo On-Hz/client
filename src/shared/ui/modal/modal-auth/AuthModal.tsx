@@ -3,6 +3,7 @@ import ModalLayout from "../modalLayout";
 import { AuthCommon } from "./AuthModalCommon";
 import { useAuthModalStore } from "@/shared/stores";
 import { InputBox } from "../../inputBox/InputBox";
+import { ModalButton } from "../modal-button/ModalButton";
 
 export default function AuthModal() {
   const { isModalOpen, closeAuthModal, authMode } = useAuthModalStore();
@@ -34,10 +35,8 @@ export default function AuthModal() {
               <InputBox placeholder="비밀번호" width="100%" />
             </div>
             {/* 로그인 버튼 */}
-            <div className="flex justify-center mb-6">
-              <button className="w-full border border-point rounded-[4px] bg-point text-white px-[11px] py-[4px] transform hover:bg-white transition-colors hover:text-point hover:border-gray5">
-                로그인
-              </button>
+            <div className="mb-6">
+              <ModalButton text="로그인" width="100%"/>
             </div>
             <div className="flex mb-4 justify-self-center">
               <p className="text-xs text-point">비밀번호를 잊어버리셨나요?</p>
@@ -61,10 +60,8 @@ export default function AuthModal() {
               <InputBox placeholder="비밀번호" width="100%" />
             </div>
             {/* 회원가입 버튼 */}
-            <div className="flex justify-center mb-6">
-              <button className="w-full border border-point rounded-[4px] bg-point text-white px-[11px] py-[4px] transform hover:bg-white transition-colors hover:text-point hover:border-gray5">
-                회원가입
-              </button>
+            <div className="mb-6">
+              <ModalButton text="회원가입" width="100%"/>
             </div>
             {/* 전환 링크 */}
             <p className="text-sm text-center">

@@ -2,6 +2,8 @@ import { type ReactNode } from "react";
 import { Header } from "../header/Header";
 import { Footer } from "../footer/Footer";
 import AuthModal from "../modal/modal-auth/AuthModal";
+import { ProfileModal } from "../modal/modal-profile/ProfileModal";
+
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,6 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <main>{children}</main>
       <Footer />
       <AuthModal />
+      <ProfileModal />
     </div>
   );
 };
