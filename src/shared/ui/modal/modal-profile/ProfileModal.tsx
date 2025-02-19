@@ -49,7 +49,9 @@ export const ProfileModal: React.FC = () => {
                     <InputBox placeholder="변경할 비밀번호를 입력하세요." width="100%"/>
                     <InputBox placeholder="비밀번호 확인" width="100%"/>
                 </div>
-                <ModalButton text="회원가입" width="100%"/>
+                <div className="text-center">
+                    <ModalButton text="수정"/>
+                </div>
             </div>
         </ModalLayout>
     )

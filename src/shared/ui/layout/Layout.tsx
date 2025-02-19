@@ -3,6 +3,7 @@ import { Header } from "../header/Header";
 import { Footer } from "../footer/Footer";
 import AuthModal from "../modal/modal-auth/AuthModal";
 import { ProfileModal } from "../modal/modal-profile/ProfileModal";
+import { WriteReviewModal } from "../modal/modal-review/WriteReviewModal";
 
 
 interface LayoutProps {
@@ -17,6 +18,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Footer />
       <AuthModal />
       <ProfileModal />
+      <WriteReviewModal />
     </div>
   );
 };

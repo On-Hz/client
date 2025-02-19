@@ -6,6 +6,7 @@ import { RoundButton } from '@/shared/ui/roundButton/RoundButton';
 import { Button } from '@/shared/ui/button/Button';
 import { ReviewCard } from '@/shared/ui/review/Review';
 import styled from 'styled-components';
+import { useModalStore } from '@/shared/stores';
 
 const ConTitle = styled.p`
     font-size:20px;
@@ -138,6 +139,7 @@ const RatingDetailUi = () => {
     //총 별점
     //평균 별점
     //내 별점
+    const { openModal } = useModalStore();
     const album = mockAlbums[0];
     const rating = mockUserAlbumRating[0];
     return (
@@ -165,7 +167,10 @@ const RatingDetailUi = () => {
                 </li>
             </ul>
             <div className='flex justify-end mt-[18px]'>
-                <Button text="리뷰 작성"/>
+                  <Button 
+                        onClick={() => openModal("writeReviewModal")}
+                        text="리뷰 작성"
+                    />
             </div>
         </div>
     )

@@ -21,7 +21,7 @@ export default function ModalLayout({
         {showCloseButton && (
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 focus:outline-none"
+            className="absolute top-6 right-6 focus:outline-none"
           >
             <CloseIcon className="text-gray-600" />
           </button>
