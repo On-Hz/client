@@ -9,7 +9,7 @@ interface ModalLayoutProps {
   showCloseButton?: boolean;
 }
 
-export default function ModalLayout({
+export function ModalLayout({
   open,
   onClose,
   children,
