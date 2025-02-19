@@ -1,26 +1,26 @@
 import React from "react";
 import { useModalStore } from "@/shared/stores";
 import { InputBox } from "../../inputBox/InputBox";
-import PersonIcon from '@mui/icons-material/Person';
-import ModalLayout from "../modalLayout";
+import PersonIcon from "@mui/icons-material/Person";
+import { ModalLayout } from "../modalLayout";
 import { ModalButton } from "../modal-button/ModalButton";
 
 interface User {
-    user_id: number,
-    user_name: string,
-    user_img?: string,
-    email: string,
-    password: string
+  user_id: number;
+  user_name: string;
+  user_img?: string;
+  email: string;
+  password: string;
 }
 const mockUser: User[] = [
-    {
-        "user_id": 1,
-        "user_name": "강동원",
-        "user_img":"",
-        "email":"user@example.com",
-        "password":"************"
-    }
-]
+  {
+    user_id: 1,
+    user_name: "강동원",
+    user_img: "",
+    email: "user@example.com",
+    password: "************",
+  },
+];
 
 export const ProfileModal: React.FC = () => {
     const { modals, closeModal } = useModalStore();
