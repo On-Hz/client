@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ModalLayout from "../modalLayout";
 import { AuthCommon } from "./AuthModalCommon";
 import { useAuthModalStore } from "@/shared/stores";
+import { InputBox } from "../../inputBox/InputBox";
 
 export default function AuthModal() {
   const { isModalOpen, closeAuthModal, authMode } = useAuthModalStore();
@@ -21,26 +22,30 @@ export default function AuthModal() {
       onClose={closeAuthModal}
       showCloseButton={false}
     >
-      <div>
-        <AuthCommon />
+      <div className="w-[340px]">
+        {/* 공통 영역: 로고, SNS 아이콘, OR, 타이틀 */}
+        <AuthCommon localMode={localMode} />
+
         {localMode === "login" ? (
-          <div>
-            <h2 className="mb-4 text-xl font-bold">로그인</h2>
-            <div className="flex flex-col mb-4 space-y-2">
-              <input className="p-2 border" placeholder="이메일" />
-              <input
-                className="p-2 border"
-                placeholder="비밀번호"
-                type="password"
-              />
+          <div className="px-10">
+            {/* 입력 폼 */}
+            <div className="flex flex-col mb-6 space-y-2">
+              <InputBox placeholder="이메일" width="100%" />
+              <InputBox placeholder="비밀번호" width="100%" />
             </div>
-            <button className="w-full py-2 text-white bg-blue-500 rounded">
-              로그인
-            </button>
-            <p className="mt-4 text-sm text-center">
+            {/* 로그인 버튼 */}
+            <div className="flex justify-center mb-6">
+              <button className="w-full border border-point rounded-[4px] bg-point text-white px-[11px] py-[4px] transform hover:bg-white transition-colors hover:text-point hover:border-gray5">
+                로그인
+              </button>
+            </div>
+            <div className="flex mb-4 justify-self-center">
+              <p className="text-xs text-point">비밀번호를 잊어버리셨나요?</p>
+            </div>
+            <p className="text-sm text-center">
               계정이 없으신가요?{" "}
               <span
-                className="text-blue-500 cursor-pointer"
+                className="font-extrabold cursor-pointer text-point"
                 onClick={switchMode}
               >
                 회원가입
@@ -48,24 +53,24 @@ export default function AuthModal() {
             </p>
           </div>
         ) : (
-          <div>
-            <h2 className="mb-4 text-xl font-bold">회원가입</h2>
-            <div className="flex flex-col mb-4 space-y-2">
-              <input className="p-2 border" placeholder="이름" />
-              <input className="p-2 border" placeholder="이메일" />
-              <input
-                className="p-2 border"
-                placeholder="비밀번호"
-                type="password"
-              />
+          <div className="px-8">
+            {/* 입력 폼 */}
+            <div className="flex flex-col mb-6 space-y-2">
+              <InputBox placeholder="이름" width="100%" />
+              <InputBox placeholder="이메일" width="100%" />
+              <InputBox placeholder="비밀번호" width="100%" />
             </div>
-            <button className="w-full py-2 text-white bg-green-500 rounded">
-              회원가입
-            </button>
-            <p className="mt-4 text-sm text-center">
+            {/* 회원가입 버튼 */}
+            <div className="flex justify-center mb-6">
+              <button className="w-full border border-point rounded-[4px] bg-point text-white px-[11px] py-[4px] transform hover:bg-white transition-colors hover:text-point hover:border-gray5">
+                회원가입
+              </button>
+            </div>
+            {/* 전환 링크 */}
+            <p className="text-sm text-center">
               이미 계정이 있으신가요?{" "}
               <span
-                className="text-blue-500 cursor-pointer"
+                className="font-bold cursor-pointer text-point"
                 onClick={switchMode}
               >
                 로그인
