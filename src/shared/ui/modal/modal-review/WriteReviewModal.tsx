@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useModalStore } from "@/shared/stores";
 import { ModalButton } from "../modal-button/ModalButton";
-import ModalLayout from "../modalLayout";
+import { ModalLayout } from "../modalLayout";
 import { Rating } from "@mui/material";
 
   
