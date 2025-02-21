@@ -11,7 +11,7 @@ export const ModalButton = ({ text, width = "auto", onClick }: ButtonProps) => {
     <button
       onClick={onClick}
       style={{ width: width }}
-      className="border border-point rounded-[20px] px-[80px] py-[14px] bg-point text-white
+      className="border border-point rounded-[30px] px-[80px] py-[14px] bg-point text-white
                 transform hover:bg-white transition-colors hover:text-point"
     >
       {text}

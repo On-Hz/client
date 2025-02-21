@@ -6,10 +6,10 @@ interface InputProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-export const InputBox = ({onChange, placeholder="",value="", width, height = "40px"}: InputProps) => {
+export const InputBox = ({onChange, placeholder="",value="", width, height = "35px"}: InputProps) => {
 
     return (
-        <div className="px-[15px] bg-white border border-gray3 rounded-[8px]"
+        <div className="px-[10px] bg-white border border-gray3 rounded-[5px]"
             style={{
                 width:width,
                 height:height

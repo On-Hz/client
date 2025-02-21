@@ -4,8 +4,8 @@ export const Footer = () => {
   return (
     <footer className="bg-[#1E1E1E]">
       <div className="px-[24px] py-[32px]">
+      <img src={logo} alt="On-Hz" width="80px" className="mr-[15px]"/>
         <div className="flex items-end">
-          <img src={logo} alt="On-Hz" width="80px" className="mr-[15px]"/>
           <a href="" className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors">서비스 이용약관 | </a>
           <a href="" className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors" > 개인정보 처리방침 | </a>
           <a href="" className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors"> 회사 안내</a>
