@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import logo from "/public/logo_tmp_text.svg";
 // import SearchIcon from "@mui/icons-material/Search";
 import { useAuthModalStore } from "@/shared/stores";
+import "../header/ui/style.css";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
 
   return (
-    <header className="border-b border-gray3">
+    <header className="border-b border-gray3 hz-header">
       <div className="flex items-center justify-between px-[20px] py-5">
         <Link to="/">
           <img src={logo} alt="On-Hz" className="w-[80px]"/>
