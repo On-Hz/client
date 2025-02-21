@@ -1,29 +1,26 @@
 @screen xs { /*min-width 300px*/
     .hz-header {
-        @apply bg-blue-500;
     }
 }
 
 @screen sm { /*min-width 500px*/
     .hz-header {
-        @apply bg-rose-500;
     }
 }
 
 @screen md { /*min-width 800px*/
     .hz-header {
-        @apply bg-purple-950;
     }
 }
 
 @screen xl { /*min-width 1000px*/
     .hz-header {
-        @apply bg-purple-200;
+
     }
 }
 
 @screen 2xl { /*min-width 1200px*/
     .hz-header {
-      @apply bg-slate-900;
+    
     }
   }

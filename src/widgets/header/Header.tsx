@@ -2,10 +2,46 @@ import { Link } from "react-router-dom";
 import logo from "/public/logo_tmp_text.svg";
 // import SearchIcon from "@mui/icons-material/Search";
 import { useAuthModalStore } from "@/shared/stores";
+import PersonIcon from '@mui/icons-material/Person';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 import "../header/ui/style.css";
+import React from "react";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event | React.SyntheticEvent) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+  
 
   return (
     <header className="border-b border-gray3 hz-header">
@@ -22,6 +58,58 @@ export const Header: React.FC = () => {
             />
             <button>{/* <SearchIcon /> */}</button>
           </div>
+          <Button
+            ref={anchorRef}
+            id="composition-button"
+            aria-controls={open ? 'composition-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}
+            sx={{
+              width:"40px",
+              height:"40px",
+              minWidth:"auto",
+              border:"1px solid #d9d9d9",
+              borderRadius:"50%",
+              marginRight:"4px"
+            }}
+          >
+            <PersonIcon style={{width:"100%",height:"100%"}} className="text-gray3"/>
+          </Button>
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                      autoFocusItem={open}
+                      id="composition-menu"
+                      aria-labelledby="composition-button"
+                      sx={{
+                        color:"#a1a1a1"
+                      }}
+                    >
+                      <MenuItem sx={{fontSize:"12px"}}  onClick={handleClose}>마이 페이지</MenuItem>
+                      <MenuItem sx={{fontSize:"12px"}}  onClick={handleClose}>로그아웃</MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
           <button
             className="text-black py-[10px] px-[12px] mr-[5px] text-[14px] transform hover:text-point transition-colors"
             onClick={() => openAuthModal("login")}
