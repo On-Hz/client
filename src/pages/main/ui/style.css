@@ -1,0 +1,29 @@
+@screen xs { /*min-width 300px*/
+    .hz-landing {
+        @apply bg-blue-500;
+    }
+}
+
+@screen sm { /*min-width 500px*/
+    .hz-landing {
+        @apply bg-rose-500;
+    }
+}
+
+@screen md { /*min-width 800px*/
+    .hz-landing {
+        @apply bg-purple-950;
+    }
+}
+
+@screen xl { /*min-width 1000px*/
+    .hz-landing {
+        @apply bg-purple-200;
+    }
+}
+
+@screen 2xl { /*min-width 1200px*/
+    .hz-landing {
+      @apply bg-slate-900;
+    }
+  }
