@@ -3,7 +3,7 @@ import { ArtistPage } from "@/pages/artist";
 import { ArtistDiscography } from "@/pages/artist/ui/ArtistDiscography";
 import { ArtistHome } from "@/pages/artist/ui/ArtistHome";
 import { ArtistReviews } from "@/pages/artist/ui/ArtistReviews";
-import { MainPage } from "@/pages/main";
+import { LandingPage } from "@/pages/landing";
 import { MyPage } from "@/pages/mypage";
 import { MypageAlbum } from "@/pages/mypage/ui/MypageAlbum";
 import { MypageArtist } from "@/pages/mypage/ui/MypageArtist";
@@ -21,7 +21,7 @@ import { Routes, Route } from "react-router-dom";
 export const Routing: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/search/:searchSlug" element={<SearchPage />}>
         <Route index element={<SearchHome />} />
         <Route path="track" element={<SearchTracks />} />
@@ -43,7 +43,6 @@ export const Routing: React.FC = () => {
         <Route path="artist" element={<MypageArtist />} />
         <Route path="like" element={<MypageLike />} />
       </Route>
-
     </Routes>
   );
 };

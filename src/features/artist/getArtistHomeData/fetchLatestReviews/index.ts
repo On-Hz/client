@@ -1,0 +1,1 @@
+export { ArtistLatestReviews } from './ui/ArtistLatestReviews'
