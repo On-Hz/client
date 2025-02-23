@@ -1,1 +1,1 @@
-export { mockArtistDiscography } from "./api/getArtistDiscography";
+export { DiscographyByArtist } from "./ui/DiscographyByArtist";

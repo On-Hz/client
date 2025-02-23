@@ -36,6 +36,16 @@ export const ArtistTabs = () => {
             Reviews
           </NavLink>
         </li>
+
+        {/* Reviews */}
+        <li>
+          <NavLink
+            to={`/artist/${artistSlug}/tracks`}
+            className={({ isActive }) => getNavLinkClass(isActive)}
+          >
+            Track
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

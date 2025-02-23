@@ -1,1 +1,1 @@
-export { ArtistLatestReviews } from './ui/ArtistLatestReviews'
+export { LatestReviewsForArtist } from './ui/LatestReviewsForArtist'

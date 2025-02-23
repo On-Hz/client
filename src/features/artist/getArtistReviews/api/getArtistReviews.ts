@@ -1,6 +1,6 @@
-import { Reviews } from "../model/types";
+import { Review } from "../model/types";
 
-export const mockReviews: Reviews[] = Array(10)
+export const mockReviews: Review[] = Array(10)
   .fill(null)
   .map((_, i) => ({
     userName: `Reviewer ${i + 1}`,

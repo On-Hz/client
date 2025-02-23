@@ -3,7 +3,7 @@ import { Rating } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { mockReviews } from "../api/getArtistLatestReviews";
 
-export const ArtistLatestReviews = () => {
+export const LatestReviewsForArtist = () => {
   const [liked, setLiked] = React.useState(false);
   const onClick = () => {
     setLiked(!liked);

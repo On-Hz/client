@@ -1,20 +1,5 @@
-import { mockArtistDiscography } from "@/features/artist/getArtistDiscography";
-import { AlbumCard } from "@/shared/ui/album/AlbumCard";
+import { DiscographyByArtist } from "@/features/artist/getArtistDiscography";
 
 export const ArtistDiscography: React.FC = () => {
-  return (
-    <section className="px-4 py-8 mx-auto max-w-7xl">
-      <h2 className="mb-4 text-2xl font-bold">Discography</h2>
-      <div className="grid grid-cols-6 gap-4">
-        {mockArtistDiscography.map((album) => (
-          <AlbumCard
-            id={album.id}
-            title={album.title}
-            release={album.release}
-            cover={album.cover}
-          />
-        ))}
-      </div>
-    </section>
-  );
+  return <DiscographyByArtist useInfiniteScroll={true} />;
 };

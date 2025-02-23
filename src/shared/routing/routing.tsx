@@ -3,6 +3,7 @@ import { ArtistPage } from "@/pages/artist";
 import { ArtistDiscography } from "@/pages/artist/ui/ArtistDiscography";
 import { ArtistHome } from "@/pages/artist/ui/ArtistHome";
 import { ArtistReviews } from "@/pages/artist/ui/ArtistReviews";
+import { ArtistTracks } from "@/pages/artist/ui/ArtistTracks";
 import { LandingPage } from "@/pages/landing";
 import { MyPage } from "@/pages/mypage";
 import { MypageAlbum } from "@/pages/mypage/ui/MypageAlbum";
@@ -32,6 +33,7 @@ export const Routing: React.FC = () => {
         <Route index element={<ArtistHome />} />
         <Route path="discography" element={<ArtistDiscography />} />
         <Route path="reviews" element={<ArtistReviews />} />
+        <Route path="tracks" element={<ArtistTracks />} />
       </Route>
       <Route path="/album" element={<AlbumPage />} />
       <Route path="/song" element={<SongPage />} />

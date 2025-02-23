@@ -1,9 +1,11 @@
 import React from "react";
 import { mockTracks } from "../api/getArtistTopTracks";
 import { Menu, MenuItem } from "@mui/material";
-import { TrackListItem } from "@/shared/ui/track/trackListItem";
+import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
+import { sectionProps } from "../../config/sectionProps";
+import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper.tsx/ui/ArtistSectionWrapper";
 
-export const ArtistTopTracks = () => {
+export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -12,8 +14,7 @@ export const ArtistTopTracks = () => {
   };
 
   return (
-    <section className="px-4 py-8 mx-auto max-w-7xl">
-      <h2 className="mb-4 text-2xl font-bold">Top Track</h2>
+    <ArtistSectionWrapper title={useInfiniteScroll ? "Tracks" : "Top Tracks"}>
       <ul className="space-y-2">
         {mockTracks.map((track) => (
           <TrackListItem
@@ -39,6 +40,6 @@ export const ArtistTopTracks = () => {
         <MenuItem onClick={handleMenuClose}>Share</MenuItem>
         <MenuItem onClick={handleMenuClose}>View details</MenuItem>
       </Menu>
-    </section>
+    </ArtistSectionWrapper>
   );
 };

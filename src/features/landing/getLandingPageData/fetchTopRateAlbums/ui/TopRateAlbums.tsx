@@ -2,7 +2,7 @@ import React from "react";
 import CarouselSection from "@/shared/ui/carousel/Carousel";
 import { Album } from "../model/types";
 import { mockTopRateAlbumData } from "../api/getTopRateAlbumList";
-import { AlbumCard } from "@/shared/ui/album/AlbumCard";
+import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
 
 const renderAlbumPage = (albums: Album[]) => (
   <div className="flex justify-center gap-4 pb-4">
