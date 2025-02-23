@@ -30,10 +30,10 @@ const renderReviewPage = (reviews: Review[]) => (
           <img
             src={review.cover}
             alt={review.reviewer}
-            className="object-cover w-20 h-20 rounded"
+            className="object-cover w-20 rounded aspect-square"
           />
           <div>
-            <p className="text-sm text-gray-600">{review.body}</p>
+            <p className="w-full text-sm text-gray-600">{review.body}</p>
           </div>
         </div>
       </div>

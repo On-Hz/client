@@ -29,7 +29,7 @@ export const GenreCard: React.FC = () => {
             <img
               src={item.img}
               alt={item.title}
-              className="object-cover w-full h-40 rounded-lg"
+              className="object-cover w-full rounded-lg aspect-square"
             />
           </div>
         ))}
