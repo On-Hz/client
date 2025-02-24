@@ -1,0 +1,26 @@
+
+@screen max-1300 { /*max-width 1300px*/
+}
+
+@screen max-1200 { /*max-width 1200px*/
+}
+
+@screen max-1000 { /*max-width 1000px*/
+    #my-page .hz-top{@apply block}
+    #my-page .hz-ratings{@apply mt-9 flex gap-7 text-[13px]}
+    #my-page .hz-ra-text{@apply text-[40px]}
+}
+
+@screen max-800 { /*max-width 800px*/
+}
+
+@screen max-500 { /*max-width 500px*/
+    #my-page .hz-user-img{@apply w-[100px] h-[100px]}
+    #my-page .hz-ratings{@apply block}
+    #my-page .hz-ra-box{@apply w-full}
+    #my-page .hz-ra-text{@apply text-[30px]}
+    #my-page .hz-star-icon{width:45px !important;height:45px !important;}
+    #my-page .hz-tab{@apply justify-between mt-7}
+    #my-page .hz-tab li {@apply w-full}
+    #my-page .hz-tab li a{@apply p-0 py-[15px] w-full text-center}
+}

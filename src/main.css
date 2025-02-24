@@ -13,10 +13,12 @@
     img{ @apply max-w-[100%]}
     main { @apply py-[40px] px-[80px] min-h-[500px]}
   
-    @screen max-800 { /*max-width 800px*/
-      body{@apply text-[13px]}
+    @screen max-1000 { /*max-width 1000px*/
       main {
           @apply py-[60px] px-[20px]
         }
+    }
+    @screen max-800 { /*max-width 800px*/
+      body{@apply text-[13px]}
     }
 }

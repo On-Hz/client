@@ -7,6 +7,7 @@ import { getNavLinkBlackClass } from "@/shared/helpers/getNavLinkBlackClass";
 import { RoundButton } from "@/shared/ui/roundButton/RoundButton";
 import styled from "styled-components";
 import { useModalStore } from "@/shared/stores";
+import "./style.css";
 
 const ConTitle = styled.p`
     font-size:20px;
@@ -51,7 +52,7 @@ const ProfileUi = () => {
         <div>
             <div className="flex items-center">
                 <div className="pr-[24px] text-center">
-                    <div className="w-[182px] h-[182px] border border-gray3 rounded-[50%] flex items-center justify-center">
+                    <div className="hz-user-img w-[182px] h-[182px] border border-gray3 rounded-[50%] flex items-center justify-center">
                         { user.user_img ? (
                             <img src={user.user_img} alt={user.user_name} style={{width:"100%",height:"100%"}} />
                         ) : (
@@ -74,19 +75,19 @@ const ProfileUi = () => {
 }
 const RatingsUi = () => {
     return (
-        <div>
+        <div className="hz-ratings">
             <div className="flex items-end">
                 <div className="text-center">
-                    <div className="text-[48px] text-yellow font-bold">3.5</div>
+                    <div className="hz-ra-text text-[48px] text-yellow font-bold">3.5</div>
                     <p className="pt-[4px]">평균 평점</p>
                 </div>
                 <div className="mx-[42px] w-px bg-gray4 h-[100px]"></div>
                 <div className="text-center">
-                    <StarIcon className="text-yellow" style={{width:"60px",height:"60px"}}/>
+                    <StarIcon className="text-yellow hz-star-icon" style={{width:"60px",height:"60px"}}/>
                     <p className="pt-[4px]">내 별점</p>
                 </div>
             </div>
-            <div className="w-[450px] mt-6 border border-gray4 rounded-[10px] p-1">
+            <div className="hz-ra-box w-[450px] mt-6 border border-gray4 rounded-[10px] p-1">
                 <div style={{ width: "100%", height: "100px"}}>
 
                 <ResponsiveContainer>
@@ -110,7 +111,7 @@ const TabMenuUi = () => {
     const { mypageSlug } = useParams<{ mypageSlug: string }>();
     return (
         <div>
-            <ul className="flex items-center border-gray4 border-t border-b mt-14">
+            <ul className="hz-tab flex items-center border-gray4 border-t border-b mt-14">
                 <li>
                     <NavLink to={`/mypage/${mypageSlug}`} end
                     className={({ isActive }) => getNavLinkBlackClass(isActive)}>
@@ -142,8 +143,8 @@ const TabMenuUi = () => {
 
 export const MyPage: React.FC = () => {
     return (
-       <div>
-            <div className="flex justify-between items-center">
+       <div id="my-page">
+            <div className="flex justify-between items-center hz-top">
                 <ProfileUi />
                 <RatingsUi />
             </div>
