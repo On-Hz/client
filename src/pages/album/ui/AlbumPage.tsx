@@ -119,7 +119,7 @@ const AlbumDetailUi = () => {
         <div className='w-[700px] hz-left'>
             <div className='flex items-end'>
                 {/* 앨범 커버 */}
-                <div className='flex items-center justify-center rounded-[10px] w-[324px] h-[324px] overflow-hidden bg-gray3'>
+                <div className='hz-cover flex items-center justify-center rounded-[10px] w-[324px] h-[324px] overflow-hidden bg-gray3'>
                     {album.cover ? (
                         <img
                             src={album.cover}
@@ -130,7 +130,7 @@ const AlbumDetailUi = () => {
                     )}
                 </div>
                  {/* 앨범, 아티스트 정보 */}
-                <div className='pl-[18px]'>
+                <div className='pl-[18px] hz-ab-info'>
                     <div className='flex items-center'>
                         <span className='flex items-center justify-center w-[64px] h-[64px] rounded-[50%] overflow-hidden bg-gray3'>
                             {artist.avatar ? (
@@ -144,7 +144,7 @@ const AlbumDetailUi = () => {
                         </span>
                         <p className='text-gray pl-[5px]'>{artist.name}</p>
                     </div>
-                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black'>{album.title}</p>
+                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{album.title}</p>
                     <div>
                         <span className='text-gray text-[14px]'>Album</span>
                         <span className='text-gray text-[13px] font-light flex items-center'>
@@ -169,7 +169,7 @@ const RatingDetailUi = () => {
             <ul className='flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]'>
                 <li className='text-center'>
                     <p className='text-[24px]'>{album.ratings_count}</p>
-                    <span className="text-gray4 text-[14px]">Total ratings</span>
+                    <span className="hz-rating-text text-gray4 text-[14px]">Total ratings</span>
                 </li>
                 <li className='text-center'>
                     <p className='text-[24px] text-gray4 '>
@@ -177,7 +177,7 @@ const RatingDetailUi = () => {
                         <span className='text-[#1C66E0] px-[5px]'>{album.average_rating.toFixed(2)}</span>
                          / 5
                     </p>
-                    <span className="text-gray4 text-[14px]">Average rating</span>
+                    <span className="hz-rating-text  text-gray4 text-[14px]">Average rating</span>
                 </li>
                 <li className='text-center'>
                     <p className='text-[24px] text-gray4'>
@@ -185,7 +185,7 @@ const RatingDetailUi = () => {
                         <span className='px-[5px]'>{rating.rating}</span>
                          / 5
                         </p>
-                    <span className="text-gray4 text-[14px]">Your rating</span>
+                    <span className="hz-rating-text  text-gray4 text-[14px]">Your rating</span>
                 </li>
             </ul>
             <div className='flex justify-end mt-[18px]'>
@@ -199,18 +199,18 @@ const RatingDetailUi = () => {
 }
 const TrackListUi = () => {
     return (
-        <div className='w-[700px]'>
+        <div className='w-[700px] hz-list'>
             <ul className='bg-[#F5F5F5] rounded-[5px] p-[28px]'>
                 {mockTracks.map((track, idx) => (
                     <TrackItem key={track.id} 
                         className='cursor-pointer flex items-center justify-between border-gray2 border-b p-[12px]'>
-                        <div className='flex items-center'>
+                        <div className='flex items-center hz-item-left'>
                             <span className='text-[14px] pr-5 track-num'>{idx + 1}</span>
-                            <p className='track-title'> {track.title} </p>
+                            <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'> dddddddddfsldfjdslfjdslfjldskjflsdjflsdjldfs{track.title} </p>
                         </div>
-                        <div className='flex items-center'>
+                        <div className='flex items-center justify-end w-[150px] hz-item-info'>
                             <button> <PlayCircleIcon /> </button>
-                            <div className='pl-10 pr-5'>
+                            <div className='pl-10'>
                                 <StarIcon className='text-yellow' style={{width:'18px',height:'18px'}} />
                                 <span className='text-gray text-[14px]'> {track.rating} / 5</span>
                             </div>
@@ -270,12 +270,12 @@ export const AlbumPage: React.FC = () => {
                 <AlbumDetailUi />
                 <RatingDetailUi />
             </div>
-            <div className="my-[60px] flex items-start justify-between">
-                <div>
+            <div className="my-[60px] flex items-start justify-between hz-bottom">
+                <div className='hz-track'>
                     <ConTitle>Track List</ConTitle>
                     <TrackListUi />
                 </div>
-                <div className="flex-1 min-w-0 pl-[40px]">
+                <div className="flex-1 min-w-0 pl-[40px] hz-info">
                     <ConTitle>Information</ConTitle>
                     <InformationUi />
                 </div>

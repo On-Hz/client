@@ -1,16 +1,7 @@
-@media (max-width:1200px){ /*max-width 1200px*/
-    .hz-header {
-    }
-}
-
-@media (max-width:1000px){ /*max-width 1000px*/
-    .hz-header {
-    }
-}
-
 @media (max-width:800px){ /*max-width 800px*/
-    .hz-header {
-    }
+    .hz-header .hz-menu {position: relative;}
+    .hz-header .hz-menu nav button:not(.hz-login),
+    .hz-header .hz-search{display: none;}
 }
 
 @media (max-width:500px){ /*max-width 500px*/

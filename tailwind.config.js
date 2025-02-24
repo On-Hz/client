@@ -23,7 +23,13 @@ export default {
         'xl': '1000px', //@media (min-width: 1000px) 
         'md': '800px', //@media (min-width: 800px) 
         'sm': '500px', //@media (min-width: 500px) 
-        'xs': '300px', //@media (min-width: 300px) 
+        'xs': '300px', //@media (min-width: 300px)
+        //max-width 기준
+        'max-500':{max:'500px'},
+        'max-800':{max:'800px'},
+        'max-1000':{max:'1000px'},
+        'max-1200':{max:'1200px'},
+        'max-1300':{max:'1300px'},
       }, 
     },
   },
