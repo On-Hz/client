@@ -12,4 +12,10 @@
     a, a:hover { @apply no-underline text-black}
     img{ @apply max-w-[100%]}
     main { @apply py-[40px] px-[80px] min-h-[500px]}
-  }
+  
+    @screen sm { /*min-width 500px*/
+      main {
+          @apply py-[20px] px-[60px]
+        }
+    }
+}

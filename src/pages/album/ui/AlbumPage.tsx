@@ -8,6 +8,7 @@ import { Button } from '@/shared/ui/button/Button';
 import { ReviewCard } from '@/shared/ui/review/Review';
 import styled from 'styled-components';
 import { useModalStore } from '@/shared/stores';
+import "./style.css";
 
 const ConTitle = styled.p`
     font-size:20px;
@@ -115,7 +116,7 @@ const AlbumDetailUi = () => {
     const album = mockAlbums[0];
     const artist = mockArtists[0];
     return (
-        <div className='w-[700px]'>
+        <div className='w-[700px] hz-left'>
             <div className='flex items-end'>
                 {/* 앨범 커버 */}
                 <div className='flex items-center justify-center rounded-[10px] w-[324px] h-[324px] overflow-hidden bg-gray3'>
@@ -164,7 +165,7 @@ const RatingDetailUi = () => {
     const album = mockAlbums[0];
     const rating = mockUserAlbumRating[0];
     return (
-        <div className='flex-1 min-w-0 pl-[40px]'>
+        <div className='flex-1 min-w-0 pl-[40px] hz-right'>
             <ul className='flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]'>
                 <li className='text-center'>
                     <p className='text-[24px]'>{album.ratings_count}</p>
@@ -264,8 +265,8 @@ const ReviewsUi = () => {
 export const AlbumPage: React.FC = () => {
     
     return (
-        <div>
-            <div className='flex items-center justify-between'>
+        <div id="ab-page">
+            <div className='flex items-center justify-between hz-top'>
                 <AlbumDetailUi />
                 <RatingDetailUi />
             </div>
