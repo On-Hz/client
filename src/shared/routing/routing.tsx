@@ -5,11 +5,11 @@ import { ArtistHome } from "@/pages/artist/ui/ArtistHome";
 import { ArtistReviews } from "@/pages/artist/ui/ArtistReviews";
 import { ArtistTracks } from "@/pages/artist/ui/ArtistTracks";
 import { LandingPage } from "@/pages/landing";
-import { MyPage } from "@/pages/mypage";
-import { MypageAlbum } from "@/pages/mypage/ui/MypageAlbum";
-import { MypageArtist } from "@/pages/mypage/ui/MypageArtist";
-import { MypageLike } from "@/pages/mypage/ui/MypageLike";
-import { MypageSong } from "@/pages/mypage/ui/MypageSong";
+import { MypageAlbum } from "@/pages/mypage/reviews/ui/MypageAlbum";
+import { MypageArtist } from "@/pages/mypage/reviews/ui/MypageArtist";
+import { MypageLike } from "@/pages/mypage/reviews/ui/MypageLike";
+import { MypageSong } from "@/pages/mypage/reviews/ui/MypageSong";
+import { MyPage } from "@/pages/mypage/ui/Mypage";
 import { SearchPage } from "@/pages/search";
 import { SearchAlbums } from "@/pages/search/ui/SearchAlbums";
 import { SearchArtists } from "@/pages/search/ui/SearchArtists";
@@ -37,10 +37,10 @@ export const Routing: React.FC = () => {
       </Route>
       <Route path="/album" element={<AlbumPage />} />
       <Route path="/song" element={<SongPage />} />
-      <Route path="/mypage" element={<MyPage />} />
 
-      <Route path="/mypage/:mypageSlug/*" element={<MyPage />}>
+      <Route path="/mypage" element={<MyPage />}>
         <Route index element={<MypageAlbum />} />
+        <Route path="album" element={<MypageAlbum />} />
         <Route path="song" element={<MypageSong />} />
         <Route path="artist" element={<MypageArtist />} />
         <Route path="like" element={<MypageLike />} />
