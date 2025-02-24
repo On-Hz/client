@@ -24,8 +24,8 @@ export const WriteReviewModal: React.FC = () => {
           onClose={() => closeModal("writeReviewModal")}
           showCloseButton={true}
         >
-            <div className="py-[25px] px-[40px] w-[550px]">
-                <p className="text-[36px] pb-6 font-semibold">{albumTitle}</p>
+            <div className="py-[25px] px-[40px] w-[550px] max-500:w-[300px] max-500:p-0">
+                <p className="text-[36px] pb-6 font-semibold max-500:text-[30px]">{albumTitle}</p>
                 <Rating
                     sx={{
                         marginBottom:'15px',

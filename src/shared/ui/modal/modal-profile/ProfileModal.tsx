@@ -31,7 +31,7 @@ export const ProfileModal: React.FC = () => {
           onClose={() => closeModal("profileModal")}
           showCloseButton={true}
         >
-            <div className="py-[25px] px-[60px]">
+            <div className="py-[25px] px-[60px] max-500:p-0">
                 <div className="text-center">
                     <div className="m-auto w-[140px] h-[140px] border border-gray3 rounded-[50%] flex items-center justify-center">
                         { user.user_img ? (
@@ -50,7 +50,10 @@ export const ProfileModal: React.FC = () => {
                     <InputBox placeholder="비밀번호 확인" width="100%"/>
                 </div>
                 <div className="text-center">
-                    <ModalButton text="수정"/>
+                    <ModalButton 
+                        text="수정"
+                         width="100%"
+                    />
                 </div>
             </div>
         </ModalLayout>

@@ -11,8 +11,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   return (
-    <div className="px-8">
-      <div className="flex flex-col mb-6 space-y-3">
+    <div>
+      <div className="flex flex-col mb-6 space-y-3 w-[300px]">
         <InputBox placeholder="이름" width="100%" />
         <InputBox placeholder="이메일" width="100%" />
         <InputBox placeholder="비밀번호" width="100%" />

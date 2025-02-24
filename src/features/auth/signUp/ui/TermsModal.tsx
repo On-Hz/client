@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ModalLayout } from "@/shared/ui/modal/modalLayout";
 import TermDetailModal from "./TermsDetailModal";
+import { ModalButton } from "@/shared/ui/modal/modal-button/ModalButton";
 
 interface TermsModalProps {
   onClose: () => void;
@@ -61,11 +62,11 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
   return (
     <>
       <ModalLayout open={true} onClose={onClose} showCloseButton={true}>
-        <div className="p-6 w-[340px] bg-white rounded">
+        <div className="p-6 w-[340px] bg-white rounded max-500:w-full">
           <h2 className="mb-2 text-lg font-bold">
             약관에 동의하시면 가입이 완료됩니다
           </h2>
-          <div className="mt-4 mb-4 space-y-3 text-sm">
+          <div className="mt-4 mb-9 space-y-3 text-sm">
             {termsConfig.map(({ key, label, hasView }) => (
               <div
                 key={key}
@@ -96,12 +97,11 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
               </div>
             ))}
           </div>
-          <button
-            className="w-full py-2 text-white rounded bg-point"
-            onClick={onClose}
-          >
-            가입하기
-          </button>
+           <ModalButton 
+                text="가입하기"
+                width="100%"
+                onClick={onClose}
+            />
         </div>
       </ModalLayout>
       <TermDetailModal

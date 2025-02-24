@@ -23,7 +23,7 @@ export default function AuthModal() {
       onClose={closeAuthModal}
       showCloseButton={false}
     >
-      <div className="w-[340px]">
+      <div className="py-[25px] px-[60px] max-500:p-0">
         {/* 공통 영역: 로고, SNS 아이콘, OR, 타이틀 (AuthCommon) */}
         <AuthCommon localMode={localMode} />
         {localMode === "login" ? (
