@@ -8,8 +8,9 @@
     #ab-page .hz-right{@apply p-0 my-[40px] w-full}
     #ab-page .hz-right ul{@apply gap-8}
 
-    #ab-page .hz-bottom .hz-track{@apply w-auto flex-1}
+    #ab-page .hz-bottom .hz-track{@apply w-auto flex-1 min-w-0}
     #ab-page .hz-bottom .hz-track .hz-list{@apply w-auto}
+    #ab-page .hz-bottom .hz-item-left{@apply flex-1 min-w-0}
     #ab-page .hz-bottom .hz-info{@apply flex-none w-[300px]}
 }
 
@@ -23,7 +24,7 @@
     #ab-page .hz-left .hz-cover{@apply w-[200px] h-[200px]}
     #ab-page .hz-left .hz-title{@apply text-[20px]}
     #ab-page .hz-track-title{@apply w-[80%]}
-    #ab-page .hz-item-left{@apply w-auto min-w-0 flex-1}
+    #ab-page .hz-item-left{@apply w-auto}
 }
 
 @screen max-500 { /*max-width 500px*/
