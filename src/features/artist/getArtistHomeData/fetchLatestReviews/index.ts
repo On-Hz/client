@@ -1,1 +1,0 @@
-export { LatestReviewsForArtist } from './ui/LatestReviewsForArtist'

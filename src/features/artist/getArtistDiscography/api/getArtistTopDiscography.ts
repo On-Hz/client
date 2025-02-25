@@ -1,6 +1,6 @@
 import { Discography } from "../model/types";
 
-export const mockDiscography: Discography[] = Array(6)
+export const mockArtistTopDiscography: Discography[] = Array(8)
   .fill(null)
   .map((_, i) => ({
     id: i,

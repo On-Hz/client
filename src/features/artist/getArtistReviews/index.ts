@@ -1,1 +1,1 @@
-export { mockReviews } from "./api/getArtistReviews";
+export { ReviewsForArtist } from "./ui/ReviewsForArtist";

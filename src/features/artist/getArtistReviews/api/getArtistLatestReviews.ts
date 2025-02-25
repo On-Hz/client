@@ -1,13 +1,12 @@
 import { Review } from "../model/types";
 
-export const mockReviews: Review[] = Array(8)
+export const mockLatestReviews: Review[] = Array(8)
   .fill(null)
   .map((_, i) => ({
-    id: i,
-    reviewer: `Reviewer name ${i + 1}`,
-    avatar: `https://picsum.photos/40/40?random=${i}`,
+    userName: `Reviewer name ${i + 1}`,
+    userImage: `https://picsum.photos/40/40?random=${i}`,
     rating: (i % 5) + 1,
-    body: `Review body ${
+    reviewText: `Review body ${
       i + 1
     } - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
       Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 

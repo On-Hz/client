@@ -5,7 +5,7 @@ import { mockTopRateAlbumData } from "../api/getTopRateAlbumList";
 import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
 
 const renderAlbumPage = (albums: Album[]) => (
-  <div className="flex justify-center gap-4 pb-4">
+  <div className="flex flex-wrap justify-center gap-4 pb-4">
     {albums.map((album) => (
       <AlbumCard
         id={album.id}
