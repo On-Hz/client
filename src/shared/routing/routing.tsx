@@ -4,6 +4,7 @@ import { ArtistDiscography } from "@/pages/artist/ui/ArtistDiscography";
 import { ArtistHome } from "@/pages/artist/ui/ArtistHome";
 import { ArtistReviews } from "@/pages/artist/ui/ArtistReviews";
 import { ArtistTracks } from "@/pages/artist/ui/ArtistTracks";
+import { ErrorPage } from "@/pages/error";
 import { LandingPage } from "@/pages/landing";
 import { MypageAlbum } from "@/pages/mypage/reviews/ui/MypageAlbum";
 import { MypageArtist } from "@/pages/mypage/reviews/ui/MypageArtist";
@@ -45,6 +46,15 @@ export const Routing: React.FC = () => {
         <Route path="artist" element={<MypageArtist />} />
         <Route path="like" element={<MypageLike />} />
       </Route>
+      <Route
+        path="*"
+        element={
+          <ErrorPage
+            error={Object.assign(new Error("404 Not Found"), { status: 404, name: "NotFoundError" })}
+            resetErrorBoundary={() => window.location.reload()}
+          />
+        }
+      />
     </Routes>
   );
 };
