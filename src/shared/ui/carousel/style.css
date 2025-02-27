@@ -1,0 +1,13 @@
+
+.swiper{@apply pt-[20px] pb-[60px]}
+.swiper-slide{@apply w-auto mr-8}
+.swiper-pagination-bullet{@apply w-[10px] h-[10px] bg-white border border-gray}
+
+@screen max-800 { /*max-width 800px*/
+    .swiper-slide{@apply mr-4}
+    .swiper-pagination-bullet{@apply w-[8px] h-[8px]}
+}
+
+@screen max-500 { /*max-width 500px*/
+    .swiper-pagination-bullet{@apply w-[6px] h-[6px]}
+}

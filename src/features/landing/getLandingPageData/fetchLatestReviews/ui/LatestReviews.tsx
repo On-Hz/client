@@ -4,14 +4,11 @@ import { Review } from "../model/types";
 import { mockLatestReviewsData } from "../api/getLatestReviews";
 
 const renderReviewPage = (reviews: Review[]) => (
-  <div
-    className="grid gap-4"
-    style={{ gridTemplateColumns: `repeat(${reviews.length}, minmax(0, 1fr))` }}
-  >
+  <div>
     {reviews.map((review) => (
       <div
         key={review.id}
-        className="flex flex-col p-4 bg-white border rounded shadow"
+        className="flex flex-col p-7 bg-white border border-gray5 rounded"
       >
         {/* 상단: 리뷰어 정보와 별점 */}
         <div className="flex items-center justify-between">
@@ -26,7 +23,7 @@ const renderReviewPage = (reviews: Review[]) => (
           {/* Rating 컴포넌트 등 추가 가능 */}
         </div>
         {/* 하단: 앨범 커버와 리뷰 텍스트 */}
-        <div className="flex items-start gap-4 mt-4">
+        <div className="flex items-start gap-4 mt-7">
           <img
             src={review.cover}
             alt={review.reviewer}

@@ -1,5 +1,11 @@
 import React from "react";
-import Carousel from "react-material-ui-carousel";
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './style.css';
+
+// import Carousel from "react-material-ui-carousel";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 export interface CarouselSectionProps<T> {
@@ -9,48 +15,43 @@ export interface CarouselSectionProps<T> {
   isReview?: boolean;
 }
 
-function chunkArray<T>(arr: T[], size: number): T[][] {
-  const chunks: T[][] = [];
-  for (let i = 0; i < arr.length; i += size) {
-    chunks.push(arr.slice(i, i + size));
-  }
-  return chunks;
-}
+// function chunkArray<T>(arr: T[], size: number): T[][] {
+//   const chunks: T[][] = [];
+//   for (let i = 0; i < arr.length; i += size) {
+//     chunks.push(arr.slice(i, i + size));
+//   }
+//   return chunks;
+// }
 
 function CarouselSection<T>({
   title,
   items,
   renderPage,
-  isReview = false,
 }: CarouselSectionProps<T>) {
-  // TailwindCSS 기준: 2xl: 1536px, xl: 1280px, md: 768px, 그 외: sm, xs
-  const is2xl = useMediaQuery("(min-width: 1200px)");
-  const isXl = useMediaQuery("(min-width: 1000px)");
-  const isMd = useMediaQuery("(min-width: 800px)");
-
-  const chunkSize = isReview
-    ? is2xl || isXl
-      ? 3
-      : isMd
-      ? 2
-      : 1
-    : is2xl
-    ? 6
-    : isXl
-    ? 4
-    : isMd
-    ? 3
-    : 2;
-
-  const pages = chunkArray(items, chunkSize);
 
   return (
     <section className="px-4 py-8">
       <h2 className="mb-4 text-2xl font-bold">{title}</h2>
-      <Carousel
+      <Swiper
+        modules={[Pagination]} 
+        navigation={false}
+        pagination={{ clickable: true }}
+        slidesPerView="auto" // 자동으로 보이는 슬라이드 수 조정
+        loop={true} // 무한 루프
+
+      >
+        {items.map((item, idx) => (
+          <SwiperSlide key={idx} className="cursor-pointer transform hover:scale-105 transition-transform">
+            {renderPage([item])}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* <Carousel
         autoPlay={false}
         navButtonsAlwaysVisible
         indicators={false}
+        infiniteLoop={true}
         cycleNavigation={false}
       >
         {pages.map((page, idx) => (
@@ -58,7 +59,7 @@ function CarouselSection<T>({
             {renderPage(page)}
           </div>
         ))}
-      </Carousel>
+      </Carousel> */}
     </section>
   );
 }

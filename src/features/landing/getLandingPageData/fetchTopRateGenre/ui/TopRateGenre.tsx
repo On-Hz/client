@@ -12,7 +12,7 @@ export const TopRateGenre: React.FC = () => {
         {mockTopRateGenreData.map((item, index) => (
           <div
             key={item.id}
-            className="p-4 border rounded-lg cursor-pointer hz-landing-genre-item"
+            className="p-4 border border-gray5 rounded-lg cursor-pointer hz-landing-genre-item"
             style={
               {
                 "--local-2-columns-grid-start": computeLocalStart(index, 2),

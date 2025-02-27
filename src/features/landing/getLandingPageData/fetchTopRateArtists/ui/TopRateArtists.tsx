@@ -4,7 +4,7 @@ import { mockTopArtistData } from "../api/getTopRateArtistList";
 import { ArtistAvatar } from "@/shared/ui/artistAvatar/ArtistAvatar";
 
 const renderArtistPage = (artists: Artist[]) => (
-  <div className="flex justify-center space-x-6">
+  <div className="">
     {artists.map((artist) => (
       <ArtistAvatar id={artist.id} avatar={artist.avatar} name={artist.name} />
     ))}

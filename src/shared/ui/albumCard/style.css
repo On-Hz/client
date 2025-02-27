@@ -1,0 +1,22 @@
+
+.hz-album-item{@apply w-[220px]}
+
+@screen max-1300 { /*max-width 1300px*/
+
+}
+
+@screen max-1200 { /*max-width 1200px*/
+
+}
+
+@screen max-1000 { /*max-width 1000px*/
+  .hz-album-item{@apply w-[200px]}
+}
+
+@screen max-800 { /*max-width 800px*/
+  .hz-album-item{@apply w-[150px]}
+}
+
+@screen max-500 { /*max-width 500px*/
+  .hz-album-item{@apply w-[120px]}
+}
