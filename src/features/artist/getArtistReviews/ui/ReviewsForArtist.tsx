@@ -3,7 +3,7 @@ import { ReviewCard } from "@/shared/ui/review/Review";
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper.tsx/ui/ArtistSectionWrapper";
 import { mockReviews } from "../api//getArtistReviews";
 import { mockLatestReviews } from "../api/getArtistLatestReviews";
-
+import './style.css'
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
 }: sectionProps) => {
@@ -14,11 +14,11 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
         className={
           useInfiniteScroll
             ? ""
-            : "grid grid-cols-4 gap-4 max-500:grid-cols-1 max-800:grid-cols-2 max-1000:grid-cols-4 max-1200:grid-cols-3"
+            : "hz-artist-sec"
         }
       >
         {mockItem.map((review, index) => (
-          <div className={"mx-3"}>
+          <div className={"hz-artist-sec-item"}>
             <ReviewCard
               key={index}
               userName={review.userName}

@@ -1,0 +1,17 @@
+.hz-artist-sec{@apply flex gap-3 flex-wrap}
+.hz-artist-sec-item{@apply w-[24%]}
+
+@screen max-1300 { /*max-width 1300px*/
+    .hz-artist-sec-item{@apply w-[32%]}
+}
+
+@screen max-1200 { /*max-width 1200px*/
+}
+
+@screen max-1000 { /*max-width 1000px*/
+    .hz-artist-sec-item{@apply w-[49%]}
+}
+
+@screen max-800 { /*max-width 800px*/
+    .hz-artist-sec-item{@apply w-[100%]}
+}
