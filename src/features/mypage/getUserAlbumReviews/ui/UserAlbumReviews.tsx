@@ -6,7 +6,7 @@ export const UserAlbumReviews = () => {
         <div>
             <div>
                 {mockReviews.map((review) => (
-                    <ReviewCard key={review.id} userName={review.reviewer} userImage={review.avatar} reviewText={review.body} rating={review.rating} />
+                    <ReviewCard key={review.id} isMybtn={true} userName={review.reviewer} userImage={review.avatar} reviewText={review.body} rating={review.rating} />
                 ))}
             </div>
         </div>
