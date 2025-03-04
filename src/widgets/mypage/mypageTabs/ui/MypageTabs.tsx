@@ -1,5 +1,5 @@
 import { getNavLinkBlackClass } from "@/shared/helpers/getNavLinkBlackClass";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 
 export const MypageTabs = () => {

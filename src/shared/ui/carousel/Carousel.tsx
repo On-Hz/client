@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import './style.css';
 
 // import Carousel from "react-material-ui-carousel";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 
 export interface CarouselSectionProps<T> {
   title: string;

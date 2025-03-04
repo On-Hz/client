@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";

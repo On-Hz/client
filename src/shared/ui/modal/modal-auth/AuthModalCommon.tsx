@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "/public/logo_tmp_text.svg";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";

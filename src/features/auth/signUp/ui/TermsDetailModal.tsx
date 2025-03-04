@@ -1,4 +1,3 @@
-import React from "react";
 import { ModalLayout } from "@/shared/ui/modal/modalLayout";
 
 interface TermDetailModalProps {
