@@ -6,5 +6,9 @@
   ],
   "include": [
     "src/swiper.d.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  }
 }

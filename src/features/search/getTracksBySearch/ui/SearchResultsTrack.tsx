@@ -7,7 +7,7 @@ import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
 export const SearchResultsTrack = ({
   hasShowMoreTab,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  useInfiniteScroll,
+  // useInfiniteScroll,
 }: sectionProps) => (
   <SearchSectionWrapper
     title="노래"
