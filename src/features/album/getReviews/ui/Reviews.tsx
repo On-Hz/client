@@ -1,7 +1,7 @@
 import React from 'react';
 import { mockReviews } from '../api/getReviews';
 import { SubTitle } from '@/shared/ui/subTitle/SubTitle';
-import { ReviewCard } from '@/shared/ui/review/Review';
+import { ReviewCard } from '@/shared/ui/reviewCard/ReviewCard';
 import { RoundButton } from '@/shared/ui/roundButton/RoundButton';
 
 

@@ -1,4 +1,4 @@
-import { ReviewCard } from "@/shared/ui/review/Review"
+import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard"
 import { mockReviews } from "../api/getUserSongReviews"
 
 export const UserSongReviews = () => {

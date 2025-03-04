@@ -1,5 +1,5 @@
 import { sectionProps } from "@/features/artist/config/sectionProps";
-import { ReviewCard } from "@/shared/ui/review/Review";
+import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard";
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper.tsx/ui/ArtistSectionWrapper";
 import { mockReviews } from "../api//getArtistReviews";
 import { mockLatestReviews } from "../api/getArtistLatestReviews";
