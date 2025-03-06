@@ -1,29 +1,38 @@
 import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
-import { mockTracks } from "../api/getTracks";
+import { useTrack } from "../api/getTracks";
 import { sectionProps } from "../../config/sectionProps";
 import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
+import { TrackListItemSkeleton } from "@/shared/ui/trackList/trackListItemSkeleton";
 
 // 추후 개발
 export const SearchResultsTrack = ({
   hasShowMoreTab,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // useInfiniteScroll,
-}: sectionProps) => (
-  <SearchSectionWrapper
-    title="노래"
-    linkTo="track"
-    hasShowMoreTab={hasShowMoreTab}
-  >
-    <ul className="space-y-2">
-      {mockTracks.map((track) => (
-        <TrackListItem
-          id={track.id}
-          title={track.title}
-          artist={track.artist}
-          cover={track.cover}
-          description={track.description}
-        />
-      ))}
-    </ul>
-  </SearchSectionWrapper>
-);
+}: // useInfiniteScroll,
+sectionProps) => {
+  const { data, isLoading } = useTrack();
+  return (
+    <SearchSectionWrapper
+      title="노래"
+      linkTo="track"
+      hasShowMoreTab={hasShowMoreTab}
+    >
+      <ul className="space-y-2">
+        {isLoading &&
+          Array.from({ length: 4 }, (v, i) => (
+            <TrackListItemSkeleton key={`search-skeleton-${i}`} />
+          ))}
+        {data &&
+          data.map((track) => (
+            <TrackListItem
+              key={track.id}
+              id={track.id}
+              title={track.title}
+              artist={track.artist}
+              cover={track.cover}
+              description={track.description}
+            />
+          ))}
+      </ul>
+    </SearchSectionWrapper>
+  );
+};

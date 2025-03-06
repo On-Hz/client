@@ -1,4 +1,4 @@
-import './style.css';
+import "./style.css";
 interface AlbumProps {
   id: number;
   title: string;
@@ -14,11 +14,8 @@ export const AlbumCard = ({
   release,
 }: AlbumProps) => {
   return (
-    <div
-      key={id}
-      className="hz-album-item flex-shrink-0 rounded-lg bg-gray2"
-    >
-      <div className="overflow-hidden rounded-lg aspect-square rounded-b-none rounded-bl-none">
+    <div key={id} className="relative flex-shrink-0 rounded-lg hz-album-item bg-gray2">
+      <div className="overflow-hidden rounded-lg rounded-b-none rounded-bl-none aspect-square">
         <img
           src={cover}
           alt={title}

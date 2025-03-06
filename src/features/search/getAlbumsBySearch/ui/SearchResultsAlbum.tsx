@@ -1,27 +1,36 @@
 import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
 import { sectionProps } from "../../config/sectionProps";
-import { mockAlbums } from "../api/getAlbums";
+import { useAlbum } from "../api/getAlbums";
 import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
+import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
 
 export const SearchResultsAlbum = ({
   hasShowMoreTab,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //useInfiniteScroll,
-}: sectionProps) => (
-  <SearchSectionWrapper
-    title="앨범"
-    linkTo="album"
-    hasShowMoreTab={hasShowMoreTab}
-  >
-    <div className="flex justify-center gap-5 pb-4 space-x-4">
-      {mockAlbums.map((album) => (
-        <AlbumCard
-          id={album.id}
-          title={album.title}
-          artist={album.artist}
-          cover={album.cover}
-        />
-      ))}
-    </div>
-  </SearchSectionWrapper>
-);
+}: //useInfiniteScroll,
+sectionProps) => {
+  const { data, isLoading } = useAlbum();
+  return (
+    <SearchSectionWrapper
+      title="앨범"
+      linkTo="album"
+      hasShowMoreTab={hasShowMoreTab}
+    >
+      <div className="flex justify-center gap-5 pb-4 space-x-4">
+        {isLoading &&
+          Array.from({ length: 5 }, (v, i) => (
+            <AlbumCardSkeleton key={`search-skeleton-${i}`} />
+          ))}
+        {data &&
+          data.map((album) => (
+            <AlbumCard
+              key={album.id}
+              id={album.id}
+              title={album.title}
+              artist={album.artist}
+              cover={album.cover}
+            />
+          ))}
+      </div>
+    </SearchSectionWrapper>
+  );
+};

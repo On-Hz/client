@@ -1,14 +1,30 @@
+import { useQuery } from "@tanstack/react-query";
 import { Review } from "../model/types";
 
-export const mockReviews: Review[] = Array(10)
+const fetchData = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  return mockReviews;
+};
+
+const mockReviews: Review[] = Array(30)
   .fill(null)
   .map((_, i) => ({
-    userName: `Reviewer ${i + 1}`,
-    // 짝수번째는 아바타 있음, 홀수번째는 userImage 생략
-    userImage:
-      i % 2 === 0 ? `https://picsum.photos/64/64?random=${i}` : undefined,
-    reviewText: `Lorem ipsum dolor sit amet, review #${
+    reviewId: i + 1,
+    userName: `Reviewer name ${i + 1}`,
+    userImage: `https://picsum.photos/40/40?random=${i}`,
+    rating: (i % 5) + 1,
+    reviewText: `Review body ${
       i + 1
-    } 내용이 들어갑니다. 예시 문장으로 채워넣을 수 있습니다.`,
-    rating: i,
+    } - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 
+      Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`, // 예시로 길게
   }));
+
+
+export const useArtistReviews = (options?: { enabled?: boolean }) => {
+  return useQuery({
+    queryKey: ["reviews"],
+    queryFn: fetchData,
+    enabled: options?.enabled ?? true,
+  });
+};

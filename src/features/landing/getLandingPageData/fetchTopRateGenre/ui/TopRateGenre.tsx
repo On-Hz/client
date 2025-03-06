@@ -1,26 +1,18 @@
-import { mockTopRateGenreData } from "../api/getTopRateGenreList";
+import { useTopGenre } from "../api/getTopRateGenreList";
+import { getGridStyles } from "@/shared/helpers";
+import { GenreSkeleton } from "./TopRateGenreSkeleton";
 
-const computeLocalStart = (index: number, columns: number): number =>
-  Math.floor(index / columns) * 2 +
-  (columns === 3 ? (index % 3 === 1 ? 2 : 1) : index % 2 === 0 ? 1 : 2);
-
-export const TopRateGenre: React.FC = () => {
+const GenreItem: React.FC = () => {
+  const { data, isLoading } = useTopGenre();
+  if (isLoading) return <GenreSkeleton />;
   return (
-    <section className="px-4 py-8">
-      <h2 className="mb-4 text-2xl font-bold">Top Rate Genre</h2>
-      <div className="hz-landing-genre-gridlayout">
-        {mockTopRateGenreData.map((item, index) => (
+    <div className="hz-landing-genre-gridlayout">
+      {data &&
+        data.map((item: any, index: number) => (
           <div
             key={item.id}
-            className="p-4 border border-gray5 rounded-lg cursor-pointer hz-landing-genre-item"
-            style={
-              {
-                "--local-2-columns-grid-start": computeLocalStart(index, 2),
-                "--local-3-columns-grid-start": computeLocalStart(index, 3),
-                "--local-4-columns-grid-start": computeLocalStart(index, 4),
-                "--local-6-columns-grid-start": computeLocalStart(index, 6),
-              } as React.CSSProperties
-            }
+            className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-genre-item"
+            style={getGridStyles(index)}
           >
             <div className="mb-2">
               <p className="font-semibold">{item.title}</p>
@@ -33,7 +25,15 @@ export const TopRateGenre: React.FC = () => {
             />
           </div>
         ))}
-      </div>
+    </div>
+  );
+};
+
+export const TopRateGenre: React.FC = () => {
+  return (
+    <section className="px-4 py-8">
+      <h2 className="mb-4 text-2xl font-bold">Top Rate Genre</h2>
+      <GenreItem />
     </section>
   );
 };

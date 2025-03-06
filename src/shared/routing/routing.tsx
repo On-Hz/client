@@ -11,15 +11,18 @@ import { MypageArtist } from "@/pages/mypage/reviews/ui/MypageArtist";
 import { MypageLike } from "@/pages/mypage/reviews/ui/MypageLike";
 import { MypageSong } from "@/pages/mypage/reviews/ui/MypageSong";
 import { MyPage } from "@/pages/mypage/ui/Mypage";
-import { SearchPage } from "@/pages/search";
 import { SearchAlbums } from "@/pages/search/ui/SearchAlbums";
 import { SearchArtists } from "@/pages/search/ui/SearchArtists";
 import { SearchHome } from "@/pages/search/ui/SearchHome";
 import { SearchTracks } from "@/pages/search/ui/SearchTracks";
 import { SongPage } from "@/pages/song/ui/SongPage";
-import React from "react";
+import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 
+const SearchPage = lazy(() => import("@/pages/search").then((module) => ({
+  default: module.SearchPage,
+}))
+);
 export const Routing: React.FC = () => {
   return (
     <Routes>
@@ -50,7 +53,10 @@ export const Routing: React.FC = () => {
         path="*"
         element={
           <ErrorPage
-            error={Object.assign(new Error("404 Not Found"), { status: 404, name: "NotFoundError" })}
+            error={Object.assign(new Error("404 Not Found"), {
+              status: 404,
+              name: "NotFoundError",
+            })}
             resetErrorBoundary={() => window.location.reload()}
           />
         }

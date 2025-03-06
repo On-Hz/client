@@ -1,34 +1,42 @@
 import { sectionProps } from "@/features/artist/config/sectionProps";
-import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard";
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper.tsx/ui/ArtistSectionWrapper";
-import { mockReviews } from "../api//getArtistReviews";
-import { mockLatestReviews } from "../api/getArtistLatestReviews";
-import './style.css'
+import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard";
+import { ReviewCardSkeleton } from "@/shared/ui/reviewCard/ReviewCardSkeleton";
+import { useArtistReviews } from "../api//getArtistReviews";
+import { useArtistLatestReviews } from "../api/getArtistLatestReviews";
+import "./style.css";
+
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
 }: sectionProps) => {
-  const mockItem = useInfiniteScroll ? mockReviews : mockLatestReviews;
+  const regularQuery = useArtistLatestReviews({ enabled: !useInfiniteScroll });
+  const infiniteQuery = useArtistReviews({
+    enabled: useInfiniteScroll,
+  });
+
+  const { data, isLoading } = useInfiniteScroll ? infiniteQuery : regularQuery;
   return (
     <ArtistSectionWrapper title={"Reviews"}>
-      <div
-        className={
-          useInfiniteScroll
-            ? ""
-            : "hz-artist-sec"
-        }
-      >
-        {mockItem.map((review, index) => (
-          <div className={"hz-artist-sec-item"}>
-            <ReviewCard
-              key={index}
-              userName={review.userName}
-              userImage={review.userImage}
-              reviewText={review.reviewText}
-              rating={review.rating}
-              hasEllipsis={!useInfiniteScroll}
-            />
-          </div>
-        ))}
+      <div className={useInfiniteScroll ? "" : "hz-artist-sec"}>
+        {isLoading &&
+          Array.from({ length: 8 }, (v, i) => (
+            <div className={"hz-artist-sec-item"} key={i}>
+              <ReviewCardSkeleton key={`search-skeleton-${i}`} />
+            </div>
+          ))}
+        {data &&
+          data.map((review, index) => (
+            <div className={"hz-artist-sec-item"} key={index}>
+              <ReviewCard
+                key={index}
+                userName={review.userName}
+                userImage={review.userImage}
+                reviewText={review.reviewText}
+                rating={review.rating}
+                hasEllipsis={!useInfiniteScroll}
+              />
+            </div>
+          ))}
       </div>
     </ArtistSectionWrapper>
   );

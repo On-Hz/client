@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Track } from "../model/types";
 
-const mockTopTracks: Track[] = Array(5)
+const mockTracks: Track[] = Array(30)
   .fill(null)
   .map((_, i) => ({
     id: i,
@@ -14,12 +14,12 @@ const mockTopTracks: Track[] = Array(5)
 
 const fetchData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  return mockTopTracks;
+  return mockTracks;
 };
 
-export const useArtistTopTracks = (options?: { enabled?: boolean }) => {
+export const useArtistTracks = (options?: { enabled?: boolean }) => {
   return useQuery({
-    queryKey: ["top_tracks"],
+    queryKey: ["tracks"],
     queryFn: fetchData,
     enabled: options?.enabled ?? true,
   });

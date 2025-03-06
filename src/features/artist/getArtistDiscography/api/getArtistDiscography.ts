@@ -1,6 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import { Discography } from "../model/types";
 
-export const mockArtistDiscography: Discography[] = Array(30)
+const fetchData = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  return mockArtistDiscography;
+};
+const mockArtistDiscography: Discography[] = Array(30)
   .fill(null)
   .map((_, i) => ({
     id: i,
@@ -8,3 +13,11 @@ export const mockArtistDiscography: Discography[] = Array(30)
     release: `2024.05.${i + 20}`,
     cover: `https://picsum.photos/200/300?random=${i}`,
   }));
+
+export const useArtistDiscography = (options?: { enabled?: boolean }) => {
+  return useQuery({
+    queryKey: ["discography"],
+    queryFn: fetchData,
+    enabled: options?.enabled ?? true,
+  });
+};
