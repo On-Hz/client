@@ -6,14 +6,11 @@ import tsconfigPaths from "vite-tsconfig-paths"
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
-    // 엔트리 파일과 청크 파일 이름을 고정
+    outDir: 'dist',  // 빌드된 파일들이 저장될 디렉토리
     rollupOptions: {
-      output: {
-        // 엔트리 파일의 이름을 'index.js'로 고정
-        entryFileNames: 'index.js',
-        // 청크 파일의 이름을 고정 (필요시 수정)
-        chunkFileNames: 'assets/[name].js',
-      }
-    }
-  }
+      input: {
+        main: '/src/main.tsx',  // 메인 파일 지정
+      },
+    },
+  },
 })
