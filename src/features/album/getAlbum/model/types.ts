@@ -1,4 +1,4 @@
-export interface Album {
+export interface AlbumType {
     id: number;
     title: string;
     cover?: string;

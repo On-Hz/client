@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import FaceIcon from '@mui/icons-material/Face';
-import { mockAlbums } from '../api/getFetchAlbum';
+import { fetchAlbum } from '../api/getFetchAlbum';
 import { mockArtists } from '../../getArtist/api/getFetchArtist';
 import { AlbumSkeleton } from './AlbumSkeleton';
+import { AlbumType } from '../model/types';
 
 
 const AlbumSec = () => {
-    const album = mockAlbums[0];
     const artist = mockArtists[0];
-
+    const [album, setAlbum] = useState<AlbumType | null>(null); // 첫 번째 앨범
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
     useEffect(() => {
-        // 1.5초
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1500);
+        const fetchData = async () => {
+            const { album, isLoading } = await fetchAlbum();
+            setAlbum(album); // 첫 번째 앨범 저장
+            setIsLoading(isLoading); // 로딩 상태 설정
+        };
+
+        fetchData(); // API 호출
     }, []);
-    
     return (
         <div>
             {isLoading ? (
@@ -28,13 +30,13 @@ const AlbumSec = () => {
                     <div className='flex items-end'>
                         {/* 앨범 커버 */}
                         <div className='hz-cover flex items-center justify-center rounded-[10px] w-[324px] h-[324px] overflow-hidden bg-gray3'>
-                            {album.cover ? (
+                            {album?.cover ? (
                                 <img
                                     src={album.cover}
                                     alt={album.title}
                                 />
                             ) : (
-                                <MusicNoteIcon style={{width:'100%',height:'100%'}} className='text-gray2'/>
+                                <MusicNoteIcon style={{ width: '100%', height: '100%' }} className='text-gray2' />
                             )}
                         </div>
                          {/* 앨범, 아티스트 정보 */}
@@ -52,8 +54,9 @@ const AlbumSec = () => {
                                 </span>
                                 <p className='text-gray pl-[5px]'>{artist.name}</p>
                             </div>
-                            <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{album.title}</p>
-                            
+                            <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>
+                                {album?.title}
+                            </p>
                         </div>
                     </div>
                 </div>

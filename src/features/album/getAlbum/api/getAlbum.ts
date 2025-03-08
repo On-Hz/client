@@ -1,6 +1,6 @@
-import { Album } from "../model/types";
+import { AlbumType } from "../model/types";
 
-export const mockAlbums: Album[] = [
+export const mockAlbums: AlbumType[] = [
     {
         "id": 2,
         "title": "To Pimp a Butterfly",
@@ -16,3 +16,12 @@ export const mockAlbums: Album[] = [
         }
     }
 ]
+
+// 비동기 API 호출
+export const fetchAlbum = (): Promise<AlbumType> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(mockAlbums[0]);
+        }, 1500);
+    });
+};

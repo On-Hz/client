@@ -6,7 +6,7 @@ import "./main.css";
 const reactRoot = createRoot(document.getElementById("root")!);
 
 reactRoot.render(
-  <React.StrictMode>
+  // <React.StrictMode> //개발할때만 주석, 배포시 꼭 주석풀기!
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
