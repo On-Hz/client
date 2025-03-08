@@ -1,6 +1,6 @@
-import { Album } from '@/features/song/fetchAlbum/ui/Album';
-import { Ratings } from '@/features/song/fetchRating/ui/Ratings';
-import { Reviews } from '@/features/song/fetchReviews/ui/Reviews';
+import { Album } from '@/features/song/getAlbum/ui/Album';
+import { Ratings } from '@/features/song/getRating/ui/Ratings';
+import { Reviews } from '@/features/song/getReviews/ui/Reviews';
 import "./style.css";
 import React from 'react';
 
