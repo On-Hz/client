@@ -5,17 +5,17 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { useAuthStore } from "../stores/authStore";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "",
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000,
 });
 
 const requestHandler = (
   request: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  // const authToken = store.getState().auth.user_info.apikey;
-  // request.baseURL = "https://example.com/api/data";
+  const token = useAuthStore.getState().token;
 
   const headers =
     request.headers instanceof AxiosHeaders
@@ -23,9 +23,9 @@ const requestHandler = (
       : new AxiosHeaders(request.headers);
   headers.set("Accept", "application/json");
   headers.set("Content-Type", "application/json");
-  // if (authToken) {
-  //     headers.set('Authorization', authToken);
-  // }
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
   request.headers = headers;
   return request;
 };

@@ -1,0 +1,26 @@
+import { create } from 'zustand'
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
+
+export interface AuthState {
+  token: string | null;
+  setToken: (token: string | null) => void;
+  removeToken: () => void;
+}
+
+export const useAuthStore = create<AuthState>((set) => ({
+  token: cookies.get('token') || null,
+  setToken: (token: string | null) => {
+    set({ token });
+    if (token) {
+      cookies.set('token', token, { path: '/', maxAge: 3600 });
+    } else {
+      cookies.remove('token', { path: '/' });
+    }
+  },
+  removeToken: () => {
+    set({ token: null });
+    cookies.remove('token', { path: '/' });
+  },
+}));

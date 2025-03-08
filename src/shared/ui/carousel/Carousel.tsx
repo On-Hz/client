@@ -33,7 +33,10 @@ function CarouselSection<T>({
       >
         {isLoading &&
           Array.from({ length: skeletonArrLength }, (_, idx) => (
-            <SwiperSlide className="transition-transform transform cursor-pointer hover:scale-105">
+            <SwiperSlide
+              key={idx}
+              className="transition-transform transform cursor-pointer hover:scale-105"
+            >
               {skeletonComp(idx)}
             </SwiperSlide>
           ))}
