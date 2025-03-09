@@ -48,7 +48,6 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleMenuClose}
-        PaperProps={{ style: { maxHeight: 200 } }}
       >
         <MenuItem onClick={handleMenuClose}>Add to playlist</MenuItem>
         <MenuItem onClick={handleMenuClose}>Share</MenuItem>

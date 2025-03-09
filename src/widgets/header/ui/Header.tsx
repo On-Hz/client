@@ -89,7 +89,7 @@ export const Header: React.FC = () => {
               transition
               disablePortal
             >
-              {({ TransitionProps, placement }) => (
+              {({ TransitionProps, placement }: { TransitionProps: any; placement: any }) => (
                 <Grow
                   {...TransitionProps}
                   style={{
