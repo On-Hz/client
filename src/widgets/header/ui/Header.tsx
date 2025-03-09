@@ -8,9 +8,10 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
+import { PopperChildrenProps } from "@mui/material/Popper/BasePopper.types";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import React from "react";
 
@@ -50,7 +51,7 @@ export const Header: React.FC = () => {
           <img src={logo} alt="On-Hz" className="w-[80px]" />
         </Link>
         <div className="hz-menu">
-          <MenuIcon style={{display:"none"}} className="hz-nav-icon"/>
+          <MenuIcon style={{ display: "none" }} className="hz-nav-icon" />
           <nav className="flex items-center hz-nav">
             <div className="hz-search mr-[24px] px-[12px] bg-gray2 rounded-[5px] w-[360px] h-[40px] text-[14px] flex items-center">
               <input
@@ -89,12 +90,14 @@ export const Header: React.FC = () => {
               transition
               disablePortal
             >
-              {({ TransitionProps, placement }: { TransitionProps: any; placement: any }) => (
+              {(props: PopperChildrenProps) => (
                 <Grow
-                  {...TransitionProps}
+                  {...props.TransitionProps}
                   style={{
                     transformOrigin:
-                      placement === "bottom-start" ? "left top" : "left bottom",
+                      props.placement === "bottom-start"
+                        ? "left top"
+                        : "left bottom",
                   }}
                 >
                   <Paper>
@@ -107,10 +110,16 @@ export const Header: React.FC = () => {
                           color: "#a1a1a1",
                         }}
                       >
-                        <MenuItem sx={{ fontSize: "12px" }} onClick={handleClose}>
+                        <MenuItem
+                          sx={{ fontSize: "12px" }}
+                          onClick={handleClose}
+                        >
                           마이 페이지
                         </MenuItem>
-                        <MenuItem sx={{ fontSize: "12px" }} onClick={handleClose}>
+                        <MenuItem
+                          sx={{ fontSize: "12px" }}
+                          onClick={handleClose}
+                        >
                           로그아웃
                         </MenuItem>
                       </MenuList>
