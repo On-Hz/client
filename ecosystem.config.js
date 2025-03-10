@@ -1,17 +1,18 @@
+// ecosystem.config.js
 module.exports = {
-    apps: [
-      {
-        name: 'on-hz', // 앱 이름
-        script: 'serve', // 실행할 스크립트
-        args: '-s dist -l 6000', // npx serve 명령어로 dist 폴더를 서빙
-        cwd: '/app', // 실행할 디렉토리
-        watch: false, // 파일 변경 시 자동으로 재시작하지 않도록 설정 (true로 설정하면 변경 감지 후 재시작됨)
-        env: {
-          NODE_ENV: 'production',
-          PM2_HOME: '/var/jenkins_home/.pm2', // PM2 환경 변수 설정
-        },
-        log_file: '/var/log/on-hz.log', // 로그 파일 경로
-      },
-    ],
-  };
-  
+  apps: [{
+    name: "on-hz",               
+    script: "serve",               
+    exec_mode: "cluster",
+    instances: "max",
+      PM2_SERVE_PATH: "./dist",
+      PM2_SERVE_PORT: 6000,
+      PM2_SERVE_SPA: "true",
+      PM2_SERVE_HOMEPAGE: "/index.html", 
+      NODE_ENV: "production",
+      env: {
+        NODE_ENV: "production",
+        PORT: 6000
+    }
+  }]
+}
