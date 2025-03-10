@@ -12,6 +12,14 @@
 > yarn dev (개발 모드 실행)
 > git push 전에 yarn run lint 로 typescript error 수정하기! (배포 시 빌드 안될 가능성 있음)
 
+## 배포 방법
+- git push 시 젠킨스를 통해 배포됨.
+- 처음 docker를 띄워야할 경우 dist 폴더, ecosystem.config.cjs 파일 필요.
+  - yarn run build 하여 dist 폴더 생성
+  - sh deploy.sh 실행하여 docker가 위치한 곳에 폴더, 파일 전송
+  - docker-compose up -d --build 하여 도커 띄우기
+  - docker exec -it on-hz-client /bin/sh 접속하여 dist 폴더 내 파일과 ecosystem.config.cjs 확인
+
 ## FSD 구조
 - app
 - page
