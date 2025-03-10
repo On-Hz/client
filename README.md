@@ -1,50 +1,50 @@
-# React + TypeScript + Vite
+# On-Hz Music Review Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## environment
+- React 18.x
+- vite
+- yarn 4.2.1
+- typescript 5.5.4
+- tanstack-query 5.x
+- zustand 4.x
 
-Currently, two official plugins are available:
+> yarn install (npm install X)
+> yarn dev (개발 모드 실행)
+> git push 전에 yarn run lint 로 typescript error 수정하기! (배포 시 빌드 안될 가능성 있음)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## FSD 구조
+- app
+- page
+- widgets
+- features
+- shared
+  - api
+  - helpers
+  - hooks
+  - routing
+  - store
+  - ui
 
-## Expanding the ESLint configuration
+## Branch rule
+- main : 운영 소스코드
+- develop : 스테이징 소스코드
+- feature : 기능별 소스코드
+- {이름} : 개인별 소스코드
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Commit rule
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 수정
+- style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+- design: css, ui 추가 및 수정
+- refactor : 코드 리팩토링
+- test : 테스트 코드, 리팩토링 테스트 코드 추가
+- temp : 임시 저장
+- etc : 기타 수정사항
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 작성 예시
+```Plain Text
+feat : 로그인 기능 추가
+- jwt access token 발급 로직 추가
+- jwt refresh token 발급 로직 추가
 ```
