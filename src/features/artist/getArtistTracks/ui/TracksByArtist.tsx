@@ -4,7 +4,7 @@ import { useArtistTracks } from "../api/getArtistTracks";
 import { Menu, MenuItem } from "@mui/material";
 import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
 import { sectionProps } from "../../config/sectionProps";
-import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper.tsx/ui/ArtistSectionWrapper";
+import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
 import { TrackListItemSkeleton } from "@/shared/ui/trackList/trackListItemSkeleton";
 
 export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
@@ -44,11 +44,7 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
       </ul>
 
       {/* MUI Menu (공용) */}
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleMenuClose}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
         <MenuItem onClick={handleMenuClose}>Add to playlist</MenuItem>
         <MenuItem onClick={handleMenuClose}>Share</MenuItem>
         <MenuItem onClick={handleMenuClose}>View details</MenuItem>

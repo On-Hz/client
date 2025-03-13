@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import StarIcon from '@mui/icons-material/Star';
-import { useModalStore } from '@/shared/stores';
 import { mockAlbums } from '../../getAlbum/api/getFetchAlbum';
 import { mockUserAlbumRating } from '../api/getFetchRatings';
 import { Button } from '@/shared/ui/button/Button';
 import { RatingsSkeleton } from './RatingsSkeleton';
+import { openModalWithAuthCheck } from '@/shared/helpers/modalAuthChkHelper';
 
 
 const RatingSec = () => {
-    //총 별점
-    //평균 별점
-    //내 별점
-    const { openModal } = useModalStore();
     const album = mockAlbums[0];
     const rating = mockUserAlbumRating[0];
 
@@ -54,7 +50,7 @@ const RatingSec = () => {
                     </ul>
                     <div className='flex justify-end mt-[18px]'>
                         <Button
-                            onClick={() => openModal("writeReviewModal")}
+                            onClick={() => openModalWithAuthCheck("writeReviewModal")}
                             text="리뷰 작성"
                         />
                     </div>

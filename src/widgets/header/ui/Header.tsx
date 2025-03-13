@@ -1,6 +1,6 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "/public/logo_tmp_text.svg";
-// import SearchIcon from "@mui/icons-material/Search";
 import { useAuthModalStore } from "@/shared/stores";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
-import React from "react";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();

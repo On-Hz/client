@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ModalLayout } from "@/shared/ui/modal/modalLayout";
+import { ModalLayout } from "@/shared/ui/modal/ModalLayout";
 import TermDetailModal from "./TermsDetailModal";
 import { ModalButton } from "@/shared/ui/modal/modal-button/ModalButton";
 
@@ -97,11 +97,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
               </div>
             ))}
           </div>
-           <ModalButton 
-                text="가입하기"
-                width="100%"
-                onClick={onClose}
-            />
+          <ModalButton text="가입하기" width="100%" onClick={onClose} />
         </div>
       </ModalLayout>
       <TermDetailModal

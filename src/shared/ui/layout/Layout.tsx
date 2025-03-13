@@ -1,11 +1,7 @@
 import { type ReactNode } from "react";
 import { Header } from "@/widgets/header";
-import { Footer } from "@/widgets/footer"
-import AuthModal from "../modal/modal-auth/AuthModal";
-import { ProfileModal } from "../modal/modal-profile/ProfileModal";
-import { WriteReviewModal } from "../modal/modal-review/WriteReviewModal";
-
-
+import { Footer } from "@/widgets/footer";
+import { ModalProvider } from "@/shared/ui/modal/ModalProvider";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -16,9 +12,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main>{children}</main>
       <Footer />
-      <AuthModal />
-      <ProfileModal />
-      <WriteReviewModal />
+      <ModalProvider />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { ModalLayout } from "../modalLayout";
+import { ModalLayout } from "../ModalLayout";
 import { AuthCommon } from "./AuthModalCommon";
 import { useAuthModalStore } from "@/shared/stores";
 import LoginForm from "@/features/auth/login/ui/LoginForm";
 import SignupForm from "@/features/auth/signUp/ui/SignUpForm";
 
-export default function AuthModal() {
+export const AuthModal: React.FC = () => {
   const { isModalOpen, closeAuthModal, authMode } = useAuthModalStore();
   const [localMode, setLocalMode] = useState<"login" | "signup">(authMode);
 
@@ -25,7 +25,7 @@ export default function AuthModal() {
     >
       <div className="py-[25px] px-[60px] max-500:p-0">
         {/* 공통 영역: 로고, SNS 아이콘, OR, 타이틀 (AuthCommon) */}
-        <AuthCommon localMode={localMode} />
+        <AuthCommon />
         {localMode === "login" ? (
           <LoginForm switchMode={switchMode} />
         ) : (
@@ -34,4 +34,4 @@ export default function AuthModal() {
       </div>
     </ModalLayout>
   );
-}
+};

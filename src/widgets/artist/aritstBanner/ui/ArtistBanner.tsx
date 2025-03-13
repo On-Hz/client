@@ -1,4 +1,5 @@
-import { ArtistTabs } from "../../artistTabs";
+import { ArtistRatingButton } from "@/widgets/artist/artistRatingButton";
+import { ArtistTabs } from "@/widgets/artist/artistTabs";
 
 export const ArtistBanner = () => {
   const imageUrl = "https://picsum.photos/1600/450?random=10";
@@ -43,10 +44,7 @@ export const ArtistBanner = () => {
           {/* 수직 구분선 */}
           <div className="w-px bg-white h-14"></div>
           {/* 내 평점 (별 버튼) */}
-          <div className="flex flex-col items-center">
-            <button className="text-4xl focus:outline-none">★</button>
-            <p className="text-base">내 평점</p>
-          </div>
+          <ArtistRatingButton />
         </div>
         <ArtistTabs />
       </div>

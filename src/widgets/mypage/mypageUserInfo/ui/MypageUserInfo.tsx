@@ -1,4 +1,3 @@
-import { useModalStore } from '@/shared/stores';
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
 import { MypageUserInfoSkeleton } from './MypageUserInfoSkeleton';
@@ -7,9 +6,9 @@ import { mockUser } from '@/features/mypage/getUserProfile/api/getUser';
 import { ratingData } from '@/features/mypage/getUserRating/api/getRating';
 import { MypageTabs } from '../../mypageTabs';
 import { useEffect, useState } from 'react';
+import { openModalWithAuthCheck } from '@/shared/helpers/modalAuthChkHelper';
 
 export const MypageUserInfo = () => {
-    const { openModal } = useModalStore();
     const user = mockUser[0];
     const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
@@ -25,7 +24,7 @@ export const MypageUserInfo = () => {
             {isLoading ? (
                 <MypageUserInfoSkeleton />
             ) : (
-                <div className="flex justify-between items-center hz-top">
+                <div className="flex items-center justify-between hz-top">
                     <div className="flex items-center">
                         <div className="pr-[24px] text-center">
                             <div className="hz-user-img w-[182px] h-[182px] border border-gray3 rounded-[50%] flex items-center justify-center">
@@ -37,7 +36,7 @@ export const MypageUserInfo = () => {
                             </div>
                             <button 
                                 className="text-point text-[13px] mt-5"
-                                onClick={() => openModal("profileModal")}>
+                                onClick={() => openModalWithAuthCheck("profileModal")}>
                                 프로필 수정
                             </button>
                         </div>

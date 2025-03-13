@@ -1,0 +1,1 @@
+export { ArtistSectionWrapper } from './ui/ArtistSectionWrapper'
