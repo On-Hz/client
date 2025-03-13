@@ -28,7 +28,7 @@ export const TopRateArtists: React.FC = () => {
   const { data, isLoading } = useTopArtist();
   return (
     <CarouselSection
-      title="Top Artist"
+      title="인기 아티스트"
       items={data || []}
       renderPage={renderArtistPage}
       isLoading={isLoading}

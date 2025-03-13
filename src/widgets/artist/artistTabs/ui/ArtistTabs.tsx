@@ -13,7 +13,7 @@ export const ArtistTabs = () => {
             end
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
-            HOME
+            홈
           </NavLink>
         </li>
 
@@ -23,7 +23,7 @@ export const ArtistTabs = () => {
             to={`/artist/${artistSlug}/discography`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
-            Discography
+            앨범
           </NavLink>
         </li>
 
@@ -33,7 +33,7 @@ export const ArtistTabs = () => {
             to={`/artist/${artistSlug}/reviews`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
-            Reviews
+            리뷰
           </NavLink>
         </li>
 
@@ -43,7 +43,7 @@ export const ArtistTabs = () => {
             to={`/artist/${artistSlug}/tracks`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
-            Track
+            노래
           </NavLink>
         </li>
       </ul>

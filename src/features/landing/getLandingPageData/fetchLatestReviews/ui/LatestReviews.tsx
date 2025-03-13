@@ -50,7 +50,7 @@ export const LatestReviews: React.FC = () => {
   const { data, isLoading } = useLatestReviews();
   return (
     <CarouselSection
-      title="Latest Reviews"
+      title="최신 리뷰"
       items={data || []}
       renderPage={renderReviewPage}
       isLoading={isLoading}

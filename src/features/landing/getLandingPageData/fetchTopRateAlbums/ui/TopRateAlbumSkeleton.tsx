@@ -1,13 +1,13 @@
 import { getGridStyles } from "@/shared/helpers";
 import Skeleton from "@mui/material/Skeleton";
 
-export const GenreSkeleton: React.FC = () => {
+export const AlbumSkeleton: React.FC = () => {
   return (
-    <div className="hz-landing-genre-gridlayout">
+    <div className="hz-landing-album-gridlayout">
       {Array.from({ length: 12 }).map((_, index) => (
         <div
           key={index}
-          className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-genre-item"
+          className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-album-item"
           style={getGridStyles(index)}
         >
           <Skeleton variant="text" width="60%" height={20} />

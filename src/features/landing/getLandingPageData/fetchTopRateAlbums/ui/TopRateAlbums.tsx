@@ -1,42 +1,39 @@
-import React from "react";
-import CarouselSection from "@/shared/ui/carousel/Carousel";
-import { Album } from "../model/types";
 import { useTopAlbum } from "../api/getTopRateAlbumList";
-import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
-import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
+import { getGridStyles } from "@/shared/helpers";
+import { AlbumSkeleton } from "./TopRateAlbumSkeleton";
 
-const renderAlbumPage = (albums: Album[]) => (
-  <div className="flex flex-wrap justify-center gap-4 pb-4">
-    {albums.map((album) => (
-      <AlbumCard
-        key={album.id}
-        id={album.id}
-        title={album.title}
-        cover={album.cover}
-        artist={album.artist}
-      />
-    ))}
-  </div>
-);
-
-const renderSkeletonAlbum = (): JSX.Element => (
-  <div className="flex flex-wrap justify-center gap-4 pb-4">
-    {Array.from({ length: 5 }, (_, idx) => (
-      <AlbumCardSkeleton key={`album-skeleton-${idx}`} />
-    ))}
-  </div>
-);
+const AlbumItem: React.FC = () => {
+  const { data, isLoading } = useTopAlbum();
+  if (isLoading) return <AlbumSkeleton />;
+  return (
+    <div className="hz-landing-album-gridlayout">
+      {data &&
+        data.map((item: any, index: number) => (
+          <div
+            key={item.id}
+            className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-album-item"
+            style={getGridStyles(index)}
+          >
+            <div className="mb-2">
+              <p className="font-semibold">{item.title}</p>
+              <p className="text-xs text-neutral-500">{item.artist}</p>
+            </div>
+            <img
+              src={item.cover}
+              alt={item.title}
+              className="object-cover w-full rounded-lg aspect-square"
+            />
+          </div>
+        ))}
+    </div>
+  );
+};
 
 export const TopRateAlbums: React.FC = () => {
-  const { data, isLoading } = useTopAlbum();
   return (
-    <CarouselSection
-      title="Top Rate Album"
-      items={data || []}
-      renderPage={renderAlbumPage}
-      isLoading={isLoading}
-      skeletonArrLength={5}
-      skeletonComp={renderSkeletonAlbum}
-    />
+    <section className="px-4 py-8">
+      <h2 className="mb-4 text-2xl font-bold">인기 앨범</h2>
+      <AlbumItem />
+    </section>
   );
 };

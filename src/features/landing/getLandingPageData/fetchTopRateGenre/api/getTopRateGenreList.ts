@@ -11,7 +11,8 @@ const mockTopRateGenreData: GenreItem[] = Array(12)
   .map((_, i) => ({
     id: i,
     title: `Genre Title ${i + 1}`,
-    img: `https://picsum.photos/200/300?random=${i}`,
+    artist: `Artist ${i + 1}`,
+    cover: `https://picsum.photos/200/300?random=${i}`,
   }));
 
 export const useTopGenre = () => {

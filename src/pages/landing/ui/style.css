@@ -14,7 +14,7 @@
   #hz-landing {
     @apply bg-blue-500;
   }
-  .hz-landing-genre-gridlayout {
+  .hz-landing-album-gridlayout {
     @apply grid gap-[var(--spacing-3x)];
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, var(--spacing-3x) max-content) var(
@@ -24,18 +24,18 @@
     perspective: 400px;
     perspective-origin: 50%;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item {
+  .hz-landing-album-gridlayout > .hz-landing-album-item {
     grid-row: var(--local-2-columns-grid-start) /
       calc(var(--local-2-columns-grid-start) + 2);
     opacity: 1;
     transform: translateY(0);
   }
 
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(odd) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(odd) {
     grid-column-start: 1;
   }
 
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(2n) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(2n) {
     grid-column-start: 2;
   }
 }
@@ -45,7 +45,7 @@
   #hz-landing {
     @apply bg-rose-500;
   }
-  .hz-landing-genre-gridlayout {
+  .hz-landing-album-gridlayout {
     gap: var(--spacing-3x);
   }
 }
@@ -55,23 +55,23 @@
   #hz-landing {
     @apply bg-purple-950;
   }
-  .hz-landing-genre-gridlayout {
+  .hz-landing-album-gridlayout {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, var(--spacing-3x) max-content) var(
         --spacing-3x
       );
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item {
+  .hz-landing-album-gridlayout > .hz-landing-album-item {
     grid-row: var(--local-3-columns-grid-start) /
       calc(var(--local-3-columns-grid-start) + 2);
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(3n + 1) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 1) {
     grid-column-start: 1;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(3n + 2) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 2) {
     grid-column-start: 2;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(3n) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n) {
     grid-column-start: 3;
   }
 }
@@ -81,26 +81,26 @@
   #hz-landing {
     @apply bg-purple-200;
   }
-  .hz-landing-genre-gridlayout {
+  .hz-landing-album-gridlayout {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, var(--spacing-3x) max-content) var(
         --spacing-3x
       );
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item {
+  .hz-landing-album-gridlayout > .hz-landing-album-item {
     grid-row: var(--local-4-columns-grid-start) /
       calc(var(--local-4-columns-grid-start) + 2);
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(4n + 1) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n + 1) {
     grid-column-start: 1;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(4n + 2) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n + 2) {
     grid-column-start: 2;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(4n + 3) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n + 3) {
     grid-column-start: 3;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(4n) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n) {
     grid-column-start: 4;
   }
 }
@@ -111,37 +111,37 @@
     @apply mx-auto max-w-7xl;
   }
   /* 장르 */
-  .hz-landing-genre-gridlayout {
+  .hz-landing-album-gridlayout {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, var(--spacing-3x) max-content) var(
         --spacing-3x
       );
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item {
+  .hz-landing-album-gridlayout > .hz-landing-album-item {
     grid-row: var(--local-6-columns-grid-start) /
       calc(var(--local-6-columns-grid-start) + 2);
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n + 1) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 1) {
     grid-column-start: 1;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n + 2) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 2) {
     grid-column-start: 2;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n + 3) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 3) {
     grid-column-start: 3;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n + 4) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 4) {
     grid-column-start: 4;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n + 5) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 5) {
     grid-column-start: 5;
   }
-  .hz-landing-genre-gridlayout > .hz-landing-genre-item:nth-of-type(6n) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n) {
     grid-column-start: 6;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hz-landing-genre-item {
+  .hz-landing-album-item {
     transform-style: preserve-3d;
     transition-duration: var(--transition-duration-long);
     transition-property: opacity, transform;
@@ -150,19 +150,19 @@
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .hz-landing-genre-item:focus-within,
-  .hz-landing-genre-item:hover {
+  .hz-landing-album-item:focus-within,
+  .hz-landing-album-item:hover {
     z-index: 1;
     transform: translateY(15px) translateZ(50px);
   }
 
-  .hz-landing-genre-item {
+  .hz-landing-album-item {
     transition-delay: unset;
     transition-duration: var(--transition-duration-long);
   }
 
-  .hz-landing-genre-item:focus-within,
-  .hz-landing-genre-item:hover {
+  .hz-landing-album-item:focus-within,
+  .hz-landing-album-item:hover {
     transform: translateZ(10px);
     transition-duration: var(--transition-duration-short);
   }

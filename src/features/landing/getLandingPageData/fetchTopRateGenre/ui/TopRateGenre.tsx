@@ -1,39 +1,42 @@
+import React from "react";
+import CarouselSection from "@/shared/ui/carousel/Carousel";
+import { GenreItem } from "../model/types";
 import { useTopGenre } from "../api/getTopRateGenreList";
-import { getGridStyles } from "@/shared/helpers";
-import { GenreSkeleton } from "./TopRateGenreSkeleton";
+import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
+import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
 
-const GenreItem: React.FC = () => {
-  const { data, isLoading } = useTopGenre();
-  if (isLoading) return <GenreSkeleton />;
-  return (
-    <div className="hz-landing-genre-gridlayout">
-      {data &&
-        data.map((item: any, index: number) => (
-          <div
-            key={item.id}
-            className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-genre-item"
-            style={getGridStyles(index)}
-          >
-            <div className="mb-2">
-              <p className="font-semibold">{item.title}</p>
-              <p className="text-xs text-neutral-500">Description</p>
-            </div>
-            <img
-              src={item.img}
-              alt={item.title}
-              className="object-cover w-full rounded-lg aspect-square"
-            />
-          </div>
-        ))}
-    </div>
-  );
-};
+const renderGenrePage = (GenreItem: GenreItem[]) => (
+  <div className="flex flex-wrap justify-center gap-4 pb-4">
+    {GenreItem.map((item) => (
+      <AlbumCard
+        key={item.id}
+        id={item.id}
+        title={item.title}
+        cover={item.cover}
+        artist={item.artist}
+      />
+    ))}
+  </div>
+);
+
+const renderSkeletonGenre = (): JSX.Element => (
+  <div className="flex flex-wrap justify-center gap-4 pb-4">
+    {Array.from({ length: 5 }, (_, idx) => (
+      <AlbumCardSkeleton key={`genre-skeleton-${idx}`} />
+    ))}
+  </div>
+);
 
 export const TopRateGenre: React.FC = () => {
+  const { data, isLoading } = useTopGenre();
   return (
-    <section className="px-4 py-8">
-      <h2 className="mb-4 text-2xl font-bold">Top Rate Genre</h2>
-      <GenreItem />
-    </section>
+    <CarouselSection
+      title="장르 별 인기 앨범"
+      items={data || []}
+      renderPage={renderGenrePage}
+      isLoading={isLoading}
+      skeletonArrLength={5}
+      skeletonComp={renderSkeletonGenre}
+    />
   );
 };
