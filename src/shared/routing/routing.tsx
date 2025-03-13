@@ -11,6 +11,7 @@ import { MypageArtist } from "@/pages/mypage/reviews/ui/MypageArtist";
 import { MypageLike } from "@/pages/mypage/reviews/ui/MypageLike";
 import { MypageSong } from "@/pages/mypage/reviews/ui/MypageSong";
 import { MyPage } from "@/pages/mypage/ui/Mypage";
+import { ReviewPage } from "@/pages/review";
 import { SearchAlbums } from "@/pages/search/ui/SearchAlbums";
 import { SearchArtists } from "@/pages/search/ui/SearchArtists";
 import { SearchHome } from "@/pages/search/ui/SearchHome";
@@ -49,6 +50,7 @@ export const Routing: React.FC = () => {
         <Route path="artist" element={<MypageArtist />} />
         <Route path="like" element={<MypageLike />} />
       </Route>
+      <Route path="/review" element={<ReviewPage />} />
       <Route
         path="*"
         element={

@@ -1,0 +1,21 @@
+
+@screen max-1300 { /*max-width 1300px*/
+    
+}
+
+@screen max-1200 { /*max-width 1200px*/
+}
+
+@screen max-1000 { /*max-width 1000px*/
+}
+
+@screen max-800 { /*max-width 800px*/
+    #rv-page .hz-cover{@apply w-[200px] h-[200px]}
+    #rv-page .hz-title{@apply text-[20px]}
+}
+
+@screen max-500 { /*max-width 500px*/
+    #rv-page .hz-cover{@apply w-[140px] h-[140px]}
+    #rv-page .hz-top > div{@apply block}
+    #rv-page .hz-ab-info{@apply p-0 pt-6}
+}

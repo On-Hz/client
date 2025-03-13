@@ -34,7 +34,7 @@ const AlbumSec = () => {
                     )}
                 </div>
                 {/* 앨범, 아티스트 정보 */}
-                <div className='pl-[18px] hz-ab-info'>
+                <div className='pl-[18px] hz-ab-info flex-1 min-w-0'>
                     <div className='flex items-center'>
                         <span className='flex items-center justify-center w-[64px] h-[64px] rounded-[50%] overflow-hidden bg-gray3'>
                             {artist.avatar ? (

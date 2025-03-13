@@ -9,6 +9,8 @@ interface ReviewProps {
   reviewText: string;
   rating: number;
   hasEllipsis?: boolean;
+  hasBorder?: boolean;
+  createTime?: string;
   isMybtn?: boolean;
 }
 
@@ -18,6 +20,8 @@ export const ReviewCard = ({
   reviewText,
   rating,
   hasEllipsis,
+  hasBorder,
+  createTime,
   isMybtn = false,
 }: ReviewProps) => {
   const [liked, setLiked] = useState(false);
@@ -27,7 +31,11 @@ export const ReviewCard = ({
   };
 
   return (
-    <div className="mb-[24px] px-[24px] py-[18px] bg-white border-gray3 border rounded-[8px]">
+    <div 
+    className={
+      hasBorder ? "mb-[24px] px-[24px] py-[18px] bg-white" : "mb-[24px] px-[24px] py-[18px] bg-white border-gray3 border rounded-[8px]"
+    }
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-center">
           <span className="w-[64px] h-[64px] rounded-[50%] overflow-hidden border border-gray3">
@@ -63,6 +71,9 @@ export const ReviewCard = ({
             },
           }}
         />
+      </div>
+      <div className="text-gray pb-5">
+        {createTime}
       </div>
       <div
         className={
