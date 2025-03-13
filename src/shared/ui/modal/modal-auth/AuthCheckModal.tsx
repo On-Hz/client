@@ -3,7 +3,7 @@ import React from "react";
 import { ModalLayout } from "../ModalLayout";
 import { useModalStore } from "@/shared/stores";
 import { useAuthModalStore } from "@/shared/stores/authModalStore";
-import logo from "/public/logo_tmp_text.svg";
+import logo from "/public/logo_text.svg";
 
 export const AuthCheckModal: React.FC = () => {
   const { modals, closeModal } = useModalStore();

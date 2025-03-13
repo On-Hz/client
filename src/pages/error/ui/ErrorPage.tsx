@@ -1,8 +1,8 @@
 import React from "react";
 import { FallbackProps } from "react-error-boundary";
 import axios from "axios";
-import logoWithText from "/public/logo_tmp_text.svg";
-import logo from "/public/logo_tmp.svg";
+import logoWithText from "/public/logo_text.svg";
+import logo from "/public/logo.svg";
 import { Layout } from "@/shared/ui/layout/Layout";
 
 export const ErrorPage: React.FC<FallbackProps> = ({

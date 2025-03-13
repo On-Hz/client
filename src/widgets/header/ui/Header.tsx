@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "/public/logo_tmp_text.svg";
+import logo from "/public/logo_text.svg";
 import { useAuthModalStore } from "@/shared/stores";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";

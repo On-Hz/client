@@ -1,4 +1,4 @@
-import logo from "/public/logo_tmp_text.svg";
+import logo from "/public/logo_text.svg";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { SiNaver } from "react-icons/si";
