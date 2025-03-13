@@ -28,6 +28,7 @@ export const WriteReviewModal: React.FC = () => {
           {albumTitle}
         </p>
         <Rating
+          precision={0.5}
           sx={{
             marginBottom: "15px",
             fontSize: "36px",

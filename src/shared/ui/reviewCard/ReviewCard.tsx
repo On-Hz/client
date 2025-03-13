@@ -52,6 +52,7 @@ export const ReviewCard = ({
       <div className="py-[15px]">
         <Rating
           value={rating}
+          precision={0.5}
           readOnly
           sx={{
             "& .MuiRating-iconFilled": {
@@ -63,7 +64,13 @@ export const ReviewCard = ({
           }}
         />
       </div>
-      <div className={hasEllipsis ? "overflow-hidden line-clamp-4": "min-h-[70px]"}>{reviewText}</div>
+      <div
+        className={
+          hasEllipsis ? "overflow-hidden line-clamp-4" : "min-h-[70px]"
+        }
+      >
+        {reviewText}
+      </div>
       <div className="pt-[15px]">
         <button onClick={onClick}>
           <FavoriteIcon

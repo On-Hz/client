@@ -23,7 +23,7 @@ const renderReviewPage = (reviews: Review[]) => (
               {review.userName}
             </p>
           </div>
-          <Rating value={review.rating} readOnly />
+          <Rating value={review.rating} precision={0.5} readOnly />
         </div>
         <div className="flex items-start gap-4 mt-7">
           <img

@@ -18,7 +18,7 @@ const mockLatestReviewsData: Review[] = Array(6)
     } - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
     Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 
     Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`,
-    rating: i + 1, // 예시로 별 4개
+    rating: i + 0.5, // 예시로 별 4개
   }));
 
 export const useLatestReviews = () => {
