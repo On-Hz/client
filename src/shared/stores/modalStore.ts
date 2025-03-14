@@ -2,17 +2,22 @@ import { create } from "zustand";
 
 interface ModalState {
   modals: Record<string, boolean>;
-  // isModalOpen: boolean;
-  openModal: (modalName: string) => void;
+  modalData: Record<string, any>; // 항상 초기화된 객체로 존재함
+  openModal: (modalName: string, data?: any) => void;
   closeModal: (modalName: string) => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
-  modals: {}, // 모든 모달 상태를 초기화
-  // isModalOpen: false,
-  openModal: (modalName) =>
-    set((state) => ({ modals: { ...state.modals, [modalName]: true, isModalOpen: true} })),
+  modals: {},
+  modalData: {},
+  openModal: (modalName, data) =>
+    set(() => ({
+      modals: { [modalName]: true },
+      modalData: { [modalName]: data },
+    })),
   closeModal: (modalName) =>
-    set((state) => ({ modals: { ...state.modals, [modalName]: false, isModalOpen: false  } })),
-
+    set(() => ({
+      modals: { [modalName]: false },
+      modalData: { [modalName]: undefined },
+    })),
 }));

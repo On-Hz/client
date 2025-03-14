@@ -1,25 +1,24 @@
-// modalRegistry.ts
 import React from "react";
-import { AuthCheckModal } from "../modal-auth/AuthCheckModal";
+import { AuthInfoModal } from "../modal-auth/AuthInfoModal";
 import { ProfileModal } from "../modal-profile/ProfileModal";
-import { WriteReviewModal } from "../modal-review/WriteReviewModal";
+import { WriteReview } from "@/features/writeReview/ui/WriteReview";
 
-export interface ModalDefinition {
+export interface ModalDefinition<T = any> {
   authCheck: boolean;
-  component: React.ComponentType;
+  component: React.ComponentType<T>;
 }
 
-export const modalRegistry: Record<string, ModalDefinition> = {
+export const modalRegistry: Record<string, ModalDefinition<any>> = {
   writeReviewModal: {
     authCheck: true,
-    component: WriteReviewModal,
+    component: WriteReview,
   },
   profileModal: {
     authCheck: true,
     component: ProfileModal,
   },
-  authCheckModal: {
+  authInfoModal: {
     authCheck: false,
-    component: AuthCheckModal,
+    component: AuthInfoModal,
   },
 };

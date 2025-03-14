@@ -7,6 +7,7 @@ import { AuthModal } from "./modal-auth/AuthModal";
 
 export const ModalProvider: React.FC = () => {
   const modals = useModalStore((state) => state.modals);
+  const modalData = useModalStore((state) => state.modalData);
   const { isModalOpen: isAuthModalOpen } = useAuthModalStore();
 
   return (
@@ -15,7 +16,7 @@ export const ModalProvider: React.FC = () => {
         .filter(([modalName, isOpen]) => isOpen && modalRegistry[modalName])
         .map(([modalName]) => {
           const Component = modalRegistry[modalName].component;
-          return <Component key={modalName} />;
+          return <Component key={modalName} data={modalData[modalName]} />;
         })}
       {isAuthModalOpen && <AuthModal />}
     </>

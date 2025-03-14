@@ -1,56 +1,75 @@
-import React, { useState } from "react";
-import { useModalStore } from "@/shared/stores";
-import { ModalButton } from "../modal-button/ModalButton";
+import React from "react";
 import { ModalLayout } from "../ModalLayout";
-import { Rating } from "@mui/material";
+import { ModalButton } from "../modal-button/ModalButton";
+import { Rating, Tooltip } from "@mui/material";
 
-const albumTitle = "APT.";
+export interface WriteReviewModalProps {
+  open: boolean;
+  title?: string;
+  content: string;
+  rating: number | null;
+  maxLength: number;
+  tooltipOpen: boolean;
+  onRatingChange: (
+    event: React.SyntheticEvent,
+    newValue: number | null
+  ) => void;
+  onRatingHover: (event: React.SyntheticEvent, newHover: number) => void;
+  onContentChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onSubmit: () => void;
+  onClose: () => void;
+}
 
-export const WriteReviewModal: React.FC = () => {
-  const { modals, closeModal } = useModalStore();
-  const [text, setText] = useState("");
-  const maxLength = 10000; // 최대 글자 수
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.target.value.length <= maxLength) {
-      setText(e.target.value);
-    }
-  };
-
+export const WriteReviewModal: React.FC<WriteReviewModalProps> = ({
+  open,
+  title,
+  content,
+  rating,
+  maxLength,
+  tooltipOpen,
+  onRatingChange,
+  onRatingHover,
+  onContentChange,
+  onSubmit,
+  onClose,
+}) => {
   return (
-    <ModalLayout
-      open={modals["writeReviewModal"] || false}
-      onClose={() => closeModal("writeReviewModal")}
-      showCloseButton={true}
-    >
+    <ModalLayout open={open} onClose={onClose} showCloseButton>
       <div className="py-[25px] px-[40px] w-[550px] max-500:w-[300px] max-500:p-0">
         <p className="text-[36px] pb-6 font-semibold max-500:text-[30px]">
-          {albumTitle}
+          {title}
         </p>
-        <Rating
-          precision={0.5}
-          sx={{
-            marginBottom: "15px",
-            fontSize: "36px",
-            fontWeight: "200",
-            "& .MuiRating-iconFilled": {
-              color: "#FFD231", // 채워진 별 색상
-            },
-            "& .MuiRating-iconEmpty": {
-              color: "#a1a1a1", // 비어있는 별 색상
-            },
-          }}
-        />
+        <Tooltip
+          title="취소하기"
+          followCursor
+          open={tooltipOpen}
+          placement="top"
+        >
+          <Rating
+            value={rating}
+            onChange={onRatingChange}
+            onChangeActive={onRatingHover} // hover 이벤트 핸들러 연결
+            precision={0.5}
+            sx={{
+              marginBottom: "15px",
+              fontSize: "36px",
+              fontWeight: "200",
+              "& .MuiRating-iconFilled": { color: "#FFD231" },
+              "& .MuiRating-iconEmpty": { color: "#a1a1a1" },
+            }}
+          />
+        </Tooltip>
         <textarea
-          onChange={handleChange}
+          value={content}
+          onChange={onContentChange}
           className="resize-none h-[150px] border border-gray4 w-full p-4"
           placeholder="리뷰를 작성해주세요."
         ></textarea>
         <div className="pt-1 text-right pb-9 text-gray">
-          {text.length} / {maxLength}자
+          {content.length} / {maxLength}자
         </div>
         <div className="text-center">
-          <ModalButton text="리뷰 작성" />
+          <ModalButton text="리뷰 작성" onClick={onSubmit} />
         </div>
       </div>
     </ModalLayout>

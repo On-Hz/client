@@ -44,7 +44,7 @@ export const ArtistBanner = () => {
           {/* 수직 구분선 */}
           <div className="w-px bg-white h-14"></div>
           {/* 내 평점 (별 버튼) */}
-          <ArtistRatingButton />
+          <ArtistRatingButton entityId={2} title="Jane Doe"/>
         </div>
         <ArtistTabs />
       </div>

@@ -1,30 +1,29 @@
-// AuthPromptModal.tsx
 import React from "react";
 import { ModalLayout } from "../ModalLayout";
 import { useModalStore } from "@/shared/stores";
 import { useAuthModalStore } from "@/shared/stores/authModalStore";
 import logo from "/public/logo_text.svg";
 
-export const AuthCheckModal: React.FC = () => {
+export const AuthInfoModal: React.FC = () => {
   const { modals, closeModal } = useModalStore();
   const openAuthModal = useAuthModalStore((state) => state.openAuthModal);
 
   // 로그인 버튼 클릭 시:
   const handleLogin = () => {
-    closeModal("authCheckModal");
+    closeModal("authInfoModal");
     openAuthModal("login");
   };
 
   // 회원가입 버튼 클릭 시:
   const handleSignup = () => {
-    closeModal("authCheckModal");
+    closeModal("authInfoModal");
     openAuthModal("signup");
   };
 
   return (
     <ModalLayout
-      open={modals["authCheckModal"] || false}
-      onClose={() => closeModal("authCheckModal")}
+      open={modals["authInfoModal"] || false}
+      onClose={() => closeModal("authInfoModal")}
       showCloseButton={true}
     >
       <div className="py-[25px] px-[60px] max-500:p-0">
