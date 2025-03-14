@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { mockReviews } from '../api/getFetchReviews';
+import { mockReviews } from '../api/getReviews';
 import { SubTitle } from '@/shared/ui/subTitle/SubTitle';
 import { ReviewCard } from '@/shared/ui/reviewCard/ReviewCard';
 import { RoundButton } from '@/shared/ui/roundButton/RoundButton';
-import { ReviewItem } from '../model/types';
+import { ReviewType } from '../model/types';
 import { ReviewCardSkeleton } from '@/shared/ui/reviewCard/ReviewCardSkeleton';
 
 
 const ReviewsSec = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [reviews, setReviews] = useState<ReviewItem[]>([]);
+    const [reviews, setReviews] = useState<ReviewType[]>([]);
 
     // 비동기 데이터 로딩
     useEffect(() => {

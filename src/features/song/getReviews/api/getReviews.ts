@@ -1,6 +1,6 @@
-import { ReviewItem } from "../model/types";
+import { ReviewType } from "../model/types";
 
-export const mockReviews: ReviewItem[] = Array(6)
+export const mockReviews: ReviewType[] = Array(6)
 .fill(null)
 .map((_, i) => ({
     id: i,

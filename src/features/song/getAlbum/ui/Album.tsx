@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import FaceIcon from '@mui/icons-material/Face';
-import { fetchAlbum } from '../api/getFetchAlbum';
-import { mockArtists } from '../../getArtist/api/getFetchArtist';
+import { fetchAlbum } from '../api/getAlbum';
+import { mockArtists } from '../../getArtist/api/getArtist';
 import { AlbumSkeleton } from './AlbumSkeleton';
 import { AlbumType } from '../model/types';
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ReviewCard } from '@/shared/ui/reviewCard/ReviewCard';
-import { ReviewItem } from '../model/types';
+import { ReviewType } from '../model/types';
 import { ReviewCardSkeleton } from '@/shared/ui/reviewCard/ReviewCardSkeleton';
 import { fetchReview } from '../api/getReview';
 
 
 const ReviewSec = () => {
-    const [review, setReview] = useState<ReviewItem | null>(null);
+    const [review, setReview] = useState<ReviewType | null>(null);
     const [isLoading, setIsLoading] = useState(true); 
 
     useEffect(() => {

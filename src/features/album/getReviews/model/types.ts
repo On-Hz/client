@@ -1,4 +1,4 @@
-export interface ReviewItem {
+export interface ReviewType {
     id: number;
     reviewer: string; // 리뷰어 이름
     avatar: string; // 리뷰어 아바타

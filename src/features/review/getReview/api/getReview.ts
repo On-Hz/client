@@ -1,6 +1,6 @@
-import { ReviewItem } from "../model/types";
+import { ReviewType } from "../model/types";
 
-export const mockReview: ReviewItem[] = [{
+export const mockReview: ReviewType[] = [{
     "id": 2341,
     "reviewer": `강동원`,
     "avatar": `https://picsum.photos/40/40?random=2`,
@@ -10,13 +10,13 @@ export const mockReview: ReviewItem[] = [{
 }];
 
 // 비동기 API 호출
-export const fetchReview = async (): Promise<{ review: ReviewItem | null; isLoading: boolean }> => {
-    let review: ReviewItem | null = null;
+export const fetchReview = async (): Promise<{ review: ReviewType | null; isLoading: boolean }> => {
+    let review: ReviewType | null = null;
     let isLoading = true;
 
     try {
         // 데이터 요청
-        const data = await new Promise<ReviewItem[]>((resolve) => {
+        const data = await new Promise<ReviewType[]>((resolve) => {
             setTimeout(() => {
                 resolve(mockReview); // mock 데이터 반환
             }, 1500);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StarIcon from '@mui/icons-material/Star';
-import { mockAlbums } from '../../getAlbum/api/getFetchAlbum';
-import { mockUserAlbumRating } from '../api/getFetchRatings';
+import { mockAlbums } from '../../getAlbum/api/getAlbum';
+import { mockUserAlbumRating } from '../api/getRatings';
 import { Button } from '@/shared/ui/button/Button';
 import { RatingsSkeleton } from './RatingsSkeleton';
 import { openModalWithAuthCheck } from '@/shared/helpers/modalAuthChkHelper';
