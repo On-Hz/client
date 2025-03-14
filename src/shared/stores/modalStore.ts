@@ -21,3 +21,4 @@ export const useModalStore = create<ModalState>((set) => ({
       modalData: { [modalName]: undefined },
     })),
 }));
+(window as any).modalStore = useModalStore;

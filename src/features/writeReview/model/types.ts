@@ -1,6 +1,6 @@
 // src/model/types.ts
 import { z } from "zod";
-import { REVIEW_TYPES } from "@/shared/constants/reviewConstants";
+import { REVIEW_TYPES } from "@/shared/constants/reviewTypes";
 
 // REVIEW_TYPES를 활용해서 ReviewType을 정의할 수 있습니다.
 export type ReviewType = (typeof REVIEW_TYPES)[keyof typeof REVIEW_TYPES];

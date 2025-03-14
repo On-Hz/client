@@ -1,6 +1,6 @@
 import React from "react";
 import { openModalWithAuthCheck } from "@/shared/helpers/modalAuthChkHelper";
-import { REVIEW_TYPES } from "@/shared/constants/reviewConstants";
+import { REVIEW_TYPES } from "@/shared/constants/reviewTypes";
 
 interface ArtistRatingButtonProps {
   entityId: number;

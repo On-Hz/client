@@ -5,6 +5,7 @@ import { ConfirmModal } from "./ConfirmModal";
 import { ReviewData } from "../model/types";
 import { useMutation } from "@tanstack/react-query";
 import { postReview } from "../api/postReview";
+import { ALERT_TYPES } from "@/shared/constants/alertTypes";
 
 interface WriteReviewProps {
   data?: {
@@ -20,7 +21,7 @@ type ConfirmOptions = {
 };
 
 export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
-  const { modals, closeModal } = useModalStore();
+  const { modals, openModal, closeModal } = useModalStore();
 
   // 상태 관리
   const [content, setContent] = useState("");
@@ -64,6 +65,10 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
     mutationFn: (newReview: ReviewData) => postReview(newReview),
     onSuccess: () => {
       closeModal("writeReviewModal");
+      openModal("alertModal", {
+        type: ALERT_TYPES.SUCCESS,
+        message: "리뷰가 작성되었습니다."
+      });
     },
     onError: (error) => {
       console.error("리뷰 작성 중 에러 발생:", error);
