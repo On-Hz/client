@@ -19,7 +19,7 @@ const RatingSec = () => {
         <li className="text-center">
           <p className="text-[24px]">{album.ratings_count}</p>
           <span className="hz-rating-text text-gray4 text-[14px]">
-            Total ratings
+            총 별점 수
           </span>
         </li>
         <li className="text-center">
@@ -34,7 +34,7 @@ const RatingSec = () => {
             / 5
           </p>
           <span className="hz-rating-text  text-gray4 text-[14px]">
-            Average rating
+            평균 별점
           </span>
         </li>
         <li className="text-center">
@@ -46,7 +46,7 @@ const RatingSec = () => {
             <span className="px-[5px]">{rating.rating}</span>/ 5
           </p>
           <span className="hz-rating-text  text-gray4 text-[14px]">
-            Your rating
+            내 별점
           </span>
         </li>
       </ul>

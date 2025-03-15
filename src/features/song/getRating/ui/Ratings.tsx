@@ -29,7 +29,7 @@ const RatingSec = () => {
                     <ul className='flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]'>
                         <li className='text-center'>
                             <p className='text-[24px]'>{album.ratings_count}</p>
-                            <span className="hz-rating-text text-gray4 text-[14px]">Total ratings</span>
+                            <span className="hz-rating-text text-gray4 text-[14px]">총 별점 수</span>
                         </li>
                         <li className='text-center'>
                             <p className='text-[24px] text-gray4 '>
@@ -37,7 +37,7 @@ const RatingSec = () => {
                                 <span className='text-[#1C66E0] px-[5px]'>{album.average_rating.toFixed(2)}</span>
                                  / 5
                             </p>
-                            <span className="hz-rating-text  text-gray4 text-[14px]">Average rating</span>
+                            <span className="hz-rating-text  text-gray4 text-[14px]">평균 별점</span>
                         </li>
                         <li className='text-center'>
                             <p className='text-[24px] text-gray4'>
@@ -45,7 +45,7 @@ const RatingSec = () => {
                                 <span className='px-[5px]'>{rating.rating}</span>
                                  / 5
                                 </p>
-                            <span className="hz-rating-text  text-gray4 text-[14px]">Your rating</span>
+                            <span className="hz-rating-text  text-gray4 text-[14px]">내 별점</span>
                         </li>
                     </ul>
                     <div className='flex justify-end mt-[18px]'>

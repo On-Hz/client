@@ -26,7 +26,7 @@ const ReviewsSec = () => {
     return (
        <div>
             <div className='flex justify-between pb-[20px]'>
-                <SubTitle text="Reviews"></SubTitle>
+                <SubTitle text="리뷰"></SubTitle>
                 <RoundButton text="정렬" />
             </div>
             <div>
