@@ -1,4 +1,4 @@
-import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
+import { ArtistSectionWrapper } from "@/widgets/artist";
 import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
 import { useArtistTopDiscography } from "../api/getArtistTopDiscography";
 import { sectionProps } from "../../config/sectionProps";

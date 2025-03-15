@@ -1,4 +1,4 @@
-import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
+import { SearchSectionWrapper } from "@/widgets/search";
 import { sectionProps } from "../../config/sectionProps";
 import { useArtist } from "../api/getArtists";
 import { ArtistAvatar, ArtistAvatarSkeleton } from "@/shared/ui";

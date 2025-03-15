@@ -1,8 +1,8 @@
-import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
-import { mockReviews } from "../api/getUserArtistReviews";
 import { useEffect, useState } from "react";
+import { mockReviews } from "../api/getUserArtistReviews";
+import { EditReviewButtonContainer } from "@/features/review";
 import { Review } from "@/shared/model";
-import { EditReviewButtonContainer } from "@/features/review/editReview";
+import { ReviewCard, ReviewCardSkeleton } from "@/shared/ui";
 
 export const UserArtistReviews = () => {
   const [isLoading, setIsLoading] = useState(true);

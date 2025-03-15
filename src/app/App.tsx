@@ -3,7 +3,7 @@ import Providers from "./hoc";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "@/shared/ui";
-import { Routing } from "@/shared/routing/routing";
+import { Routing } from "@/shared/routing";
 
 export const App: React.FC = () => {
   return (

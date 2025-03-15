@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { ArtistBanner } from "@/widgets/artist/aritstBanner";
+import { ArtistBanner } from "@/widgets/artist";
 
 export const ArtistPage: React.FC = () => {
   return (

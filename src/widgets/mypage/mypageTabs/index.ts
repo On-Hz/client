@@ -1,1 +1,0 @@
-export { MypageTabs } from "./ui/MypageTabs";

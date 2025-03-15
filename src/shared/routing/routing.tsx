@@ -1,29 +1,37 @@
-import { AlbumPage } from "@/pages/album";
-import { ArtistPage } from "@/pages/artist";
-import { ArtistDiscography } from "@/pages/artist/ui/ArtistDiscography";
-import { ArtistHome } from "@/pages/artist/ui/ArtistHome";
-import { ArtistReviews } from "@/pages/artist/ui/ArtistReviews";
-import { ArtistTracks } from "@/pages/artist/ui/ArtistTracks";
-import { ErrorPage } from "@/pages/error";
-import { LandingPage } from "@/pages/landing";
-import { MypageAlbum } from "@/pages/mypage/reviews/ui/MypageAlbum";
-import { MypageArtist } from "@/pages/mypage/reviews/ui/MypageArtist";
-import { MypageLike } from "@/pages/mypage/reviews/ui/MypageLike";
-import { MypageSong } from "@/pages/mypage/reviews/ui/MypageSong";
-import { MyPage } from "@/pages/mypage/ui/Mypage";
-import { ReviewPage } from "@/pages/review";
-import { SearchAlbums } from "@/pages/search/ui/SearchAlbums";
-import { SearchArtists } from "@/pages/search/ui/SearchArtists";
-import { SearchHome } from "@/pages/search/ui/SearchHome";
-import { SearchTracks } from "@/pages/search/ui/SearchTracks";
-import { SongPage } from "@/pages/song/ui/SongPage";
 import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { AlbumPage } from "@/pages/album";
+import {
+  ArtistPage,
+  ArtistHome,
+  ArtistDiscography,
+  ArtistReviews,
+  ArtistTracks,
+} from "@/pages/artist";
+import { ErrorPage } from "@/pages/error";
+import { LandingPage } from "@/pages/landing";
+import {
+  MyPage,
+  MypageAlbum,
+  MypageArtist,
+  MypageLike,
+  MypageSong,
+} from "@/pages/mypage";
+import { ReviewPage } from "@/pages/review";
+import {
+  SearchAlbums,
+  SearchArtists,
+  SearchHome,
+  SearchTracks,
+} from "@/pages/search";
+import { SongPage } from "@/pages/song";
 
-const SearchPage = lazy(() => import("@/pages/search").then((module) => ({
-  default: module.SearchPage,
-}))
+const SearchPage = lazy(() =>
+  import("@/pages/search").then((module) => ({
+    default: module.SearchPage,
+  }))
 );
+
 export const Routing: React.FC = () => {
   return (
     <Routes>
@@ -40,9 +48,12 @@ export const Routing: React.FC = () => {
         <Route path="reviews" element={<ArtistReviews />} />
         <Route path="tracks" element={<ArtistTracks />} />
       </Route>
+
+      {/* AlbumId, SongId값 slug 넣어줘야함  */}
       <Route path="/album" element={<AlbumPage />} />
       <Route path="/song" element={<SongPage />} />
 
+      {/* userId값 slug 넣어줘야함  */}
       <Route path="/mypage" element={<MyPage />}>
         <Route index element={<MypageAlbum />} />
         <Route path="album" element={<MypageAlbum />} />
@@ -50,6 +61,8 @@ export const Routing: React.FC = () => {
         <Route path="artist" element={<MypageArtist />} />
         <Route path="like" element={<MypageLike />} />
       </Route>
+
+      {/* ReviewId값 slug 넣어줘야함  */}
       <Route path="/review" element={<ReviewPage />} />
       <Route
         path="*"

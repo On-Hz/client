@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { ModalLayout } from "@/shared/ui";
 import { AuthCommon } from "./AuthModalCommon";
 import { useAuthModalStore } from "@/shared/stores";
-import LoginForm from "@/features/auth/login/ui/LoginForm";
-import SignupForm from "@/features/auth/signUp/ui/SignUpForm";
+import {LoginForm, SignUpForm } from "@/features/auth";
 
 export const AuthModal: React.FC = () => {
   const { isModalOpen, closeAuthModal, authMode } = useAuthModalStore();
@@ -29,9 +28,11 @@ export const AuthModal: React.FC = () => {
         {localMode === "login" ? (
           <LoginForm switchMode={switchMode} />
         ) : (
-          <SignupForm switchMode={switchMode} />
+          <SignUpForm switchMode={switchMode} />
         )}
       </div>
     </ModalLayout>
   );
 };
+
+// feature 컴포넌트를 shared에서 가져올 수 없음. feature/auth 폴더 내에서 login,signUpForm을 props로 받아오는 등 방법 생각해봐야할듯. 

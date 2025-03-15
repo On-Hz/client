@@ -1,7 +1,9 @@
-import { DiscographyByArtist } from "@/features/artist/getArtistDiscography";
-import { ReviewsForArtist } from "@/features/artist/getArtistReviews";
-import { TracksByArtist } from "@/features/artist/getArtistTracks";
 import React from "react";
+import {
+  TracksByArtist,
+  DiscographyByArtist,
+  ReviewsForArtist,
+} from "@/features/artist";
 
 export const ArtistHome: React.FC = () => {
   return (

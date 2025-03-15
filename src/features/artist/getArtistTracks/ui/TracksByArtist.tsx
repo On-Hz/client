@@ -4,7 +4,7 @@ import { useArtistTracks } from "../api/getArtistTracks";
 import { Menu, MenuItem } from "@mui/material";
 import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
 import { sectionProps } from "../../config/sectionProps";
-import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
+import { ArtistSectionWrapper } from "@/widgets/artist";
 
 export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const regularQuery = useArtistTopTracks({ enabled: !useInfiniteScroll });

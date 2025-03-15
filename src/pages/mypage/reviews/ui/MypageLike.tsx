@@ -1,4 +1,4 @@
-import { UserLikes } from "@/features/mypage/getUserLikes/ui/UserLikes"
+import { UserLikes } from "@/features/mypage"
 
 export const MypageLike: React.FC = () => { 
     return <UserLikes />

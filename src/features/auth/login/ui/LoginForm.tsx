@@ -5,7 +5,7 @@ interface LoginFormProps {
   switchMode: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
   return (
     <div>
       <div className="flex flex-col mb-6 space-y-3 w-[300px]">
@@ -30,5 +30,3 @@ const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
     </div>
   );
 };
-
-export default LoginForm;

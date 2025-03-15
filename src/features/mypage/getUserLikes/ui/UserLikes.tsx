@@ -24,15 +24,15 @@ export const UserLikeSec = () => {
             {isLoading ? (
                 <UserLikeSecSkeleton />
                 ) : (
-                    <div className="flex gap-7 pt-10 flex-wrap hz-like-wrap">
-                        {Likes?.map((like, idx) => (
+                    <div className="flex flex-wrap pt-10 gap-7 hz-like-wrap">
+                        {Likes?.map((like) => (
                             <div className="like-box relative w-[23%] h-[400px]">
                                 <div className="like-cover rounded-lg h-[200px] w-full overflow-hidden">
-                                    <img src={like.artist.avatar} alt={like.artist.name} className="w-full h-full object-cover"/>
+                                    <img src={like.artist.avatar} alt={like.artist.name} className="object-cover w-full h-full"/>
                                 </div>
                                 <div className="like-text m-auto absolute bottom-0 left-1/2 translate-x-[-50%] w-[84%] rounded-lg p-5 border border-gray3 bg-white">
                                     <p className="text-gray5 text-[14px]">{like.creatTime}</p>
-                                    <p className="text-gray py-2">{like.reviewer}</p>
+                                    <p className="py-2 text-gray">{like.reviewer}</p>
                                     <div>
                                     <Rating
                                         value={like.rating}
@@ -48,10 +48,10 @@ export const UserLikeSec = () => {
                                         }}
                                         />
                                     </div>
-                                    <p className="text-gray line-clamp-2 my-5 min-h-10">
+                                    <p className="my-5 text-gray line-clamp-2 min-h-10">
                                         {like.body}
                                     </p>
-                                    <button className="text-point underline">리뷰 보기</button>
+                                    <button className="underline text-point">리뷰 보기</button>
                                 </div>
                             </div>
                         ))}

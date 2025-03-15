@@ -1,4 +1,4 @@
-import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
+import { SearchSectionWrapper } from "@/widgets/search";
 import { sectionProps } from "../../config/sectionProps";
 import { useAlbum } from "../api/getAlbums";
 import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";

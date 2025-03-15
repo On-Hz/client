@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
-import { TermsModal } from "@/features/auth/signUp/ui/TermsModal";
+import { TermsModal } from "./TermsModal";
 
 interface SignupFormProps {
   switchMode: () => void;
 }
 
-const SignupForm: React.FC<SignupFormProps> = ({ switchMode }) => {
+export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
 
   return (
@@ -38,5 +38,3 @@ const SignupForm: React.FC<SignupFormProps> = ({ switchMode }) => {
     </div>
   );
 };
-
-export default SignupForm;

@@ -27,7 +27,7 @@ const mockLatestReviewsData: Review[] = Array(6)
     Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`,
     reviewType: REVIEW_TYPES.ALBUM,
     entityId: i,
-    cover: `https://picsum.photos/200/300?random=${i + 1}`,
+    cover: `https://picsum.photos/200/300?random=${i}`,
   }));
 
 export const useLatestReviews = () => {

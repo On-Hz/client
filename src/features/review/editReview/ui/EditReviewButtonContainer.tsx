@@ -2,7 +2,7 @@ import React from "react";
 import { useModalStore } from "@/shared/stores";
 import { openModalWithAuthCheck } from "@/shared/helpers";
 import { EditReviewButton } from "@/shared/ui";
-import { useDeleteReview } from "@/features/manageReview/deleteReview";
+import { useDeleteReview } from "@/features/manageReview/";
 import { ReviewType } from "@/shared/constants";
 
 interface EditReviewContainerProps {

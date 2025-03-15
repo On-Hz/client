@@ -2,8 +2,7 @@ import React from "react";
 import { AlertModal } from "../modal-common-alert/AlertModal";
 import { AuthInfoModal } from "../modal-auth/AuthInfoModal";
 import { ProfileModal } from "../modal-profile/ProfileModal";
-import { WriteReview } from "@/features/manageReview/writeReview";
-import { ModifyReview } from "@/features/manageReview/modifyReview";
+import { WriteReview, ModifyReview } from "@/features/manageReview";
 
 export interface ModalDefinition<T = any> {
   authCheck: boolean;

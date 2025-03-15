@@ -1,4 +1,4 @@
-import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
+import { SearchSectionWrapper } from "@/widgets/search";
 import { useTrack } from "../api/getTracks";
 import { sectionProps } from "../../config/sectionProps";
 import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
