@@ -1,6 +1,6 @@
 import { postReview } from "../api/postReview";
 import { ReviewModalContainer } from "../../ui/ReviewModalContainer";
-import { REVIEW_TYPES } from "@/shared/constants/reviewTypes";
+import { REVIEW_TYPES } from "@/shared/constants";
 
 interface WriteReviewProps {
   data?: {

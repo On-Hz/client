@@ -1,9 +1,7 @@
 import React from "react";
-import CarouselSection from "@/shared/ui/carousel/Carousel";
+import { CarouselSection, AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
 import { GenreItem } from "../model/types";
 import { useTopGenre } from "../api/getTopRateGenreList";
-import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
-import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
 
 const renderGenrePage = (GenreItem: GenreItem[]) => (
   <div className="flex flex-wrap justify-center gap-4 pb-4">

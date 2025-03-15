@@ -1,7 +1,5 @@
-// ModalProvider.tsx
 import React from "react";
-import { useModalStore } from "@/shared/stores/modalStore";
-import { useAuthModalStore } from "@/shared/stores/authModalStore";
+import { useModalStore, useAuthModalStore } from "@/shared/stores";
 import { modalRegistry } from "./config/modalRegistry";
 import { AuthModal } from "./modal-auth/AuthModal";
 

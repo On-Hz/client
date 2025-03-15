@@ -1,9 +1,8 @@
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
-import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
+import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
 import { useArtistTopDiscography } from "../api/getArtistTopDiscography";
 import { sectionProps } from "../../config/sectionProps";
 import { useArtistDiscography } from "../api/getArtistDiscography";
-import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
 
 export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const regularQuery = useArtistTopDiscography({ enabled: !useInfiniteScroll });

@@ -1,8 +1,7 @@
 import React from "react";
-import { ModalLayout } from "../ModalLayout";
-import { useModalStore } from "@/shared/stores/modalStore";
-import { AlertType } from "@/shared/constants/alertTypes";
-import { Button } from "@/shared/ui/button/Button";
+import { useModalStore } from "@/shared/stores";
+import { AlertType } from "@/shared/constants";
+import { ModalLayout, Button } from "@/shared/ui";
 import { RenderIcon } from "./RenderAlertIcon";
 
 interface AlertModalData {

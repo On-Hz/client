@@ -1,8 +1,7 @@
 import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
 import { sectionProps } from "../../config/sectionProps";
 import { useAlbum } from "../api/getAlbums";
-import { AlbumCard } from "@/shared/ui/albumCard/AlbumCard";
-import { AlbumCardSkeleton } from "@/shared/ui/albumCard/AlbumCardSkeleton";
+import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
 
 export const SearchResultsAlbum = ({
   hasShowMoreTab,

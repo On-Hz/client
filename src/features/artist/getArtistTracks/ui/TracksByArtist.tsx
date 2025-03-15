@@ -2,10 +2,9 @@ import React from "react";
 import { useArtistTopTracks } from "../api/getArtistTopTracks";
 import { useArtistTracks } from "../api/getArtistTracks";
 import { Menu, MenuItem } from "@mui/material";
-import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
+import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
 import { sectionProps } from "../../config/sectionProps";
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
-import { TrackListItemSkeleton } from "@/shared/ui/trackList/trackListItemSkeleton";
 
 export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const regularQuery = useArtistTopTracks({ enabled: !useInfiniteScroll });

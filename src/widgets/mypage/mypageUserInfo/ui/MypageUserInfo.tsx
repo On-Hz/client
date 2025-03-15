@@ -6,7 +6,7 @@ import { mockUser } from '@/features/mypage/getUserProfile/api/getUser';
 import { ratingData } from '@/features/mypage/getUserRating/api/getRating';
 import { MypageTabs } from '../../mypageTabs';
 import { useEffect, useState } from 'react';
-import { openModalWithAuthCheck } from '@/shared/helpers/modalAuthChkHelper';
+import { openModalWithAuthCheck } from '@/shared/helpers';
 
 export const MypageUserInfo = () => {
     const user = mockUser[0];

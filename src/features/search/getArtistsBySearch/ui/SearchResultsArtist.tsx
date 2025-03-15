@@ -1,8 +1,7 @@
 import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
 import { sectionProps } from "../../config/sectionProps";
 import { useArtist } from "../api/getArtists";
-import { ArtistAvatar } from "@/shared/ui/artistAvatar/ArtistAvatar";
-import { ArtistAvatarSkeleton } from "@/shared/ui/artistAvatar/ArtistAvatarSkeleton";
+import { ArtistAvatar, ArtistAvatarSkeleton } from "@/shared/ui";
 
 export const SearchResultsArtist = ({
   hasShowMoreTab,

@@ -13,14 +13,14 @@ export interface CarouselSectionProps<T> {
   skeletonComp: (idx?: number) => JSX.Element;
 }
 
-function CarouselSection<T>({
+export const CarouselSection = <T,>({
   title,
   items,
   renderPage,
   isLoading,
   skeletonArrLength,
   skeletonComp,
-}: CarouselSectionProps<T>) {
+}: CarouselSectionProps<T>) => {
   return (
     <section className="px-4 py-8">
       <h2 className="mb-4 text-2xl font-bold">{title}</h2>
@@ -67,5 +67,3 @@ function CarouselSection<T>({
     </section>
   );
 }
-
-export default CarouselSection;

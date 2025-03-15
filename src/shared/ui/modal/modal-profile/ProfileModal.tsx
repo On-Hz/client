@@ -1,9 +1,7 @@
 import React from "react";
 import { useModalStore } from "@/shared/stores";
-import { InputBox } from "../../inputBox/InputBox";
 import PersonIcon from "@mui/icons-material/Person";
-import { ModalLayout } from "../ModalLayout";
-import { ModalButton } from "../modal-button/ModalButton";
+import { ModalLayout, ModalButton, InputBox } from "@/shared/ui";
 
 interface User {
   user_id: number;

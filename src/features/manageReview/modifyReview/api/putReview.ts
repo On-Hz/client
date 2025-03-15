@@ -1,4 +1,4 @@
-import axiosInstance from "@/shared/api/axiosInstance";
+import { axiosInstance } from "@/shared/api";
 import { ReviewData } from "../../model/types";
 
 export const putReview = async (review: ReviewData): Promise<ReviewData> => {

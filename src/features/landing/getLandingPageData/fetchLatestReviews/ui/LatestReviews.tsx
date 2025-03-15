@@ -1,5 +1,5 @@
 import React from "react";
-import CarouselSection from "@/shared/ui/carousel/Carousel";
+import { CarouselSection } from "@/shared/ui";
 import { Review } from "@/shared/model";
 import { useLatestReviews } from "../api/getLatestReviews";
 import Rating from "@mui/material/Rating";

@@ -1,5 +1,4 @@
-import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard";
-import { ReviewCardSkeleton } from "@/shared/ui/reviewCard";
+import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
 import { mockReviews } from "../api/getUserArtistReviews";
 import { useEffect, useState } from "react";
 import { Review } from "@/shared/model";

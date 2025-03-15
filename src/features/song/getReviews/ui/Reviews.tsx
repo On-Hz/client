@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { mockReviews } from '../api/getReviews';
-import { SubTitle } from '@/shared/ui/subTitle/SubTitle';
-import { ReviewCard } from '@/shared/ui/reviewCard';
-import { RoundButton } from '@/shared/ui/roundButton/RoundButton';
+import { ReviewCard, ReviewCardSkeleton, RoundButton, SubTitle } from '@/shared/ui';
 import { Review } from '@/shared/model';
-import { ReviewCardSkeleton } from '@/shared/ui/reviewCard';
 
 
 const ReviewsSec = () => {

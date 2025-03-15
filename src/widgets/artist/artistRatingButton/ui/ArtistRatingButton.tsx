@@ -1,5 +1,5 @@
 import React from "react";
-import { openModalWithAuthCheck } from "@/shared/helpers/modalAuthChkHelper";
+import { openModalWithAuthCheck } from "@/shared/helpers";
 import { REVIEW_TYPES } from "@/shared/constants";
 
 interface ArtistRatingButtonProps {

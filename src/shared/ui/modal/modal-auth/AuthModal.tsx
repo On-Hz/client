@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ModalLayout } from "../ModalLayout";
+import { ModalLayout } from "@/shared/ui";
 import { AuthCommon } from "./AuthModalCommon";
 import { useAuthModalStore } from "@/shared/stores";
 import LoginForm from "@/features/auth/login/ui/LoginForm";

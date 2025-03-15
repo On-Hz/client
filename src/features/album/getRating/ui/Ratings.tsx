@@ -1,9 +1,9 @@
 import StarIcon from "@mui/icons-material/Star";
 import { mockUserAlbumRating } from "../api/getRatings";
-import { Button } from "@/shared/ui/button/Button";
+import { Button } from "@/shared/ui";
 import { RatingsSkeleton } from "./RatingsSkeleton";
 import { useAlbumStore } from "../../getAlbum/store/albumStore";
-import { openModalWithAuthCheck } from "@/shared/helpers/modalAuthChkHelper";
+import { openModalWithAuthCheck } from "@/shared/helpers";
 
 const RatingSec = () => {
   const rating = mockUserAlbumRating[0];

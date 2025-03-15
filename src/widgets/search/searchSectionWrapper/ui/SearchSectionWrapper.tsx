@@ -1,6 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import { SearchSectionWrapperProps } from "../model/types";
-import { Button } from "@/shared/ui/button/Button";
+import { Button } from "@/shared/ui";
 
 export const SearchSectionWrapper: React.FC<SearchSectionWrapperProps> = ({
   title,

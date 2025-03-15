@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalLayout } from "@/shared/ui/modal/ModalLayout";
+import { ModalLayout } from "@/shared/ui";
 
 interface ConfirmModalProps {
   type: "content" | "rating";

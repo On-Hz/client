@@ -1,5 +1,5 @@
-import { TabButton } from "@/shared/ui/tabButton/TabButton";
 import { NavLink, useParams } from "react-router-dom";
+import { TabButton } from "@/shared/ui";
 
 export const SearchTabs = () => {
   const { searchSlug } = useParams<{ searchSlug: string }>();

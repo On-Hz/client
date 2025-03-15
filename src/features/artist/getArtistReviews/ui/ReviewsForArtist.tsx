@@ -1,7 +1,6 @@
 import { sectionProps } from "@/features/artist/config/sectionProps";
 import { ArtistSectionWrapper } from "@/widgets/artist/artistSectionWrapper";
-import { ReviewCard } from "@/shared/ui/reviewCard";
-import { ReviewCardSkeleton } from "@/shared/ui/reviewCard";
+import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
 import { useArtistReviews } from "../api/getArtistReviews";
 import { useArtistLatestReviews } from "../api/getArtistLatestReviews";
 import "./style.css";

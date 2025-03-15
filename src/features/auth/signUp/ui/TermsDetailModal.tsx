@@ -1,4 +1,4 @@
-import { ModalLayout } from "@/shared/ui/modal/ModalLayout";
+import { ModalLayout } from "@/shared/ui";
 
 interface TermDetailModalProps {
   open: boolean;

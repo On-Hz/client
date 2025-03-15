@@ -1,6 +1,5 @@
 import React from "react";
-import { InputBox } from "@/shared/ui/inputBox/InputBox";
-import { ModalButton } from "@/shared/ui/modal/modal-button/ModalButton";
+import { InputBox, ModalButton } from "@/shared/ui";
 
 interface LoginFormProps {
   switchMode: () => void;

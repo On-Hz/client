@@ -1,8 +1,7 @@
 import { SearchSectionWrapper } from "@/widgets/search/searchSectionWrapper";
 import { useTrack } from "../api/getTracks";
 import { sectionProps } from "../../config/sectionProps";
-import { TrackListItem } from "@/shared/ui/trackList/trackListItem";
-import { TrackListItemSkeleton } from "@/shared/ui/trackList/trackListItemSkeleton";
+import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
 
 // 추후 개발
 export const SearchResultsTrack = ({

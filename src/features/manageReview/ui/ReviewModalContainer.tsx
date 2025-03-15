@@ -1,7 +1,7 @@
 // feature/ui/ReviewModalContainer.tsx
 import React, { useState } from "react";
 import { useModalStore } from "@/shared/stores";
-import { EditReviewModal } from "@/shared/ui/modal/modal-review/EditReviewModal";
+import { EditReviewModal } from "@/shared/ui";
 import { ConfirmModal } from "./ConfirmModal";
 import { useMutation } from "@tanstack/react-query";
 import { ReviewData } from "../model/types";

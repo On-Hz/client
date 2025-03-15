@@ -1,6 +1,5 @@
 import React from "react";
-import { ModalLayout } from "../ModalLayout";
-import { ModalButton } from "../modal-button/ModalButton";
+import { ModalLayout, ModalButton } from "@/shared/ui";
 import { Rating, Tooltip } from "@mui/material";
 
 export interface EditReviewModalProps {

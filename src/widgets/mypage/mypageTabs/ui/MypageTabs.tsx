@@ -1,4 +1,4 @@
-import { getNavLinkBlackClass } from "@/shared/helpers/getNavLinkBlackClass";
+import { getNavLinkBlackClass } from "@/shared/helpers";
 import { NavLink, useLocation } from "react-router-dom";
 
 
@@ -8,7 +8,7 @@ export const MypageTabs = () => {
     
     return (
         <div className="mb-10">
-            <ul className="hz-tab flex items-center border-gray4 border-t border-b mt-14">
+            <ul className="flex items-center border-t border-b hz-tab border-gray4 mt-14">
                 <li>
                     <NavLink 
                     to={`/mypage/album`}

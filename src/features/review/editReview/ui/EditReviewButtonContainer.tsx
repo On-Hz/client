@@ -1,7 +1,7 @@
 import React from "react";
 import { useModalStore } from "@/shared/stores";
-import { openModalWithAuthCheck } from "@/shared/helpers/modalAuthChkHelper";
-import { EditReviewButton } from "@/shared/ui/reviewCard";
+import { openModalWithAuthCheck } from "@/shared/helpers";
+import { EditReviewButton } from "@/shared/ui";
 import { useDeleteReview } from "@/features/manageReview/deleteReview";
 import { ReviewType } from "@/shared/constants";
 

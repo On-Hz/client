@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@/shared/ui/button/Button';
+import { Button } from '@/shared/ui';
 import { Skeleton } from '@mui/material';
 
 

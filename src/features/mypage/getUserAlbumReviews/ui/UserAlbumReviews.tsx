@@ -1,8 +1,7 @@
-import { ReviewCard } from "@/shared/ui/reviewCard";
-import { ReviewCardSkeleton } from "@/shared/ui/reviewCard";
+import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
 import { mockReviews } from "../api/getUserAlbumReviews";
 import { useEffect, useState } from "react";
-import { Review } from "@/shared/model/review";
+import { Review } from "@/shared/model";
 import { EditReviewButtonContainer } from "@/features/review/editReview";
 
 export const UserAlbumReviews = () => {

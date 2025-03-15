@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ReviewCard } from '@/shared/ui/reviewCard';
+import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
 import { Review } from '@/shared/model';
-import { ReviewCardSkeleton } from '@/shared/ui/reviewCard';
 import { fetchReview } from '../api/getReview';
 
 

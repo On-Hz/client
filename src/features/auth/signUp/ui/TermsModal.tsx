@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { ModalLayout } from "@/shared/ui/modal/ModalLayout";
+import { ModalLayout, ModalButton } from "@/shared/ui";
 import TermDetailModal from "./TermsDetailModal";
-import { ModalButton } from "@/shared/ui/modal/modal-button/ModalButton";
 
 interface TermsModalProps {
   onClose: () => void;
@@ -66,7 +65,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
           <h2 className="mb-2 text-lg font-bold">
             약관에 동의하시면 가입이 완료됩니다
           </h2>
-          <div className="mt-4 mb-9 space-y-3 text-sm">
+          <div className="mt-4 space-y-3 text-sm mb-9">
             {termsConfig.map(({ key, label, hasView }) => (
               <div
                 key={key}

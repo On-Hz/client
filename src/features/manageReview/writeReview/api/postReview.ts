@@ -1,4 +1,4 @@
-import axiosInstance from "@/shared/api/axiosInstance";
+import { axiosInstance } from "@/shared/api";
 import { ReviewData } from "../../model/types";
 
 export const postReview = async (review: ReviewData): Promise<ReviewData> => {
@@ -11,8 +11,11 @@ export const postReview = async (review: ReviewData): Promise<ReviewData> => {
 
   // URL 경로에 reviewType과 entityId를 포함합니다.
   const url = `/api/v1/reviews/${reviewType}/${entityId}`;
-  
+
   // request body에는 text와 rating을 전송합니다.
-  const response = await axiosInstance.post<ReviewData>(url, { content, rating });
+  const response = await axiosInstance.post<ReviewData>(url, {
+    content,
+    rating,
+  });
   return response.data;
 };

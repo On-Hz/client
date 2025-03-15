@@ -1,7 +1,6 @@
 import React from "react";
-import { ModalLayout } from "../ModalLayout";
-import { useModalStore } from "@/shared/stores";
-import { useAuthModalStore } from "@/shared/stores/authModalStore";
+import { ModalLayout } from "@/shared/ui";
+import { useModalStore, useAuthModalStore } from "@/shared/stores";
 import logo from "/public/logo_text.svg";
 
 export const AuthInfoModal: React.FC = () => {
@@ -32,7 +31,9 @@ export const AuthInfoModal: React.FC = () => {
             <img src={logo} alt="On-Hz" className="w-24 m-auto mb-1" />
           </div>
         </div>
-        <p className="mb-10 text-lg font-bold text-gray5">로그인 또는 회원가입 후 이용 가능합니다.</p>
+        <p className="mb-10 text-lg font-bold text-gray5">
+          로그인 또는 회원가입 후 이용 가능합니다.
+        </p>
         <div className="flex justify-center space-x-4">
           <button
             className="bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px]"
