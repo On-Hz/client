@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ReviewCard } from '@/shared/ui/reviewCard/ReviewCard';
-import { ReviewType } from '../model/types';
-import { ReviewCardSkeleton } from '@/shared/ui/reviewCard/ReviewCardSkeleton';
+import { ReviewCard } from '@/shared/ui/reviewCard';
+import { Review } from '@/shared/model';
+import { ReviewCardSkeleton } from '@/shared/ui/reviewCard';
 import { fetchReview } from '../api/getReview';
 
 
 const ReviewSec = () => {
-    const [review, setReview] = useState<ReviewType | null>(null);
+    const [review, setReview] = useState<Review | null>(null);
     const [isLoading, setIsLoading] = useState(true); 
 
     useEffect(() => {
@@ -27,11 +27,11 @@ const ReviewSec = () => {
                     ) : (
                         <ReviewCard
                             key={review!.id}
-                            userName={review!.reviewer}
-                            userImage={review!.avatar}
-                            reviewText={review!.body}
+                            userName={review!.user.userName}
+                            userProfilePath={review!.user.profilePath}
+                            content={review!.content}
                             rating={review!.rating}
-                            createTime={review!.createTime}
+                            createdAt={review!.createdAt}
                             hasBorder={true}
                         />
                     )}

@@ -1,18 +1,17 @@
-// 예시: feature/mypage/manageReview/ui/ReviewActionsContainer.tsx
 import React from "react";
 import { useModalStore } from "@/shared/stores";
 import { openModalWithAuthCheck } from "@/shared/helpers/modalAuthChkHelper";
-import { ReviewEditButton } from "@/shared/ui/reviewCard/ReviewEditButton";
+import { EditReviewButton } from "@/shared/ui/reviewCard";
 import { useDeleteReview } from "@/features/manageReview/deleteReview";
 import { ReviewType } from "@/shared/constants";
 
-interface ReviewEditContainerProps {
+interface EditReviewContainerProps {
   reviewType: ReviewType;
   reviewId: number;
   entityId: number;
 }
 
-export const ReviewEditContainer: React.FC<ReviewEditContainerProps> = ({
+export const EditReviewButtonContainer: React.FC<EditReviewContainerProps> = ({
   reviewType,
   reviewId,
   entityId,
@@ -44,5 +43,5 @@ export const ReviewEditContainer: React.FC<ReviewEditContainerProps> = ({
     });
   };
 
-  return <ReviewEditButton onModify={handleModify} onDelete={handleDelete} />;
+  return <EditReviewButton onModify={handleModify} onDelete={handleDelete} />;
 };

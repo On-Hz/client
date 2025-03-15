@@ -9,7 +9,7 @@ interface ReviewProps {
   rating: number;
   hasEllipsis?: boolean;
   hasBorder?: boolean;
-  createTime?: string;
+  createdAt?: string;
   myReviewEditButton?: React.ReactNode;
 }
 
@@ -20,7 +20,7 @@ export const ReviewCard = ({
   rating,
   hasEllipsis,
   hasBorder,
-  createTime,
+  createdAt,
   myReviewEditButton,
 }: ReviewProps) => {
   const [liked, setLiked] = useState(false);
@@ -68,7 +68,7 @@ export const ReviewCard = ({
           }}
         />
       </div>
-      <div className="pb-5 text-gray">{createTime}</div>
+      <div className="pb-5 text-gray">{createdAt}</div>
       <div
         className={
           hasEllipsis ? "overflow-hidden line-clamp-4" : "min-h-[70px]"

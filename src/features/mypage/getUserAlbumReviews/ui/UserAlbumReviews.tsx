@@ -1,9 +1,9 @@
-import { ReviewCard } from "@/shared/ui/reviewCard/ReviewCard";
-import { ReviewCardSkeleton } from "@/shared/ui/reviewCard/ReviewCardSkeleton";
+import { ReviewCard } from "@/shared/ui/reviewCard";
+import { ReviewCardSkeleton } from "@/shared/ui/reviewCard";
 import { mockReviews } from "../api/getUserAlbumReviews";
 import { useEffect, useState } from "react";
 import { Review } from "@/shared/model/review";
-import { ReviewEditContainer } from "../../manageReview/ui/ReviewEditContainer";
+import { EditReviewButtonContainer } from "@/features/review/editReview";
 
 export const UserAlbumReviews = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +29,13 @@ export const UserAlbumReviews = () => {
         : reviews.map((review) => (
             <ReviewCard
               key={review.id}
-              myReviewEditButton={<ReviewEditContainer reviewType={review.reviewType} reviewId={review.id} entityId={review.entityId}/>}
+              myReviewEditButton={
+                <EditReviewButtonContainer
+                  reviewType={review.reviewType}
+                  reviewId={review.id}
+                  entityId={review.entityId}
+                />
+              }
               userName={review.user.userName}
               userProfilePath={review.user.profilePath}
               content={review.content}

@@ -8,5 +8,7 @@ export interface Review {
   user: User;
   rating: number;
   content: string;
-  cover?: string
+  createdAt?: string;
+  updatedAt?: string;
+  cover?: string;
 }

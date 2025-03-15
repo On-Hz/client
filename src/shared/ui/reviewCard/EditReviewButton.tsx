@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "@/shared/ui/button/Button";
 
-interface ReviewEditButtonProps {
+interface EditReviewButtonProps {
   onModify: () => void;
   onDelete: () => void;
 }
 
-export const ReviewEditButton: React.FC<ReviewEditButtonProps> = ({
+export const EditReviewButton: React.FC<EditReviewButtonProps> = ({
   onModify,
   onDelete,
 }) => {
