@@ -1,6 +1,6 @@
 import { LikeType } from "../model/types";
 
-export const mockLikes: LikeType[] = Array(6)
+export const mockLikes: LikeType[] = Array(10)
 .fill(null)
 .map((_, i) => ({
     id: i,

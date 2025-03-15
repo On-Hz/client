@@ -2,6 +2,7 @@ import Rating from "@mui/material/Rating"
 import { useEffect, useState } from "react";
 import { fetchUserLikesData } from "../api/getUserLikes";
 import { LikeType } from "../model/types";
+import { UserLikeSecSkeleton } from "./UserLikesSkeleton";
 
 export const UserLikeSec = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -21,17 +22,17 @@ export const UserLikeSec = () => {
     return( 
         <div className="">
             {isLoading ? (
-                "스켈레톤"
+                <UserLikeSecSkeleton />
                 ) : (
-                    <div className="flex gap-6 pt-36 flex-wrap">
+                    <div className="flex gap-7 pt-10 flex-wrap hz-like-wrap">
                         {Likes?.map((like, idx) => (
-                            <div className="like-box relative w-[300px] pb-[180px]">
-                                <div className="like-cover absolute top-[-140px] left-0 rounded-lg bg-gray5 h-[200px] w-full overflow-hidden">
+                            <div className="like-box relative w-[23%] h-[400px]">
+                                <div className="like-cover rounded-lg h-[200px] w-full overflow-hidden">
                                     <img src={like.artist.avatar} alt={like.artist.name} className="w-full h-full object-cover"/>
                                 </div>
-                                <div className="like-text m-auto relative z-10 w-[240px] rounded-lg p-5 border border-gray3 bg-white">
+                                <div className="like-text m-auto absolute bottom-0 left-1/2 translate-x-[-50%] w-[84%] rounded-lg p-5 border border-gray3 bg-white">
                                     <p className="text-gray5 text-[14px]">{like.creatTime}</p>
-                                    <p className="text-gray py-2">{like.artist.name}</p>
+                                    <p className="text-gray py-2">{like.reviewer}</p>
                                     <div>
                                     <Rating
                                         value={like.rating}
@@ -47,7 +48,7 @@ export const UserLikeSec = () => {
                                         }}
                                         />
                                     </div>
-                                    <p className="text-gray line-clamp-2 my-5">
+                                    <p className="text-gray line-clamp-2 my-5 min-h-10">
                                         {like.body}
                                     </p>
                                     <button className="text-point underline">리뷰 보기</button>
