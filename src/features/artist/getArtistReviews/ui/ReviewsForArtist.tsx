@@ -29,9 +29,9 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
             <div className={"hz-artist-sec-item"} key={index}>
               <ReviewCard
                 key={index}
-                userName={review.userName}
-                userImage={review.userImage}
-                reviewText={review.reviewText}
+                userName={review.user.userName}
+                userProfilePath={review.user.profilePath}
+                content={review.content}
                 rating={review.rating}
                 hasEllipsis={!useInfiniteScroll}
               />

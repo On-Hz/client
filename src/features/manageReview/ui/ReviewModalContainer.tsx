@@ -1,18 +1,16 @@
+// feature/ui/ReviewModalContainer.tsx
 import React, { useState } from "react";
 import { useModalStore } from "@/shared/stores";
-import { WriteReviewModal } from "@/shared/ui/modal/modal-review/WriteReviewModal";
+import { EditReviewModal } from "@/shared/ui/modal/modal-review/EditReviewModal";
 import { ConfirmModal } from "./ConfirmModal";
-import { ReviewData } from "../model/types";
 import { useMutation } from "@tanstack/react-query";
-import { postReview } from "../api/postReview";
-import { ALERT_TYPES } from "@/shared/constants/alertTypes";
+import { ReviewData } from "../model/types";
 
-interface WriteReviewProps {
-  data?: {
-    reviewType?: string;
-    entityId?: number;
-    title?: string;
-  };
+interface ReviewModalContainerProps {
+  modalName: string;
+  initialData?: Partial<ReviewData>; // 수정 시 미리 조회한 데이터를 넣어줍니다.
+  submitReview: (review: ReviewData) => Promise<any>;
+  alertMessage: string;
 }
 
 type ConfirmOptions = {
@@ -20,12 +18,18 @@ type ConfirmOptions = {
   content: React.ReactNode;
 };
 
-export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
-  const { modals, openModal, closeModal } = useModalStore();
-
-  // 상태 관리
-  const [content, setContent] = useState("");
-  const [rating, setRating] = useState<number | null>(null);
+export const ReviewModalContainer: React.FC<ReviewModalContainerProps> = ({
+  modalName,
+  initialData,
+  submitReview,
+  alertMessage,
+}) => {
+  const { openModal, closeModal } = useModalStore();
+  const [reviewModalFlag, setReviewModalFlag] = useState(true);
+  const [content, setContent] = useState(initialData?.content || "");
+  const [rating, setRating] = useState<number | null>(
+    initialData?.rating ?? null
+  );
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [confirmOptions, setConfirmOptions] = useState<ConfirmOptions | null>(
     null
@@ -40,7 +44,7 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
     }
   };
 
-  // 별점 클릭 핸들러 (클릭 시 rating 상태 업데이트)
+  // 별점 클릭 핸들러
   const handleRatingChange = (
     event: React.SyntheticEvent,
     newValue: number | null
@@ -48,7 +52,7 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
     setRating(newValue);
   };
 
-  // 별점 Hover 핸들러 (이미 선택된 별점에 마우스가 올라가면 tooltip 표시)
+  // 별점 Hover 핸들러
   const handleRatingHover = (event: React.SyntheticEvent, newHover: number) => {
     setTooltipOpen(newHover === rating && rating !== null);
   };
@@ -56,28 +60,32 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
   const getReviewData = (): ReviewData => ({
     content,
     rating: rating ?? 0,
-    reviewType: (data?.reviewType as "ALBUM" | "ARTIST" | "TRACK") ?? "ALBUM",
-    entityId: data?.entityId,
-    title: data?.title || "",
+    reviewType:
+      (initialData?.reviewType as "ALBUM" | "ARTIST" | "TRACK") ?? "ALBUM",
+    entityId: initialData?.entityId,
+    reviewId: initialData?.reviewId,
+    title: initialData?.title || "",
   });
 
+  // React Query mutation (API 호출 함수는 prop으로 전달)
   const mutation = useMutation({
-    mutationFn: (newReview: ReviewData) => postReview(newReview),
+    mutationFn: (newReview: ReviewData) => submitReview(newReview),
     onSuccess: () => {
-      closeModal("writeReviewModal");
+      setReviewModalFlag(false)
       openModal("alertModal", {
-        type: ALERT_TYPES.SUCCESS,
-        message: "리뷰가 작성되었습니다."
+        type: "success",
+        message: alertMessage,
+        onConfirm: () => closeModal(modalName),
       });
     },
     onError: (error) => {
-      console.error("리뷰 작성 중 에러 발생:", error);
+      console.error("리뷰 제출 중 에러 발생:", error);
     },
   });
 
-  // 리뷰 제출 버튼 클릭 핸들러
+  // 리뷰 제출 버튼 핸들러
   const handleSubmit = async () => {
-    // 텍스트가 없으면 confirm 모달 띄움 (닫기만 있음)
+    // 텍스트가 없으면 confirm 모달 띄움
     if (content.trim() === "") {
       setConfirmOptions({
         type: "content",
@@ -85,7 +93,7 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
       });
       return;
     }
-    // 별점이 0인 경우 confirm 모달 띄워 "별점 없이 리뷰를 작성하시겠습니까?"라고 묻습니다.
+    // 별점이 0인 경우 confirm 모달 띄움
     if (rating === null || rating === 0) {
       setConfirmOptions({
         type: "rating",
@@ -95,7 +103,7 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
       });
       return;
     }
-    // 조건에 맞으면 POST 요청 실행
+    // 조건 충족 시 API 호출
     mutation.mutate(getReviewData());
   };
 
@@ -109,9 +117,9 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
 
   return (
     <>
-      <WriteReviewModal
-        open={modals["writeReviewModal"] || false}
-        title={data?.title || ""}
+      <EditReviewModal
+        open={reviewModalFlag}
+        title={initialData?.title || ""}
         content={content}
         rating={rating}
         maxLength={maxLength}
@@ -120,7 +128,7 @@ export const WriteReview: React.FC<WriteReviewProps> = ({ data }) => {
         onRatingHover={handleRatingHover}
         onContentChange={handleContentChange}
         onSubmit={handleSubmit}
-        onClose={() => closeModal("writeReviewModal")}
+        onClose={() => {setReviewModalFlag(false); closeModal(modalName)}}
       />
       {confirmOptions && (
         <ConfirmModal

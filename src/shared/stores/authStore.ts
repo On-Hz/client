@@ -24,3 +24,4 @@ export const useAuthStore = create<AuthState>((set) => ({
     cookies.remove("token", { path: "/" });
   },
 }));
+(window as any).authStore = useAuthStore;

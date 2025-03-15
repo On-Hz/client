@@ -3,7 +3,7 @@ import { ModalLayout } from "../ModalLayout";
 import { ModalButton } from "../modal-button/ModalButton";
 import { Rating, Tooltip } from "@mui/material";
 
-export interface WriteReviewModalProps {
+export interface EditReviewModalProps {
   open: boolean;
   title?: string;
   content: string;
@@ -20,7 +20,7 @@ export interface WriteReviewModalProps {
   onClose: () => void;
 }
 
-export const WriteReviewModal: React.FC<WriteReviewModalProps> = ({
+export const EditReviewModal: React.FC<EditReviewModalProps> = ({
   open,
   title,
   content,

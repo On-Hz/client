@@ -5,7 +5,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { useAuthStore } from "../stores/authStore";
+import { useAuthStore } from "../stores";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

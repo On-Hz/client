@@ -11,14 +11,14 @@ export const useModalStore = create<ModalState>((set) => ({
   modals: {},
   modalData: {},
   openModal: (modalName, data) =>
-    set(() => ({
-      modals: { [modalName]: true },
-      modalData: { [modalName]: data },
+    set((state) => ({
+      modals: { ...state.modals, [modalName]: true },
+      modalData: { ...state.modalData, [modalName]: data },
     })),
   closeModal: (modalName) =>
-    set(() => ({
-      modals: { [modalName]: false },
-      modalData: { [modalName]: undefined },
+    set((state) => ({
+      modals: { ...state.modals, [modalName]: false },
+      modalData: { ...state.modalData, [modalName]: undefined },
     })),
 }));
 (window as any).modalStore = useModalStore;

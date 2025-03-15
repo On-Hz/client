@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Review } from "../model/types";
+import { Review } from "@/shared/model";
+import { REVIEW_TYPES } from "@/shared/constants";
 
 const fetchData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -8,17 +9,25 @@ const fetchData = async () => {
 
 const mockLatestReviewsData: Review[] = Array(6)
   .fill(null)
+  .fill(null)
   .map((_, i) => ({
     id: i,
-    userName: `Reviewedsfasdfsdafafdr ${i + 1}`,
-    userImage: `https://picsum.photos/200/300?random=${i + 10}`,
-    cover: `https://picsum.photos/200/300?random=${i + 20}`,
-    reviewText: `Review body ${
+    user: {
+      id: i + 100, // 예시용 dummy ID
+      email: `reviewer${i + 1}@example.com`,
+      userName: `Reviewer name ${i + 1}`,
+      profilePath: `https://picsum.photos/40/40?random=${i}`,
+      role: "USER",
+    },
+    rating: (i % 5) + 1,
+    content: `Review body ${
       i + 1
-    } - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+    } - 앨범은 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
     Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 
     Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`,
-    rating: i + 0.5, // 예시로 별 4개
+    reviewType: REVIEW_TYPES.ALBUM,
+    entityId: i,
+    cover: `https://picsum.photos/200/300?random=${i + 1}`,
   }));
 
 export const useLatestReviews = () => {

@@ -1,10 +1,6 @@
-// api/postReview.ts
 import axiosInstance from "@/shared/api/axiosInstance";
-import { ReviewData } from "../model/types";
+import { ReviewData } from "../../model/types";
 
-/**
- * reviewType과 entityId는 URL 경로에 포함되고, request body에는 text와 rating만 전송됩니다.
- */
 export const postReview = async (review: ReviewData): Promise<ReviewData> => {
   const { reviewType, entityId, content, rating } = review;
 

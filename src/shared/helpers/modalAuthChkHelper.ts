@@ -1,5 +1,5 @@
 import { useModalStore } from "@/shared/stores/modalStore";
-import { useAuthStore } from "@/shared/stores/authStore";
+import { useAuthStore } from "@/shared/stores";
 import { modalRegistry } from "@/shared/ui/modal/config/modalRegistry";
 
 // 토큰 상태와 모달 오픈 함수를 직접 가져와서 처리하는 방식
@@ -14,6 +14,7 @@ export const openModalWithAuthCheck = (modalName: string, data?: any) => {
   if (modalDef.authCheck && !token) {
     openModal("authInfoModal");
   } else {
+    console.log('openModal', modalName, data)
     openModal(modalName, data);
   }
 };

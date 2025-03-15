@@ -3,3 +3,5 @@ export const REVIEW_TYPES = {
   ARTIST: "ARTIST",
   TRACK: "TRACK",
 } as const;
+
+export type ReviewType = (typeof REVIEW_TYPES)[keyof typeof REVIEW_TYPES];

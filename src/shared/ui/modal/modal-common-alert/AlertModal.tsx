@@ -1,13 +1,9 @@
 import React from "react";
 import { ModalLayout } from "../ModalLayout";
 import { useModalStore } from "@/shared/stores/modalStore";
-import { ALERT_TYPES, AlertType } from "@/shared/constants/alertTypes";
-import {
-  AiOutlineCheckCircle,
-  AiOutlineCloseCircle,
-  AiOutlineExclamationCircle,
-  AiOutlineInfoCircle,
-} from "react-icons/ai";
+import { AlertType } from "@/shared/constants/alertTypes";
+import { Button } from "@/shared/ui/button/Button";
+import { RenderIcon } from "./RenderAlertIcon";
 
 interface AlertModalData {
   type: AlertType;
@@ -21,25 +17,10 @@ export const AlertModal: React.FC = () => {
   const open = modals["alertModal"] || false;
   const data: AlertModalData = modalData["alertModal"] || {};
 
+  // 데이터가 없으면 렌더링하지 않습니다.
   if (!data) return null;
 
   const { type, message, confirmText = "확인", onConfirm } = data;
-
-  const renderIcon = () => {
-    switch (type) {
-      case ALERT_TYPES.SUCCESS:
-        return <AiOutlineCheckCircle size={50} className="text-point" />;
-      case ALERT_TYPES.ERROR:
-        return <AiOutlineCloseCircle size={50} className="text-red-500" />;
-      case ALERT_TYPES.WARNING:
-        return (
-          <AiOutlineExclamationCircle size={50} className="text-yellow-500" />
-        );
-      case ALERT_TYPES.INFO:
-      default:
-        return <AiOutlineInfoCircle size={50} className="text-green-500" />;
-    }
-  };
 
   const handleConfirm = () => {
     if (onConfirm) {
@@ -52,14 +33,21 @@ export const AlertModal: React.FC = () => {
     <ModalLayout open={open} onClose={() => closeModal("alertModal")}>
       <div className="py-[25px] px-[60px] max-500:p-0">
         <div className="flex flex-col items-center">
-          {renderIcon()}
-          <p className="mb-10 text-lg font-bold text-center text-gray5">{message}</p>
-          <button
-            onClick={handleConfirm}
-            className="px-4 py-2 mt-6 text-white transition-colors bg-black rounded hover:bg-point"
-          >
-            {confirmText}
-          </button>
+          <RenderIcon type={type} />
+          <p className="mt-4 mb-10 text-lg font-bold text-center text-gray5">
+            {message}
+          </p>
+          {onConfirm ? (
+            <div className="flex gap-4">
+              <Button onClick={handleConfirm} text="예" />
+              <Button onClick={() => closeModal("alertModal")} text="아니오" />
+            </div>
+          ) : (
+            <Button
+              onClick={() => closeModal("alertModal")}
+              text={confirmText}
+            />
+          )}
         </div>
       </div>
     </ModalLayout>
