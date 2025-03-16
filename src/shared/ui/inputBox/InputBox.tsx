@@ -4,10 +4,11 @@ interface InputProps {
     placeholder?: string,
     value?:string,
     type?:string,
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    name?:string,
+    onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-export const InputBox = ({onChange, placeholder="",value="",type="", width, height = "35px"}: InputProps) => {
+export const InputBox = ({onChange,placeholder="",value="",type="text", name="", width, height = "35px"}: InputProps) => {
 
     return (
         <div className="px-[10px] bg-white border border-gray3 rounded-[5px]"
@@ -18,6 +19,7 @@ export const InputBox = ({onChange, placeholder="",value="",type="", width, heig
         >
            <input 
                 className="w-full h-full text-[14px]"
+                name={name}
                 value={value}
                 type={type}
                 placeholder={placeholder}

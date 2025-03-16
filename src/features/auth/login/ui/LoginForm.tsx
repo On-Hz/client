@@ -8,40 +8,53 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
-  const { handleLogin } = useLogin();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const { mutate, errorMessage } = useLogin(); 
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [validationError, setValidationError] = useState<string | null>(null);
+  console.log("error메세지!!!",errorMessage);
+  
+  // 입력값 변경
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //console.log(`변경됨:`, e.target.value);
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  const onSubmit = async () => {
-    // 유효성 검사 & 즉시 에러 업데이트
-    const validationError = validateLogin(email, password);
-    if (validationError) {
-      return setError(validationError);
+  //로그인
+  const onSubmit = () => {
+  // console.log("로그인 버튼");
+  // console.log("입력값:", form); 
+  const errorMessage = validateLogin(form.email, form.password);
+    setValidationError(errorMessage); // 유효성 검사 에러
+
+    if (!errorMessage) {
+      mutate(form); 
     }
-
-    const apiError = await handleLogin(email, password);
-    setError(apiError);
   };
 
   return (
     <div>
       <div className="flex flex-col mb-6 space-y-3 w-[300px]">
         <InputBox
+          name="email" 
           placeholder="이메일"
           width="100%"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={form.email}
+          onChange={handleChange}
         />
         <InputBox
+          name="password" 
           placeholder="비밀번호"
           width="100%"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
         />
       </div>
-      {error && <p className="text-red text-sm text-center mb-4">{error}</p>}
+      {(validationError || errorMessage) && (
+        <p className="text-red text-sm text-center mb-4">
+          {validationError || errorMessage}
+        </p>
+      )}
       <div className="mb-6">
         <ModalButton text="로그인" width="100%" onClick={onSubmit}/>
       </div>
