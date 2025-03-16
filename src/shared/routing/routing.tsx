@@ -25,6 +25,7 @@ import {
   SearchTracks,
 } from "@/pages/search";
 import { SongPage } from "@/pages/song";
+import { PrivateRoute } from "./PrivateRoute";
 
 const SearchPage = lazy(() =>
   import("@/pages/search").then((module) => ({
@@ -54,12 +55,14 @@ export const Routing: React.FC = () => {
       <Route path="/song" element={<SongPage />} />
 
       {/* userId값 slug 넣어줘야함  */}
-      <Route path="/mypage" element={<MyPage />}>
-        <Route index element={<MypageAlbum />} />
-        <Route path="album" element={<MypageAlbum />} />
-        <Route path="song" element={<MypageSong />} />
-        <Route path="artist" element={<MypageArtist />} />
-        <Route path="like" element={<MypageLike />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/mypage/:userId" element={<MyPage />}>
+          <Route index element={<MypageAlbum />} />
+          <Route path="album" element={<MypageAlbum />} />
+          <Route path="song" element={<MypageSong />} />
+          <Route path="artist" element={<MypageArtist />} />
+          <Route path="like" element={<MypageLike />} />
+        </Route>
       </Route>
 
       {/* ReviewId값 slug 넣어줘야함  */}

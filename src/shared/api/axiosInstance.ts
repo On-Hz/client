@@ -27,6 +27,10 @@ const requestHandler = (
     headers.set("Authorization", `Bearer ${token}`);
   }
   request.headers = headers;
+
+  // console.log("Request Headers:", request.headers);
+  // console.log("Token:", token);
+
   return request;
 };
 
@@ -41,11 +45,11 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => response.data,
+  (response: AxiosResponse) => response,
   (error: AxiosError) => {
-    const message =
-      (error.response?.data as { message?: string })?.message || error.message;
-    console.error(message);
-    return Promise.reject(error);
+    const data = error.response?.data as { message?: string };
+    const message = data?.message ?? error.message ?? "예기치 않은 오류가 발생했습니다.";
+    console.error("API Error:", message);
+    return Promise.reject(new Error(message));
   }
 );

@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "/public/logo_text.svg";
-import { useAuthModalStore } from "@/shared/stores";
+import { useAuthModalStore, useAuthStore } from "@/shared/stores";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -17,29 +17,35 @@ import "./style.css";
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
   const [open, setOpen] = React.useState(false);
+  const { user, logout } = useAuthStore();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  //사용자 메뉴
+  const toggleUserMenu = () => setOpen((prev) => !prev);
 
-  const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
+  //사용자 메뉴 닫기
+  const closeUserMenu = (event?: MouseEvent | TouchEvent) => {
+    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
-
     setOpen(false);
   };
+
+  //로그아웃
+  const handleLogout = () => {
+    logout();
+    setOpen(false);
+  };
+
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
+      if (anchorRef.current) { //`null` 체크 후 `focus()` 실행
+        anchorRef.current.focus();
+      }
     }
-
     prevOpen.current = open;
   }, [open]);
 
@@ -60,85 +66,97 @@ export const Header: React.FC = () => {
               />
               <button>{/* <SearchIcon /> */}</button>
             </div>
-            <Button
-              ref={anchorRef}
-              id="composition-button"
-              aria-controls={open ? "composition-menu" : undefined}
-              aria-expanded={open ? "true" : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-              sx={{
-                width: "40px",
-                height: "40px",
-                minWidth: "auto",
-                border: "1px solid #d9d9d9",
-                borderRadius: "50%",
-                marginRight: "4px",
-              }}
-            >
-              <PersonIcon
-                style={{ width: "100%", height: "100%" }}
-                className="text-gray3"
-              />
-            </Button>
-            <Popper
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              placement="bottom-start"
-              transition
-              disablePortal
-            >
-              {(props: PopperChildrenProps) => (
-                <Grow
-                  {...props.TransitionProps}
-                  style={{
-                    transformOrigin:
-                      props.placement === "bottom-start"
-                        ? "left top"
-                        : "left bottom",
+            {user ? ( //로그인
+              <div className="flex items-center ml-4">
+                <p className="text-[20px] pr-4">{user.userName} <span className="text-[15px]">님</span></p>
+                <Button
+                  ref={anchorRef}
+                  id="composition-button"
+                  aria-controls={open ? "composition-menu" : undefined}
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="true"
+                  onClick={toggleUserMenu}
+                  sx={{
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "auto",
+                    border: "1px solid #d9d9d9",
+                    borderRadius: "50%",
+                    marginRight: "4px",
                   }}
                 >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList
-                        autoFocusItem={open}
-                        id="composition-menu"
-                        aria-labelledby="composition-button"
-                        sx={{
-                          color: "#a1a1a1",
-                        }}
-                      >
-                        <MenuItem
-                          sx={{ fontSize: "12px" }}
-                          onClick={handleClose}
-                        >
-                          마이 페이지
-                        </MenuItem>
-                        <MenuItem
-                          sx={{ fontSize: "12px" }}
-                          onClick={handleClose}
-                        >
-                          로그아웃
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-            <button
-              className="hz-login text-black py-[10px] px-[12px] mr-[5px] text-[14px] transform hover:text-point transition-colors"
-              onClick={() => openAuthModal("login")}
-            >
-              로그인
-            </button>
-            <button
-              className="bg-black text-white border rounded-[5px] text-[14px] py-[10px] px-[12px] transform hover:bg-point transition-colors"
-              onClick={() => openAuthModal("signup")}
-            >
-              회원가입
-            </button>
+                  <PersonIcon
+                    style={{ width: "100%", height: "100%" }}
+                    className="text-gray3"
+                  />
+                </Button>
+                <Popper
+                  open={open}
+                  anchorEl={anchorRef.current}
+                  role={undefined}
+                  placement="bottom-start"
+                  transition
+                  disablePortal
+                >
+                  {(props: PopperChildrenProps) => (
+                    <Grow
+                      {...props.TransitionProps}
+                      style={{
+                        transformOrigin:
+                          props.placement === "bottom-start"
+                            ? "left top"
+                            : "left bottom",
+                      }}
+                    >
+                      <Paper>
+                        <ClickAwayListener onClickAway={closeUserMenu}>
+                          <MenuList
+                            autoFocusItem={open}
+                            id="composition-menu"
+                            aria-labelledby="composition-button"
+                            sx={{
+                              color: "#a1a1a1",
+                            }}
+                          >
+                            <MenuItem
+                              sx={{ fontSize: "12px" }}
+                              onClick={() => {
+                                closeUserMenu();
+                                navigate(`/mypage/${user?.id}`);
+                              }}
+                            >
+                              마이 페이지
+                            </MenuItem>
+                            <MenuItem
+                              sx={{ fontSize: "12px" }}
+                              onClick={handleLogout} // ✅ 로그아웃 버튼 적용
+                            >
+                              로그아웃
+                            </MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    </Grow>
+                  )}
+                </Popper>
+              </div>
+            ) : (
+              //로그아웃
+              <>
+                <button
+                  className="hz-login text-black py-[10px] px-[12px] mr-[5px] text-[14px] transform hover:text-point transition-colors"
+                  onClick={() => openAuthModal("login")}
+                >
+                  로그인
+                </button>
+                <button
+                  className="bg-black text-white border rounded-[5px] text-[14px] py-[10px] px-[12px] transform hover:bg-point transition-colors"
+                  onClick={() => openAuthModal("signup")}
+                >
+                  회원가입
+                </button>
+              </>
+            )}
           </nav>
         </div>
       </div>
