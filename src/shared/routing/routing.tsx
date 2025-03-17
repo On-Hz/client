@@ -50,11 +50,9 @@ export const Routing: React.FC = () => {
         <Route path="tracks" element={<ArtistTracks />} />
       </Route>
 
-      {/* AlbumId, SongId값 slug 넣어줘야함  */}
-      <Route path="/album" element={<AlbumPage />} />
-      <Route path="/song" element={<SongPage />} />
+      <Route path="/album/:artistSlug" element={<AlbumPage />} />
+      <Route path="/song/:songSlug" element={<SongPage />} />
 
-      {/* userId값 slug 넣어줘야함  */}
       <Route element={<PrivateRoute />}>
         <Route path="/mypage/:userId" element={<MyPage />}>
           <Route index element={<MypageAlbum />} />
@@ -65,8 +63,7 @@ export const Routing: React.FC = () => {
         </Route>
       </Route>
 
-      {/* ReviewId값 slug 넣어줘야함  */}
-      <Route path="/review" element={<ReviewPage />} />
+      <Route path="/review/:reviewId" element={<ReviewPage />} />
       <Route
         path="*"
         element={
