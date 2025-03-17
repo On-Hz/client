@@ -1,5 +1,5 @@
 import { CarouselSection, ArtistAvatar, ArtistAvatarSkeleton, } from "@/shared/ui";
-import { Artist } from "../model/types";
+import { Artist } from "@/shared/model";
 import { useTopArtist } from "../api/getTopRateArtistList";
 
 const renderArtistPage = (artists: Artist[]) => (
@@ -8,7 +8,7 @@ const renderArtistPage = (artists: Artist[]) => (
       <ArtistAvatar
         key={artist.id}
         id={artist.id}
-        avatar={artist.avatar}
+        profilePath={artist.profilePath}
         name={artist.name}
       />
     ))}

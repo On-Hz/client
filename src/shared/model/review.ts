@@ -10,5 +10,6 @@ export interface Review {
   content: string;
   createdAt?: string;
   updatedAt?: string;
-  cover?: string;
+  entityName?: string;
+  entityFilePath?: string;
 }

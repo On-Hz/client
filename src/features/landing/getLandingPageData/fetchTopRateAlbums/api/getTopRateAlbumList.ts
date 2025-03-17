@@ -1,24 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { Album } from "../model/types";
+import { axiosInstance } from "@/shared/api";
+import { Album } from "@/shared/model";
 
-const fetchData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  return mockTopRateAlbumData;
+const getTopAlbumList = async () => {
+  const url = "/api/v1/albums";
+  const response = await axiosInstance.get<Album[]>(url, {
+    params: {
+      offset: 0,
+      limit: 12,
+      order_by: "rating_count,average_rating",
+    },
+  });
+  return response.data;
 };
 
-const mockTopRateAlbumData: Album[] = Array(12)
-  .fill(null)
-  .map((_, i) => ({
-    id: i,
-    title: `Album ${i + 1}`,
-    artist: "Artist Name",
-    cover: `https://picsum.photos/200/300?random=${i}`,
-  }));
-
-  export const useTopAlbum = () => {
-    return useQuery({
-      queryKey: ["album"],
-      queryFn: fetchData,
-    });
-  }
-  
+export const useTopAlbum = () => {
+  return useQuery({
+    queryKey: ["album_landing"],
+    queryFn: getTopAlbumList,
+  });
+};

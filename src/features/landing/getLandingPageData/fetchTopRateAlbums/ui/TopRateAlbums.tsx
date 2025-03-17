@@ -1,30 +1,51 @@
+import { Link } from "react-router-dom";
 import { useTopAlbum } from "../api/getTopRateAlbumList";
 import { getGridStyles } from "@/shared/helpers";
+import { TopRateAlbumTitle } from "./TopRateAlbumTitle";
 import { AlbumSkeleton } from "./TopRateAlbumSkeleton";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+
 
 const AlbumItem: React.FC = () => {
   const { data, isLoading } = useTopAlbum();
   if (isLoading) return <AlbumSkeleton />;
+
   return (
     <div className="hz-landing-album-gridlayout">
       {data &&
-        data.map((item: any, index: number) => (
-          <div
-            key={item.id}
-            className="p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-album-item"
-            style={getGridStyles(index)}
-          >
-            <div className="mb-2">
-              <p className="font-semibold">{item.title}</p>
-              <p className="text-xs text-neutral-500">{item.artist}</p>
-            </div>
-            <img
-              src={item.cover}
-              alt={item.title}
-              className="object-cover w-full rounded-lg aspect-square"
-            />
-          </div>
-        ))}
+        data.map((album: any, index: number) => {
+          const mainArtist = album.artists.find(
+            (artist: any) => artist.role === "main"
+          );
+          return (
+             <Link to={`/album/${album.id}`} 
+              key={album.id}
+              className="flex flex-col p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-album-item"
+              style={getGridStyles(index)}
+            >
+              <div className="content-center flex-1 mb-4">
+                <div className="album-title-wrapper">
+                  <TopRateAlbumTitle text={album.title} />
+                </div>
+                <p className="text-xs text-neutral-500">{mainArtist?.name}</p>
+              </div>
+              {album.coverPath ? (
+                <img
+                  src={album.coverPath}
+                  alt={album.title}
+                  className="object-cover w-full rounded-lg aspect-square"
+                />
+              ) : (
+                <div className="object-cover rounded-lg bg-gray3 aspect-square">
+                  <MusicNoteIcon
+                    style={{ width: "100%", height: "100%" }}
+                    className="text-gray2"
+                  />
+                </div>
+              )}
+            </Link>
+          );
+        })}
     </div>
   );
 };

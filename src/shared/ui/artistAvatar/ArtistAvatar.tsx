@@ -1,21 +1,33 @@
-import './style.css';
+import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import "./style.css";
 interface ArtistAvatarProps {
   id: number;
-  avatar?: string;
+  profilePath: string | null;
   name: string;
+  onClick?: () => void;
 }
 
-export const ArtistAvatar = ({ id, avatar, name }: ArtistAvatarProps) => {
+export const ArtistAvatar = ({ id, profilePath, name }: ArtistAvatarProps) => {
   return (
-    <div key={id} className="text-center">
-      <div className="hz-artist-item mb-2 rounded-full overflow-hidden">
-        <img
-          src={avatar}
-          alt={name}
-          className="object-cover w-full h-full"
-        />
+    <Link to={`/artist/${id}`} key={id} className="text-center">
+      <div className="mb-2 overflow-hidden rounded-full hz-artist-item bg-gray3">
+        {profilePath ? (
+          <img
+            src={profilePath}
+            alt={name}
+            className="object-cover w-full h-full"
+          />
+        ) : (
+          <div className="p-10 text-center">
+            <FaUser
+              style={{ width: "100%", height: "100%" }}
+              className="text-gray2"
+            />
+          </div>
+        )}
       </div>
       <p>{name}</p>
-    </div>
+    </Link>
   );
 };

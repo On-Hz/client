@@ -1,7 +1,7 @@
 import { REVIEW_TYPES } from "@/shared/constants";
 import { Review } from "@/shared/model";
 
-export const mockReview: Review[] = [{
+export const mockReview: Review = {
     "id": 2341,
     "user": {
         "id": 100, // 예시용 dummy ID
@@ -15,7 +15,7 @@ export const mockReview: Review[] = [{
     "content": " - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? Repudiandae velit illum dolores dicta, consequatur accusantium numquam.",
     "reviewType": REVIEW_TYPES.ARTIST,
     "entityId": 1
-}];
+};
 
 // 비동기 API 호출
 export const fetchReview = async (): Promise<{ review: Review | null; isLoading: boolean }> => {
@@ -24,13 +24,13 @@ export const fetchReview = async (): Promise<{ review: Review | null; isLoading:
 
     try {
         // 데이터 요청
-        const data = await new Promise<Review[]>((resolve) => {
+        const data = await new Promise<Review>((resolve) => {
             setTimeout(() => {
                 resolve(mockReview); // mock 데이터 반환
             }, 1500);
         });
 
-        review = data[0] || null;
+        review = data || null;
         isLoading = false;
     } catch (error) {
         console.error("Failed to fetch review:", error);
