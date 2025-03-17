@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { useLogin } from "../hooks/useLogin";
 import { validateLogin } from "@/shared/validation/authSchema";
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 interface LoginFormProps {
   switchMode: () => void;
@@ -11,7 +12,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
   const { mutate, errorMessage } = useLogin(); 
   const [form, setForm] = useState({ email: "", password: "" });
   const [validationError, setValidationError] = useState<string | null>(null);
-  console.log("error메세지!!!",errorMessage);
   
   // 입력값 변경
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +52,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
       </div>
       {(validationError || errorMessage) && (
         <p className="text-red text-sm text-center mb-4">
-          {validationError || errorMessage}
+          <ReportProblemIcon /> {validationError || errorMessage}
         </p>
       )}
       <div className="mb-6">

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { ModalLayout, ModalButton } from "@/shared/ui";
 import TermDetailModal from "./TermsDetailModal";
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 interface TermsModalProps {
+  onComplete: () => void; 
   onClose: () => void;
 }
 
@@ -14,16 +16,17 @@ const termsConfig: {
   hasView?: boolean;
 }[] = [
   { key: "entire", label: "전체 약관 동의" },
-  { key: "age14", label: "만 14세 이상입니다." },
-  { key: "service", label: "서비스 이용약관", hasView: true },
-  { key: "privacy", label: "개인정보 수집/이용 동의", hasView: true },
+  { key: "age14", label: "(필수) 만 14세 이상입니다." },
+  { key: "service", label: "(필수) 서비스 이용약관", hasView: true },
+  { key: "privacy", label: "(필수) 개인정보 수집/이용 동의", hasView: true },
 ];
 
-export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
+export const TermsModal: React.FC<TermsModalProps> = ({ onComplete, onClose }) => {
   const [detailOpen, setDetailOpen] = useState(false);
   const [detailTerm, setDetailTerm] = useState<"service" | "privacy">(
     "service"
   );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   const [checks, setChecks] = useState<Record<TermKey, boolean>>({
     entire: false,
@@ -51,12 +54,24 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
         return newState;
       }
     });
+    setErrorMessage(null);
   };
 
   const openDetailModal = (term: "service" | "privacy") => {
     setDetailTerm(term);
     setDetailOpen(true);
   };
+
+  const isAllChecked = checks.age14 && checks.service && checks.privacy;
+
+  const handleSubmit = () => {
+    if (!isAllChecked) {
+      setErrorMessage("필수 약관에 동의해야 가입이 가능합니다.");
+      return;
+    }
+    onComplete();
+  };
+
 
   return (
     <>
@@ -96,7 +111,8 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onClose }) => {
               </div>
             ))}
           </div>
-          <ModalButton text="가입하기" width="100%" onClick={onClose} />
+          {errorMessage && <p className="text-red text-sm text-center mb-3"> <ReportProblemIcon /> {errorMessage}</p>}
+          <ModalButton text="가입하기" width="100%" onClick={handleSubmit} />
         </div>
       </ModalLayout>
       <TermDetailModal
