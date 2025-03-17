@@ -1,81 +1,67 @@
 import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import { AlbumPage } from "@/pages/album";
-import {
-  ArtistPage,
-  ArtistHome,
-  ArtistDiscography,
-  ArtistReviews,
-  ArtistTracks,
-} from "@/pages/artist";
-import { ErrorPage } from "@/pages/error";
-import { LandingPage } from "@/pages/landing";
-import {
-  MyPage,
-  MypageAlbum,
-  MypageArtist,
-  MypageLike,
-  MypageSong,
-} from "@/pages/mypage";
-import { ReviewPage } from "@/pages/review";
-import {
-  SearchAlbums,
-  SearchArtists,
-  SearchHome,
-  SearchTracks,
-} from "@/pages/search";
-import { SongPage } from "@/pages/song";
 import { PrivateRoute } from "./PrivateRoute";
+import { NotFoundRoute } from "./NotFoundRoute";
 
-const SearchPage = lazy(() =>
-  import("@/pages/search").then((module) => ({
-    default: module.SearchPage,
-  }))
-);
+//Lazy 로딩을 위한 페이지 매핑 (객체화)
+const pages = {
+  landing: lazy(() => import("@/pages/landing").then((module) => ({ default: module.LandingPage }))),
+  search: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchPage }))),
+  searchHome: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchHome }))),
+  searchTracks: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchTracks }))),
+  searchArtists: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchArtists }))),
+  searchAlbums: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchAlbums }))),
+
+  artist: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistPage }))),
+  artistHome: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistHome }))),
+  artistDiscography: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistDiscography }))),
+  artistReviews: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistReviews }))),
+  artistTracks: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistTracks }))),
+
+  album: lazy(() => import("@/pages/album").then((m) => ({ default: m.AlbumPage }))),
+  song: lazy(() => import("@/pages/song").then((m) => ({ default: m.SongPage }))),
+
+  mypage: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MyPage }))),
+  mypageAlbum: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageAlbum }))),
+  mypageSong: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageSong }))),
+  mypageArtist: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageArtist }))),
+  mypageLike: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageLike }))),
+
+  review: lazy(() => import("@/pages/review").then((m) => ({ default: m.ReviewPage }))),
+};
 
 export const Routing: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/search/:searchSlug" element={<SearchPage />}>
-        <Route index element={<SearchHome />} />
-        <Route path="track" element={<SearchTracks />} />
-        <Route path="artist" element={<SearchArtists />} />
-        <Route path="album" element={<SearchAlbums />} />
-      </Route>
-      <Route path="/artist/:artistSlug/*" element={<ArtistPage />}>
-        <Route index element={<ArtistHome />} />
-        <Route path="discography" element={<ArtistDiscography />} />
-        <Route path="reviews" element={<ArtistReviews />} />
-        <Route path="tracks" element={<ArtistTracks />} />
-      </Route>
-
-      <Route path="/album/:artistSlug" element={<AlbumPage />} />
-      <Route path="/song/:songSlug" element={<SongPage />} />
-
-      <Route element={<PrivateRoute />}>
-        <Route path="/mypage/:userId" element={<MyPage />}>
-          <Route index element={<MypageAlbum />} />
-          <Route path="album" element={<MypageAlbum />} />
-          <Route path="song" element={<MypageSong />} />
-          <Route path="artist" element={<MypageArtist />} />
-          <Route path="like" element={<MypageLike />} />
+        <Route path="/" element={<pages.landing />} />
+        <Route path="/search/:searchSlug" element={<pages.search />}>
+            <Route index element={<pages.searchHome />} />
+            <Route path="track" element={<pages.searchTracks />} />
+            <Route path="artist" element={<pages.searchArtists />} />
+            <Route path="album" element={<pages.searchAlbums />} />
         </Route>
-      </Route>
+        <Route path="/artist/:artistSlug/*" element={<pages.artist />}>
+            <Route index element={<pages.artistHome />} />
+            <Route path="discography" element={<pages.artistDiscography />} />
+            <Route path="reviews" element={<pages.artistReviews />} />
+            <Route path="tracks" element={<pages.artistTracks />} />
+        </Route>
 
-      <Route path="/review/:reviewId" element={<ReviewPage />} />
-      <Route
-        path="*"
-        element={
-          <ErrorPage
-            error={Object.assign(new Error("404 Not Found"), {
-              status: 404,
-              name: "NotFoundError",
-            })}
-            resetErrorBoundary={() => window.location.reload()}
-          />
-        }
-      />
+        <Route path="/album/:artistSlug"  element={<pages.album />} />
+        <Route path="/song/:songSlug" element={<pages.song />} />
+ 
+        <Route element={<PrivateRoute />}>
+            <Route path="/mypage/:userId" element={<pages.mypage />}>
+            <Route index element={<pages.mypageAlbum />} />
+            <Route path="album" element={<pages.mypageAlbum />} />
+            <Route path="song" element={<pages.mypageSong />} />
+            <Route path="artist" element={<pages.mypageArtist />} />
+            <Route path="like" element={<pages.mypageLike />} />
+            </Route>
+        </Route>
+
+        <Route path="/review/:reviewId" element={<pages.review />} />
+        <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );
 };

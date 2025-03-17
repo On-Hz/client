@@ -3,7 +3,7 @@ export interface User {
   email: string;
   userName: string;
   profilePath: string | null;
-  socialType: string;
+  socialType: "naver" | "google" | "kakao" | "none"; 
   role: string;
   social: boolean;
 }

@@ -1,6 +1,7 @@
 import { FC, ReactNode, Suspense } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { QueryParamProvider } from "./WithQueryParam";
+import { BrowserRouter } from "react-router-dom";
+import { LoadingLogo } from "@/shared/ui/loadingLogo/LoadingLogo";
 
 export const WithRouter: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -10,7 +11,10 @@ export const WithRouter: FC<{ children: ReactNode }> = ({ children }) => {
         v7_startTransition: true,
       }}
     >
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={
+      <div className="flex justify-center items-center w-full h-screen bg-white">
+        <LoadingLogo />
+      </div>}>
         <QueryParamProvider>{children}</QueryParamProvider>
       </Suspense>
     </BrowserRouter>
