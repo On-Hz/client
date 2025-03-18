@@ -3,7 +3,7 @@ import { openModalWithAuthCheck } from "@/shared/helpers";
 import { REVIEW_TYPES } from "@/shared/constants";
 
 interface ArtistRatingButtonProps {
-  entityId: number;
+  entityId?: number;
   title: string;
 }
 

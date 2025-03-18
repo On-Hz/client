@@ -1,6 +1,5 @@
 import { Genre } from "./genre";
 import { Artist } from "./artist";
-
 export interface Album {
   id: number;
   title: string;

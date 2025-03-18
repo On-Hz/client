@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
 import { sectionProps } from "../../config/sectionProps";
 import { ArtistSectionWrapper } from "@/widgets/artist";
-import { ReviewCard, ReviewCardSkeleton } from '@/shared/ui';
+import { ReviewCard, ReviewCardSkeleton } from "@/shared/ui";
 import { useArtistReviews } from "../api/getArtistReviews";
 import { useArtistLatestReviews } from "../api/getArtistLatestReviews";
 import "./style.css";
@@ -8,7 +9,12 @@ import "./style.css";
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
 }: sectionProps) => {
-  const regularQuery = useArtistLatestReviews({ enabled: !useInfiniteScroll });
+  const { artistSlug } = useParams<{ artistSlug: string }>() as {
+    artistSlug: string;
+  };
+  const regularQuery = useArtistLatestReviews(artistSlug, {
+    enabled: !useInfiniteScroll,
+  });
   const infiniteQuery = useArtistReviews({
     enabled: useInfiniteScroll,
   });
@@ -32,6 +38,7 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
                 userProfilePath={review.user.profilePath}
                 content={review.content}
                 rating={review.rating}
+                createdAt={review.createdAt}
                 hasEllipsis={!useInfiniteScroll}
               />
             </div>
