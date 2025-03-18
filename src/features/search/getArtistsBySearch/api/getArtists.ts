@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Artist } from "../model/types";
+import { Artist } from "@/shared/model";
 
 const fetchData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -11,7 +11,8 @@ const mockArtists: Artist[] = Array(5)
   .map((_, i) => ({
     id: i,
     name: `Artist ${i + 1}`,
-    avatar: `https://picsum.photos/200/300?random=${i}`,
+    profilePath: `https://picsum.photos/200/300?random=${i}`,
+    createdAt: new Date().toISOString(),
   }));
 
 export const useArtist = () => {

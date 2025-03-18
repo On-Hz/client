@@ -11,6 +11,8 @@ export const mockReviews: Review[] = Array(6)
       userName: `Reviewer name ${i + 1}`,
       profilePath: `https://picsum.photos/40/40?random=${i}`,
       role: "USER",
+      socialType: "none",
+      social: false,
     },
     rating: (i % 5) + 1,
     content: `Review body ${

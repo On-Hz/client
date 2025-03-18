@@ -26,7 +26,7 @@ export const SearchResultsArtist = ({
               key={artist.id}
               id={artist.id}
               name={artist.name}
-              avatar={artist.avatar}
+              profilePath={artist.profilePath}
             />
           ))}
       </div>
