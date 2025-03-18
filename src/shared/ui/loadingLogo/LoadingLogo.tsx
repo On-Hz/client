@@ -17,14 +17,14 @@ export const LoadingLogo: React.FC = () => {
   
         gsap.to(pathRef.current, { 
           strokeDashoffset: 0, 
-          duration: 20, 
+          duration: 10, 
           ease: "power2.out" 
         });
   
         gsap.to(pathRef.current, { 
           fillOpacity: 1,  // stroke 그린 후에 fill을 서서히 채우기
           duration: 1.5, 
-          delay: 2  // path가 다 그려진 후 fill이 채워지도록 딜레이
+          delay: 1  // path가 다 그려진 후 fill이 채워지도록 딜레이
         });
     }
 
@@ -33,7 +33,7 @@ export const LoadingLogo: React.FC = () => {
       gsap.fromTo(
         ellipseRef.current,
         { strokeDasharray: length, strokeDashoffset: length },
-        { strokeDashoffset: 0, duration: 2, ease: "power2.out", delay: 0.5 } // 0.5초 후 실행
+        { strokeDashoffset: 0, duration: 2, ease: "power2.out", delay:0} // 0.5초 후 실행
       );
     }
   }, []);
