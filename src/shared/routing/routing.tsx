@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { NotFoundRoute } from "./NotFoundRoute";
+import NaverCallback from "@/features/auth/naver/ui/NaverCallback";
 
 //Lazy 로딩을 위한 페이지 매핑 (객체화)
 const pages = {
@@ -61,6 +62,7 @@ export const Routing: React.FC = () => {
         </Route>
 
         <Route path="/review/:reviewId" element={<pages.review />} />
+        <Route path="/naver-callback" element={<NaverCallback />} />
         <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );
