@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuthStore } from "@/shared/stores/authStore";
 import { useAuthModalStore } from "@/shared/stores/authModalStore"; 
 import { login } from "../api/login";
-import { LoginResult } from "../model/types";
+import { AuthResult } from "../../model/types";
 import { useMutation } from "@tanstack/react-query";
 
 interface LoginVariables {
@@ -15,7 +15,7 @@ export const useLogin = () => {
   const { closeAuthModal } = useAuthModalStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const mutation = useMutation<LoginResult, Error, LoginVariables>({
+  const mutation = useMutation<AuthResult, Error, LoginVariables>({
     mutationFn: async ({ email, password }) => await login(email, password),
     onSuccess: (data) => {
       if ("error" in data) {

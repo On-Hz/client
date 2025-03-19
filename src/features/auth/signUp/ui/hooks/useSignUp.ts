@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useModalStore } from "@/shared/stores";
 import { signUp } from "../api/signUp";
-import { LoginResult } from "@/features/auth/login/model/types";
+import { AuthResult } from "@/features/auth/model/types";
 
 interface SignupVariables {
   name: string;
@@ -16,20 +16,21 @@ export const useSignUp = () => {
   const { openModal } = useModalStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const mutation = useMutation<LoginResult, Error, SignupVariables>({
+  const mutation = useMutation<AuthResult, Error, SignupVariables>({
     mutationFn: async ({ name, email, password }) => {
       const result = await signUp(name, email, password);
-      
-      if ("error" in result) { 
+ 
+      if (result && "error" in result) { 
         //console.error("useSignUp - 에러 발생:", result.error);
         setErrorMessage(result.error); //서버 에러메세지
         return result; //에러페이지 x
       }
-      
+
       return result; // 성공 시 반환
     },
     onSuccess: (data) => {
-      if ("error" in data) {
+      //console.log('data',data);
+      if (data && "error" in data) {
         return; // 에러가 있으면 성공 처리 안함
       }
 
