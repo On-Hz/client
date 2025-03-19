@@ -44,13 +44,18 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
           value={form.name}
           onChange={handleChange}
         />
-        <InputBox
-          name="email"
-          placeholder="이메일"
-          width="100%"
-          value={form.email}
-          onChange={handleChange}
-        />
+        <div className="flex gap-1">
+          <div className="flex-1">
+            <InputBox
+              name="email"
+              placeholder="이메일"
+              width="100%"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </div>
+          <button className="border border-point rounded-md text-[14px] p-1 text-point transform hover:bg-point transition-colors hover:text-white">중복확인</button>
+        </div>
         <InputBox
           name="password"
           placeholder="비밀번호"
