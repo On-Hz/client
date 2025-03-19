@@ -1,7 +1,7 @@
 import React from "react";
 import { useModalStore } from "@/shared/stores";
 import { AlertType } from "@/shared/constants";
-import { ModalLayout, Button, ModalButton } from "@/shared/ui";
+import { ModalLayout, Button } from "@/shared/ui";
 import { RenderIcon } from "./RenderAlertIcon";
 
 interface AlertModalData {
@@ -30,7 +30,7 @@ export const AlertModal: React.FC = () => {
 
   return (
     <ModalLayout open={open} onClose={() => closeModal("alertModal")}>
-      <div className="py-[20px] px-[30px] max-500:p-0">
+      <div className="pt-[20px] px-[30px] max-500:p-0 min-w-72">
         <div className="flex flex-col items-center">
           <RenderIcon type={type}/>
           <p className="mt-4 mb-10 text-lg text-center text-black">
@@ -42,13 +42,11 @@ export const AlertModal: React.FC = () => {
               <Button onClick={() => closeModal("alertModal")} text="아니오" />
             </div>
           ) : (
-             <ModalButton
-              text={confirmText}
-              width="100%"
-              py="5px"
-              px="40px"
+             <button className="py-2 px-8 rounded-[20px] border border-point bg-point text-white text-[14px] transform hover:bg-white transition-colors hover:text-point"
               onClick={() => closeModal("alertModal")}
-            />
+            >
+              {confirmText}
+            </button>
           )}
         </div>
       </div>
