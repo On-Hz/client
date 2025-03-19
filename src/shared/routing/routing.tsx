@@ -29,6 +29,8 @@ const pages = {
   mypageLike: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageLike }))),
 
   review: lazy(() => import("@/pages/review").then((m) => ({ default: m.ReviewPage }))),
+  genre: lazy(() => import("@/pages/genre").then((m) => ({ default: m.GenrePage }))),
+
 };
 
 export const Routing: React.FC = () => {
@@ -62,6 +64,7 @@ export const Routing: React.FC = () => {
         </Route>
 
         <Route path="/review/:reviewId" element={<pages.review />} />
+        <Route path="/genre/:genreCode" element={<pages.genre />} />
         <Route path="/naver-callback" element={<NaverCallback />} />
         <Route path="*" element={<NotFoundRoute />} />
     </Routes>

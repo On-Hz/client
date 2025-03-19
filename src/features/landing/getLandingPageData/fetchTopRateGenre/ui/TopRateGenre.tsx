@@ -1,17 +1,17 @@
 import React from "react";
 import { CarouselSection, AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
-import { GenreItem } from "../model/types";
+import { Genre } from "@/shared/model";
 import { useTopGenre } from "../api/getTopRateGenreList";
 
-const renderGenrePage = (GenreItem: GenreItem[]) => (
+const renderGenrePage = (GenreList: Genre[]) => (
   <div className="flex flex-wrap justify-center gap-4 pb-4">
-    {GenreItem.map((item) => (
+    {GenreList.map((item) => (
       <AlbumCard
         key={item.id}
         id={item.id}
-        title={item.title}
-        cover={item.cover}
-        artist={item.artist}
+        title={item.code}
+        cover={item.imagePath}
+        isDifferentType={true}
       />
     ))}
   </div>

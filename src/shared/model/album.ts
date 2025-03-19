@@ -1,5 +1,6 @@
 import { Genre } from "./genre";
 import { Artist } from "./artist";
+import { Rating } from "./rating";
 export interface Album {
   id: number;
   title: string;
@@ -8,4 +9,5 @@ export interface Album {
   coverPath: string;
   genres: Genre[];
   artists: Artist[];
+  ratingSummary?: Rating;
 }

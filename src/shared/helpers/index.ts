@@ -4,3 +4,4 @@ export { getNavLinkClass } from "./getNavLinkClass";
 export { getGridStyles } from "./computeGridLocalStart";
 export { openModalWithAuthCheck } from "./modalAuthChkHelper";
 export { measureNaturalLineRatio } from "./computeTextOverTwoLines";
+export { getStrokeStyle } from "./getStrokeStyle";
