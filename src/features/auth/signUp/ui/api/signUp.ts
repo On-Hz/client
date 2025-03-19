@@ -1,8 +1,7 @@
-import { LoginResponse } from "@/features/auth/login/model/types";
+import { LoginResponse, LoginResult } from "@/features/auth/login/model/types";
 import { axiosInstance } from "@/shared/api/axiosInstance";
 
-
-export const signUp = async (userName: string, email: string, password: string): Promise<LoginResponse> => {
+export const signUp = async (userName: string, email: string, password: string): Promise<LoginResult> => {
     try {
         const response = await axiosInstance.post<LoginResponse>("/api/v1/auth/signup", {
             userName,
@@ -11,7 +10,7 @@ export const signUp = async (userName: string, email: string, password: string):
         });
         return response.data; //JWT 토큰 반환
     } catch (error: any) {
-       //console.error("회원가입:", error.response?.data?.message || "회원가입에 실패했습니다.");
-        return Promise.reject(new Error(error.response?.data?.message || "회원가입에 실패했습니다."));
+        // console.log('signUp 에러:'+error.message)
+        return { error: error.message};  //서버 메세지
     }
 };

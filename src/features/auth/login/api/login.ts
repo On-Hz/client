@@ -6,8 +6,8 @@ export const login = async (email: string, password: string): Promise<LoginResul
       const response = await axiosInstance.post<LoginResponse>("/api/v1/auth/login", { email, password });
       return response.data;
   } catch (error: any) {
-      console.error("❌ API 요청 실패:", error.response?.data?.message || "로그인 실패");
+      console.error("login 실패:", error.message);
 
-      return { error: error.response?.data?.message || "로그인에 실패했습니다." };
+      return { error: error.message }; //서버 메세지
   }
 };

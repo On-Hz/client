@@ -4,6 +4,7 @@ import { TermsModal } from "./TermsModal";
 import { useSignUp } from "./hooks/useSignUp";
 import { validateSignup } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+
 interface SignupFormProps {
   switchMode: () => void;
 }
@@ -18,44 +19,37 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  //약관 동의 후 회원가입
+  // 약관 동의 후 회원가입 실행
   const handleCompleteSignup = () => {
-    mutate({ ...form, termsAccepted: true });
-    setIsTermsOpen(false);
+    mutate({ ...form });
   };
-  
+
   const onSubmit = () => {
     const error = validateSignup(form.name, form.email, form.password);
     setValidationError(error);
-    
+
     if (!error) {
       setIsTermsOpen(true);
     }
   };
 
-
   return (
     <div>
       <div className="flex flex-col mb-6 space-y-3 w-[300px]">
-      <InputBox
+        <InputBox
           name="name"
-          placeholder="이름"
+          placeholder="닉네임"
           width="100%"
           value={form.name}
           onChange={handleChange}
         />
-        <div className="flex gap-1">
-          <div className="flex-1">
-            <InputBox
-              name="email"
-              placeholder="이메일"
-              width="100%"
-              value={form.email}
-              onChange={handleChange}
-            />
-          </div>
-          <button className="border border-point rounded-md text-[14px] p-1 text-point transform hover:bg-point transition-colors hover:text-white">중복확인</button>
-        </div>
+        <InputBox
+          name="email"
+          placeholder="이메일"
+          width="100%"
+          value={form.email}
+          onChange={handleChange}
+        />
         <InputBox
           name="password"
           placeholder="비밀번호"
@@ -70,30 +64,25 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
           <ReportProblemIcon /> {validationError || errorMessage}
         </p>
       )}
+      
       <div className="mb-6">
-        <ModalButton
-          text="회원가입"
-          width="100%"
-          onClick={onSubmit}
-        />
+        <ModalButton text="회원가입" width="100%" onClick={onSubmit} />
       </div>
 
       <p className="text-sm text-center">
         이미 계정이 있으신가요?{" "}
-        <span
-          className="font-bold cursor-pointer text-point"
-          onClick={switchMode}
-        > 
+        <span className="font-bold cursor-pointer text-point" onClick={switchMode}>
           로그인
         </span>
       </p>
-      {/* 약관 동의 모달 (첫번째 nested modal) */}
-      {isTermsOpen &&
-       <TermsModal 
-          onClose={() => setIsTermsOpen(false)} 
+
+      {/* 약관 동의 모달 */}
+      {isTermsOpen && (
+        <TermsModal
+          onClose={() => setIsTermsOpen(false)}
           onComplete={handleCompleteSignup}
         />
-      }
+      )}
     </div>
   );
 };

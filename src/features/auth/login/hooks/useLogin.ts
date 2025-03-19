@@ -19,8 +19,8 @@ export const useLogin = () => {
     mutationFn: async ({ email, password }) => await login(email, password),
     onSuccess: (data) => {
       if ("error" in data) {
-        console.warn("로그인 실패:", data.error);
-        setErrorMessage(data.error); // error 상태 업데이트
+       // console.warn("로그인 실패:", data.error);
+        setErrorMessage(data.error);
         return;
       }
 
@@ -28,8 +28,8 @@ export const useLogin = () => {
       closeAuthModal();
     },
     onError: (error) => {
-      console.error("로그인 실패:", error.message);
-      setErrorMessage(error.message || "로그인에 실패했습니다."); //error 상태 업데이트
+      //console.error("로그인 실패:", error.message);
+      setErrorMessage(error.message); //서버 에러메세지
     },
   });
 
