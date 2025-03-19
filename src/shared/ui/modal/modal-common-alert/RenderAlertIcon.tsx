@@ -11,7 +11,7 @@ import { ALERT_TYPES } from "@/shared/constants";
 const iconMap = {
   [ALERT_TYPES.SUCCESS]: {
     component: AiOutlineCheckCircle,
-    className: "text-green",
+    className: "text-green-600",
   },
   [ALERT_TYPES.ERROR]: {
     component: AiOutlineCloseCircle,
@@ -35,5 +35,5 @@ export const RenderIcon: React.FC<RenderIconProps> = ({ type }) => {
   const { component: IconComponent, className } =
     iconMap[type] || iconMap[ALERT_TYPES.INFO];
 
-  return <IconComponent size={50} className={className} />;
+  return <IconComponent size={35} className={className} />;
 };

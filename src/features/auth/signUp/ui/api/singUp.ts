@@ -11,7 +11,7 @@ export const signUp = async (userName: string, email: string, password: string):
         });
         return response.data; //JWT 토큰 반환
     } catch (error: any) {
-        console.error("회원가입:", error.response?.data?.message || "회원가입에 실패했습니다.");
+       //console.error("회원가입:", error.response?.data?.message || "회원가입에 실패했습니다.");
         return Promise.reject(new Error(error.response?.data?.message || "회원가입에 실패했습니다."));
     }
 };

@@ -22,7 +22,7 @@ export const AuthModal: React.FC = () => {
       onClose={closeAuthModal}
       showCloseButton={false}
     >
-      <div className="py-[25px] px-[60px] max-500:p-0">
+      <div className="py-[25px] px-[60px] max-500:p-0 min-w-72">
         {/* 공통 영역: 로고, SNS 아이콘, OR, 타이틀 (AuthCommon) */}
         <AuthCommon />
         {localMode === "login" ? (

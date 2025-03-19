@@ -1,7 +1,7 @@
-// import { useNavigate } from "react-router-dom";
 import { useAuthModalStore } from "@/shared/stores/authModalStore"; 
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useModalStore } from "@/shared/stores";
 import { signUp } from "../api/singUp";
 
 interface SignupVariables {
@@ -13,7 +13,7 @@ interface SignupVariables {
 
 export const useSignUp = () => {
   const { openAuthModal } = useAuthModalStore();
-  //const navigate = useNavigate();
+  const { openModal } = useModalStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const mutation = useMutation<void, Error, SignupVariables>({
@@ -24,8 +24,11 @@ export const useSignUp = () => {
         await signUp(name, email, password);
     },
     onSuccess: () => {
-      openAuthModal("login"); 
-      //navigate("/")
+      openAuthModal("login");
+      openModal("alertModal", {
+        type: "success",
+        message: "On-Hz 오신 것을 환영합니다!"
+        });
     },
     onError: (error) => {
       console.error("useSignUp:", error.message);

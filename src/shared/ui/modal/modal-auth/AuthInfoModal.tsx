@@ -25,14 +25,14 @@ export const AuthInfoModal: React.FC = () => {
       onClose={() => closeModal("authInfoModal")}
       showCloseButton={true}
     >
-      <div className="py-[25px] px-[60px] max-500:p-0">
+      <div className="py-[20px] px-[30px] max-500:p-0 min-w-72">
         <div className="mb-6">
           <div className="px-8 mb-10 text-center">
-            <img src={logo} alt="On-Hz" className="w-24 m-auto mb-1" />
+            <img src={logo} alt="On-Hz" className="w-20 m-auto mb-1" />
           </div>
         </div>
-        <p className="mb-10 text-lg font-bold text-gray5">
-          로그인 또는 회원가입 후 이용 가능합니다.
+        <p className="mb-10 text-lg text-center text-black break-keep">
+          로그인 또는 회원가입 후 <br /> 이용 가능합니다.
         </p>
         <div className="flex justify-center space-x-4">
           <button

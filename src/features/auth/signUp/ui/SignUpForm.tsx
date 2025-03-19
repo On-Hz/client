@@ -70,7 +70,6 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
           text="회원가입"
           width="100%"
           onClick={onSubmit}
-          //onClick={() => setIsTermsOpen(true)}
         />
       </div>
 
