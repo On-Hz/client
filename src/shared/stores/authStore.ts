@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { User } from "../model";
 import { getAuthToken, getAuthUser, setAuth, removeAuth } from "./authCookie";
 
@@ -28,7 +28,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "auth-storage",
-      getStorage: () => sessionStorage, //`sessionStorage` 사용하여 보안 강화
+      storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({ user: state.user }), //`user` 정보만 저장
     }
   )

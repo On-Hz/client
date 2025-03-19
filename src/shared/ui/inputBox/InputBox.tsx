@@ -6,9 +6,10 @@ interface InputProps {
     type?:string,
     name?:string,
     onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur?:(e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-export const InputBox = ({onChange,placeholder="",value="",type="text", name="", width, height = "35px"}: InputProps) => {
+export const InputBox = ({onChange,onBlur,placeholder="",value="",type="text", name="", width, height = "35px"}: InputProps) => {
 
     return (
         <div className="px-[10px] bg-white border border-gray3 rounded-[5px]"
@@ -24,6 +25,7 @@ export const InputBox = ({onChange,placeholder="",value="",type="text", name="",
                 type={type}
                 placeholder={placeholder}
                 onChange={onChange}
+                onBlur={onBlur}
             />
         </div>
     )
