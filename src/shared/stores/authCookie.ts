@@ -2,7 +2,7 @@ import { Cookies } from "react-cookie";
 import { User } from "../model";
 
 const cookies = new Cookies();
-const isSecure = window.location.protocol === "https:";
+const isSecure = window.location.protocol === "https:"; //개발환경 false
 
 export const getAuthToken = (): string | null => cookies.get("token") || null;
 

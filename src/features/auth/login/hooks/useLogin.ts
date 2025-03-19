@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuthStore } from "@/shared/stores/authStore";
-import { useNavigate } from "react-router-dom";
 import { useAuthModalStore } from "@/shared/stores/authModalStore"; 
 import { login } from "../api/login";
 import { LoginResult } from "../model/types";
@@ -14,7 +13,6 @@ interface LoginVariables {
 export const useLogin = () => {
   const { setAuth } = useAuthStore();
   const { closeAuthModal } = useAuthModalStore();
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const mutation = useMutation<LoginResult, Error, LoginVariables>({
@@ -28,7 +26,6 @@ export const useLogin = () => {
 
       setAuth(data.accessToken, data.user);
       closeAuthModal();
-      navigate("/");
     },
     onError: (error) => {
       console.error("로그인 실패:", error.message);
