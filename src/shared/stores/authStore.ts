@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { Cookies } from "react-cookie";
-import { User } from "../model/user";
+import { persist } from "zustand/middleware";
+import { User } from "../model";
+import { getAuthToken, getAuthUser, setAuth, removeAuth } from "./authCookie";
 
-const cookies = new Cookies();
 export interface AuthState {
   token: string | null;
   user: User | null;
@@ -10,27 +10,28 @@ export interface AuthState {
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  token: cookies.get("token") || null,
-  user: cookies.get("user") ? JSON.parse(cookies.get("user") as string) : null,
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token: getAuthToken(),
+      user: getAuthUser(),
 
-  setAuth: (token, user) => {
-    set({ token, user });
+      setAuth: (token, user) => {
+        set({ token, user });
+        setAuth(token, user);
+      },
 
-    if (token && user) {
-      cookies.set("token", token, { path: "/", maxAge: 3600 });
-      cookies.set("user", JSON.stringify(user), { path: "/", maxAge: 3600 });
-    } else {
-      cookies.remove("token", { path: "/" });
-      cookies.remove("user", { path: "/" });
+      logout: () => {
+        set({ token: null, user: null });
+        removeAuth();
+      },
+    }),
+    {
+      name: "auth-storage",
+      getStorage: () => sessionStorage, //`sessionStorage` 사용하여 보안 강화
+      partialize: (state) => ({ user: state.user }), //`user` 정보만 저장
     }
-  },
-
-  logout: () => {
-    set({ token: null, user: null });
-    cookies.remove("token", { path: "/" });
-    cookies.remove("user", { path: "/" });
-  },
-}));
+  )
+);
 
 (window as any).authStore = useAuthStore;
