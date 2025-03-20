@@ -1,25 +1,12 @@
-:root {
-  --spacing-3x: 16px;
-  --transition-duration-long: 500ms;
-  --transition-duration-medium: 300ms;
-  --transition-duration-short: 150ms;
-  --transition-easing-linear: cubic-bezier(0, 0, 1, 1);
-  --transition-easing-ease-in: cubic-bezier(0.42, 0, 1, 1);
-  --transition-easing-ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
-  --transition-easing-ease-out: cubic-bezier(0, 0, 0.58, 1);
-}
-
 @screen xs {
   /*min-width 300px*/
   #hz-landing {
     @apply bg-blue-500;
   }
   .hz-landing-album-gridlayout {
-    @apply grid gap-[var(--spacing-3x)];
+    @apply grid gap-[16px];
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, var(--spacing-3x) max-content) var(
-        --spacing-3x
-      );
+    grid-template-rows: repeat(6, 16px max-content) 16px;
     padding-bottom: 1px;
     perspective: 400px;
     perspective-origin: 50%;
@@ -28,8 +15,8 @@
     overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-2-columns-grid-start) /
-      calc(var(--local-2-columns-grid-start) + 2);
+    grid-row: var(--local-2-columns) /
+      calc(var(--local-2-columns) + 2);
     opacity: 1;
     transform: translateY(0);
   }
@@ -49,7 +36,7 @@
     @apply bg-rose-500;
   }
   .hz-landing-album-gridlayout {
-    gap: var(--spacing-3x);
+    gap: 16px;
   }
 }
 
@@ -60,16 +47,14 @@
   }
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, var(--spacing-3x) max-content) var(
-        --spacing-3x
-      );
+    grid-template-rows: repeat(4, 16px max-content) 16px;
   }
   .hz-landing-album-gridlayout > * {
     overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-3-columns-grid-start) /
-      calc(var(--local-3-columns-grid-start) + 2);
+    grid-row: var(--local-3-columns) /
+      calc(var(--local-3-columns) + 2);
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 1) {
     grid-column-start: 1;
@@ -89,16 +74,14 @@
   }
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, var(--spacing-3x) max-content) var(
-        --spacing-3x
-      );
+    grid-template-rows: repeat(3, 16px max-content) 16px;
   }
   .hz-landing-album-gridlayout > * {
     overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-4-columns-grid-start) /
-      calc(var(--local-4-columns-grid-start) + 2);
+    grid-row: var(--local-4-columns) /
+      calc(var(--local-4-columns) + 2);
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n + 1) {
     grid-column-start: 1;
@@ -122,16 +105,14 @@
   /* 장르 */
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, var(--spacing-3x) max-content) var(
-        --spacing-3x
-      );
+    grid-template-rows: repeat(2, 16px max-content) 16px;
   }
   .hz-landing-album-gridlayout > * {
     overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-6-columns-grid-start) /
-      calc(var(--local-6-columns-grid-start) + 2);
+    grid-row: var(--local-6-columns) /
+      calc(var(--local-6-columns) + 2);
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 1) {
     grid-column-start: 1;
@@ -155,9 +136,9 @@
 @media (prefers-reduced-motion: no-preference) {
   .hz-landing-album-item {
     transform-style: preserve-3d;
-    transition-duration: var(--transition-duration-long);
+    transition-duration: 500ms;
     transition-property: opacity, transform;
-    transition-timing-function: var(--transition-easing-ease-out);
+    transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
   }
 }
 
@@ -170,13 +151,13 @@
 
   .hz-landing-album-item {
     transition-delay: unset;
-    transition-duration: var(--transition-duration-long);
+    transition-duration: 500ms;
   }
 
   .hz-landing-album-item:focus-within,
   .hz-landing-album-item:hover {
     transform: translateZ(10px);
-    transition-duration: var(--transition-duration-short);
+    transition-duration: 150ms;
   }
 }
 .album-title-wrapper {

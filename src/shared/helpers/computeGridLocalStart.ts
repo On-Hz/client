@@ -4,7 +4,7 @@ const computeGridLocalStart = (index: number, columns: number): number =>
 
 export const getGridStyles = (index: number): React.CSSProperties =>
   [2, 3, 4, 6].reduce((acc, col) => {
-    (acc as any)[`--local-${col}-columns-grid-start`] = computeGridLocalStart(
+    (acc as any)[`--local-${col}-columns`] = computeGridLocalStart(
       index,
       col
     );
