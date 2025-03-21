@@ -6,7 +6,6 @@ import { signUp } from "../api/signUp";
 import { AuthResult } from "@/features/auth/model/types";
 
 interface SignupVariables {
-  name: string;
   email: string;
   password: string;
 }
@@ -17,8 +16,8 @@ export const useSignUp = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const mutation = useMutation<AuthResult, Error, SignupVariables>({
-    mutationFn: async ({ name, email, password }) => {
-      const result = await signUp(name, email, password);
+    mutationFn: async ({email, password }) => {
+      const result = await signUp(email, password);
  
       if (result && "error" in result) { 
         //console.error("useSignUp - 에러 발생:", result.error);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { useLogin } from "../hooks/useLogin";
-import { validateLogin } from "@/shared/validation/authSchema";
+import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 interface LoginFormProps {
@@ -23,7 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
   const onSubmit = () => {
   // console.log("로그인 버튼");
   // console.log("입력값:", form); 
-  const errorMessage = validateLogin(form.email, form.password);
+  const errorMessage = validateAuth(form.email, form.password);
     setValidationError(errorMessage); // 유효성 검사 에러
 
     if (!errorMessage) {

@@ -1,10 +1,9 @@
 import { AuthResponse, AuthResult } from "@/features/auth/model/types";
 import { axiosInstance } from "@/shared/api/axiosInstance";
 
-export const signUp = async (userName: string, email: string, password: string): Promise<AuthResult> => {
+export const signUp = async (email: string, password: string): Promise<AuthResult> => {
     try {
         const response = await axiosInstance.post<AuthResponse>("/api/v1/auth/signup", {
-            userName,
             email,
             password,
         });

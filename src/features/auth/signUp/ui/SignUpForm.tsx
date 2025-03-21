@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { TermsModal } from "./TermsModal";
 import { useSignUp } from "./hooks/useSignUp";
-import { validateSignup } from "@/shared/validation/authSchema";
+import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 interface SignupFormProps {
@@ -12,7 +12,7 @@ interface SignupFormProps {
 export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const { mutate, errorMessage } = useSignUp();
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({email: "", password: "" });
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   };
 
   const onSubmit = () => {
-    const error = validateSignup(form.name, form.email, form.password);
+    const error = validateAuth(form.email, form.password);
     setValidationError(error);
 
     if (!error) {
@@ -36,13 +36,6 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   return (
     <div>
       <div className="flex flex-col mb-6 space-y-3 w-[300px]">
-        <InputBox
-          name="name"
-          placeholder="닉네임"
-          width="100%"
-          value={form.name}
-          onChange={handleChange}
-        />
         <InputBox
           name="email"
           placeholder="이메일"
