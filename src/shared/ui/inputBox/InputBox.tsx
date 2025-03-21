@@ -5,14 +5,20 @@ interface InputProps {
     value?:string,
     type?:string,
     name?:string,
+    disabled?:boolean,
     onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?:(e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-export const InputBox = ({onChange,onBlur,placeholder="",value="",type="text", name="", width, height = "35px"}: InputProps) => {
+export const InputBox = ({onChange,onBlur,disabled=false, placeholder="",value="",type="text", name="", width, height = "35px"}: InputProps) => {
 
     return (
-        <div className="px-[10px] bg-white border border-gray3 rounded-[5px]"
+        <div 
+            className={
+                `px-[10px] border border-gray3 rounded-[5px] ${ 
+                    disabled ? "bg-gray3" : ""
+                }`
+            }
             style={{
                 width:width,
                 height:height
@@ -26,6 +32,7 @@ export const InputBox = ({onChange,onBlur,placeholder="",value="",type="text", n
                 placeholder={placeholder}
                 onChange={onChange}
                 onBlur={onBlur}
+                disabled={disabled}
             />
         </div>
     )

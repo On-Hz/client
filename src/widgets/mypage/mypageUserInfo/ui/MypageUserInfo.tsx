@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import PersonIcon from "@mui/icons-material/Person";
-import StarIcon from "@mui/icons-material/Star";
 import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
-import { BarChart, Bar, XAxis, ResponsiveContainer } from "recharts";
-import { mockUser, ratingData } from "@/features/mypage";
 import { MypageTabs } from "../../mypageTabs/ui/MypageTabs";
 import { openModalWithAuthCheck } from "@/shared/helpers";
-
+import { useAuthStore } from "@/shared/stores";
+import { UserAvatar } from "../../userAvatar/ui/UserAvatar";
+import { UserRatingBox } from "../../userRatingBox.tsx/ui/UserRatingBox";
 export const MypageUserInfo = () => {
-  const user = mockUser[0];
+  const user = useAuthStore((state) => state.user);
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
 
   useEffect(() => {
@@ -18,6 +16,8 @@ export const MypageUserInfo = () => {
     }, 1500);
   }, []);
 
+  if (!user) return null;
+  
   return (
     <div>
       {isLoading ? (
@@ -26,20 +26,7 @@ export const MypageUserInfo = () => {
         <div className="flex items-center justify-between hz-top">
           <div className="flex items-center">
             <div className="pr-[24px] text-center">
-              <div className="hz-user-img w-[182px] h-[182px] border border-gray3 rounded-[50%] flex items-center justify-center">
-                {user.user_img ? (
-                  <img
-                    src={user.user_img}
-                    alt={user.user_name}
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                ) : (
-                  <PersonIcon
-                    style={{ width: "100%", height: "100%" }}
-                    className="text-gray3"
-                  />
-                )}
-              </div>
+            <UserAvatar profilePath={user.profilePath} userName={user.userName} />
               <button
                 className="text-point text-[13px] mt-5"
                 onClick={() => openModalWithAuthCheck("profileModal")}
@@ -49,52 +36,12 @@ export const MypageUserInfo = () => {
             </div>
             <div>
               <p className="pb-[14px] text-[24px] font-semibold">
-                {user.user_name}
+                {user.userName}
               </p>
               <p className="text-[14px] text-gray">{user.email}</p>
             </div>
           </div>
-          <div className="hz-ratings">
-            <div className="flex items-end">
-              <div className="text-center">
-                <div className="hz-ra-text text-[48px] text-yellow font-bold">
-                  3.5
-                </div>
-                <p className="pt-[4px]">평균 평점</p>
-              </div>
-              <div className="mx-[42px] w-px bg-gray4 h-[100px]"></div>
-              <div className="text-center">
-                <StarIcon
-                  className="text-yellow hz-star-icon"
-                  style={{ width: "60px", height: "60px" }}
-                />
-                <p className="pt-[4px]">내 별점</p>
-              </div>
-            </div>
-            <div className="hz-ra-box w-[450px] mt-6 border border-gray4 rounded-[10px] p-1">
-              <div style={{ width: "100%", height: "100px" }}>
-                <ResponsiveContainer>
-                  <BarChart
-                    data={ratingData}
-                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                  >
-                    <XAxis
-                      tick={{ fill: "#FFD231", fontSize: 14 }}
-                      dataKey="rating"
-                      label={{ value: "", position: "insideBottom", dy: 10 }}
-                      stroke="#fff"
-                    />
-                    <Bar
-                      dataKey="count"
-                      fill="#FFD231"
-                      barSize={50}
-                      radius={2}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </div>
+          <UserRatingBox />
         </div>
       )}
       <MypageTabs />

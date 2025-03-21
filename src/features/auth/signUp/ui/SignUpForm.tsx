@@ -4,6 +4,7 @@ import { TermsModal } from "./TermsModal";
 import { useSignUp } from "./hooks/useSignUp";
 import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import { emailCheck } from "./api/emailCheck";
 
 interface SignupFormProps {
   switchMode: () => void;
@@ -24,13 +25,24 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
     mutate({ ...form });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const error = validateAuth(form.email, form.password);
-    setValidationError(error);
+    setValidationError(error);    
 
-    if (!error) {
+    if (error) return;
+
+    const result = await emailCheck(form.email);
+  
+    if ("available" in result) {
+      if (!result.available) {
+        setValidationError("이미 사용 중인 이메일입니다.");
+        return;
+      }
+    
+      setValidationError(null);
       setIsTermsOpen(true);
     }
+
   };
 
   return (
