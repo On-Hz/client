@@ -91,7 +91,7 @@ export const AlbumsByGenre: React.FC<AlbumsByGenreProps> = ({ genreCode }) => {
 
                     <Rating
                       name={`album-rating-${album.id}`}
-                      value={album.ratingSummary?.averageRating}
+                      value={album.rating}
                       readOnly
                       size="small"
                     />

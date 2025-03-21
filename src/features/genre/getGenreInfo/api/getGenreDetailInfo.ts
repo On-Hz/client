@@ -3,7 +3,7 @@ import { axiosInstance } from "@/shared/api";
 import { Genre } from "@/shared/model";
 
 const getGenreDetailInfo = async ( genreCode: string ) => {
-  const url = `/api/v1/common/catalog/genres/${genreCode}`;
+  const url = `/api/v1/common/genres/featured/${genreCode}`;
   const response = await axiosInstance.get<Genre>(url);
   return response.data;
 };

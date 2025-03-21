@@ -9,5 +9,5 @@ export interface Album {
   coverPath: string;
   genres: Genre[];
   artists: Artist[];
-  ratingSummary?: Rating;
+  rating?: Rating["averageRating"];
 }

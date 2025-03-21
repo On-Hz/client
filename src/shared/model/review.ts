@@ -12,4 +12,6 @@ export interface Review {
   updatedAt?: string;
   entityName?: string;
   entityFilePath?: string;
+  likeCount?: number;
+  isLiked?: boolean;
 }

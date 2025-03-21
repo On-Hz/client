@@ -2,6 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useGenreDetailInfo } from "@/features/genre";
 import { getStrokeStyle } from "@/shared/helpers";
+import { GENRE_COLOR_PALETTES } from "@/shared/constants";
 
 interface GenreBannerProps {
   genreCode: string;
@@ -11,19 +12,31 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
   const { data: genreInfo } = useGenreDetailInfo(genreCode);
   const upperGenre = genreInfo?.code.toUpperCase();
 
+  const colors = GENRE_COLOR_PALETTES[genreCode];
+  const style = {
+    background: `
+      radial-gradient(circle at 20% 20%, ${colors.darkMuted}, transparent 60%),
+      radial-gradient(circle at 70% 10%, ${colors.vibrant}, transparent 60%),
+      radial-gradient(circle at 20% 80%, ${colors.lightVibrant}, transparent 60%),
+      radial-gradient(circle at 80% 80%, ${colors.lightMuted}, transparent 60%),
+      radial-gradient(circle at 40% 60%, ${colors.muted}, transparent 60%),
+      radial-gradient(circle at 60% 60%, ${colors.darkVibrant}, transparent 60%)
+    `,
+  };
   return (
     <Box
       component="section"
-      className="relative flex items-center justify-center w-full overflow-hidden "
-      style={{ backgroundColor: "transparent" }}
+      className="relative flex items-center justify-center w-full py-10 overflow-hidden"
+      style={style}
     >
       <span style={getStrokeStyle(upperGenre || "")}>{upperGenre}</span>
 
       <Box className="flex items-center space-x-[-11rem] z-10">
         <div className="relative overflow-hidden" style={{ zIndex: 1 }}>
           <div
-            className="rounded-full bg-point"
+            className="rounded-full"
             style={{
+              backgroundColor: `${colors.lightMuted}`,
               width: "clamp(200px, 22vw, 350px)",
               height: "clamp(200px, 22vw, 350px)",
             }}
@@ -33,7 +46,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
             style={{
               transform: "translateY(-50%)",
               zIndex: 2,
-              width: "55%",
+              width: "53%",
               textAlign: "left",
             }}
           >
@@ -43,8 +56,9 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
 
         <div className="relative" style={{ zIndex: 2 }}>
           <div
-            className="rounded-full bg-gray5"
+            className="rounded-full"
             style={{
+              backgroundColor: `${colors.muted}`,
               width: "clamp(200px, 22vw, 350px)",
               height: "clamp(200px, 22vw, 350px)",
             }}
@@ -55,19 +69,11 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
           <div
             className="flex items-center justify-center overflow-hidden rounded-full"
             style={{
+              backgroundColor: `${colors.darkMuted}`,
               width: "clamp(200px, 22vw, 350px)",
               height: "clamp(200px, 22vw, 350px)",
-              backgroundColor: genreInfo?.imagePath ? "transparent" : "#000",
             }}
-          >
-            {genreInfo?.imagePath && (
-              <img
-                src={genreInfo?.imagePath}
-                alt={genreInfo?.code}
-                className="object-cover w-full h-full"
-              />
-            )}
-          </div>
+          />
         </div>
       </Box>
 

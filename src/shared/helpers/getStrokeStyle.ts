@@ -1,4 +1,6 @@
-export const getStrokeStyle = (upperGenre: string): React.CSSProperties => {
+export const getStrokeStyle = (
+  upperGenre: string,
+): React.CSSProperties => {
   const length = upperGenre.length;
 
   // 기본값
@@ -22,12 +24,12 @@ export const getStrokeStyle = (upperGenre: string): React.CSSProperties => {
 
   return {
     position: "absolute",
-    top: "50%",
+    top: "55%",
     left: "50%",
     transform,
     fontSize,
     letterSpacing,
-    WebkitTextStroke: "2px #000",
+    WebkitTextStroke: "3px #fff",
     color: "transparent",
     zIndex: 0,
   };
