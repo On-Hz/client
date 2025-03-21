@@ -1,77 +1,61 @@
-@screen xs {
-  /*min-width 300px*/
-  #hz-landing {
-    @apply bg-blue-500;
+/* 마퀴 애니메이션 */
+@keyframes albumTitleMarquee {
+  0% {
+    transform: translateX(0);
   }
-  .hz-landing-album-gridlayout {
-    @apply grid gap-[16px];
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6, 16px max-content) 16px;
-    padding-bottom: 1px;
-    perspective: 400px;
-    perspective-origin: 50%;
-  }
-  .hz-landing-album-gridlayout > * {
-    overflow: hidden;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-2-columns) /
-      calc(var(--local-2-columns) + 2);
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(odd) {
-    grid-column-start: 1;
-  }
-
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(2n) {
-    grid-column-start: 2;
+  100% {
+    transform: translateX(-100%);
   }
 }
 
-@screen sm {
-  /*min-width 500px*/
-  #hz-landing {
-    @apply bg-rose-500;
-  }
-  .hz-landing-album-gridlayout {
-    gap: 16px;
+.album-title-long {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .hz-landing-album-item:hover .album-title-long {
+    white-space: nowrap;
+    overflow: unset;
+    text-overflow: unset;
+    animation: albumTitleMarquee 5s linear infinite;
+    animation-delay: 0.5s;
+    will-change: transform;
   }
 }
 
-@screen md {
-  /*min-width 800px*/
-  #hz-landing {
-    @apply bg-purple-950;
-  }
-  .hz-landing-album-gridlayout {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 16px max-content) 16px;
-  }
-  .hz-landing-album-gridlayout > * {
-    overflow: hidden;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-3-columns) /
-      calc(var(--local-3-columns) + 2);
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 1) {
-    grid-column-start: 1;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 2) {
-    grid-column-start: 2;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n) {
-    grid-column-start: 3;
-  }
+.hz-landing-album-gridlayout {
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 16px max-content) 16px;
+}
+.hz-landing-album-gridlayout > * {
+  overflow: hidden;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item {
+  grid-row: var(--local-6-columns) /
+    calc(var(--local-6-columns) + 2);
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 1) {
+  grid-column-start: 1;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 2) {
+  grid-column-start: 2;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 3) {
+  grid-column-start: 3;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 4) {
+  grid-column-start: 4;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 5) {
+  grid-column-start: 5;
+}
+.hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n) {
+  grid-column-start: 6;
 }
 
-@screen xl {
-  /*min-width 1000px*/
-  #hz-landing {
-    @apply bg-purple-200;
-  }
+@screen max-1200 {
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 16px max-content) 16px;
@@ -97,97 +81,55 @@
   }
 }
 
-@screen 2xl {
-  /*min-width 1200px*/
-  #hz-landing {
-    @apply mx-auto max-w-7xl;
-  }
-  /* 장르 */
+@screen max-1000 {
   .hz-landing-album-gridlayout {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 16px max-content) 16px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 16px max-content) 16px;
   }
   .hz-landing-album-gridlayout > * {
     overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-6-columns) /
-      calc(var(--local-6-columns) + 2);
+    grid-row: var(--local-3-columns) /
+      calc(var(--local-3-columns) + 2);
   }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 1) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 1) {
     grid-column-start: 1;
   }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 2) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 2) {
     grid-column-start: 2;
   }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 3) {
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n) {
     grid-column-start: 3;
   }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 4) {
-    grid-column-start: 4;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 5) {
-    grid-column-start: 5;
-  }
-  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n) {
-    grid-column-start: 6;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .hz-landing-album-item {
-    transform-style: preserve-3d;
-    transition-duration: 500ms;
-    transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .hz-landing-album-item:focus-within,
-  .hz-landing-album-item:hover {
-    z-index: 1;
-    transform: translateY(15px) translateZ(50px);
-  }
-
-  .hz-landing-album-item {
-    transition-delay: unset;
-    transition-duration: 500ms;
-  }
-
-  .hz-landing-album-item:focus-within,
-  .hz-landing-album-item:hover {
-    transform: translateZ(10px);
-    transition-duration: 150ms;
-  }
-}
-.album-title-wrapper {
-  position: relative;
-  overflow: hidden;
+@screen max-800 {
 }
 
-.album-title-long {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-@media (prefers-reduced-motion: no-preference) and (hover: hover) {
-  .hz-landing-album-item:hover .album-title-long {
-    white-space: nowrap;
-    overflow: unset;
-    text-overflow: unset;
-    animation: albumTitleMarquee 5s linear infinite;
-    animation-delay: 0.5s;
-    will-change: transform;
+@screen max-500 {
+  .hz-landing-album-gridlayout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 16px max-content) 16px;
+    padding-bottom: 1px;
+    perspective: 400px;
+    perspective-origin: 50%;
   }
-}
-
-/* 마퀴 애니메이션 */
-@keyframes albumTitleMarquee {
-  0% {
-    transform: translateX(0);
+  .hz-landing-album-gridlayout > * {
+    overflow: hidden;
   }
-  100% {
-    transform: translateX(-100%);
+  .hz-landing-album-gridlayout > .hz-landing-album-item {
+    grid-row: var(--local-2-columns) /
+      calc(var(--local-2-columns) + 2);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(odd) {
+    grid-column-start: 1;
+  }
+
+  .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(2n) {
+    grid-column-start: 2;
   }
 }

@@ -11,7 +11,7 @@ const AlbumItem: React.FC = () => {
   if (isLoading) return <AlbumSkeleton />;
 
   return (
-    <div className="hz-landing-album-gridlayout">
+    <div className="hz-landing-album-gridlayout grid gap-5">
       {data &&
         data.map((album: any, index: number) => {
           const mainArtist = album.artists.find(
@@ -20,11 +20,11 @@ const AlbumItem: React.FC = () => {
           return (
              <Link to={`/album/${album.id}`} 
               key={album.id}
-              className="flex flex-col p-4 border rounded-lg cursor-pointer border-gray5 hz-landing-album-item"
+              className="flex flex-col p-3 border rounded-lg cursor-pointer bg-white border-gray5 hz-landing-album-item transition-transform transform hover:scale-105"
               style={getGridStyles(index)}
             >
-              <div className="content-center flex-1 mb-4">
-                <div className="album-title-wrapper">
+              <div className="mb-4">
+                <div className="album-title-wrapper relative overflow-hidden">
                   <TopRateAlbumTitle text={album.title} />
                 </div>
                 <p className="text-xs text-neutral-500">{mainArtist?.name}</p>

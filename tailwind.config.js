@@ -18,12 +18,7 @@ export default {
         gray4: '#DDDDDD',
         gray5: '#a1a1a1',
       },
-      screens: {/*사용 안함 : 적용된 파일 수정 후 삭제 예정*/
-        '2xl': '1200px', //@media (min-width: 1200px) 
-        'xl': '1000px', //@media (min-width: 1000px) 
-        'md': '800px', //@media (min-width: 800px) 
-        'sm': '500px', //@media (min-width: 500px) 
-        'xs': '300px', //@media (min-width: 300px)
+      screens: {
         //max-width 기준
         'max-500':{max:'500px'},
         'max-800':{max:'800px'},
