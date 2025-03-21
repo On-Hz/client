@@ -33,8 +33,7 @@
   overflow: hidden;
 }
 .hz-landing-album-gridlayout > .hz-landing-album-item {
-  grid-row: var(--local-6-columns) /
-    calc(var(--local-6-columns) + 2);
+  grid-row: var(--local-6-columns) / calc(var(--local-6-columns) + 2);
 }
 .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(6n + 1) {
   grid-column-start: 1;
@@ -55,17 +54,14 @@
   grid-column-start: 6;
 }
 
+
 @screen max-1200 {
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 16px max-content) 16px;
   }
-  .hz-landing-album-gridlayout > * {
-    overflow: hidden;
-  }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-4-columns) /
-      calc(var(--local-4-columns) + 2);
+    grid-row: var(--local-4-columns) / calc(var(--local-4-columns) + 2);
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(4n + 1) {
     grid-column-start: 1;
@@ -86,12 +82,8 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 16px max-content) 16px;
   }
-  .hz-landing-album-gridlayout > * {
-    overflow: hidden;
-  }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-3-columns) /
-      calc(var(--local-3-columns) + 2);
+    grid-row: var(--local-3-columns) / calc(var(--local-3-columns) + 2);
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(3n + 1) {
     grid-column-start: 1;
@@ -103,26 +95,17 @@
     grid-column-start: 3;
   }
 }
-
-@screen max-800 {
+@screen max-800 { 
+  .hz-landing-title{@apply text-[20px]}
 }
-
 @screen max-500 {
+  .hz-landing-title{@apply text-[17px]}
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, 16px max-content) 16px;
-    padding-bottom: 1px;
-    perspective: 400px;
-    perspective-origin: 50%;
-  }
-  .hz-landing-album-gridlayout > * {
-    overflow: hidden;
   }
   .hz-landing-album-gridlayout > .hz-landing-album-item {
-    grid-row: var(--local-2-columns) /
-      calc(var(--local-2-columns) + 2);
-    opacity: 1;
-    transform: translateY(0);
+    grid-row: var(--local-2-columns) / calc(var(--local-2-columns) + 2);
   }
 
   .hz-landing-album-gridlayout > .hz-landing-album-item:nth-of-type(odd) {

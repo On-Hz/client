@@ -23,7 +23,7 @@ export const CarouselSection = <T,>({
 }: CarouselSectionProps<T>) => {
   return (
     <section className="px-4 py-8">
-      <h2 className="mb-4 text-2xl font-bold">{title}</h2>
+      <h2 className="mb-4 text-2xl font-bold hz-landing-title">{title}</h2>
       <Swiper
         modules={[Pagination]}
         navigation={false}

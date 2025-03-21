@@ -1,6 +1,6 @@
 
-.swiper{@apply pt-[20px] pb-[60px]}
-.swiper-slide{@apply w-auto mr-8}
+.swiper{@apply pt-[20px] pb-[60px] pl-[10px]}
+.swiper-slide{@apply w-auto mr-6}
 .swiper-pagination-bullet{@apply w-[10px] h-[10px] bg-white border border-gray}
 
 @screen max-800 { /*max-width 800px*/
