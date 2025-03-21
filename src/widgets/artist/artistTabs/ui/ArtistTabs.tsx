@@ -5,7 +5,7 @@ export const ArtistTabs = () => {
   const { artistSlug } = useParams<{ artistSlug: string }>();
   return (
     <nav className="mt-10">
-      <ul className="flex space-x-4 text-lg font-semibold">
+      <ul className="flex space-x-4 text-lg font-semibold hz-artist-banner-tab">
         {/* HOME */}
         <li>
           <NavLink

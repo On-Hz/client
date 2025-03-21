@@ -1,0 +1,34 @@
+
+.hz-artist-banner{}
+.hz-artist-banner .hz-banner-rating div{line-height: normal;}
+.hz-artist-banner .hz-banner-rating button{@apply pb-1}
+.hz-artist-banner .hz-banner-rating button svg{@apply w-[42px] h-[42px]}
+
+
+@media (max-width:1200px){
+
+}
+@media (max-width:1000px){
+    .hz-artist-banner{@apply h-[400px]}
+    .hz-artist-banner .hz-banner-title{ @apply text-[65px]}
+    .hz-artist-banner .hz-banner-rating{@apply gap-5}
+    .hz-artist-banner .hz-banner-rating div{@apply text-[28px]}
+    .hz-artist-banner .hz-banner-rating p{@apply text-[15px]}
+    .hz-artist-banner .hz-banner-rating button svg{@apply w-[28px] h-[28px]}
+
+}
+@media (max-width:800px){ 
+    .hz-landing-title{@apply text-[22px]}
+    .hz-artist-banner .hz-banner-title{ @apply text-[50px]}
+    .hz-artist-banner-img{@apply grid-cols-1}
+    .hz-artist-banner-img div:not(.hz-center-img){@apply hidden w-0 h-0}
+}
+@media (max-width:500px){ 
+    .hz-landing-title{@apply text-[18px]}
+    .hz-artist-banner .hz-banner-title{ @apply text-[35px]}
+    .hz-artist-banner .hz-banner-rating p{@apply text-[14px]}
+    .hz-artist-banner-text{@apply px-4}
+    .hz-artist-banner-tab{@apply space-x-0}
+    .hz-artist-banner-tab li{@apply flex-1}
+    .hz-artist-banner-tab li a{@apply w-full text-center px-0}
+}

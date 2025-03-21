@@ -23,7 +23,7 @@ export const AlbumCard = ({
       key={id}
       className="relative flex-shrink-0 rounded-lg hz-album-item bg-gray2"
     >
-      <div className="overflow-hidden rounded-lg rounded-b-none rounded-bl-none aspect-square">
+      <div className="overflow-hidden rounded-lg rounded-b-none rounded-bl-none aspect-square">        
         {cover ? (
           <img
             src={cover}

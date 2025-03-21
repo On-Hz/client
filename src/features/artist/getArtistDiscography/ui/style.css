@@ -1,0 +1,15 @@
+
+.hz-dscography .hz-album-item{@apply w-[18.7%]}
+
+@media (max-width:1200px){ 
+    .hz-dscography .hz-album-item{@apply w-[23.6%]}
+}
+@media (max-width:1000px){ 
+    .hz-dscography .hz-album-item{@apply w-[31.7%]}
+}
+@media (max-width:800px){ 
+    .hz-dscography .hz-album-item{@apply w-[30.7%]}
+}
+@media (max-width:500px){ 
+    .hz-dscography .hz-album-item{@apply w-[47.5%]}
+}

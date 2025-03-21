@@ -1,17 +1,19 @@
-.hz-artist-sec{@apply flex gap-3 flex-wrap}
-.hz-artist-sec-item{@apply w-[24%]}
+.hz-review-sec{@apply flex gap-4 flex-wrap}
+.hz-review-sec-item{@apply w-[23.7%]}
 
 @screen max-1300 { /*max-width 1300px*/
-    .hz-artist-sec-item{@apply w-[32%]}
+    .hz-review-sec-item{@apply w-[32.2%]}
 }
 
 @screen max-1200 { /*max-width 1200px*/
+    .hz-review-sec-item{@apply w-[32.1%]}
 }
 
 @screen max-1000 { /*max-width 1000px*/
-    .hz-artist-sec-item{@apply w-[49%]}
+    .hz-review-sec-item{@apply w-[48.1%]}
 }
 
-@screen max-800 { /*max-width 800px*/
-    .hz-artist-sec-item{@apply w-[100%]}
+@screen max-500 { 
+    .hz-review-sec-item{@apply w-[100%]}
+    .hz-review-sec-item .review-text-box{@apply h-auto}
 }

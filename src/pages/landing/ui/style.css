@@ -96,10 +96,10 @@
   }
 }
 @screen max-800 { 
-  .hz-landing-title{@apply text-[20px]}
+  .hz-landing-title{@apply text-[22px]}
 }
 @screen max-500 {
-  .hz-landing-title{@apply text-[17px]}
+  .hz-landing-title{@apply text-[18px]}
   .hz-landing-album-gridlayout {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, 16px max-content) 16px;

@@ -29,11 +29,11 @@ export const TrackListItem = ({
       key={id}
       className="flex items-center justify-between px-2 py-3 transition-colors hover:bg-gray2"
     >
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center flex-1 min-w-0">
         <img
           src={cover}
           alt={title}
-          className="object-cover rounded-lg w-14 h-14"
+          className="object-cover rounded-lg w-14 h-14 mr-5"
         />
         <div>
           <p className="font-semibold">{title}</p>

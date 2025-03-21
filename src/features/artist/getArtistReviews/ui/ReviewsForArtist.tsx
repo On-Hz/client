@@ -22,16 +22,16 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
   const { data, isLoading } = useInfiniteScroll ? infiniteQuery : regularQuery;
   return (
     <ArtistSectionWrapper title={"Reviews"}>
-      <div className={useInfiniteScroll ? "" : "hz-artist-sec"}>
+      <div className={useInfiniteScroll ? "hz-review-sec" : "hz-review-sec"}>
         {isLoading &&
           Array.from({ length: 8 }, (v, i) => (
-            <div className={"hz-artist-sec-item"} key={i}>
+            <div className={"hz-review-sec-item"} key={i}>
               <ReviewCardSkeleton key={`search-skeleton-${i}`} />
             </div>
           ))}
         {data &&
           data.map((review, index) => (
-            <div className={"hz-artist-sec-item"} key={index}>
+            <div className={"hz-review-sec-item"} key={index}>
               <ReviewCard
                 key={index}
                 userName={review.user.userName}
