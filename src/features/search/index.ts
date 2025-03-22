@@ -1,3 +1,3 @@
-export { SearchResultsAlbum } from "./getAlbumsBySearch/ui/SearchResultsAlbum";
-export { SearchResultsArtist } from "./getArtistsBySearch/ui/SearchResultsArtist";
-export { SearchResultsTrack } from "./getTracksBySearch/ui/SearchResultsTrack";
+export { SearchResultsAlbum } from "./albums/ui/SearchResultsAlbum";
+export { SearchResultsArtist } from "./artists/ui/SearchResultsArtist";
+export { SearchResultsTrack } from "./tracks/ui/SearchResultsTrack";

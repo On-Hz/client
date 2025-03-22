@@ -1,2 +1,2 @@
-export { AlbumsByGenre } from "./getGenreAlbum/ui/AlbumsByGenre";
-export { useGenreDetailInfo } from "./getGenreInfo/api/getGenreDetailInfo";
+export { AlbumsByGenre } from "./list/ui/AlbumsByGenre";
+export { useDetailGenreInfo } from "./detail/api/detailGenreApi";

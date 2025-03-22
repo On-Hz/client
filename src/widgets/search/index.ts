@@ -1,2 +1,2 @@
-export { SearchSectionWrapper } from "./searchSectionWrapper/ui/SearchSectionWrapper";
-export { SearchTabs } from "./searchTabs/ui/SearchTabs";
+export { SearchSectionWrapper } from "./sectionWrapper/ui/SearchSectionWrapper";
+export { SearchTabs } from "./tabs/ui/SearchTabs";

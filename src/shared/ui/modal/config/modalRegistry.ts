@@ -2,7 +2,7 @@ import React from "react";
 import { AlertModal } from "../modal-common-alert/AlertModal";
 import { AuthInfoModal } from "../modal-auth/AuthInfoModal";
 import { ProfileModal } from "../modal-profile/ProfileModal";
-import { WriteReview, ModifyReview } from "@/features/manageReview";
+import { CreateReview, UpdateReview } from "@/features/review";
 
 export interface ModalDefinition<T = any> {
   authCheck: boolean;
@@ -14,13 +14,13 @@ export const modalRegistry: Record<string, ModalDefinition<any>> = {
     authCheck: false,
     component: AlertModal,
   },
-  writeReviewModal: {
+  createReviewModal: {
     authCheck: true,
-    component: WriteReview,
+    component: CreateReview,
   },
-  modifyReviewModal: {
+  updateReviewModal: {
     authCheck: true,
-    component: ModifyReview,
+    component: UpdateReview,
   },
   profileModal: {
     authCheck: true,

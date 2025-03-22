@@ -1,1 +1,1 @@
-export { GenreBanner } from "./genreBanner/GenreBanner";
+export { GenreBanner } from "./banner/GenreBanner";

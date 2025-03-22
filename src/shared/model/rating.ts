@@ -4,4 +4,5 @@ export interface Rating {
   ratingDist: object;
   ratingCount: number;
   lastUpdatedAt: string;
+  userRating: number;
 }

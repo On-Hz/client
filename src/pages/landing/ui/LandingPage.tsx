@@ -2,7 +2,7 @@ import React from "react";
 import {
   TopRateAlbums,
   TopRateArtists,
-  TopRateGenre,
+  GenreSelection,
   LatestReviews,
 } from "@/features/landing";
 import "./style.css";
@@ -12,7 +12,7 @@ export const LandingPage: React.FC = () => {
     <div className="hz-landing">
       <TopRateAlbums />
       <TopRateArtists />
-      <TopRateGenre />
+      <GenreSelection />
       <LatestReviews />
     </div>
   );

@@ -1,2 +1,2 @@
-export { ArtistBanner } from "./aritstBanner/ui/ArtistBanner";
-export { ArtistSectionWrapper } from './artistSectionWrapper/ui/ArtistSectionWrapper'
+export { ArtistBanner } from "./banner/ui/ArtistBanner";
+export { ArtistSectionWrapper } from "./sectionWrapper/ui/ArtistSectionWrapper";

@@ -1,3 +1,5 @@
-export { ReviewBanner } from "./getReviewEntity/ui/ReviewBanner";
-export { ReviewDetail } from "./getReviewDetail/ui/ReviewDetail";
-export { EditReviewButtonContainer } from "./editReview/ui/EditReviewButtonContainer";
+export { CreateReview } from "./create/ui/CreateReview";
+export { UpdateReview } from "./update/ui/UpdateReview";
+export { ReviewBanner } from "./detail/ui/ReviewBanner";
+export { ReviewDetail } from "./detail/ui/ReviewDetail";
+export { ReviewCardContainer } from "./list/ui/ReviewCardContainer";

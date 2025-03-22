@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Rating from "@mui/material/Rating";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -10,7 +9,9 @@ interface ReviewProps {
   hasEllipsis?: boolean;
   hasBorder?: boolean;
   createdAt?: string;
-  myReviewEditButton?: React.ReactNode;
+  reviewActionButtons?: React.ReactNode;
+  isLiked?: boolean;
+  onClick: () => void;
 }
 
 export const ReviewCard = ({
@@ -21,14 +22,10 @@ export const ReviewCard = ({
   hasEllipsis,
   hasBorder,
   createdAt,
-  myReviewEditButton,
+  reviewActionButtons,
+  isLiked,
+  onClick,
 }: ReviewProps) => {
-  const [liked, setLiked] = useState(false);
-
-  const onClick = () => {
-    setLiked(!liked);
-  };
-
   return (
     <div
       className={
@@ -51,7 +48,7 @@ export const ReviewCard = ({
           </span>
           <p className="font-bold text-gray pl-[12px]">{userName}</p>
         </div>
-        {myReviewEditButton}
+        {reviewActionButtons}
       </div>
       <div className="py-[15px]">
         <Rating
@@ -71,7 +68,9 @@ export const ReviewCard = ({
       <div className="pb-5 text-gray">{createdAt}</div>
       <div
         className={
-          hasEllipsis ? "overflow-hidden line-clamp-4 h-[95px] review-text-box" : "min-h-[70px]" //line-clamp-4 h-[95px] => 4줄의 높이를 지정. (카드 높이가 동일하도록)
+          hasEllipsis
+            ? "overflow-hidden line-clamp-4 h-[95px] review-text-box"
+            : "min-h-[70px]" //line-clamp-4 h-[95px] => 4줄의 높이를 지정. (카드 높이가 동일하도록)
         }
       >
         {content}
@@ -80,7 +79,7 @@ export const ReviewCard = ({
         <button onClick={onClick}>
           <FavoriteIcon
             className={
-              liked ? "text-red" : "text-white stroke-black stroke-[2px]"
+              isLiked ? "text-red" : "text-white stroke-black stroke-[2px]"
             }
           />
         </button>
