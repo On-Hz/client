@@ -3,7 +3,7 @@ import { axiosInstance } from "@/shared/api";
 import { ReviewType } from "@/shared/constants";
 import { Rating } from "@/shared/model";
 
-const getReviewRatingInfo = async (
+const getDetailReviewRatingInfo = async (
   entityType: ReviewType,
   entityId: string
 ): Promise<Rating> => {
@@ -12,12 +12,12 @@ const getReviewRatingInfo = async (
   return response.data;
 };
 
-export const useReviewRatingInfo = (
+export const useDetailReviewRatingInfo = (
   entityType: ReviewType,
   entityId: string
 ) => {
   return useQuery<Rating>({
     queryKey: [`ratingInfo_${entityType}`, entityId],
-    queryFn: () => getReviewRatingInfo(entityType, entityId),
+    queryFn: () => getDetailReviewRatingInfo(entityType, entityId),
   });
 };

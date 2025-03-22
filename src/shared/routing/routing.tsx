@@ -43,15 +43,15 @@ export const Routing: React.FC = () => {
             <Route path="artist" element={<pages.searchArtists />} />
             <Route path="album" element={<pages.searchAlbums />} />
         </Route>
-        <Route path="/artist/:artistSlug/*" element={<pages.artist />}>
+        <Route path="/artist/:artistId/*" element={<pages.artist />}>
             <Route index element={<pages.artistHome />} />
             <Route path="discography" element={<pages.artistDiscography />} />
             <Route path="reviews" element={<pages.artistReviews />} />
             <Route path="tracks" element={<pages.artistTracks />} />
         </Route>
 
-        <Route path="/album/:artistSlug"  element={<pages.album />} />
-        <Route path="/song/:songSlug" element={<pages.song />} />
+        <Route path="/album/:albumId"  element={<pages.album />} />
+        <Route path="/track/:trackId" element={<pages.song />} />
  
         <Route element={<PrivateRoute />}>
             <Route path="/mypage/:userId" element={<pages.mypage />}>

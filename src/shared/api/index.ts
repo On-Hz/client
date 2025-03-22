@@ -1,2 +1,3 @@
 export { axiosInstance } from "./axiosInstance";
-export { useReviewRatingInfo } from "./reviewRatingInfoApi"
+export { useDetailReviewRatingInfo } from "./detailReviewRatingApi";
+export { useDetailEntityInfo } from "./detailEntityApi";

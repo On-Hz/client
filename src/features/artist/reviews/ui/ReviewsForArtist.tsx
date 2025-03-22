@@ -10,10 +10,10 @@ import "./style.css";
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
 }: sectionProps) => {
-  const { artistSlug } = useParams<{ artistSlug: string }>() as {
-    artistSlug: string;
+  const { artistId } = useParams<{ artistId: string }>() as {
+    artistId: string;
   };
-  const regularQuery = useArtistLatestReviews(artistSlug, {
+  const regularQuery = useArtistLatestReviews(artistId, {
     enabled: !useInfiniteScroll,
   });
   const infiniteQuery = useArtistReviews({

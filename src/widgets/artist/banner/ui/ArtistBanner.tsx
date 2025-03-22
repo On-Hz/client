@@ -1,32 +1,33 @@
 import { useParams } from "react-router-dom";
 import { ArtistRatingButton } from "../../ratingButton/ui/ArtistRatingButton";
 import { ArtistTabs } from "../../tabs/ui/ArtistTabs";
-import { useArtistDetailInfo } from "@/features/artist";
 import { ArtistBannerSkeleton } from "./ArtistBannerSkeleton";
+import { useDetailEntityInfo, useDetailReviewRatingInfo } from "@/shared/api";
 import { REVIEW_TYPES } from "@/shared/constants";
-import { useReviewRatingInfo } from "@/shared/api";
+import { Artist } from "@/shared/model";
 import "./style.css";
 
 export const ArtistBanner = () => {
-  const { artistSlug } = useParams<{ artistSlug: string }>() as {
-    artistSlug: string;
+  const { artistId } = useParams<{ artistId: string }>() as {
+    artistId: string;
   };
-  const { data: artistInfo, isLoading } = useArtistDetailInfo(artistSlug);
-  const { data: ratingInfo } = useReviewRatingInfo(
+  const { data: artistInfo, isLoading } = useDetailEntityInfo<Artist>(
     REVIEW_TYPES.ARTIST,
-    artistSlug || ""
+    artistId
   );
-  if (isLoading) {
+  const { data: ratingInfo } = useDetailReviewRatingInfo(
+    REVIEW_TYPES.ARTIST,
+    artistId || ""
+  );
+  if (isLoading || !artistInfo) {
     return <ArtistBannerSkeleton />;
   }
-  if (!artistInfo) {
-    return <ArtistBannerSkeleton />;
-  }
+
   return (
     <div className="grid relative w-full h-[450px] bg-point hz-artist-banner">
       {/* 3열 그리드로 하나의 이미지를 각각 배경으로 */}
       <div
-        className="grid grid-cols-3 h-full hz-artist-banner-img"
+        className="grid h-full grid-cols-3 hz-artist-banner-img"
         style={{ gridColumn: "1 / -1", gridRow: "1 / -1" }}
       >
         {/* 왼쪽 (어둡게) */}

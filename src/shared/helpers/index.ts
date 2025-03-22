@@ -5,3 +5,5 @@ export { getGridStyles } from "./computeGridLocalStart";
 export { openModalWithAuthCheck } from "./modalAuthChkHelper";
 export { measureNaturalLineRatio } from "./computeTextOverTwoLines";
 export { getStrokeStyle } from "./getStrokeStyle";
+export { formatDate } from "./formatDateHelper";
+export { extractEntityDetails } from "./extractEntityDetailsHelper";

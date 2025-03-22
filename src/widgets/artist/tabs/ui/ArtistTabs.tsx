@@ -2,14 +2,14 @@ import { getNavLinkClass } from "@/shared/helpers";
 import { NavLink, useParams } from "react-router-dom";
 
 export const ArtistTabs = () => {
-  const { artistSlug } = useParams<{ artistSlug: string }>();
+  const { artistId } = useParams<{ artistId: string }>();
   return (
     <nav className="mt-10">
       <ul className="flex space-x-4 text-lg font-semibold hz-artist-banner-tab">
         {/* HOME */}
         <li>
           <NavLink
-            to={`/artist/${artistSlug}`}
+            to={`/artist/${artistId}`}
             end
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
@@ -20,7 +20,7 @@ export const ArtistTabs = () => {
         {/* Discography */}
         <li>
           <NavLink
-            to={`/artist/${artistSlug}/discography`}
+            to={`/artist/${artistId}/discography`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
             앨범
@@ -30,7 +30,7 @@ export const ArtistTabs = () => {
         {/* Reviews */}
         <li>
           <NavLink
-            to={`/artist/${artistSlug}/reviews`}
+            to={`/artist/${artistId}/reviews`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
             리뷰
@@ -40,7 +40,7 @@ export const ArtistTabs = () => {
         {/* Reviews */}
         <li>
           <NavLink
-            to={`/artist/${artistSlug}/tracks`}
+            to={`/artist/${artistId}/tracks`}
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
             노래
