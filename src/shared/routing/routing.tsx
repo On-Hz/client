@@ -6,67 +6,108 @@ import NaverCallback from "@/features/auth/naver/ui/NaverCallback";
 
 //Lazy 로딩을 위한 페이지 매핑 (객체화)
 const pages = {
-  landing: lazy(() => import("@/pages/landing").then((module) => ({ default: module.LandingPage }))),
-  search: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchPage }))),
-  searchHome: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchHome }))),
-  searchTracks: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchTracks }))),
-  searchArtists: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchArtists }))),
-  searchAlbums: lazy(() => import("@/pages/search").then((m) => ({ default: m.SearchAlbums }))),
+  landing: lazy(() =>
+    import("@/pages/landing").then((module) => ({
+      default: module.LandingPage,
+    }))
+  ),
+  search: lazy(() =>
+    import("@/pages/search").then((m) => ({ default: m.SearchPage }))
+  ),
+  searchHome: lazy(() =>
+    import("@/pages/search").then((m) => ({ default: m.SearchHome }))
+  ),
+  searchTracks: lazy(() =>
+    import("@/pages/search").then((m) => ({ default: m.SearchTracks }))
+  ),
+  searchArtists: lazy(() =>
+    import("@/pages/search").then((m) => ({ default: m.SearchArtists }))
+  ),
+  searchAlbums: lazy(() =>
+    import("@/pages/search").then((m) => ({ default: m.SearchAlbums }))
+  ),
 
-  artist: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistPage }))),
-  artistHome: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistHome }))),
-  artistDiscography: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistDiscography }))),
-  artistReviews: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistReviews }))),
-  artistTracks: lazy(() => import("@/pages/artist").then((m) => ({ default: m.ArtistTracks }))),
+  artist: lazy(() =>
+    import("@/pages/artist").then((m) => ({ default: m.ArtistPage }))
+  ),
+  artistHome: lazy(() =>
+    import("@/pages/artist").then((m) => ({ default: m.ArtistHome }))
+  ),
+  artistDiscography: lazy(() =>
+    import("@/pages/artist").then((m) => ({ default: m.ArtistDiscography }))
+  ),
+  artistReviews: lazy(() =>
+    import("@/pages/artist").then((m) => ({ default: m.ArtistReviews }))
+  ),
+  artistTracks: lazy(() =>
+    import("@/pages/artist").then((m) => ({ default: m.ArtistTracks }))
+  ),
 
-  album: lazy(() => import("@/pages/album").then((m) => ({ default: m.AlbumPage }))),
-  song: lazy(() => import("@/pages/song").then((m) => ({ default: m.SongPage }))),
+  album: lazy(() =>
+    import("@/pages/album").then((m) => ({ default: m.AlbumPage }))
+  ),
+  track: lazy(() =>
+    import("@/pages/track").then((m) => ({ default: m.TrackPage }))
+  ),
 
-  mypage: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MyPage }))),
-  mypageAlbum: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageAlbum }))),
-  mypageSong: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageSong }))),
-  mypageArtist: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageArtist }))),
-  mypageLike: lazy(() => import("@/pages/mypage").then((m) => ({ default: m.MypageLike }))),
+  mypage: lazy(() =>
+    import("@/pages/mypage").then((m) => ({ default: m.MyPage }))
+  ),
+  mypageAlbum: lazy(() =>
+    import("@/pages/mypage").then((m) => ({ default: m.MypageAlbum }))
+  ),
+  mypageTrack: lazy(() =>
+    import("@/pages/mypage").then((m) => ({ default: m.MypageTrack }))
+  ),
+  mypageArtist: lazy(() =>
+    import("@/pages/mypage").then((m) => ({ default: m.MypageArtist }))
+  ),
+  mypageLike: lazy(() =>
+    import("@/pages/mypage").then((m) => ({ default: m.MypageLike }))
+  ),
 
-  review: lazy(() => import("@/pages/review").then((m) => ({ default: m.ReviewPage }))),
-  genre: lazy(() => import("@/pages/genre").then((m) => ({ default: m.GenrePage }))),
-
+  review: lazy(() =>
+    import("@/pages/review").then((m) => ({ default: m.ReviewPage }))
+  ),
+  genre: lazy(() =>
+    import("@/pages/genre").then((m) => ({ default: m.GenrePage }))
+  ),
 };
 
 export const Routing: React.FC = () => {
   return (
     <Routes>
-        <Route path="/" element={<pages.landing />} />
-        <Route path="/search/:searchSlug" element={<pages.search />}>
-            <Route index element={<pages.searchHome />} />
-            <Route path="track" element={<pages.searchTracks />} />
-            <Route path="artist" element={<pages.searchArtists />} />
-            <Route path="album" element={<pages.searchAlbums />} />
-        </Route>
-        <Route path="/artist/:artistId/*" element={<pages.artist />}>
-            <Route index element={<pages.artistHome />} />
-            <Route path="discography" element={<pages.artistDiscography />} />
-            <Route path="reviews" element={<pages.artistReviews />} />
-            <Route path="tracks" element={<pages.artistTracks />} />
-        </Route>
+      <Route path="/" element={<pages.landing />} />
+      <Route path="/search/:searchSlug" element={<pages.search />}>
+        <Route index element={<pages.searchHome />} />
+        <Route path="track" element={<pages.searchTracks />} />
+        <Route path="artist" element={<pages.searchArtists />} />
+        <Route path="album" element={<pages.searchAlbums />} />
+      </Route>
+      <Route path="/artist/:artistId/*" element={<pages.artist />}>
+        <Route index element={<pages.artistHome />} />
+        <Route path="discography" element={<pages.artistDiscography />} />
+        <Route path="reviews" element={<pages.artistReviews />} />
+        <Route path="tracks" element={<pages.artistTracks />} />
+      </Route>
 
-        <Route path="/album/:albumId"  element={<pages.album />} />
-        <Route path="/track/:trackId" element={<pages.song />} />
- 
-        <Route element={<PrivateRoute />}>
-            <Route path="/mypage/:userId" element={<pages.mypage />}>
-            <Route index element={<pages.mypageAlbum />} />
-            <Route path="album" element={<pages.mypageAlbum />} />
-            <Route path="song" element={<pages.mypageSong />} />
-            <Route path="artist" element={<pages.mypageArtist />} />
-            <Route path="like" element={<pages.mypageLike />} />
-            </Route>
-        </Route>
+      <Route path="/album/:albumId" element={<pages.album />} />
+      <Route path="/track/:trackId" element={<pages.track />} />
 
-        <Route path="/review/:reviewId" element={<pages.review />} />
-        <Route path="/genre/:genreCode" element={<pages.genre />} />
-        <Route path="/naver-callback" element={<NaverCallback />} />
-        <Route path="*" element={<NotFoundRoute />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/mypage/:userId" element={<pages.mypage />}>
+          <Route index element={<pages.mypageAlbum />} />
+          <Route path="album" element={<pages.mypageAlbum />} />
+          <Route path="track" element={<pages.mypageTrack />} />
+          <Route path="artist" element={<pages.mypageArtist />} />
+          <Route path="like" element={<pages.mypageLike />} />
+        </Route>
+      </Route>
+
+      <Route path="/review/:reviewId" element={<pages.review />} />
+      <Route path="/genre/:genreCode" element={<pages.genre />} />
+      <Route path="/naver-callback" element={<NaverCallback />} />
+      <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );
 };

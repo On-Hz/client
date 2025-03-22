@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CarouselSection } from "@/shared/ui";
 import { Review } from "@/shared/model";
-import { useLatestReviews } from "../api/latestReviewApi";
+import { useLatestReviews } from "../api/getLatestReviewsApi";
 import { LatestReviewsSkeleton } from "./LatestReviewsSkeleton";
 import Rating from "@mui/material/Rating";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";

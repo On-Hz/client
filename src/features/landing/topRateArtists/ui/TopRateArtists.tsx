@@ -4,7 +4,7 @@ import {
   ArtistAvatarSkeleton,
 } from "@/shared/ui";
 import { Artist } from "@/shared/model";
-import { useTopArtists } from "../api/topRateArtistApi";
+import { useTopArtists } from "../api/getTopRateArtistsApi";
 
 const renderArtistPage = (artists: Artist[]) => (
   <>

@@ -1,1 +1,1 @@
-export { MypageUserInfo } from "./mypageUserInfo/ui/MypageUserInfo";
+export { MypageUserInfo } from "./userInfo/ui/MypageUserInfo";

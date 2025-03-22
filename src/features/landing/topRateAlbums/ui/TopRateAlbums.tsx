@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useTopAlbums } from "../api/topRateAlbumApi";
+import { useTopAlbums } from "../api/getTopRateAlbumsApi";
 import { getGridStyles } from "@/shared/helpers";
 import { TopRateAlbumTitle } from "./TopRateAlbumTitle";
 import { AlbumSkeleton } from "./TopRateAlbumsSkeleton";

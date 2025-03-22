@@ -1,8 +1,8 @@
 import { ArtistSectionWrapper } from "@/widgets/artist";
 import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
-import { useArtistTopDiscography } from "../api/topDiscographyArtistApi";
+import { useArtistTopDiscography } from "../api/getArtistTopDiscographyApi";
 import { sectionProps } from "../../config/sectionProps";
-import { useArtistDiscography } from "../api/discographyArtistApi";
+import { useArtistDiscography } from "../api/getArtistDiscographyApi";
 import "./style.css";
 
 export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {

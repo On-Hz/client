@@ -1,19 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import { useAlbumsByGenre } from "../api/albumsByGenreApi";
+import { useAlbumsByGenre } from "../api/getAlbumsByGenreApi";
 import { AlbumsByGenreSkeleton } from "./AlbumsByGenreSkeleton";
-import { Link } from "react-router-dom";
-
-/** 날짜 포맷 함수 (한국어 날짜 형식) */
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
+import { formatDate } from "@/shared/helpers";
 
 interface AlbumsByGenreProps {
   genreCode: string;

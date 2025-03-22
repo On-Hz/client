@@ -1,6 +1,6 @@
 import React from "react";
-import { useArtistTopTracks } from "../api/topTracksArtistApi";
-import { useArtistTracks } from "../api/tracksArtistApi";
+import { useArtistTopTracks } from "../api/getArtistTopTracksApi";
+import { useArtistTracks } from "../api/getArtistTracksApi";
 import { Menu, MenuItem } from "@mui/material";
 import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
 import { sectionProps } from "../../config/sectionProps";

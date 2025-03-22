@@ -3,8 +3,8 @@ import { sectionProps } from "../../config/sectionProps";
 import { ArtistSectionWrapper } from "@/widgets/artist";
 import { ReviewCardContainer } from "@/features/review";
 import { ReviewCardSkeleton } from "@/shared/ui";
-import { useArtistReviews } from "../api/reviewsArtistApi";
-import { useArtistLatestReviews } from "../api/latestReviewsArtistApi";
+import { useArtistReviews } from "../api/getArtistReviewsApi";
+import { useArtistLatestReviews } from "../api/getArtistLatestReviewsApi";
 import "./style.css";
 
 export const ReviewsForArtist: React.FC<sectionProps> = ({
