@@ -95,7 +95,7 @@ export const Routing: React.FC = () => {
       <Route path="/track/:trackId" element={<pages.track />} />
 
       <Route element={<PrivateRoute />}>
-        <Route path="/mypage/:userId" element={<pages.mypage />}>
+        <Route path="/mypage/:userId/*" element={<pages.mypage />}>
           <Route index element={<pages.mypageAlbum />} />
           <Route path="album" element={<pages.mypageAlbum />} />
           <Route path="track" element={<pages.mypageTrack />} />
