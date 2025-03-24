@@ -7,3 +7,5 @@ export { measureNaturalLineRatio } from "./computeTextOverTwoLines";
 export { getStrokeStyle } from "./getStrokeStyle";
 export { formatDate } from "./formatDateHelper";
 export { extractEntityDetails } from "./extractEntityDetailsHelper";
+export { getReviewModalOptions } from "./getReviewModalOptions";
+export { isReviewQuery } from "./isReviewQuery";

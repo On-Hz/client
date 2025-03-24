@@ -51,6 +51,7 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
           />
         ) : null
       }
+      likeCount={review.likeCount}
     />
   );
 };

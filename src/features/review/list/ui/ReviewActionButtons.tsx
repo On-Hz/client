@@ -4,6 +4,7 @@ import { useModalStore } from "@/shared/stores";
 import { openModalWithAuthCheck } from "@/shared/helpers";
 import { useDeleteReview } from "../../delete/api/deleteReviewApi";
 import { ReviewType } from "@/shared/constants";
+import { usePageInfo } from "../../shared/hooks/usePageInfo";
 
 interface ReviewActionButtonsProps {
   reviewType: ReviewType;
@@ -18,6 +19,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
 }) => {
   const { openModal } = useModalStore();
   const { mutate: deleteReviewMutate } = useDeleteReview();
+  const { pageType } = usePageInfo();
 
   const handleUpdate = () => {
     openModal("alertModal", {
@@ -25,9 +27,8 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
       message: "해당 리뷰를 수정하시겠습니까?",
       onConfirm: () => {
         openModalWithAuthCheck("updateReviewModal", {
-          reviewType,
-          entityId,
           reviewId,
+          pageType
         });
       },
     });

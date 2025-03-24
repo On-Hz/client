@@ -67,13 +67,14 @@ export const ArtistBanner = () => {
         {/* 별점 영역 */}
         <div className="flex items-end gap-8 hz-banner-rating">
           <div className="flex flex-col items-center">
-            <div className="text-[40px]">{ratingInfo?.averageRating}</div>
+            <div className="text-[40px] pb-1">{ratingInfo?.averageRating}</div>
             <p className="text-base">평균 평점</p>
           </div>
           <div className="w-px bg-white h-14"></div>
           <ArtistRatingButton
             entityId={artistInfo.id}
             title={artistInfo.name}
+            userRating={ratingInfo?.userRating || -1}
           />
         </div>
         <ArtistTabs />

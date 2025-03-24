@@ -13,7 +13,6 @@ export const openModalWithAuthCheck = (modalName: string, data?: any) => {
   if (modalDef.authCheck && !token) {
     openModal("authInfoModal");
   } else {
-    console.log('openModal', modalName, data)
     openModal(modalName, data);
   }
 };

@@ -6,6 +6,7 @@ import {
 import { useModalStore } from "@/shared/stores";
 import type { AxiosError } from "axios";
 import type { ReviewSubmitData } from "../model/reviewSubmitSchema";
+import { isReviewQuery } from "@/shared/helpers";
 
 interface UseSubmitReviewOptions {
   onSuccessCallback?: () => void;
@@ -21,12 +22,7 @@ export const useSubmitReview = (
   return useMutation<void, AxiosError, ReviewSubmitData>({
     mutationFn: (newReview: ReviewSubmitData) => submitReview(newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) =>
-          Array.isArray(query.queryKey) &&
-          typeof query.queryKey[0] === "string" &&
-          query.queryKey[0].startsWith("reviews_"),
-      });
+      queryClient.invalidateQueries({ predicate: isReviewQuery });
       if (options?.onSuccessCallback) {
         options.onSuccessCallback();
       }

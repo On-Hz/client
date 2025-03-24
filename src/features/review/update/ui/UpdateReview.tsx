@@ -1,24 +1,26 @@
 import { updateReview } from "../api/updateReviewApi";
 import { ReviewFormModal } from "../../shared/ui/ReviewFormModal";
-import { REVIEW_TYPES } from "@/shared/constants";
+import { useDetailReviewInfo } from "../../detail/api/detailReviewApi";
 
 interface UpdateReviewProps {
   data?: {
-    reviewType?: keyof typeof REVIEW_TYPES;
-    entityId?: number;
-    title?: string;
-    content?: string;
-    rating?: number;
+    title: string;
+    reviewId?: number;
+    pageType?: string;
   };
 }
 
 export const UpdateReview: React.FC<UpdateReviewProps> = ({ data }) => {
+  const { data: review, isLoading } = useDetailReviewInfo(data?.reviewId?.toString() || "");
+  if (isLoading || !review) return;
+  const mergedInitialData = { ...review, ...data };
+
   return (
     <ReviewFormModal
       modalName="updateReviewModal"
       submitReview={updateReview}
       alertMessage="리뷰가 수정되었습니다."
-      initialData={data}
+      initialData={mergedInitialData}
     />
   );
 };

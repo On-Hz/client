@@ -3,10 +3,15 @@ import {
   UseMutationResult,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 import { axiosInstance } from "@/shared/api";
 import { useModalStore } from "@/shared/stores";
 import { ReviewType } from "@/shared/constants";
-import { AxiosError } from "axios";
+import { isReviewQuery } from "@/shared/helpers";
+import { usePageInfo } from "../../shared/hooks/usePageInfo";
+import { useInvalidateRatingInfo } from "../../shared/hooks/useInvalidateRatingInfo";
+
 
 export const deleteReview = async (
   reviewType: ReviewType,
@@ -24,7 +29,12 @@ export const useDeleteReview = (): UseMutationResult<
   { reviewType: ReviewType; entityId: number; reviewId: number }
 > => {
   const { openModal } = useModalStore();
+  const { pageType, entityId } = usePageInfo();
+  const invalidateRatingInfo = useInvalidateRatingInfo({ pageType, entityId });
+  const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
+
   return useMutation<
     void,
     AxiosError,
@@ -32,17 +42,20 @@ export const useDeleteReview = (): UseMutationResult<
   >({
     mutationFn: ({ reviewType, entityId, reviewId }) =>
       deleteReview(reviewType, entityId, reviewId),
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       openModal("alertModal", {
         type: "success",
         message: "리뷰가 삭제되었습니다.",
       });
-      queryClient.invalidateQueries({
-        predicate: (query) =>
-          Array.isArray(query.queryKey) &&
-          typeof query.queryKey[0] === "string" &&
-          query.queryKey[0].startsWith("reviews_"),
-      });
+      invalidateRatingInfo();
+      const segments = location.pathname.split("/").filter(Boolean);
+      if (segments.length === 2 && segments[0] === "review") {
+        navigate(
+          `/${variables.reviewType.toLowerCase()}/${variables.entityId}`
+        );
+      } else {
+        queryClient.invalidateQueries({ predicate: isReviewQuery });
+      }
     },
     onError: (error) => {
       openModal("alertModal", {

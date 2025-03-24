@@ -4,7 +4,11 @@ import { mockAlbums } from "../../album/api/getAlbumDetailApi";
 import { mockUserAlbumRating } from "../api/getTrackRatingsApi";
 import { Button } from "@/shared/ui";
 import { RatingsSkeleton } from "./RatingsSkeleton";
-import { openModalWithAuthCheck } from "@/shared/helpers";
+import {
+  openModalWithAuthCheck,
+  getReviewModalOptions,
+} from "@/shared/helpers";
+import { REVIEW_TYPES } from "@/shared/constants";
 
 const RatingSec = () => {
   const album = mockAlbums[0];
@@ -62,7 +66,27 @@ const RatingSec = () => {
           </ul>
           <div className="flex justify-end mt-[18px]">
             <Button
-              onClick={() => openModalWithAuthCheck("createReviewModal")}
+              onClick={() => {
+                const reviewType = REVIEW_TYPES.TRACK;
+                const userRating = rating.rating; //userRating
+                const entityId = album.id; //track.id
+                const title = album.title; //track.title
+                const reviewId =
+                  userRating > -1 ? rating.id : undefined;
+
+                const reviewModalOptions = getReviewModalOptions({
+                  reviewType,
+                  userRating,
+                  entityId,
+                  title,
+                  reviewId,
+                });
+
+                if (reviewModalOptions) {
+                  const { reviewModalName, modalOptions } = reviewModalOptions;
+                  openModalWithAuthCheck(reviewModalName, modalOptions);
+                }
+              }}
               text="리뷰 작성"
             />
           </div>

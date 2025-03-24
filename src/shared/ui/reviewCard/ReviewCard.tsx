@@ -1,6 +1,7 @@
 import Rating from "@mui/material/Rating";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { formatDate } from "@/shared/helpers";
 interface ReviewProps {
   userName: string;
   userProfilePath?: string | null;
@@ -12,6 +13,7 @@ interface ReviewProps {
   reviewActionButtons?: React.ReactNode;
   isLiked?: boolean;
   onClick: () => void;
+  likeCount?: number;
 }
 
 export const ReviewCard = ({
@@ -25,6 +27,7 @@ export const ReviewCard = ({
   reviewActionButtons,
   isLiked,
   onClick,
+  likeCount,
 }: ReviewProps) => {
   return (
     <div
@@ -65,7 +68,7 @@ export const ReviewCard = ({
           }}
         />
       </div>
-      <div className="pb-5 text-gray">{createdAt}</div>
+      <div className="pb-5 text-gray">{formatDate(createdAt || "")}</div>
       <div
         className={
           hasEllipsis
@@ -75,7 +78,7 @@ export const ReviewCard = ({
       >
         {content}
       </div>
-      <div className="pt-[15px]">
+      <div className="pt-[15px] flex">
         <button onClick={onClick}>
           <FavoriteIcon
             className={
@@ -83,6 +86,9 @@ export const ReviewCard = ({
             }
           />
         </button>
+        {(likeCount || likeCount === 0) && (
+          <p className="font-bold text-gray pl-[12px]">좋아요 {likeCount}</p>
+        )}
       </div>
     </div>
   );
