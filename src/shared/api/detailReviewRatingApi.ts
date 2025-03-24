@@ -16,8 +16,9 @@ export const useDetailReviewRatingInfo = (
   entityType: ReviewType,
   entityId: string
 ) => {
+  const typeKey = `${entityType}`.toLowerCase();
   return useQuery<Rating>({
-    queryKey: [`ratingInfo_${entityType}`, entityId],
+    queryKey: [`ratingInfo_${typeKey}`, entityId],
     queryFn: () => getDetailReviewRatingInfo(entityType, entityId),
   });
 };
