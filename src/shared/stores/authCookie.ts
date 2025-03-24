@@ -6,6 +6,8 @@ const isSecure = window.location.protocol === "https:"; //개발환경 false
 
 export const getAuthToken = (): string | null => cookies.get("token") || null;
 
+export const getDeviceId = (): string | null => cookies.get("device-id") || null;
+
 export const getAuthUser = (): User | null => {
   const userCookie = cookies.get("user");
   if (typeof userCookie === "string") {
@@ -20,10 +22,14 @@ export const getAuthUser = (): User | null => {
   return null;
 };
 
-export const setAuth = (token: string | null, user: User | null) => {
+export const setAuth = (token: string | null, user: User | null, deviceId:string) => {
   if (token && user) {
     cookies.set("token", token, { path: "/", maxAge: 3600, sameSite: "lax", secure: isSecure });
     cookies.set("user", JSON.stringify(user), { path: "/", maxAge: 3600, sameSite: "lax", secure: isSecure });
+
+    if (deviceId) {
+      cookies.set("device-id", deviceId, { path: "/", maxAge: 3600, sameSite: "lax", secure: isSecure });
+    }
   } else {
     removeAuth();
   }

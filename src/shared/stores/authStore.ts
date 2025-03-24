@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { User } from "../model";
-import { getAuthToken, getAuthUser, setAuth, removeAuth } from "./authCookie";
+import { getAuthToken, getAuthUser, getDeviceId, setAuth, removeAuth } from "./authCookie";
 
 export interface AuthState {
   token: string | null;
   user: User | null;
-  setAuth: (token: string | null, user: User | null) => void;
+  deviceId: string | null;
+  setAuth: (token: string | null, user: User | null, deviceId: string) => void;
   logout: () => void;
 }
 
@@ -15,21 +16,22 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       token: getAuthToken(),
       user: getAuthUser(),
+      deviceId: getDeviceId(),
 
-      setAuth: (token, user) => {
-        set({ token, user });
-        setAuth(token, user);
+      setAuth: (token, user, deviceId) => {
+        set({ token, user, deviceId });
+        setAuth(token, user, deviceId);
       },
 
       logout: () => {
-        set({ token: null, user: null });
+        set({ token: null, user: null, deviceId:null });
         removeAuth();
       },
     }),
     {
       name: "auth-storage",
       storage: createJSONStorage(() => sessionStorage),
-      partialize: (state) => ({ user: state.user }), //`user` 정보만 저장
+      partialize: (state) => ({ user: state.user}),
     }
   )
 );

@@ -4,6 +4,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import { ModalLayout, ModalButton, InputBox } from "@/shared/ui";
 import { validateProfileChange } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import { UpdateProfileParams } from "@/features/mypage/profile/model/types";
+import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfile";
 
 export const ProfileModal: React.FC = () => {
   const { modals, closeModal } = useModalStore();
@@ -15,29 +17,24 @@ export const ProfileModal: React.FC = () => {
     confirm: "",
   });
   const [validationError, setValidationError] = useState<string | null>(null);
+  const { mutate } = useUpdateProfile();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const errorMessage = validateProfileChange(form.userName, form.password, form.confirm);
-
     setValidationError(errorMessage); // 유효성 검사 에러
+
     if (!errorMessage) {
-      // mutate(form); 
+      const params: UpdateProfileParams = {
+        user_name: form.userName,
+        ...(form.password ? { new_password: form.password } : {}),
+      };
+      mutate(params);
     }
 
-    const updatedProfile = {
-      ...user,
-      userName: form.userName,
-      ...(form.password ? { password: form.password } : {})
-    };
-
-    console.log("✅ 업데이트할 프로필:", updatedProfile);
-
-    // TODO: API 호출 → 성공 시 closeModal
-   // closeModal("profileModal");
 
   };
 

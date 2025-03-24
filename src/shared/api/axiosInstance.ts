@@ -5,7 +5,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { useAuthStore } from "../stores";
+import { getAuthToken, getDeviceId } from "../stores/authCookie";
 
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -15,21 +15,26 @@ export const axiosInstance: AxiosInstance = axios.create({
 const requestHandler = (
   request: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const token = useAuthStore.getState().token;
-
+  const token = getAuthToken();
+  const deviceId = getDeviceId();
   const headers =
     request.headers instanceof AxiosHeaders
       ? request.headers
       : new AxiosHeaders(request.headers);
   headers.set("Accept", "application/json");
   headers.set("Content-Type", "application/json");
+  
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
+  }
+  if (deviceId) {
+    headers.set("Device-Id", deviceId);
   }
   request.headers = headers;
 
   // console.log("Request Headers:", request.headers);
-  // console.log("Token:", token);
+  // console.log("token:", token);
+  // console.log("Device-Id:", deviceId);
 
   return request;
 };
