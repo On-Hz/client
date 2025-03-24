@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useModalStore } from "@/shared/stores";
 import { ReviewModal } from "@/shared/ui";
 import { ReviewSubmitConfirmModal } from "./ReviewSubmitConfirmModal";
-import { useMutation } from "@tanstack/react-query";
+import { useSubmitReview } from "../hooks/useSubmitReview";
 import { ReviewSubmitData } from "../model/reviewSubmitSchema";
 
 interface ReviewFormModalProps {
@@ -64,19 +64,14 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
     title: initialData?.title || "",
   });
 
-  // React Query mutation (API 호출 함수는 prop으로 전달)
-  const mutation = useMutation({
-    mutationFn: (newReview: ReviewSubmitData) => submitReview(newReview),
-    onSuccess: () => {
+  const mutation = useSubmitReview(submitReview, {
+    onSuccessCallback: () => {
       setReviewModalFlag(false);
       openModal("alertModal", {
         type: "success",
         message: alertMessage,
         onConfirm: () => closeModal(modalName),
       });
-    },
-    onError: (error) => {
-      console.error("리뷰 제출 중 에러 발생:", error);
     },
   });
 

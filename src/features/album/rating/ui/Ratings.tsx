@@ -52,7 +52,7 @@ const RatingSec = () => {
       </ul>
       <div className="flex justify-end mt-[18px]">
         <Button
-          onClick={() => openModalWithAuthCheck("writeReviewModal")}
+          onClick={() => openModalWithAuthCheck("createReviewModal")}
           text="리뷰 작성"
         />
       </div>

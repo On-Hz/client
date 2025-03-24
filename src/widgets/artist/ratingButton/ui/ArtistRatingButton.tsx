@@ -16,7 +16,7 @@ export const ArtistRatingButton: React.FC<ArtistRatingButtonProps> = ({
     <div className="flex flex-col items-center">
       <button
         onClick={() =>
-          openModalWithAuthCheck("writeReviewModal", {
+          openModalWithAuthCheck("createReviewModal", {
             reviewType: REVIEW_TYPES.ARTIST,
             entityId,
             title,
