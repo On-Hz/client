@@ -75,6 +75,7 @@ export const ArtistBanner = () => {
             entityId={artistInfo.id}
             title={artistInfo.name}
             userRating={ratingInfo?.userRating || -1}
+            reviewId={ratingInfo?.userReviewId}
           />
         </div>
         <ArtistTabs />

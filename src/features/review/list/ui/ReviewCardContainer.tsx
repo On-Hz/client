@@ -48,6 +48,7 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
             reviewType={review.reviewType}
             reviewId={review.id}
             entityId={review.entityId}
+            title={review.entityName || ""}
           />
         ) : null
       }

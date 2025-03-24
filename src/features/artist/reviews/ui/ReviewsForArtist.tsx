@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { sectionProps } from "../../config/sectionProps";
 import { ArtistSectionWrapper } from "@/widgets/artist";
 import { ReviewCardContainer } from "@/features/review";
@@ -20,7 +20,7 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
     enabled: useInfiniteScroll,
   });
 
-  const { data, isLoading } = useInfiniteScroll ? infiniteQuery : regularQuery;
+  const { data:reviews, isLoading } = useInfiniteScroll ? infiniteQuery : regularQuery;
   return (
     <ArtistSectionWrapper title={"Reviews"}>
       <div className={useInfiniteScroll ? "hz-review-sec" : "hz-review-sec"}>
@@ -30,14 +30,14 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
               <ReviewCardSkeleton key={`search-skeleton-${i}`} />
             </div>
           ))}
-        {data &&
-          data.map((review, index) => (
-            <div className={"hz-review-sec-item"} key={index}>
+        {reviews &&
+          reviews.map((review) => (
+            <Link to={`/review/${review.id}`} className={"hz-review-sec-item"} key={review.id}>
               <ReviewCardContainer
                 review={review}
                 hasEllipsis={!useInfiniteScroll}
               />
-            </div>
+            </Link>
           ))}
       </div>
     </ArtistSectionWrapper>

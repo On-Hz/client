@@ -5,4 +5,5 @@ export interface Rating {
   ratingCount: number;
   lastUpdatedAt: string;
   userRating: number;
+  userReviewId: number;
 }

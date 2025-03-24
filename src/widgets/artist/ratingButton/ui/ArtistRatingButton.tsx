@@ -10,7 +10,7 @@ interface ArtistRatingButtonProps {
   entityId?: number;
   title: string;
   userRating: number;
-  reviewId: number;
+  reviewId?: number;
 }
 
 export const ArtistRatingButton: React.FC<ArtistRatingButtonProps> = ({
