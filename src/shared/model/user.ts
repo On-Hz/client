@@ -6,4 +6,5 @@ export interface User {
   socialType: "naver" | "google" | "kakao" | "none"; 
   role: string;
   social: boolean;
+  isInitialized: boolean;
 }

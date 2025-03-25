@@ -22,7 +22,10 @@ const requestHandler = (
       ? request.headers
       : new AxiosHeaders(request.headers);
   headers.set("Accept", "application/json");
-  headers.set("Content-Type", "application/json");
+  // headers.set("Content-Type", "application/json");
+  if (!(request.data instanceof FormData)) {
+    headers.set("Content-Type", "application/json");
+  }
   
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);

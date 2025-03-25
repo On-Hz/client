@@ -7,6 +7,7 @@ export interface AuthState {
   token: string | null;
   user: User | null;
   deviceId: string | null;
+  isInitialized: boolean;
   setAuth: (token: string | null, user: User | null, deviceId: string) => void;
   logout: () => void;
 }
@@ -17,14 +18,15 @@ export const useAuthStore = create<AuthState>()(
       token: getAuthToken(),
       user: getAuthUser(),
       deviceId: getDeviceId(),
+      isInitialized: !!getAuthToken(), 
 
       setAuth: (token, user, deviceId) => {
-        set({ token, user, deviceId });
+        set({ token, user, deviceId, isInitialized: true });
         setAuth(token, user, deviceId);
       },
 
       logout: () => {
-        set({ token: null, user: null, deviceId:null });
+        set({ token: null, user: null, deviceId:null, isInitialized: true });
         removeAuth();
       },
     }),

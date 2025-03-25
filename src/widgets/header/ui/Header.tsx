@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
+import { BASE_IMAGE_URL } from "@/shared/constants/image";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
@@ -48,6 +49,10 @@ export const Header: React.FC = () => {
     }
     prevOpen.current = open;
   }, [open]);
+
+  if (!user) return null; 
+
+  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
 
   return (
     <header className="border-b border-gray3 hz-header">
@@ -85,10 +90,11 @@ export const Header: React.FC = () => {
                     marginRight: "4px",
                   }}
                 >
-                  <PersonIcon
-                    style={{ width: "100%", height: "100%" }}
-                    className="text-gray3"
-                  />
+                  {profileImageUrl ? (
+                    <img src={profileImageUrl} alt={user.userName} style={{ width: "100%", height: "auto" }} />
+                  ) : (
+                    <PersonIcon style={{ width: "100%", height: "100%" }} className="text-gray3" />
+                  )}
                 </Button>
                 <Popper
                   open={open}

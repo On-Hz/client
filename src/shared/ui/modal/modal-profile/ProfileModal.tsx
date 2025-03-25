@@ -6,9 +6,11 @@ import { validateProfileChange } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { UpdateProfileParams } from "@/features/mypage/profile/model/types";
 import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfile";
+import { uploadUserProfileImage } from "@/features/mypage/profile/api/updateUserProfileImageApi";
+import { BASE_IMAGE_URL } from "@/shared/constants/image";
 
 export const ProfileModal: React.FC = () => {
-  const { modals, closeModal } = useModalStore();
+  const { modals, openModal, closeModal } = useModalStore();
   const user = useAuthStore((state) => state.user);
   const [form, setForm] = useState({ 
     userName: user?.userName ?? "",
@@ -34,11 +36,33 @@ export const ProfileModal: React.FC = () => {
       };
       mutate(params);
     }
+  };
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      try {
+        await uploadUserProfileImage(file);
+        //변경된 이미지로.
+        //const res = await uploadUserProfileImage(file); //변경된 profilePath
+        //const newProfilePath = res.profilePath;
+        // if (user) {
+        //   setAuth(token, { ...user, profilePath: newProfilePath }, deviceId || "");
+        // }
 
+        openModal("alertModal", {
+          type: "success",
+          message: "프로필 이미지가 변경되었습니다."
+        });
+      } catch (err: any) {
+        console.log(err.message);
+      }
+    }
   };
 
   if (!user) return null;
+
+  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
 
   return (
     <ModalLayout
@@ -48,12 +72,12 @@ export const ProfileModal: React.FC = () => {
     >
       <div className="py-[25px] px-[60px] max-500:p-0">
         <div className="text-center">
-          <div className="m-auto w-[140px] h-[140px] border border-gray3 rounded-[50%] flex items-center justify-center">
+          <div className="overflow-hidden m-auto w-[140px] h-[140px] border border-gray3 rounded-[50%] flex items-center justify-center">
             {user.profilePath ? (
               <img
-                src={user.profilePath}
+                src={profileImageUrl}
                 alt={user.userName}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "auto" }}
               />
             ) : (
               <PersonIcon
@@ -62,7 +86,16 @@ export const ProfileModal: React.FC = () => {
               />
             )}
           </div>
-          <button className="text-point text-[13px] mt-5">이미지 추가</button>
+          <label htmlFor="profileImage" className="text-point text-[13px] mt-5 cursor-pointer">
+            이미지 추가
+          </label>
+          <input
+            id="profileImage"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
         </div>
         <div className="my-7 flex flex-col space-y-2 w-[300px]">
         <InputBox

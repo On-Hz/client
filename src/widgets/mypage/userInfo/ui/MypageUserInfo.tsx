@@ -1,32 +1,26 @@
-import { useEffect, useState } from "react";
 import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
 import { MypageTabs } from "../../tabs/ui/MypageTabs";
 import { openModalWithAuthCheck } from "@/shared/helpers";
-import { useAuthStore } from "@/shared/stores";
 import { UserAvatar } from "../../userAvatar/ui/UserAvatar";
 import { UserRatingBox } from "../../userRatingBox.tsx/ui/UserRatingBox";
+import { BASE_IMAGE_URL } from "@/shared/constants/image";
+import { useUserInfoQuery } from "@/features/mypage/profile/hooks/useInfoQuery";
+
 export const MypageUserInfo = () => {
-  const user = useAuthStore((state) => state.user);
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태
+  const { data: user, isLoading } = useUserInfoQuery();
 
-  useEffect(() => {
-    // 2초 후에 로딩 상태 변경
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  }, []);
+  if (isLoading) return <MypageUserInfoSkeleton />;
 
-  if (!user) return null;
-  
+  if (!user) return null; 
+
+  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
+
   return (
     <div>
-      {isLoading ? (
-        <MypageUserInfoSkeleton />
-      ) : (
-        <div className="flex items-center justify-between hz-top">
+      <div className="flex items-center justify-between hz-top">
           <div className="flex items-center">
             <div className="pr-[24px] text-center">
-            <UserAvatar profilePath={user.profilePath} userName={user.userName} />
+            <UserAvatar profilePath={profileImageUrl} userName={user.userName} />
               <button
                 className="text-point text-[13px] mt-5"
                 onClick={() => openModalWithAuthCheck("profileModal")}
@@ -42,8 +36,7 @@ export const MypageUserInfo = () => {
             </div>
           </div>
           <UserRatingBox />
-        </div>
-      )}
+      </div>
       <MypageTabs />
     </div>
   );

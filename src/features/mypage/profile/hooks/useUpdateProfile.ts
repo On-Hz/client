@@ -1,20 +1,20 @@
 import { useAuthStore, useModalStore } from "@/shared/stores";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UpdateProfileParams } from "../model/types";
 import { updateUserProfile } from "../api/updateUserProfileApi";
+import { User } from "@/shared/model";
 
 export const useUpdateProfile = () => {
-    const { user, token, deviceId, setAuth } = useAuthStore();
+    const { token, deviceId, setAuth } = useAuthStore();
     const { openModal, closeModal } = useModalStore();
-    
-    const mutation = useMutation<void, Error, UpdateProfileParams>({
-      mutationFn: updateUserProfile,
-      onSuccess: (data, variables) => {
-        //닉네임 변경된 경우
-        if (user && variables.user_name && variables.user_name !== user.userName) {
-          setAuth(token, { ...user, userName: variables.user_name }, deviceId || "");
-        }
+    const queryClient = useQueryClient();
 
+    const mutation = useMutation<User, Error, UpdateProfileParams>({
+      mutationFn: updateUserProfile,
+      onSuccess: (updatedUser) => {
+        setAuth(token, updatedUser, deviceId || "");
+        queryClient.setQueryData(["userInfo"], updatedUser);
+        
         closeModal("profileModal");
         openModal("alertModal", {
           type: "success",

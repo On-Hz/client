@@ -1,7 +1,5 @@
 
 export const naverLogin = () => {
-  //   const setAuth = useAuthStore((state) => state.setAuth);
-
   const width = 800;
   const height = 800;
   const left = (window.innerWidth - width) / 2;

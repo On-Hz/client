@@ -7,9 +7,9 @@ interface UserAvatarProps {
   
   export const UserAvatar = ({ profilePath, userName }: UserAvatarProps) => {
     return (
-      <div className="hz-user-img w-[182px] h-[182px] border border-gray3 rounded-[50%] flex items-center justify-center">
+      <div className="hz-user-img w-[182px] h-[182px] border border-gray3 rounded-[50%] overflow-hidden flex items-center justify-center">
         {profilePath ? (
-          <img src={profilePath} alt={userName} style={{ width: "100%", height: "100%" }} />
+          <img src={profilePath} alt={userName} style={{ width: "100%", height: "auto" }} />
         ) : (
           <PersonIcon style={{ width: "100%", height: "100%" }} className="text-gray3" />
         )}
