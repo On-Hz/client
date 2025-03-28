@@ -1,8 +1,8 @@
 import { ReviewCard } from "@/shared/ui";
 import { Review } from "@/shared/model/review";
-import { useAuthStore, useModalStore } from "@/shared/stores";
-import { useLikeReview } from "../api/likeReviewApi";
+import { useAuthStore } from "@/shared/stores";
 import { ReviewActionButtons } from "./ReviewActionButtons";
+import { ReviewLikeButton } from "./ReviewLikeButton";
 
 interface ReviewCardContainerProps {
   review: Review;
@@ -15,22 +15,7 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
   hasBorder,
   hasEllipsis,
 }) => {
-  const { token, user } = useAuthStore();
-  const openModal = useModalStore.getState().openModal;
-  const { mutate: likeReview } = useLikeReview();
-
-  const handleLikeReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!token || !user) {
-      openModal("authInfoModal");
-      return;
-    }
-    likeReview({
-      reviewType: review.reviewType,
-      entityId: review.entityId,
-      reviewId: review.id,
-    });
-  };
+  const { user } = useAuthStore();
 
   return (
     <ReviewCard
@@ -39,8 +24,6 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
       content={review.content}
       rating={review.rating}
       createdAt={review.createdAt}
-      isLiked={review.isLiked}
-      handleLikeReview={handleLikeReview}
       hasBorder={hasBorder}
       hasEllipsis={hasEllipsis}
       reviewActionButtons={
@@ -53,7 +36,16 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
           />
         ) : null
       }
-      likeCount={review.likeCount}
+      reviewLikeButton={
+        <ReviewLikeButton
+          reviewType={review.reviewType}
+          reviewId={review.id}
+          entityId={review.entityId}
+          isLiked={review.isLiked || false}
+          likeCount={review.likeCount || 0}
+          isOnlyIcon={false}
+        />
+      }
     />
   );
 };

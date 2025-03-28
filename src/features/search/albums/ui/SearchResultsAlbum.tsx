@@ -26,7 +26,7 @@ sectionProps) => {
               id={album.id}
               title={album.title}
               artist={album.artist}
-              cover={album.cover}
+              coverPath={album.coverPath}
             />
           ))}
       </div>

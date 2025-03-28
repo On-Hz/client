@@ -11,7 +11,7 @@ const mockArtistDiscography: Discography[] = Array(30)
     id: i,
     title: `Album ${i + 1}`,
     release: `2024.05.${i + 20}`,
-    cover: `https://picsum.photos/200/300?random=${i}`,
+    coverPath: `https://picsum.photos/200/300?random=${i}`,
   }));
 
 export const useArtistDiscography = (options?: { enabled?: boolean }) => {

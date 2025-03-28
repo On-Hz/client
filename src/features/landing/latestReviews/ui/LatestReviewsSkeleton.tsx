@@ -17,11 +17,11 @@ export const LatestReviewsSkeleton: React.FC = () => {
         <Skeleton variant="text" width={80} height={24} />
       </div>
 
-      <div className="flex items-start gap-4 mt-7">
+      <div className="flex items-start gap-4 mt-5">
         <Skeleton
           variant="rectangular"
-          width={80}
-          height={80}
+          width={100}
+          height={100}
           className="rounded"
         />
         <div>

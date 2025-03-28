@@ -10,7 +10,7 @@ const renderGenrePage = (GenreList: Genre[]) => (
         key={item.id}
         id={item.id}
         title={item.code}
-        cover={item.imagePath}
+        coverPath={item.imagePath}
         isDifferentType={true}
       />
     ))}

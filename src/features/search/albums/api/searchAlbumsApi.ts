@@ -12,7 +12,7 @@ const mockAlbums: Album[] = Array(5)
     id: i,
     title: `Album ${i + 1}`,
     artist: "Artist Name",
-    cover: `https://picsum.photos/200/300?random=${i}`,
+    coverPath: `https://picsum.photos/200/300?random=${i}`,
   }));
 
 export const useAlbum = () => {

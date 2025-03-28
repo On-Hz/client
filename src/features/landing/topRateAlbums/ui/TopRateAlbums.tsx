@@ -5,7 +5,6 @@ import { TopRateAlbumTitle } from "./TopRateAlbumTitle";
 import { AlbumSkeleton } from "./TopRateAlbumsSkeleton";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
-
 const AlbumItem: React.FC = () => {
   const { data, isLoading } = useTopAlbums();
   if (isLoading) return <AlbumSkeleton />;
@@ -18,7 +17,8 @@ const AlbumItem: React.FC = () => {
             (artist: any) => artist.role === "main"
           );
           return (
-             <Link to={`/album/${album.id}`} 
+            <Link
+              to={`/album/${album.id}`}
               key={album.id}
               className="flex flex-col p-3 transition-transform transform bg-white border rounded-lg cursor-pointer border-gray5 hz-landing-album-item hover:scale-105"
               style={getGridStyles(index)}
@@ -31,7 +31,7 @@ const AlbumItem: React.FC = () => {
               </div>
               {album.coverPath ? (
                 <img
-                  src={album.coverPath}
+                  src={`${import.meta.env.VITE_IMAGE_URL}${album.coverPath}`}
                   alt={album.title}
                   className="object-cover w-full rounded-lg aspect-square"
                 />

@@ -20,7 +20,7 @@ const mockArtistTopDiscography: Discography[] = Array(8)
         "Davido",
         "Lil Baby",
       ][i] ?? `Artist ${i + 1}`,
-    cover: `https://picsum.photos/300/300?random=${i + 10}`,
+    coverPath: `https://picsum.photos/300/300?random=${i + 10}`,
     release: `2024.05.${i + 20}`,
   }));
 

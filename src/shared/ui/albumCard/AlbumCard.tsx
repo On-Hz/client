@@ -7,14 +7,14 @@ interface AlbumProps {
   title: string;
   artist?: string;
   release?: string;
-  cover?: string;
+  coverPath?: string;
   isDifferentType?: boolean;
 }
 export const AlbumCard = ({
   id,
   title,
   artist,
-  cover,
+  coverPath,
   release,
   isDifferentType,
 }: AlbumProps) => {
@@ -24,9 +24,9 @@ export const AlbumCard = ({
       className="relative flex-shrink-0 rounded-lg hz-album-item bg-gray2"
     >
       <div className="overflow-hidden rounded-lg rounded-b-none rounded-bl-none aspect-square">        
-        {cover ? (
+        {coverPath ? (
           <img
-            src={cover}
+            src={`${import.meta.env.VITE_IMAGE_URL}${coverPath}`}
             alt={title}
             className="object-cover w-full aspect-square"
           />

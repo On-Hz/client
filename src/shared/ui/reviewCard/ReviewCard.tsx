@@ -1,6 +1,5 @@
 import Rating from "@mui/material/Rating";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { formatDate } from "@/shared/helpers";
 interface ReviewProps {
   userName: string;
@@ -11,9 +10,7 @@ interface ReviewProps {
   hasBorder?: boolean;
   createdAt?: string;
   reviewActionButtons?: React.ReactNode;
-  isLiked?: boolean;
-  handleLikeReview: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  likeCount?: number;
+  reviewLikeButton: React.ReactNode;
 }
 
 export const ReviewCard = ({
@@ -25,9 +22,7 @@ export const ReviewCard = ({
   hasBorder,
   createdAt,
   reviewActionButtons,
-  isLiked,
-  handleLikeReview,
-  likeCount,
+  reviewLikeButton,
 }: ReviewProps) => {
   return (
     <div
@@ -78,18 +73,7 @@ export const ReviewCard = ({
       >
         {content}
       </div>
-      <div className="pt-[15px] flex">
-        <button onClick={handleLikeReview}>
-          <FavoriteIcon
-            className={
-              isLiked ? "text-red" : "text-white stroke-black stroke-[2px]"
-            }
-          />
-        </button>
-        {(likeCount || likeCount === 0) && (
-          <p className="font-bold text-gray pl-[12px]">좋아요 {likeCount}</p>
-        )}
-      </div>
+      <div className="pt-[15px] flex">{reviewLikeButton}</div>
     </div>
   );
 };
