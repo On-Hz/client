@@ -20,19 +20,28 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
     enabled: useInfiniteScroll,
   });
 
-  const { data:reviews, isLoading } = useInfiniteScroll ? infiniteQuery : regularQuery;
+  const { data: reviews, isLoading } = useInfiniteScroll
+    ? infiniteQuery
+    : regularQuery;
   return (
     <ArtistSectionWrapper title={"Reviews"}>
       <div className={useInfiniteScroll ? "hz-review-sec" : "hz-review-sec"}>
         {isLoading &&
           Array.from({ length: 8 }, (v, i) => (
-            <div className={"hz-review-sec-item"} key={i}>
+            <div
+              className={`${!useInfiniteScroll ? "hz-review-sec-item" : "w-full"}`}
+              key={i}
+            >
               <ReviewCardSkeleton key={`search-skeleton-${i}`} />
             </div>
           ))}
         {reviews &&
           reviews.map((review) => (
-            <Link to={`/review/${review.id}`} className={"hz-review-sec-item"} key={review.id}>
+            <Link
+              to={`/review/${review.id}`}
+              className={`${!useInfiniteScroll ? "hz-review-sec-item" : "w-full"}`}
+              key={review.id}
+            >
               <ReviewCardContainer
                 review={review}
                 hasEllipsis={!useInfiniteScroll}
