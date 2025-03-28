@@ -23,7 +23,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
   const { mutate: deleteReviewMutate } = useDeleteReview();
   const { pageType } = usePageInfo();
 
-  const handleUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleUpdateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     openModal("alertModal", {
       type: "info",
@@ -38,7 +38,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
     });
   };
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDeleteReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     openModal("alertModal", {
       type: "warning",
@@ -51,8 +51,8 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
 
   return (
     <div className="flex gap-2">
-      <Button text="수정" onClick={handleUpdate} />
-      <Button text="삭제" onClick={handleDelete} />
+      <Button text="수정" onClick={handleUpdateReview} />
+      <Button text="삭제" onClick={handleDeleteReview} />
     </div>
   );
 };

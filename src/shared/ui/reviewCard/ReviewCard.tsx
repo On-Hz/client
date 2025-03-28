@@ -12,7 +12,7 @@ interface ReviewProps {
   createdAt?: string;
   reviewActionButtons?: React.ReactNode;
   isLiked?: boolean;
-  onClick: () => void;
+  handleLikeReview: (e: React.MouseEvent<HTMLButtonElement>) => void;
   likeCount?: number;
 }
 
@@ -26,7 +26,7 @@ export const ReviewCard = ({
   createdAt,
   reviewActionButtons,
   isLiked,
-  onClick,
+  handleLikeReview,
   likeCount,
 }: ReviewProps) => {
   return (
@@ -79,7 +79,7 @@ export const ReviewCard = ({
         {content}
       </div>
       <div className="pt-[15px] flex">
-        <button onClick={onClick}>
+        <button onClick={handleLikeReview}>
           <FavoriteIcon
             className={
               isLiked ? "text-red" : "text-white stroke-black stroke-[2px]"

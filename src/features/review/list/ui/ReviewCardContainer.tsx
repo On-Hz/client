@@ -11,15 +11,16 @@ interface ReviewCardContainerProps {
 }
 
 export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
-    review,
-    hasBorder,
-    hasEllipsis,
-  }) => {
+  review,
+  hasBorder,
+  hasEllipsis,
+}) => {
   const { token, user } = useAuthStore();
   const openModal = useModalStore.getState().openModal;
   const { mutate: likeReview } = useLikeReview();
 
-  const handleLike = () => {
+  const handleLikeReview = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (!token || !user) {
       openModal("authInfoModal");
       return;
@@ -39,7 +40,7 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
       rating={review.rating}
       createdAt={review.createdAt}
       isLiked={review.isLiked}
-      onClick={handleLike}
+      handleLikeReview={handleLikeReview}
       hasBorder={hasBorder}
       hasEllipsis={hasEllipsis}
       reviewActionButtons={
