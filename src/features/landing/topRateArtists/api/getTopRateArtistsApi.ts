@@ -8,7 +8,7 @@ const getTopArtists = async () => {
     params: {
       offset: 0,
       limit: 12,
-      order_by: "rating_count,average_rating",
+      orderBy: "rating_count,average_rating",
     },
   });
   return response.data;

@@ -9,7 +9,7 @@ const getArtistLatestReviewList = async (artistId: string) => {
     params: {
       offset: 0,
       limit: 8,
-      order_by: "created_at",
+      orderBy: "created_at",
     },
   });
   return response.data;

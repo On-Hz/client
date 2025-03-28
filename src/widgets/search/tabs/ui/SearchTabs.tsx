@@ -5,7 +5,7 @@ export const SearchTabs = () => {
   const { searchSlug } = useParams<{ searchSlug: string }>();
   return (
     <nav className="flex items-center space-x-1">
-      {/* 전체 */}1
+      {/* 전체 */}
       <NavLink to={`/search/${searchSlug}`} end>
         {({ isActive }) => <TabButton text="전체" isActive={isActive} />}
       </NavLink>

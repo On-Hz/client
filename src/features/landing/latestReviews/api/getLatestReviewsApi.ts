@@ -8,7 +8,7 @@ const getLatestReviews = async () => {
     params: {
       offset: 0,
       limit: 12,
-      order_by: "created_at",
+      orderBy: "created_at",
     },
   });
   return response.data;
