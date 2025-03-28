@@ -1,33 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { Discography } from "../model/types";
+import { axiosInstance } from "@/shared/api";
+import { ORDER_BY } from "@/shared/constants";
+import { Album } from "@/shared/model";
 
-const fetchData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  return mockArtistTopDiscography;
+const getArtistTopDiscography = async (artistId: string) => {
+  const url = `/api/v1/artists/${artistId}/albums`;
+  const response = await axiosInstance.get<Album[]>(url, {
+    params: {
+      limit: 5,
+      orderBy: ORDER_BY.CREATED_AT,
+    },
+  });
+  return response.data;
 };
 
-const mockArtistTopDiscography: Discography[] = Array(8)
-  .fill(null)
-  .map((_, i) => ({
-    id: i,
-    title:
-      [
-        "Omah Lay",
-        "Wizkid",
-        "Lil Baby",
-        "Burna Boy",
-        "Wizkid",
-        "Davido",
-        "Lil Baby",
-      ][i] ?? `Artist ${i + 1}`,
-    coverPath: `https://picsum.photos/300/300?random=${i + 10}`,
-    release: `2024.05.${i + 20}`,
-  }));
-
-export const useArtistTopDiscography = (options?: { enabled?: boolean }) => {
+export const useArtistTopDiscography = (artistId: string, options?: { enabled?: boolean }) => {
   return useQuery({
-    queryKey: ["top_discography"],
-    queryFn: fetchData,
+    queryKey: ["discography_artist_home"],
+    queryFn: ()=>getArtistTopDiscography(artistId),
     enabled: options?.enabled ?? true,
   });
 };

@@ -1,13 +1,14 @@
-import { Genre } from "./genre";
 import { Artist } from "./artist";
-// import { Rating } from "./rating";
+import { Rating } from "./rating";
 
 export interface Track {
   id: number;
-  title: string;
-  releaseDate: string;
-  createdAt: string;
+  trackName: string;
+  trackRank: string;
+  duration: string;
   coverPath: string;
-  genres: Genre[];
+  albumId: string;
   artists: Artist[];
+  createdAt: string;
+  rating?: Rating["averageRating"];
 }

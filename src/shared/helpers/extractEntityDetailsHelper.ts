@@ -32,9 +32,9 @@ export const extractEntityDetails = (
     mainArtist = "";
   } else if (reviewType === REVIEW_TYPES.TRACK) {
     const track = entityInfo as Track;
-    title = track.title;
+    title = track.trackName;
     imagePath = track.coverPath;
-    releaseDate = formatDate(track.releaseDate);
+    releaseDate = formatDate(track.createdAt);
     mainArtist =
       track.artists.find((artist) => artist.role === "main")?.name || "";
   } else {

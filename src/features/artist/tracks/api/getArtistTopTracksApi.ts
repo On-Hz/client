@@ -1,26 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
-import { Track } from "../model/types";
+import { axiosInstance } from "@/shared/api";
+import { ORDER_BY } from "@/shared/constants";
+import { Track } from "@/shared/model";
 
-const mockTopTracks: Track[] = Array(5)
-  .fill(null)
-  .map((_, i) => ({
-    id: i,
-    title: `Last Item ${i + 1}`,
-    artist: "Jane Doe",
-    cover: `https://picsum.photos/60/60?random=${i}`,
-    description: "Lorem ipsum dolor sit amet, consectetur.",
-    rating: 4.3,
-  }));
-
-const fetchData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  return mockTopTracks;
+const getArtistTopTracks = async (artistId: string) => {
+  const url = `/api/v1/artists/${artistId}/tracks`;
+  const response = await axiosInstance.get<Track[]>(url, {
+    params: {
+      limit: 5,
+      orderBy: ORDER_BY.CREATED_AT,
+    },
+  });
+  return response.data;
 };
 
-export const useArtistTopTracks = (options?: { enabled?: boolean }) => {
+export const useArtistTopTracks = (
+  artistId: string,
+  options?: { enabled?: boolean }
+) => {
   return useQuery({
-    queryKey: ["top_tracks"],
-    queryFn: fetchData,
+    queryKey: ["tracks_artist_home"],
+    queryFn: () => getArtistTopTracks(artistId),
     enabled: options?.enabled ?? true,
   });
 };

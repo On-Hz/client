@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { formatDate } from "@/shared/helpers";
 import "./style.css";
 
 interface AlbumProps {
   id: number;
   title: string;
   artist?: string;
-  release?: string;
+  createdAt?: string;
   coverPath?: string;
   isDifferentType?: boolean;
 }
@@ -15,7 +16,7 @@ export const AlbumCard = ({
   title,
   artist,
   coverPath,
-  release,
+  createdAt,
   isDifferentType,
 }: AlbumProps) => {
   return (
@@ -41,7 +42,7 @@ export const AlbumCard = ({
       </div>
       <div className="p-5 space-y-1">
         <p className="text-sm font-medium">{title}</p>
-        <p className="text-xs text-gray-500">{artist ? artist : release}</p>
+        <p className="text-xs text-gray-500">{artist ? artist : formatDate(createdAt || "")}</p>
       </div>
     </Link>
   );

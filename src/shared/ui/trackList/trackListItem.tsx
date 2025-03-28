@@ -1,56 +1,71 @@
-import { IconButton } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Link } from "react-router-dom";
+// import { IconButton } from "@mui/material";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+
 interface TrackProps {
   id: number;
-  title: string;
-  artist: string;
-  cover: string;
-  description: string;
+  trackName: string;
+  artist?: string;
+  coverPath: string;
+  duration: string;
   rating?: number;
-  setAnchorEl?: (element: HTMLElement | null) => void;
+  // setAnchorEl?: (element: HTMLElement | null) => void;
 }
 
 export const TrackListItem = ({
   id,
-  cover,
-  title,
-  description,
+  coverPath,
+  artist,
+  trackName,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  duration,
   rating,
-  setAnchorEl,
-}: TrackProps) => {
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (setAnchorEl) {
-      setAnchorEl(event.currentTarget);
-    }
-  };
+}: // setAnchorEl,
+TrackProps) => {
+  // const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   if (setAnchorEl) {
+  //     setAnchorEl(event.currentTarget);
+  //   }
+  // };
 
   return (
-    <li
-      key={id}
-      className="flex items-center justify-between px-2 py-3 transition-colors hover:bg-gray2"
-    >
-      <div className="flex items-center flex-1 min-w-0">
-        <img
-          src={cover}
-          alt={title}
-          className="object-cover rounded-lg w-14 h-14 mr-5"
-        />
-        <div>
-          <p className="font-semibold">{title}</p>
-          <p className="text-sm text-gray-500">{description}</p>
+    <li key={id}>
+      <Link
+        to={`/track/${id}`}
+        className="flex items-center justify-between px-2 py-3 transition-colors hover:bg-gray2"
+      >
+        <div className="flex items-center flex-1 min-w-0">
+          {coverPath ? (
+            <img
+              src={`${import.meta.env.VITE_IMAGE_URL}${coverPath}`}
+              alt={trackName}
+              className="object-cover mr-5 rounded-lg w-14 h-14"
+            />
+          ) : (
+            <div className="object-cover mr-5 rounded-lg w-14 h-14 bg-gray3">
+              <MusicNoteIcon
+                style={{ width: "100%", height: "100%" }}
+                className="text-gray2"
+              />
+            </div>
+          )}
+          <div>
+            <p className="font-semibold">{trackName}</p>
+            <p className="text-sm text-gray-500">{artist}</p>
+          </div>
         </div>
-      </div>
 
-      {/* 오른쪽: 별(하나) + 평점, 햄버거 아이콘 */}
-      <div className="flex items-center space-x-4">
-        <IconButton onClick={handleMenuClick} size="small">
-          <MoreVertIcon />
-        </IconButton>
-        <div className="flex items-center">
-          <span className="text-xl text-yellow-400">★</span>
-          <span className="ml-1 text-sm text-gray-600">{rating} / 5</span>
+        <div className="flex items-center space-x-4">
+          {/* <IconButton onClick={handleMenuClick} size="small">
+              <MoreVertIcon />
+            </IconButton> */}
+          <div className="flex items-center">
+            <span className="text-xl text-yellow-400">★</span>
+            <span className="ml-1 text-sm text-gray-600">{rating} / 5</span>
+          </div>
         </div>
-      </div>
+      </Link>
     </li>
   );
 };

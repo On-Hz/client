@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { Review } from "@/shared/model";
 import { axiosInstance } from "@/shared/api";
+import { ORDER_BY } from "@/shared/constants";
 
 const getLatestReviews = async () => {
   const url = "/api/v1/reviews";
   const response = await axiosInstance.get<Review[]>(url, {
     params: {
-      offset: 0,
       limit: 12,
-      orderBy: "created_at",
+      orderBy: ORDER_BY.CREATED_AT,
     },
   });
   return response.data;
