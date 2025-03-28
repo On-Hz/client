@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/shared/api";
 import { Album } from "@/shared/model";
+import { ORDER_BY } from "@/shared/constants";
 
 const getTopAlbums = async () => {
   const url = "/api/v1/albums";
   const response = await axiosInstance.get<Album[]>(url, {
     params: {
-      offset: 0,
       limit: 12,
-      orderBy: "rating_count,average_rating",
+      orderBy: `${ORDER_BY.RATING_COUNT},${ORDER_BY.AVERAGE_RATING}`,
     },
   });
   return response.data;
