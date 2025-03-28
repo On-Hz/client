@@ -25,10 +25,13 @@ sectionProps) => {
             <TrackListItem
               key={track.id}
               id={track.id}
-              title={track.title}
-              artist={track.artist}
-              cover={track.cover}
-              description={track.description}
+              trackName={track.trackName}
+              artist={
+                track.artists?.find((artist) => artist.role === "main")?.name ||
+                ""
+              }
+              coverPath={track.coverPath}
+              duration={track.duration}
             />
           ))}
       </ul>

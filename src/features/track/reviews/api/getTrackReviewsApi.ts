@@ -13,6 +13,7 @@ export const mockReviews: Review[] = Array(6)
       role: "USER",
       socialType: "none",
       social: false,
+      isInitialized:false
     },
     rating: (i % 5) + 1,
     content: `Review body ${
