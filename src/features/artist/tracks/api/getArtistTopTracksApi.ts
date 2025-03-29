@@ -8,7 +8,7 @@ const getArtistTopTracks = async (artistId: string) => {
   const response = await axiosInstance.get<Track[]>(url, {
     params: {
       limit: 5,
-      orderBy: ORDER_BY.CREATED_AT,
+      orderBy: `${ORDER_BY.RATING_COUNT},${ORDER_BY.AVERAGE_RATING}`,
     },
   });
   return response.data;

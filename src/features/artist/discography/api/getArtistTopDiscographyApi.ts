@@ -8,16 +8,19 @@ const getArtistTopDiscography = async (artistId: string) => {
   const response = await axiosInstance.get<Album[]>(url, {
     params: {
       limit: 5,
-      orderBy: ORDER_BY.CREATED_AT,
+      orderBy: `${ORDER_BY.RATING_COUNT},${ORDER_BY.AVERAGE_RATING}`,
     },
   });
   return response.data;
 };
 
-export const useArtistTopDiscography = (artistId: string, options?: { enabled?: boolean }) => {
+export const useArtistTopDiscography = (
+  artistId: string,
+  options?: { enabled?: boolean }
+) => {
   return useQuery({
     queryKey: ["discography_artist_home"],
-    queryFn: ()=>getArtistTopDiscography(artistId),
+    queryFn: () => getArtistTopDiscography(artistId),
     enabled: options?.enabled ?? true,
   });
 };
