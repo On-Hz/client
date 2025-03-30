@@ -14,6 +14,7 @@ import MenuList from "@mui/material/MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { BASE_IMAGE_URL } from "@/shared/constants/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
@@ -21,6 +22,7 @@ export const Header: React.FC = () => {
   const { user, logout } = useAuthStore();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   //사용자 메뉴
   const toggleUserMenu = () => setOpen((prev) => !prev);
@@ -36,6 +38,7 @@ export const Header: React.FC = () => {
   //로그아웃
   const handleLogout = () => {
     logout();
+    queryClient.clear(); 
     setOpen(false);
   };
 
@@ -50,9 +53,8 @@ export const Header: React.FC = () => {
     prevOpen.current = open;
   }, [open]);
 
-  if (!user) return null; 
-
-  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
+  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
+  
 
   return (
     <header className="border-b border-gray3 hz-header">
@@ -88,6 +90,8 @@ export const Header: React.FC = () => {
                     border: "1px solid #d9d9d9",
                     borderRadius: "50%",
                     marginRight: "4px",
+                    padding:"0",
+                    overflow:"hidden"
                   }}
                 >
                   {profileImageUrl ? (

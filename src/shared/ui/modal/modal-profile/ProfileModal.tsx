@@ -6,11 +6,11 @@ import { validateProfileChange } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { UpdateProfileParams } from "@/features/mypage/profile/model/types";
 import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfile";
-import { uploadUserProfileImage } from "@/features/mypage/profile/api/updateUserProfileImageApi";
 import { BASE_IMAGE_URL } from "@/shared/constants/image";
+import { ProfileImageCropModal } from "@/features/mypage/profile/ui/ProfileImageCropModal";
 
 export const ProfileModal: React.FC = () => {
-  const { modals, openModal, closeModal } = useModalStore();
+  const { modals, closeModal } = useModalStore();
   const user = useAuthStore((state) => state.user);
   const [form, setForm] = useState({ 
     userName: user?.userName ?? "",
@@ -20,6 +20,16 @@ export const ProfileModal: React.FC = () => {
   });
   const [validationError, setValidationError] = useState<string | null>(null);
   const { mutate } = useUpdateProfile();
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      setCropModalOpen(true); // 이미지 크롭 모달 오픈!
+    }
+  };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,34 +48,12 @@ export const ProfileModal: React.FC = () => {
     }
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      try {
-        await uploadUserProfileImage(file);
-        //변경된 이미지로.
-        //const res = await uploadUserProfileImage(file); //변경된 profilePath
-        //const newProfilePath = res.profilePath;
-        // if (user) {
-        //   setAuth(token, { ...user, profilePath: newProfilePath }, deviceId || "");
-        // }
-
-        openModal("alertModal", {
-          type: "success",
-          message: "프로필 이미지가 변경되었습니다."
-        });
-      } catch (err: any) {
-        console.log(err.message);
-      }
-    }
-  };
-
   if (!user) return null;
 
-  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
-
+  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
   return (
-    <ModalLayout
+    <>
+      <ModalLayout
       open={modals["profileModal"] || false}
       onClose={() => closeModal("profileModal")}
       showCloseButton={true}
@@ -73,7 +61,7 @@ export const ProfileModal: React.FC = () => {
       <div className="py-[25px] px-[60px] max-500:p-0">
         <div className="text-center">
           <div className="overflow-hidden m-auto w-[140px] h-[140px] border border-gray3 rounded-[50%] flex items-center justify-center">
-            {user.profilePath ? (
+            {profileImageUrl ? (
               <img
                 src={profileImageUrl}
                 alt={user.userName}
@@ -138,6 +126,14 @@ export const ProfileModal: React.FC = () => {
           <ModalButton text="수정" width="100%" onClick={handleSubmit}/>
         </div>
       </div>
-    </ModalLayout>
+      </ModalLayout>
+      {cropModalOpen && selectedImage && (
+        <ProfileImageCropModal
+          open={cropModalOpen}
+          onClose={() => setCropModalOpen(false)}
+          imageFile={selectedImage}
+        />
+      )}
+    </>
   );
 };

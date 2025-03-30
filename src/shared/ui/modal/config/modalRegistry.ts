@@ -3,7 +3,6 @@ import { AlertModal } from "../modal-common-alert/AlertModal";
 import { AuthInfoModal } from "../modal-auth/AuthInfoModal";
 import { ProfileModal } from "../modal-profile/ProfileModal";
 import { CreateReview, UpdateReview } from "@/features/review";
-
 export interface ModalDefinition<T = any> {
   authCheck: boolean;
   component: React.ComponentType<T>;

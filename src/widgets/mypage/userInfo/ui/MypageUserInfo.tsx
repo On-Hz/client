@@ -13,7 +13,8 @@ export const MypageUserInfo = () => {
 
   if (!user) return null; 
 
-  const profileImageUrl = BASE_IMAGE_URL + `${user.profilePath}`
+  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
+  
 
   return (
     <div>

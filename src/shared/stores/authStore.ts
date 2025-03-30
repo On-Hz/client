@@ -26,9 +26,10 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
-        set({ token: null, user: null, deviceId:null, isInitialized: true });
+        set({ token: null, user: null, deviceId: null, isInitialized: false });
         removeAuth();
-      },
+        sessionStorage.removeItem("auth-storage");
+      }      
     }),
     {
       name: "auth-storage",
