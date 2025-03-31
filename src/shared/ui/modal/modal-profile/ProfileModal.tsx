@@ -8,6 +8,7 @@ import { UpdateProfileParams } from "@/features/mypage/profile/model/types";
 import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfile";
 import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { ProfileImageCropModal } from "@/features/mypage/profile/ui/ProfileImageCropModal";
+import { nicknameCheck } from "@/features/mypage/profile/api/validateUserNicknameApi";
 
 export const ProfileModal: React.FC = () => {
   const { modals, openModal, closeModal } = useModalStore();
@@ -52,6 +53,18 @@ export const ProfileModal: React.FC = () => {
   const handleSubmit = async () => {
     const errorMessage = validateProfileChange(form.userName, form.password, form.confirm);
     setValidationError(errorMessage); // 유효성 검사 에러
+
+    const result = await nicknameCheck(form.userName);
+
+    if ("available" in result) {
+      if (!result.available) {
+        setValidationError("이미 사용 중인 닉네임입니다.");
+        return;
+      }
+    
+      setValidationError(null);
+    }
+
 
     if (!errorMessage) {
       const params: UpdateProfileParams = {
