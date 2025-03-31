@@ -10,7 +10,7 @@ import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { ProfileImageCropModal } from "@/features/mypage/profile/ui/ProfileImageCropModal";
 
 export const ProfileModal: React.FC = () => {
-  const { modals, closeModal } = useModalStore();
+  const { modals, openModal, closeModal } = useModalStore();
   const user = useAuthStore((state) => state.user);
   const [form, setForm] = useState({ 
     userName: user?.userName ?? "",
@@ -22,14 +22,28 @@ export const ProfileModal: React.FC = () => {
   const { mutate } = useUpdateProfile();
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  
+  const maxFileSizeMB = 3;
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setSelectedImage(file);
-      setCropModalOpen(true); // 이미지 크롭 모달 오픈!
+    if (!file) return;
+
+    e.target.value = "";
+    
+    const fileSizeMB = file.size / (1024 * 1024);
+    
+    if (fileSizeMB > maxFileSizeMB) {
+      openModal("alertModal", {
+        type: "info",
+        message: "이미지 크기는 " + maxFileSizeMB+"MB 이하로 업로드해주세요.",
+      });
+      return;
     }
+
+    setSelectedImage(file);
+    setCropModalOpen(true);
   };
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -75,7 +89,7 @@ export const ProfileModal: React.FC = () => {
             )}
           </div>
           <label htmlFor="profileImage" className="text-point text-[13px] mt-5 cursor-pointer">
-            이미지 추가
+            이미지 등록
           </label>
           <input
             id="profileImage"

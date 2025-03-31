@@ -14,8 +14,7 @@ export const useUpdateProfile = () => {
       onSuccess: (updatedUser) => {
         setAuth(token, updatedUser, deviceId || "");
         queryClient.setQueryData(["userInfo"], updatedUser);
-        console.log('dd',updatedUser);
-        
+
         closeModal("profileModal");
         openModal("alertModal", {
           type: "success",

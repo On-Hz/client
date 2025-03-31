@@ -8,15 +8,6 @@ export const useCropProfileImage = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
-  const initWithFile = (file: File) => {
-    const objectUrl = URL.createObjectURL(file);
-    setImageSrc(objectUrl);
-
-    return () => {
-      URL.revokeObjectURL(objectUrl);
-    };
-  };
-
   const onCropComplete = useCallback((_: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -41,6 +32,5 @@ export const useCropProfileImage = () => {
     setZoom,
     onCropComplete,
     showCroppedImage,
-    initWithFile,
   };
 };

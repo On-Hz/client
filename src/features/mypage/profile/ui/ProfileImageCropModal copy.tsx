@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import Cropper from "react-easy-crop";
+import { uploadUserProfileImage } from "@/features/mypage/profile/api/updateUserProfileImageApi";
 import { Button, ModalLayout } from "@/shared/ui";
 import { useAuthStore, useModalStore } from "@/shared/stores";
+import getCroppedImg from "../lib/cropImageUtils";
 import { useQueryClient } from "@tanstack/react-query";
-import { uploadUserProfileImage } from "@/features/mypage/profile/api/updateUserProfileImageApi";
-import { useCropProfileImage } from "../hooks/useCropProfileImage";
 
 interface Props {
   open: boolean;
@@ -13,36 +13,24 @@ interface Props {
 }
 
 export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFile }) => {
-  const { setAuth, token, deviceId } = useAuthStore();
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
   const { openModal } = useModalStore();
+  const { setAuth, token, deviceId } = useAuthStore();
   const queryClient = useQueryClient();
-
-  const {
-    imageSrc,
-    setCrop,
-    setZoom,
-    crop,
-    zoom,
-    onCropComplete,
-    showCroppedImage,
-    initWithFile,
-  } = useCropProfileImage();
   
-  useEffect(() => {
-    const revoke = initWithFile(imageFile);
-  
-    return () => {
-      revoke();
-    };
-  }, [imageFile]);
+  const onCropComplete = useCallback((_croppedArea: any, croppedAreaPixels: any) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
 
   const handleUpload = async () => {
-    const croppedBlob = await showCroppedImage();
+    if (!croppedAreaPixels) return;
+
+    const croppedBlob = await getCroppedImg(URL.createObjectURL(imageFile), croppedAreaPixels);
     if (!croppedBlob) return;
 
-    const croppedFile = new File([croppedBlob], "croppedImage.jpeg", {
-      type: "image/jpeg",
-    });
+    const croppedFile = new File([croppedBlob], "croppedImage.jpeg", { type: "image/jpeg" });
 
     try {
       const updatedUser = await uploadUserProfileImage(croppedFile);
@@ -52,13 +40,13 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
 
       openModal("alertModal", {
         type: "success",
-        message: "프로필 이미지가 변경되었습니다.",
+        message: "프로필 이미지가 변경되었습니다."
       });
       onClose();
     } catch (err: any) {
       openModal("alertModal", {
         type: "error",
-        message: "이미지 업로드 실패하였습니다.",
+        message: "이미지 업로드 실패하였습니다."
       });
       console.error("이미지 업로드 실패:", err);
     }
@@ -67,9 +55,8 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
   return (
     <ModalLayout open={open} onClose={onClose} showCloseButton={true}>
       <div className="w-[300px] h-[400px] relative bg-black">
-      {imageSrc && (
         <Cropper
-          image={imageSrc}
+          image={URL.createObjectURL(imageFile)}
           crop={crop}
           zoom={zoom}
           aspect={1}
@@ -77,7 +64,6 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
         />
-      )}
       </div>
 
       <div className="mt-4 flex justify-between">

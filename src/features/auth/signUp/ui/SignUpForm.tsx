@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { TermsModal } from "./TermsModal";
-import { useSignUp } from "./hooks/useSignUp";
 import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import { emailCheck } from "./api/emailCheck";
+import { emailCheck } from "../api/emailCheck";
+import { useSignUp } from "../hooks/useSignUp";
 
 interface SignupFormProps {
   switchMode: () => void;
