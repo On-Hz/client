@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "@/shared/stores/authStore";
 import { useAuthModalStore } from "@/shared/stores/authModalStore"; 
-import { login } from "../api/login";
+import { login } from "../api/loginApi";
 import { AuthResult } from "../../model/types";
 import { useMutation } from "@tanstack/react-query";
 

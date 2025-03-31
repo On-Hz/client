@@ -3,7 +3,7 @@ import { InputBox, ModalButton } from "@/shared/ui";
 import { TermsModal } from "./TermsModal";
 import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import { emailCheck } from "../api/emailCheck";
+import { emailCheck } from "../api/validateUserEmailCheckApi";
 import { useSignUp } from "../hooks/useSignUp";
 
 interface SignupFormProps {

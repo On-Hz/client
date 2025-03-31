@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useModalStore } from "@/shared/stores";
 import { AuthResult } from "@/features/auth/model/types";
-import { signUp } from "../api/signUp";
+import { signUp } from "../api/signUpApi";
 
 interface SignupVariables {
   email: string;

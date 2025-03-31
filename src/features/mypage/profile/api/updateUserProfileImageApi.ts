@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/shared/api";
 import { User } from "@/shared/model";
 
-export const uploadUserProfileImage = async (file: File): Promise<User> => {
+export const updateUserProfileImage = async (file: File): Promise<User> => {
     const formData = new FormData();
     formData.append("file", file);
     try {
