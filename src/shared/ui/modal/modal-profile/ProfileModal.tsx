@@ -9,6 +9,8 @@ import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfi
 import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { ProfileImageCropModal } from "@/features/mypage/profile/ui/ProfileImageCropModal";
 import { nicknameCheck } from "@/features/mypage/profile/api/validateUserNicknameApi";
+import { useDeleteUserAccount } from "@/features/mypage/profile/hooks/useDeleteUserAccount";
+
 
 export const ProfileModal: React.FC = () => {
   const { modals, openModal, closeModal } = useModalStore();
@@ -23,7 +25,7 @@ export const ProfileModal: React.FC = () => {
   const { mutate } = useUpdateProfile();
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  
+  const { mutate: deleteUserAccount } = useDeleteUserAccount();
   const maxFileSizeMB = 3;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +75,18 @@ export const ProfileModal: React.FC = () => {
       };
       mutate(params);
     }
+  };
+
+  const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("dddd");
+    e.preventDefault();
+    openModal("alertModal", {
+      type: "warning",
+      message: "정말 탈퇴를 진행하시겠습니까?",
+      onConfirm: () => {
+        deleteUserAccount();
+      },
+    });
   };
 
   if (!user) return null;
@@ -149,6 +163,12 @@ export const ProfileModal: React.FC = () => {
             <ReportProblemIcon /> {validationError}
           </p>
         )}
+        <div className="flex justify-end mb-4">
+          <button 
+            className="text-red text-[12px] p-1 border border-red rounded-md"
+            onClick={handleDeleteAccount}
+          >회원탈퇴</button>
+        </div>
         <div className="text-center">
           <ModalButton text="수정" width="100%" onClick={handleSubmit}/>
         </div>

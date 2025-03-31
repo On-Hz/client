@@ -37,7 +37,7 @@ export const AlertModal: React.FC = () => {
             {message}
           </p>
           {onConfirm ? (
-            <div className="flex gap-4">
+            <div className="flex gap-1">
               <Button onClick={handleConfirm} text="예" />
               <Button onClick={() => closeModal("alertModal")} text="아니오" />
             </div>
