@@ -22,7 +22,7 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
     enabled: !useInfiniteScroll,
   });
 
-  const infiniteQuery = useInfiniteScrollQuery<Review, "createdAt">({
+  const infiniteQuery = useInfiniteScrollQuery<Review>({
     endpoint: `/api/v1/reviews/${REVIEW_TYPES.ARTIST}/${artistId}`,
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,

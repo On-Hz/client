@@ -17,7 +17,7 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const regularQuery = useArtistTopTracks(artistId, {
     enabled: !useInfiniteScroll,
   });
-  const infiniteQuery = useInfiniteScrollQuery<Track, "createdAt">({
+  const infiniteQuery = useInfiniteScrollQuery<Track>({
     endpoint: `/api/v1/artists/${artistId}/tracks`,
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,

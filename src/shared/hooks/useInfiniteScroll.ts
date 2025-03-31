@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/shared/api";
 
-interface InfiniteScrollParams<T, K extends keyof T> {
+interface InfiniteScrollParams {
   endpoint: string;
   limit: number;
-  orderBy: K;
+  orderBy: string;
   enabled?: boolean;
   queryKeyPrefix?: string;
 }
@@ -16,15 +16,14 @@ interface PageParam {
 
 /**
  * @template T - API 응답의 데이터 항목 타입. 각 항목은 최소 { id: number }를 포함해야 합니다.
- * @template K - orderBy로 사용할 T의 키. 이 필드는 API 응답 데이터에 반드시 존재해야 합니다.
  */
-export function useInfiniteScroll<T extends { id: number }, K extends keyof T>({
+export function useInfiniteScroll<T extends { id: number }>({
   endpoint,
   limit,
   orderBy,
   enabled = true,
   queryKeyPrefix = "infiniteData",
-}: InfiniteScrollParams<T, K>) {
+}: InfiniteScrollParams) {
   const queryKey = [queryKeyPrefix, endpoint, limit, orderBy];
 
   return useInfiniteQuery<T[], Error>({
@@ -48,7 +47,7 @@ export function useInfiniteScroll<T extends { id: number }, K extends keyof T>({
         const lastItem = lastPage[lastPage.length - 1];
         return {
           lastId: lastItem.id,
-          lastOrderValue: lastItem[orderBy] as string | number,
+          lastOrderValue: (lastItem as any)[orderBy],
         };
       }
       return undefined;

@@ -17,7 +17,7 @@ export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {
   const regularQuery = useArtistTopDiscography(artistId, {
     enabled: !useInfiniteScroll,
   });
-  const infiniteQuery = useInfiniteScrollQuery<Album, "createdAt">({
+  const infiniteQuery = useInfiniteScrollQuery<Album>({
     endpoint: `/api/v1/artists/${artistId}/albums`,
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,
