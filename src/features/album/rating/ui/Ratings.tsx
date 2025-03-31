@@ -1,27 +1,29 @@
 import StarIcon from "@mui/icons-material/Star";
-import { mockUserAlbumRating } from "../api/getAlbumRatingsApi";
 import { Button } from "@/shared/ui";
 import { RatingsSkeleton } from "./RatingsSkeleton";
-import { useAlbumStore } from "../../detail/store/albumStore";
 import {
   openModalWithAuthCheck,
   getReviewModalOptions,
 } from "@/shared/helpers";
 import { REVIEW_TYPES } from "@/shared/constants";
+import { useParams } from "react-router-dom";
+import { useAlbumDetail } from "../../detail/api/getAlbumDetailApi";
+import { useAlbumRatings } from "../api/getAlbumRatingsApi";
 
 const RatingSec = () => {
-  const rating = mockUserAlbumRating[0];
-  const { album, isLoading } = useAlbumStore();
-
-  if (isLoading || !album) {
-    return <RatingsSkeleton />;
-  }
-
+  const reviewTypeAlbum = REVIEW_TYPES.ALBUM;
+  const { albumId } = useParams<{ albumId: string }>();// /album/:albumId
+  const { data: album, isLoading } = useAlbumDetail(albumId!);
+  const { data: ratings } = useAlbumRatings(reviewTypeAlbum, albumId!);
+  const userRatingDisplay = ratings?.userRating && ratings.userRating !== -1 ? ratings.userRating : 0;
+  
+  if (isLoading || !ratings) return <RatingsSkeleton />;
+  
   return (
     <div className="flex-1 min-w-0 pl-[40px] hz-right">
       <ul className="flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]">
         <li className="text-center">
-          <p className="text-[24px]">{album.ratings_count}</p>
+          <p className="text-[24px]">{ratings?.ratingCount}</p>
           <span className="hz-rating-text text-gray4 text-[14px]">
             총 별점 수
           </span>
@@ -33,7 +35,7 @@ const RatingSec = () => {
               style={{ width: "24px", height: "24px" }}
             />
             <span className="text-[#1C66E0] px-[5px]">
-              {album.average_rating.toFixed(2)}
+              {ratings ? ratings.averageRating.toFixed(2) : "0"}
             </span>
             / 5
           </p>
@@ -47,7 +49,7 @@ const RatingSec = () => {
               className="text-gray5"
               style={{ width: "24px", height: "24px" }}
             />
-            <span className="px-[5px]">{rating.rating}</span>/ 5
+            <span className="px-[5px]">{userRatingDisplay}</span>/ 5
           </p>
           <span className="hz-rating-text  text-gray4 text-[14px]">
             내 별점
@@ -57,11 +59,11 @@ const RatingSec = () => {
       <div className="flex justify-end mt-[18px]">
         <Button
           onClick={() => {
-            const reviewType = REVIEW_TYPES.TRACK;
-            const userRating = rating.rating;
+            const reviewType = reviewTypeAlbum;
+            const userRating = ratings?.userRating;
             const entityId = album.id;
             const title = album.title;
-            const reviewId = userRating > -1 ? rating.id : undefined;
+            const reviewId = userRating > -1 ? ratings?.id : undefined;
 
             const reviewModalOptions = getReviewModalOptions({
               reviewType,

@@ -1,27 +1,17 @@
-import { AlbumType } from "../model/types";
+import { axiosInstance } from "@/shared/api";
+import { useQuery } from "@tanstack/react-query";
 
-export const mockAlbums: AlbumType[] = [
-    {
-        "id": 2,
-        "title": "To Pimp a Butterfly",
-        "cover": "",
-        "average_rating": 9.433468752701184,
-        "ratings_count": 729,
-        "release_date": "2015-03-16",
-        "duration": "4680",
-        "genre":"POP",
-        "artist": {
-            "id": 525046,
-            "name": "Kendrick Lamar"
-        }
-    }
-]
+const getAlbumDetail = async (albumId: string) => {
+  const url = `/api/v1/albums/${albumId}`;
+  const response = await axiosInstance.get(url);
+  console.log('res',response.data);
+  return response.data;
+};
 
-// 비동기 API 호출
-export const fetchAlbum = (): Promise<AlbumType> => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockAlbums[0]);
-        }, 1500);
-    });
+export const useAlbumDetail = (albumId: string) => {
+  return useQuery({
+    queryKey: ["album_detail", albumId],
+    queryFn: () => getAlbumDetail(albumId), 
+    enabled: !!albumId,
+  });
 };

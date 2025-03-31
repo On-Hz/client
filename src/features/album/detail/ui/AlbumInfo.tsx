@@ -1,32 +1,40 @@
 import React from 'react';
 import { AlbumInfoSkeleton } from './AlbumInfoSkeleton';
-import { useAlbumStore } from '../store/albumStore';
-
+import { useParams } from 'react-router-dom';
+import { useAlbumDetail } from '../api/getAlbumDetailApi';
+import { Artist } from '@/shared/model';
 const InformationSec = () => {
-    const { album, isLoading } = useAlbumStore();
 
-    if (isLoading || !album) {
-        return <AlbumInfoSkeleton />;
-    }
+    const { albumId } = useParams<{ albumId: string }>();
+    const { data: album, isLoading } = useAlbumDetail(albumId!);
+    
+    if (isLoading) return <AlbumInfoSkeleton />;
     
     return (
         <div>
             <ul className='border border-gray4 rounded-[10px] p-[10px]'>
-                <li className='border-b border-gray4 py-[14px] text-[14px]'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
                     <span className='text-gray5 pr-[10px]'>발매일</span>
-                    <span>{album.release_date}</span>
+                    <span className='flex-1'>{album.releaseDate}</span>
                 </li>
-                <li className='border-b border-gray4 py-[14px] text-[14px]'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
                     <span className='text-gray5 pr-[10px]'>아티스트</span>
-                    <span>{album.artist.name}</span>
+                    <div className='flex-1'>
+                        {album.artists.map((artist: Artist, index: number) => (
+                        <span key={artist.id}>
+                            {artist.name}
+                            {index !== album.artists.length - 1 && ", "}
+                        </span>
+                        ))}
+                    </div>
                 </li>
-                <li className='border-b border-gray4 py-[14px] text-[14px]'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
                     <span className='text-gray5 pr-[10px]'>장르</span>
-                    <span>{album.genre}</span>
+                    <span className='flex-1'>{album.genres[0].code}</span>
                 </li>
-                <li className='py-[14px] text-[14px]'>
+                <li className='py-[14px] text-[14px] flex items-center justify-between'>
                     <span className='text-gray5 pr-[10px]'>길이</span>
-                    <span>{album.duration}</span>
+                    <span className='flex-1'>{album.createdAt}</span>
                 </li>
             </ul>
         </div>
