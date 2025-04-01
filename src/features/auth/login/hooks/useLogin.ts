@@ -24,7 +24,7 @@ export const useLogin = () => {
         return;
       }
 
-      setAuth(data.accessToken, data.user, data.deviceId);
+      setAuth(data.accessToken, data.refreshToken, data.user, data.deviceId);
       closeAuthModal();
     },
     onError: (error) => {

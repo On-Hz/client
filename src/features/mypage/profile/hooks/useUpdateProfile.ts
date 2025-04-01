@@ -5,14 +5,14 @@ import { updateUserProfile } from "../api/updateUserProfileApi";
 import { User } from "@/shared/model";
 
 export const useUpdateProfile = () => {
-    const { token, deviceId, setAuth } = useAuthStore();
+    const { token, refreshToken, deviceId, setAuth } = useAuthStore();
     const { openModal, closeModal } = useModalStore();
     const queryClient = useQueryClient();
 
     const mutation = useMutation<User, Error, UpdateProfileParams>({
       mutationFn: updateUserProfile,
       onSuccess: (updatedUser) => {
-        setAuth(token, updatedUser, deviceId || "");
+        setAuth(token, refreshToken, updatedUser, deviceId || "");
         queryClient.setQueryData(["userInfo"], updatedUser);
 
         closeModal("profileModal");
