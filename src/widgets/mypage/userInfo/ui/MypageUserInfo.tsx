@@ -1,19 +1,20 @@
-// import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
 import { MypageTabs } from "../../tabs/ui/MypageTabs";
 import { openModalWithAuthCheck } from "@/shared/helpers";
 import { UserAvatar } from "../../userAvatar/ui/UserAvatar";
 import { UserRatingBox } from "../../userRatingBox.tsx/ui/UserRatingBox";
 import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { useAuthStore } from "@/shared/stores";
+import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
 
 export const MypageUserInfo = () => {
   const user = useAuthStore((state) => state.user);
-  // const isInitialized = useAuthStore((state) => state.isInitialized);
-  // if (!isInitialized) return <MypageUserInfoSkeleton />;
+  const isInitialized = useAuthStore((state) => state.isInitialized);
+  
+  if (!isInitialized) return <MypageUserInfoSkeleton />;
+
   if (!user) return null;
 
   const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
-  
 
   return (
     <div>
