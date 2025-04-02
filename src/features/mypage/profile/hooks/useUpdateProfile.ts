@@ -1,5 +1,5 @@
 import { useAuthStore, useModalStore } from "@/shared/stores";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { UpdateProfileParams } from "../model/types";
 import { updateUserProfile } from "../api/updateUserProfileApi";
 import { User } from "@/shared/model";
@@ -7,13 +7,11 @@ import { User } from "@/shared/model";
 export const useUpdateProfile = () => {
     const { token, refreshToken, deviceId, setAuth } = useAuthStore();
     const { openModal, closeModal } = useModalStore();
-    const queryClient = useQueryClient();
 
     const mutation = useMutation<User, Error, UpdateProfileParams>({
       mutationFn: updateUserProfile,
       onSuccess: (updatedUser) => {
         setAuth(token, refreshToken, updatedUser, deviceId || "");
-        queryClient.setQueryData(["userInfo"], updatedUser);
 
         closeModal("profileModal");
         openModal("alertModal", {
