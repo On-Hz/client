@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Cropper from "react-easy-crop";
 import { Button, ModalLayout } from "@/shared/ui";
 import { useAuthStore, useModalStore } from "@/shared/stores";
-import { useQueryClient } from "@tanstack/react-query";
 import { useCropProfileImage } from "../hooks/useProfileImageCrop";
 import { updateUserProfileImage } from "../api/updateUserProfileImageApi";
 
@@ -13,9 +12,8 @@ interface Props {
 }
 
 export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFile }) => {
-  const { setAuth, token, deviceId } = useAuthStore();
+  const { setAuth, token, refreshToken, deviceId } = useAuthStore();
   const { openModal } = useModalStore();
-  const queryClient = useQueryClient();
 
   const {
     imageSrc,
@@ -47,8 +45,7 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
     try {
       const updatedUser = await updateUserProfileImage(croppedFile);
 
-      setAuth(token, updatedUser, deviceId || "");
-      queryClient.setQueryData(["userInfo"], updatedUser);
+      setAuth(token, refreshToken, updatedUser, deviceId || "");
 
       openModal("alertModal", {
         type: "success",

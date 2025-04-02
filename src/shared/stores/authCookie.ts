@@ -9,7 +9,11 @@ export const getAuthRefreshToken = (): string | null => cookies.get("refresh-tok
 export const getDeviceId = (): string | null => cookies.get("device-id") || null;
 export const getAuthUser = (): User | null => {
   const userCookie = cookies.get("user");
-  // console.log("user 쿠키:", userCookie);
+  //console.log("user 쿠키:", userCookie);
+  
+  if (typeof userCookie === "object") {
+    return userCookie as User;
+  }
   if (typeof userCookie === "string") {
     try {
       return JSON.parse(userCookie);
@@ -18,9 +22,7 @@ export const getAuthUser = (): User | null => {
       removeAuthUser();
     }
   }
-  if (typeof userCookie === "object") {
-    return userCookie as User;
-  }
+
   return null;
 };
 export const setAuth = (
