@@ -13,11 +13,11 @@ const InformationSec = () => {
     return (
         <div>
             <ul className='border border-gray4 rounded-[10px] p-[10px]'>
-                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>발매일</span>
                     <span className='flex-1'>{album.releaseDate}</span>
                 </li>
-                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>아티스트</span>
                     <div className='flex-1'>
                         {album.artists.map((artist: Artist, index: number) => (
@@ -28,11 +28,11 @@ const InformationSec = () => {
                         ))}
                     </div>
                 </li>
-                <li className='border-b border-gray4 py-[14px] text-[14px] flex items-center justify-between'>
+                <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>장르</span>
-                    <span className='flex-1'>{album.genres[0].code}</span>
+                    <span className='flex-1'>{album.genres?.[0]?.code ?? ""}</span>
                 </li>
-                <li className='py-[14px] text-[14px] flex items-center justify-between'>
+                <li className='py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>길이</span>
                     <span className='flex-1'>{album.createdAt}</span>
                 </li>

@@ -8,15 +8,16 @@ import {
 import { REVIEW_TYPES } from "@/shared/constants";
 import { useParams } from "react-router-dom";
 import { useAlbumDetail } from "../../detail/api/getAlbumDetailApi";
-import { useAlbumRatings } from "../api/getAlbumRatingsApi";
+import { useDetailReviewRatingInfo } from "@/shared/api";
 
 const RatingSec = () => {
   const reviewTypeAlbum = REVIEW_TYPES.ALBUM;
   const { albumId } = useParams<{ albumId: string }>();// /album/:albumId
   const { data: album, isLoading } = useAlbumDetail(albumId!);
-  const { data: ratings } = useAlbumRatings(reviewTypeAlbum, albumId!);
+  const { data: ratings } = useDetailReviewRatingInfo(reviewTypeAlbum, albumId!);
   const userRatingDisplay = ratings?.userRating && ratings.userRating !== -1 ? ratings.userRating : 0;
   
+
   if (isLoading || !ratings) return <RatingsSkeleton />;
   
   return (
@@ -24,12 +25,12 @@ const RatingSec = () => {
       <ul className="flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]">
         <li className="text-center">
           <p className="text-[24px]">{ratings?.ratingCount}</p>
-          <span className="hz-rating-text text-gray4 text-[14px]">
+          <span className="hz-rating-text text-gray text-[14px]">
             총 별점 수
           </span>
         </li>
         <li className="text-center">
-          <p className="text-[24px] text-gray4 ">
+          <p className="text-[24px] text-gray ">
             <StarIcon
               className="text-yellow"
               style={{ width: "24px", height: "24px" }}
@@ -39,19 +40,19 @@ const RatingSec = () => {
             </span>
             / 5
           </p>
-          <span className="hz-rating-text  text-gray4 text-[14px]">
+          <span className="hz-rating-text  text-gray text-[14px]">
             평균 별점
           </span>
         </li>
         <li className="text-center">
-          <p className="text-[24px] text-gray4">
+          <p className="text-[24px] text-gray">
             <StarIcon
               className="text-gray5"
               style={{ width: "24px", height: "24px" }}
             />
             <span className="px-[5px]">{userRatingDisplay}</span>/ 5
           </p>
-          <span className="hz-rating-text  text-gray4 text-[14px]">
+          <span className="hz-rating-text  text-gray text-[14px]">
             내 별점
           </span>
         </li>
