@@ -46,7 +46,7 @@ export const ReviewLikeButton: React.FC<ReviewLikeButtonProps> = ({
         />
       </button>
       {(likeCount || likeCount === 0) && (
-        <p className={`font-bold text-gray pt-[2px] ${!isOnlyIcon ? "pl-[12px]" : "pl-[10px]"}`}>
+        <p className={`text-black text-[14px] pt-[2px] ${!isOnlyIcon ? "pl-[10px]" : "pl-[8px]"}`}>
           {!isOnlyIcon ? `좋아요 ${likeCount}` : likeCount}
         </p>
       )}
