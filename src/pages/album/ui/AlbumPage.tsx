@@ -13,7 +13,7 @@ export const AlbumPage: React.FC = () => {
         <div className="hz-track">
           <Tracks />
         </div>
-        <div className="flex-1 min-w-0 pl-[40px] hz-info">
+        <div className="flex-1 min-w-0 pl-[30px] hz-info">
           <AlbumInfo />
         </div>
       </div>

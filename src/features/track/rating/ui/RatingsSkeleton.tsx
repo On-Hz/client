@@ -6,7 +6,7 @@ import { Skeleton } from '@mui/material';
 const RatingSecSkeleton = () => {
 
     return (
-        <div className='flex-1 min-w-0 pl-[40px] hz-right'>
+        <div className='flex-1 min-w-0 pl-[30px] hz-right'>
             <ul className='flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]'>
                 <li className='text-center'>
                     <Skeleton variant="text" width={80} height={30} className='m-auto'/>

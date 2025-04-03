@@ -3,6 +3,7 @@ import { Review } from "@/shared/model/review";
 import { useAuthStore } from "@/shared/stores";
 import { ReviewActionButtons } from "./ReviewActionButtons";
 import { ReviewLikeButton } from "./ReviewLikeButton";
+import { BASE_IMAGE_URL } from "@/shared/constants/image";
 
 interface ReviewCardContainerProps {
   review: Review;
@@ -16,11 +17,13 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
   hasEllipsis,
 }) => {
   const { user } = useAuthStore();
+  
+  const userProfileImageUrl = review.user.profilePath ? `${BASE_IMAGE_URL}${review.user.profilePath}` : null;
 
   return (
     <ReviewCard
       userName={review.user.userName}
-      userProfilePath={review.user.profilePath}
+      userProfilePath={userProfileImageUrl}
       content={review.content}
       rating={review.rating}
       createdAt={review.createdAt}

@@ -21,7 +21,7 @@ const RatingSec = () => {
   if (isLoading || !ratings) return <RatingsSkeleton />;
   
   return (
-    <div className="flex-1 min-w-0 pl-[40px] hz-right">
+    <div className="flex-1 min-w-0 pl-[30px] hz-right">
       <ul className="flex items-center justify-center border border-gray4 rounded-[10px] gap-10 py-[40px]">
         <li className="text-center">
           <p className="text-[24px]">{ratings?.ratingCount}</p>

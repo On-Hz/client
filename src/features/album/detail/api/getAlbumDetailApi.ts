@@ -10,7 +10,7 @@ const getAlbumDetail = async (albumId: string) => {
 
 export const useAlbumDetail = (albumId: string) => {
   return useQuery({
-    queryKey: ["album_detail", albumId],
+    queryKey: ["album_detail"],
     queryFn: () => getAlbumDetail(albumId), 
     enabled: !!albumId,
   });

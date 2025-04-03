@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { mockReviews } from "../api/getAlbumReviewsApi";
+import React from "react";
 import { ReviewCardContainer } from "@/features/review"
 import { ReviewCardSkeleton, RoundButton, SubTitle } from "@/shared/ui";
+import { useParams } from "react-router-dom";
+import { useAlbumReviews } from "../api/getAlbumReviewsApi";
 import { Review } from "@/shared/model";
 
 const ReviewsSec = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  // 비동기 데이터 로딩
-  useEffect(() => {
-    const loadReviews = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // 2초 대기
-      setReviews(mockReviews);
-      setIsLoading(false);
-    };
-
-    loadReviews();
-  }, []);
+  
+  const { albumId } = useParams<{ albumId: string }>();
+  const { data: reviews, isLoading } = useAlbumReviews(albumId!);
 
   return (
     <div>
@@ -26,16 +17,19 @@ const ReviewsSec = () => {
         <RoundButton text="정렬" />
       </div>
       <div>
-        {isLoading
-          ? Array.from({ length: mockReviews.length }).map((_, index) => (
-              <ReviewCardSkeleton key={`skeleton-${index}`} />
-            ))
-          : reviews.map((review) => (
-              <ReviewCardContainer
-                key={review.id}
-                review={review}
-              />
-            ))}
+        {isLoading &&
+           Array.from({ length: 5 }).map((_, idx) => (
+              <ReviewCardSkeleton key={`review-skeleton-${idx}`} />
+          ))
+        }
+        {reviews && 
+          reviews.map((review: Review) => (
+            <ReviewCardContainer
+              key={review.id}
+              review={review}
+            />
+          ))
+        }
       </div>
     </div>
   );
