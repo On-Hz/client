@@ -11,7 +11,7 @@ const getAlbumReviewList = async (albumId: string) => {
       orderBy: ORDER_BY.CREATED_AT,
     },
   });
-  console.log("getAlbumReviewList", response.data);
+  //console.log("getAlbumReviewList", response.data);
   return response.data;
 };
 
