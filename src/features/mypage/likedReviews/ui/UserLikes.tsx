@@ -65,4 +65,4 @@ export const UserLikes: React.FC = () => {
     return (
         <UserLikeSec />
     );
-  };
+};

@@ -1,5 +1,6 @@
-import { UserAlbumReviews } from "@/features/mypage"
+import { UserReviews } from "@/features/mypage/reviews/ui/UserReviews";
+import { REVIEW_TYPES } from "@/shared/constants";
 
-export const MypageAlbum: React.FC = () => { 
-    return <UserAlbumReviews />
-}
+export const MypageAlbum = () => {
+    return <UserReviews type={REVIEW_TYPES.ALBUM} />;
+};
