@@ -8,6 +8,9 @@ import Rating from "@mui/material/Rating";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { ReviewLikeButton } from "@/features/review/list/ui/ReviewLikeButton";
+import { BASE_IMAGE_URL } from "@/shared/constants/image";
+
+
 
 const renderReviewPage = (reviews: Review[]) => (
   <div>
@@ -21,7 +24,7 @@ const renderReviewPage = (reviews: Review[]) => (
           <div className="flex items-center w-56">
             {review.user.profilePath ? (
               <img
-                src={review.user.profilePath}
+                src={`${BASE_IMAGE_URL}${review.user.profilePath}`}
                 alt=""
                 className="mr-2 rounded-full h-7 w-7"
               />
