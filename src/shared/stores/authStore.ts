@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { User } from "../model";
 import { getAuthToken, getAuthUser, getDeviceId, setAuth, removeAuth, getAuthRefreshToken } from "./authCookie";
+import { axiosInstance } from "../api";
 
 export interface AuthState {
   token: string | null;
@@ -27,11 +28,22 @@ export const useAuthStore = create<AuthState>()(
         setAuth(token, refreshToken, user, deviceId);
       },
 
-      logout: () => {
+      logout: async () => {
+        const isSocial = getAuthUser()?.social;
+      
+        if (isSocial) {
+          try {
+            await axiosInstance.post("/api/v1/auth/logout", null, { withCredentials: true });
+          } catch (error) {
+            console.warn("서버 로그아웃 실패:", error);
+          }
+        }
+  
         set({ token: null, refreshToken: null, user: null, deviceId: null, isInitialized: false });
         removeAuth();
         sessionStorage.removeItem("auth-storage");
       }
+      
     }),
     {
       name: "auth-storage",

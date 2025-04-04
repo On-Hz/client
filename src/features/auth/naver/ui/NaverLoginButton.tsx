@@ -1,4 +1,3 @@
-import React from "react";
 import { SiNaver } from "react-icons/si";
 import { naverLogin } from "../api/naverLogin";
 

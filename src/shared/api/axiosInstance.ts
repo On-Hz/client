@@ -75,8 +75,8 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log("🔴 status:", error.response?.status);
-    console.log("🔴 error.response.data:", error.response?.data);
+    // console.log("🔴 status:", error.response?.status);
+    // console.log("🔴 error.response.data:", error.response?.data);
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
     
     if (error.response?.status === 401 && !originalRequest._retry) {
