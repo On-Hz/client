@@ -3,12 +3,12 @@ import { TracksSkeleton } from './TracksSkeleton';
 import StarIcon from '@mui/icons-material/Star';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAlbumTracks } from '../api/getAlbumTracksApi';
 import { Track } from '@/shared/model';
 const TrackItem = styled.li`
     &:hover .track-num,
-    &:hover .track-title {
+    &:hover .hz-track-title {
         color: #395EA1;
     }
 `;
@@ -16,14 +16,18 @@ const TrackItem = styled.li`
 const TrackListSec = () => {
   const { albumId } = useParams<{ albumId: string }>();
   const { data: tracks, isLoading } = useAlbumTracks(albumId!);
-
+  const navigate = useNavigate(); 
+  
   if (isLoading) return <TracksSkeleton />;
 
   return (
     <div className='w-[700px] hz-list'>
       <ul className='bg-[#F5F5F5] rounded-[5px] p-[28px]'>
         {tracks?.map((track:Track, idx:number) => (
-          <TrackItem key={track.id} className='cursor-pointer flex items-center justify-between border-gray2 border-b p-[12px]'>
+          <TrackItem 
+            key={track.id}
+            onClick={() => navigate(`/track/${track.id}`)}
+            className='cursor-pointer flex items-center justify-between border-gray2 border-b p-[12px]'>
             <div className='flex items-center hz-item-left'>
               <span className='text-[14px] pr-5 track-num'>{idx + 1}</span>
               <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'>{track.trackName}</p>
