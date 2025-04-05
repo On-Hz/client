@@ -4,7 +4,6 @@ import FaceIcon from '@mui/icons-material/Face';
 import { useAlbumDetail } from '../api/getAlbumDetailApi';
 import { useParams } from 'react-router-dom';
 import { AlbumSkeleton } from './AlbumSkeleton';
-import { BASE_IMAGE_URL } from '@/shared/constants/image';
 import { Artist } from '@/shared/model';
 
 const AlbumSec = () => {
@@ -12,7 +11,7 @@ const AlbumSec = () => {
     const { data: album, isLoading } = useAlbumDetail(albumId!);
 
     if (isLoading) return <AlbumSkeleton />;
-
+    
     return (
         <div className='w-[700px] hz-left'>
             <div className='flex items-end'>
@@ -36,7 +35,7 @@ const AlbumSec = () => {
                             <span className="flex items-center justify-center w-[30px] h-[30px] rounded-[50%] overflow-hidden bg-gray3 mb-2">
                                 {artist.profilePath ? (
                                 <img
-                                    src={`${BASE_IMAGE_URL}${artist.profilePath}`}
+                                    src={`${import.meta.env.VITE_IMAGE_URL}${artist.profilePath}`}
                                     alt={artist.name}
                                     className="w-full h-full object-cover"
                                 />
@@ -56,7 +55,7 @@ const AlbumSec = () => {
                                         <span className="flex items-center justify-center w-[30px] h-[30px] mr-1 mb-1 rounded-full overflow-hidden bg-gray3">
                                             {artist.profilePath ? (
                                             <img
-                                                src={`${BASE_IMAGE_URL}${artist.profilePath}`}
+                                                src={`${import.meta.env.VITE_IMAGE_URL}${artist.profilePath}`}
                                                 alt={artist.name}
                                                 className="w-full h-full object-cover"
                                             />
@@ -79,26 +78,6 @@ const AlbumSec = () => {
                             </p>   
                         </>                     
                     )}
-
-                    {/* {album.artists.map((artist: Artist) => (
-                        <div className='flex items-center' key={artist.id}>
-                            <span className='flex items-center justify-center w-[35px] h-[35px] rounded-[50%] overflow-hidden bg-gray3 mb-2'>
-                                {artist.profilePath ? (
-                                    <img
-                                        src={`${BASE_IMAGE_URL}${artist.profilePath}`}
-                                        alt={artist.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    ) : (
-                                    <FaceIcon
-                                        style={{ width: "100%", height: "100%" }}
-                                        className="text-gray2"
-                                    />
-                                )}
-                            </span>
-                            <p className='text-gray pl-[5px]'>{artist.name}</p>
-                        </div> 
-                    ))} */}
                     <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{album.title}</p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범</span>

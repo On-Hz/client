@@ -2,7 +2,6 @@ import { MypageTabs } from "../../tabs/ui/MypageTabs";
 import { openModalWithAuthCheck } from "@/shared/helpers";
 import { UserAvatar } from "../../userAvatar/ui/UserAvatar";
 import { UserRatingBox } from "../../userRatingBox.tsx/ui/UserRatingBox";
-import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { useAuthStore } from "@/shared/stores";
 import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
 
@@ -14,7 +13,7 @@ export const MypageUserInfo = () => {
 
   if (!user) return null;
 
-  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
+  const profileImageUrl = user?.profilePath ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}` : null;
 
   return (
     <div>

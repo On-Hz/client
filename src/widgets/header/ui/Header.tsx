@@ -13,7 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
-import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const Header: React.FC = () => {
@@ -53,7 +52,7 @@ export const Header: React.FC = () => {
     prevOpen.current = open;
   }, [open]);
 
-  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
+  const profileImageUrl = user?.profilePath ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}` : null;
   
 
   return (

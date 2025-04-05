@@ -6,7 +6,6 @@ import { validateProfileChange } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import { UpdateProfileParams } from "@/features/mypage/profile/model/types";
 import { useUpdateProfile } from "@/features/mypage/profile/hooks/useUpdateProfile";
-import { BASE_IMAGE_URL } from "@/shared/constants/image";
 import { ProfileImageCropModal } from "@/features/mypage/profile/ui/ProfileImageCropModal";
 import { nicknameCheck } from "@/features/mypage/profile/api/validateUserNicknameApi";
 import { useDeleteUserAccount } from "@/features/mypage/profile/hooks/useDeleteUserAccount";
@@ -91,7 +90,7 @@ export const ProfileModal: React.FC = () => {
 
   if (!user) return null;
 
-  const profileImageUrl = user?.profilePath ? `${BASE_IMAGE_URL}${user.profilePath}` : null;
+  const profileImageUrl = user?.profilePath ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}` : null;
   return (
     <>
       <ModalLayout
