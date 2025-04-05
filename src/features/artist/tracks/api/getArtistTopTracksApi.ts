@@ -3,7 +3,7 @@ import { axiosInstance } from "@/shared/api";
 import { ORDER_BY } from "@/shared/constants";
 import { Track } from "@/shared/model";
 
-const getArtistTopTracks = async (artistId: string) => {
+const getArtistTopTrackList = async (artistId: string) => {
   const url = `/api/v1/artists/${artistId}/tracks`;
   const response = await axiosInstance.get<Track[]>(url, {
     params: {
@@ -20,7 +20,7 @@ export const useArtistTopTracks = (
 ) => {
   return useQuery({
     queryKey: ["tracks_artist_home"],
-    queryFn: () => getArtistTopTracks(artistId),
+    queryFn: () => getArtistTopTrackList(artistId),
     enabled: options?.enabled ?? true,
   });
 };

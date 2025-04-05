@@ -1,14 +1,29 @@
+import { useParams } from "react-router-dom";
 import { SearchSectionWrapper } from "@/widgets/search";
-import { useTrack } from "../api/searchTracksApi";
-import { sectionProps } from "../../config/sectionProps";
 import { TrackListItem, TrackListItemSkeleton } from "@/shared/ui";
+import { Track } from "@/shared/model";
+import { sectionProps } from "../../config/sectionProps";
+import { useCombinedSearchResults } from "../../shared/hooks/useCombinedSearchResults";
 
-// 추후 개발
 export const SearchResultsTrack = ({
   hasShowMoreTab,
-}: // useInfiniteScroll,
-sectionProps) => {
-  const { data, isLoading } = useTrack();
+  initialData,
+}: sectionProps) => {
+  const { searchSlug: rawSearchSlug } = useParams<{ searchSlug: string }>()!;
+  const searchSlug = rawSearchSlug ?? "";
+
+  const {
+    data: tracks,
+    isLoading,
+    ref,
+    hasNextPage,
+  } = useCombinedSearchResults<Track>({
+    searchSlug,
+    type: "track",
+    hasShowMoreTab,
+    initialData,
+  });
+
   return (
     <SearchSectionWrapper
       title="노래"
@@ -20,8 +35,8 @@ sectionProps) => {
           Array.from({ length: 4 }, (v, i) => (
             <TrackListItemSkeleton key={`search-skeleton-${i}`} />
           ))}
-        {data &&
-          data.map((track) => (
+        {tracks &&
+          tracks.map((track) => (
             <TrackListItem
               key={track.id}
               id={track.id}
@@ -34,6 +49,9 @@ sectionProps) => {
               duration={track.duration}
             />
           ))}
+        {!hasShowMoreTab && hasNextPage && (
+          <div ref={ref} style={{ height: "1px" }} />
+        )}
       </ul>
     </SearchSectionWrapper>
   );

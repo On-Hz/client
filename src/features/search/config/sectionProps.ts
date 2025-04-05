@@ -1,4 +1,4 @@
 export interface sectionProps {
-  useInfiniteScroll: boolean;
   hasShowMoreTab: boolean;
+  initialData: any;
 }

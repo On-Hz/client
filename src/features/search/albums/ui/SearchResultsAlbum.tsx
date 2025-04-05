@@ -1,13 +1,29 @@
+import { useParams } from "react-router-dom";
 import { SearchSectionWrapper } from "@/widgets/search";
-import { sectionProps } from "../../config/sectionProps";
-import { useAlbum } from "../api/searchAlbumsApi";
 import { AlbumCard, AlbumCardSkeleton } from "@/shared/ui";
+import { Album } from "@/shared/model";
+import { sectionProps } from "../../config/sectionProps";
+import { useCombinedSearchResults } from "../../shared/hooks/useCombinedSearchResults";
 
 export const SearchResultsAlbum = ({
   hasShowMoreTab,
-}: //useInfiniteScroll,
-sectionProps) => {
-  const { data, isLoading } = useAlbum();
+  initialData,
+}: sectionProps) => {
+  const { searchSlug: rawSearchSlug } = useParams<{ searchSlug: string }>()!;
+  const searchSlug = rawSearchSlug ?? "";
+
+  const {
+    data: albums,
+    isLoading,
+    ref,
+    hasNextPage,
+  } = useCombinedSearchResults<Album>({
+    searchSlug,
+    type: "album",
+    hasShowMoreTab,
+    initialData,
+  });
+
   return (
     <SearchSectionWrapper
       title="앨범"
@@ -19,16 +35,19 @@ sectionProps) => {
           Array.from({ length: 5 }, (v, i) => (
             <AlbumCardSkeleton key={`search-skeleton-${i}`} />
           ))}
-        {data &&
-          data.map((album) => (
+        {albums &&
+          albums.map((album) => (
             <AlbumCard
               key={album.id}
               id={album.id}
               title={album.title}
-              artist={album.artist}
               coverPath={album.coverPath}
+              createdAt={album.createdAt}
             />
           ))}
+        {!hasShowMoreTab && hasNextPage && (
+          <div ref={ref} style={{ height: "1px" }} />
+        )}
       </div>
     </SearchSectionWrapper>
   );

@@ -1,14 +1,29 @@
+import { useParams } from "react-router-dom";
 import { SearchSectionWrapper } from "@/widgets/search";
-import { sectionProps } from "../../config/sectionProps";
-import { useArtist } from "../api/searchArtistsApi";
 import { ArtistAvatar, ArtistAvatarSkeleton } from "@/shared/ui";
+import { Artist } from "@/shared/model";
+import { sectionProps } from "../../config/sectionProps";
+import { useCombinedSearchResults } from "../../shared/hooks/useCombinedSearchResults";
 
 export const SearchResultsArtist = ({
   hasShowMoreTab,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  useInfiniteScroll,
+  initialData,
 }: sectionProps) => {
-  const { data, isLoading } = useArtist();
+  const { searchSlug: rawSearchSlug } = useParams<{ searchSlug: string }>()!;
+  const searchSlug = rawSearchSlug ?? "";
+
+  const {
+    data: artists,
+    isLoading,
+    ref,
+    hasNextPage,
+  } = useCombinedSearchResults<Artist>({
+    searchSlug,
+    type: "artist",
+    hasShowMoreTab,
+    initialData,
+  });
+
   return (
     <SearchSectionWrapper
       title="아티스트"
@@ -20,8 +35,8 @@ export const SearchResultsArtist = ({
           Array.from({ length: 5 }, (_, i) => (
             <ArtistAvatarSkeleton key={`search-skeleton-${i}`} />
           ))}
-        {!isLoading && data &&
-          data.map((artist) => (
+        {artists &&
+          artists.map((artist) => (
             <ArtistAvatar
               key={artist.id}
               id={artist.id}
@@ -29,6 +44,9 @@ export const SearchResultsArtist = ({
               profilePath={artist.profilePath}
             />
           ))}
+        {!hasShowMoreTab && hasNextPage && (
+          <div ref={ref} style={{ height: "1px" }} />
+        )}
       </div>
     </SearchSectionWrapper>
   );

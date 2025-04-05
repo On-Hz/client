@@ -5,3 +5,4 @@ export const REVIEW_TYPES = {
 } as const;
 
 export type ReviewType = (typeof REVIEW_TYPES)[keyof typeof REVIEW_TYPES];
+export type LowerCaseReviewType = Lowercase<ReviewType>;

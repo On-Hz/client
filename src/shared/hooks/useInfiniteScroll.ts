@@ -5,6 +5,7 @@ interface InfiniteScrollParams {
   endpoint: string;
   limit: number;
   orderBy: string;
+  additionalParams?: Record<string, any>;
   enabled?: boolean;
   queryKeyPrefix?: string;
 }
@@ -21,6 +22,7 @@ export function useInfiniteScroll<T extends { id: number }>({
   endpoint,
   limit,
   orderBy,
+  additionalParams = {},
   enabled = true,
   queryKeyPrefix = "infiniteData",
 }: InfiniteScrollParams) {
@@ -37,6 +39,7 @@ export function useInfiniteScroll<T extends { id: number }>({
           lastOrderValue,
           limit,
           orderBy,
+          ...additionalParams,
         },
       });
       return res.data;

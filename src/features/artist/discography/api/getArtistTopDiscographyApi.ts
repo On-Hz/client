@@ -3,7 +3,7 @@ import { axiosInstance } from "@/shared/api";
 import { ORDER_BY } from "@/shared/constants";
 import { Album } from "@/shared/model";
 
-const getArtistTopDiscography = async (artistId: string) => {
+const getArtistTopDiscographyList = async (artistId: string) => {
   const url = `/api/v1/artists/${artistId}/albums`;
   const response = await axiosInstance.get<Album[]>(url, {
     params: {
@@ -20,7 +20,7 @@ export const useArtistTopDiscography = (
 ) => {
   return useQuery({
     queryKey: ["discography_artist_home"],
-    queryFn: () => getArtistTopDiscography(artistId),
+    queryFn: () => getArtistTopDiscographyList(artistId),
     enabled: options?.enabled ?? true,
   });
 };

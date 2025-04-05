@@ -14,6 +14,7 @@ import MenuList from "@mui/material/MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { useQueryClient } from "@tanstack/react-query";
+import { SearchBar } from "../searchBar/ui/SearchBar";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
@@ -64,14 +65,7 @@ export const Header: React.FC = () => {
         <div className="hz-menu">
           <MenuIcon style={{ display: "none" }} className="hz-nav-icon" />
           <nav className="flex items-center hz-nav">
-            <div className="hz-search mr-[24px] px-[12px] bg-gray2 rounded-[5px] w-[360px] h-[40px] text-[14px] flex items-center">
-              <input
-                className="w-full h-full bg-transparent"
-                type="text"
-                placeholder="검색어를 입력해주세요."
-              />
-              <button>{/* <SearchIcon /> */}</button>
-            </div>
+            <SearchBar/>
             {user ? ( //로그인
               <div className="flex items-center ml-4">
                 <p className="text-[20px] pr-4">{user.userName} <span className="text-[15px]">님</span></p>
