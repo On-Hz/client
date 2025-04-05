@@ -20,7 +20,7 @@ export const useAlbumReviews = (
   options?: { enabled?: boolean }
 ) => {
   return useQuery({
-    queryKey: ["album_reviews"],
+    queryKey: ["album_review"],
     queryFn: () => getAlbumReviewList(albumId),
     enabled: options?.enabled ?? true,
   });

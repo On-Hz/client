@@ -21,7 +21,7 @@ const ReviewsForAlbum = () => {
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,
     enabled: infiniteMode,
-    queryKeyPrefix: "album_reviews"
+    queryKeyPrefix: "album_review"
   });
 
   const reviews = infiniteMode
