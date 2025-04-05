@@ -2,26 +2,26 @@ import React, { useEffect } from "react";
 import { ReviewCardContainer } from "@/features/review"
 import { ReviewCardSkeleton, RoundButton, SubTitle } from "@/shared/ui";
 import { useParams } from "react-router-dom";
-import { useAlbumReviews } from "../api/getAlbumReviewsApi";
+import { useTrackReviews } from "../api/getTrackReviewsApi";
 import { Review } from "@/shared/model";
 import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
 import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
 import { useInView } from "react-intersection-observer";
 
-const ReviewsForAlbum = () => {
-  const { albumId } = useParams<{ albumId: string }>() as { albumId: string };
-  const infiniteMode = true;
+const ReviewsForTrack = () => {
+  const { trackId } = useParams<{ trackId: string }>() as { trackId: string };
+  const infiniteMode = false;
 
-  const regularQuery = useAlbumReviews(albumId, {
+  const regularQuery = useTrackReviews(trackId, {
     enabled: !infiniteMode,
   });
 
   const infiniteQuery = useInfiniteScrollQuery<Review>({
-    endpoint: `/api/v1/reviews/${REVIEW_TYPES.ALBUM}/${albumId}`,
+    endpoint: `/api/v1/reviews/${REVIEW_TYPES.TRACK}/${trackId}`,
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,
     enabled: infiniteMode,
-    queryKeyPrefix: "album_review"
+    queryKeyPrefix: "track_review"
   });
 
   const reviews = infiniteMode
@@ -74,5 +74,5 @@ const ReviewsForAlbum = () => {
 };
 
 export const Reviews: React.FC = () => {
-  return <ReviewsForAlbum />;
+  return <ReviewsForTrack />;
 };

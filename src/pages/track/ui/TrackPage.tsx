@@ -1,5 +1,7 @@
 import React from "react";
-import { Album, Ratings, Reviews } from "@/features/track";
+import { Ratings, Reviews } from "@/features/track";
+import "./style.css";
+import { Album } from "@/features/track/detail/ui/Album";
 import "./style.css";
 
 export const TrackPage: React.FC = () => {

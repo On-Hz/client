@@ -1,26 +1,28 @@
 import { Review } from "@/shared/model";
-import { REVIEW_TYPES } from "@/shared/constants";
+import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
+import { axiosInstance } from "@/shared/api";
+import { useQuery } from "@tanstack/react-query";
 
-export const mockReviews: Review[] = Array(6)
-  .fill(null)
-  .map((_, i) => ({
-    id: i,
-    user: {
-      id: i + 100, // 예시용 dummy ID
-      email: `reviewer${i + 1}@example.com`,
-      userName: `Reviewer name ${i + 1}`,
-      profilePath: `https://picsum.photos/40/40?random=${i}`,
-      role: "USER",
-      socialType: "none",
-      social: false,
-      isInitialized:false
+const getTrackReviewList = async (trackId: string) => {
+  const url = `/api/v1/reviews/${REVIEW_TYPES.TRACK}/${trackId}`;
+  const response = await axiosInstance.get<Review[]>(url, {
+    params: {
+      limit: 8,
+      orderBy: ORDER_BY.CREATED_AT,
     },
-    rating: (i % 5) + 1,
-    content: `Review body ${
-      i + 1
-    } - 앨범은 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    Laboriosam explicabo blanditiis commodi esse, voluptate saepe dolorum quos? 
-    Repudiandae velit illum dolores dicta, consequatur accusantium numquam.`,
-    reviewType: REVIEW_TYPES.ALBUM,
-    entityId: i,
-  }));
+  });
+  console.log("getTrackReviewList :: ", response.data);
+  return response.data;
+};
+
+export const useTrackReviews = (
+  trackId: string,
+  options?: { enabled?: boolean }
+) => {
+  return useQuery({
+    queryKey: ["track_review"],
+    queryFn: () => getTrackReviewList(trackId),
+    enabled: options?.enabled ?? true,
+  });
+};
+

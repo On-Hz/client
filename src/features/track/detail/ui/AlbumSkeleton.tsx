@@ -19,6 +19,13 @@ const AlbumSecSkeleton = () => {
                         <p className='pl-[5px]'><Skeleton width="80px" /></p>
                     </div>
                     <p className='mt-[15px] mb-[17px] text-[36px] font-bold'><Skeleton width="200px" /></p>
+                    <div>
+                        <span className='text-[14px]'><Skeleton width="50px" /></span>
+                        <span className='text-[13px] font-light flex items-center'>
+                            <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
+                            <Skeleton width="60px" />
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -36,7 +36,10 @@ const RatingSec = () => {
               style={{ width: "24px", height: "24px" }}
             />
             <span className="text-[#1C66E0] px-[5px]">
-              {ratings ? ratings.averageRating.toFixed(2) : "0"}
+              {ratings.averageRating === 0
+                ? "0"
+                : ratings.averageRating.toFixed(1)
+              }
             </span>
             / 5
           </p>
