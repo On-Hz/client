@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import { shallow } from "zustand/shallow";
@@ -16,6 +16,7 @@ export const SearchBar: React.FC = React.memo(() => {
   const [searchSlug, setSearchSlug] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { recentSearches, addSearch, removeSearch } = useSearchHistoryStore(
     (state) => ({
@@ -36,12 +37,28 @@ export const SearchBar: React.FC = React.memo(() => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const { clearResults } = useSearchResultsStore(
+    (state) => ({
+      clearResults: state.clearResults,
+    }),
+    shallow
+  );
+
   useEffect(() => {
-    const parts = window.location.pathname.split("/");
-    const keyword = parts[2] ? decodeURIComponent(parts[2]) : "";
-    if (keyword && keyword !== currentKeyword) {
-      setCurrentKeyword(keyword);
-      setSearchSlug(keyword);
+    if (!location.pathname.startsWith("/search")) {
+      clearResults();
+      setSearchSlug("");
+    }
+  }, [location.pathname, clearResults]);
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/search")) {
+      const parts = window.location.pathname.split("/");
+      const keyword = parts[2] ? decodeURIComponent(parts[2]) : "";
+      if (keyword && keyword !== currentKeyword) {
+        setCurrentKeyword(keyword);
+        setSearchSlug(keyword);
+      }
     }
   }, [currentKeyword, setCurrentKeyword]);
 
