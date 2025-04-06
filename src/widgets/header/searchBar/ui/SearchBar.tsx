@@ -45,13 +45,6 @@ export const SearchBar: React.FC = React.memo(() => {
   );
 
   useEffect(() => {
-    if (!location.pathname.startsWith("/search")) {
-      clearResults();
-      setSearchSlug("");
-    }
-  }, [location.pathname, clearResults]);
-
-  useEffect(() => {
     if (location.pathname.startsWith("/search")) {
       const parts = window.location.pathname.split("/");
       const keyword = parts[2] ? decodeURIComponent(parts[2]) : "";
@@ -59,8 +52,12 @@ export const SearchBar: React.FC = React.memo(() => {
         setCurrentKeyword(keyword);
         setSearchSlug(keyword);
       }
+    } else{
+      clearResults();
+      setSearchSlug("");
     }
-  }, [currentKeyword, setCurrentKeyword]);
+
+  }, [location.pathname, clearResults, currentKeyword, setCurrentKeyword]);
 
   const displayedSearches = useMemo(
     () => recentSearches.slice(0, 5),
