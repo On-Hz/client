@@ -20,7 +20,6 @@ const getSearchTopResults = async <T>(
   return response.data;
 };
 
-// 공통화된 검색 훅
 export const useSearchTopResults = <T>(
   keyword: string,
   type: LowerCaseReviewType,

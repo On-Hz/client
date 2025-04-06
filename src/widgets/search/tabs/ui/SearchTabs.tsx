@@ -1,18 +1,23 @@
 import React from "react";
 import { NavLink, useParams } from "react-router-dom";
+import { shallow } from "zustand/shallow";
+import { useSearchResultsStore } from "@/shared/stores";
 import { TabButton } from "@/shared/ui";
-import { useSearchContext } from "@/features/search";
 
 export const SearchTabs: React.FC = () => {
   const { searchSlug } = useParams<{ searchSlug: string }>();
-  const { results } = useSearchContext();
+  const { results, isLoading } = useSearchResultsStore(
+      (state) => ({
+        results: state.results,
+        isLoading: state.isLoading,
+      }),
+      shallow
+    );
   const { tracks, artists, albums } = results;
 
   const hasAnyResults =
     tracks.length > 0 || artists.length > 0 || albums.length > 0;
-  if (!hasAnyResults) {
-    return null;
-  }
+  if (!hasAnyResults || isLoading) return null;
 
   return (
     <nav className="flex items-center space-x-1">
