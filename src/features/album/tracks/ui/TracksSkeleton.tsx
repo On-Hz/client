@@ -18,12 +18,9 @@ const TrackListSecSkeleton = () => {
                     <Skeleton width={25} height={20} className='mr-5' />
                     <Skeleton width="80%" height={20} />
                 </div>
-                <div className='flex items-center justify-end w-[150px] hz-item-info'>
-                    <Skeleton variant="circular" width={20} height={20} />
-                    <div className='pl-10 flex items-center'>
-                        <Skeleton variant="circular" width={18} height={18} className='mr-1'/>
-                        <Skeleton width={40} height={20} />
-                    </div>
+                <div className='flex items-center justify-end hz-item-info'>
+                    <Skeleton variant="circular" width={18} height={18} className='mr-1'/>
+                    <Skeleton width={40} height={20} />
                 </div>
             </TrackItem>
         ))}
