@@ -34,25 +34,22 @@ export const ArtistBanner = () => {
         <div
           className="bg-black bg-center bg-cover bg-opacity-60 bg-blend-overlay"
           style={{
-            backgroundImage: `url("https://cdn.shopify.com/s/files/1/0294/9673/7891/files/is-blackpink-disbanding_600x600.webp?v=1709131245")`,
+            backgroundImage: `url(${artistInfo?.profilePath})`,
           }}
-          //`url(${artistInfo?.profilePath})`
         ></div>
         {/* 중앙 (밝게) */}
         <div
           className="bg-center bg-cover hz-center-img"
           style={{
-            backgroundImage: `url("https://cdn.shopify.com/s/files/1/0294/9673/7891/files/is-blackpink-disbanding_600x600.webp?v=1709131245")`,
+            backgroundImage: `url(${artistInfo?.profilePath})`,
           }}
-          //`url(${artistInfo?.profilePath})`
         ></div>
         {/* 오른쪽 (어둡게) */}
         <div
           className="bg-black bg-center bg-cover bg-opacity-60 bg-blend-overlay"
           style={{
-            backgroundImage: `url("https://cdn.shopify.com/s/files/1/0294/9673/7891/files/is-blackpink-disbanding_600x600.webp?v=1709131245")`,
+            backgroundImage: `url(${artistInfo?.profilePath})`,
           }}
-          //`url(${artistInfo?.profilePath})`
         ></div>
       </div>
 

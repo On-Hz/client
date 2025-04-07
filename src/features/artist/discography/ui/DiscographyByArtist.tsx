@@ -46,7 +46,7 @@ export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {
             id={album.id}
             title={album.title}
             coverPath={album.coverPath}
-            createdAt={album.createdAt}
+            releaseDate={album.releaseDate}
           />
         ))}
 

@@ -7,7 +7,7 @@ interface AlbumProps {
   id: number;
   title: string;
   artist?: string;
-  createdAt?: string;
+  releaseDate?: string;
   coverPath?: string;
   isDifferentType?: boolean;
 }
@@ -16,7 +16,7 @@ export const AlbumCard = ({
   title,
   artist,
   coverPath,
-  createdAt,
+  releaseDate,
   isDifferentType,
 }: AlbumProps) => {
   return (
@@ -42,7 +42,7 @@ export const AlbumCard = ({
       </div>
       <div className="p-5 space-y-1">
         <p className="text-sm font-medium">{title}</p>
-        <p className="text-xs text-gray-500">{artist ? artist : formatDate(createdAt || "")}</p>
+        <p className="text-xs text-gray-500">{artist ? artist : formatDate(releaseDate || "")}</p>
       </div>
     </Link>
   );

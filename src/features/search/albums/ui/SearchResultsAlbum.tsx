@@ -42,7 +42,7 @@ export const SearchResultsAlbum = ({
               id={album.id}
               title={album.title}
               coverPath={album.coverPath}
-              createdAt={album.createdAt}
+              releaseDate={album.releaseDate}
             />
           ))}
         {!hasShowMoreTab && hasNextPage && (
