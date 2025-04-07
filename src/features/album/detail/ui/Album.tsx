@@ -5,6 +5,7 @@ import { useAlbumDetail } from '../api/getAlbumDetailApi';
 import { useParams } from 'react-router-dom';
 import { AlbumSkeleton } from './AlbumSkeleton';
 import { Artist } from '@/shared/model';
+import { formatDate } from '@/shared/helpers';
 
 const AlbumSec = () => {
     const { albumId } = useParams<{ albumId: string }>();
@@ -84,7 +85,7 @@ const AlbumSec = () => {
                         <span className='text-gray text-[14px]'>앨범</span>
                         <span className='text-gray text-[13px] font-light flex items-center'>
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
-                            {album.releaseDate}
+                            {formatDate(album.releaseDate || "")}
                         </span>
                     </div>
                 </div>

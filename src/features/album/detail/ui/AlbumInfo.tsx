@@ -3,6 +3,7 @@ import { AlbumInfoSkeleton } from './AlbumInfoSkeleton';
 import { useParams } from 'react-router-dom';
 import { useAlbumDetail } from '../api/getAlbumDetailApi';
 import { Artist } from '@/shared/model';
+import { formatDate } from '@/shared/helpers';
 const InformationSec = () => {
 
     const { albumId } = useParams<{ albumId: string }>();
@@ -15,7 +16,7 @@ const InformationSec = () => {
             <ul className='border border-gray4 rounded-[10px] p-[10px]'>
                 <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>발매일</span>
-                    <span className='flex-1'>{album.releaseDate}</span>
+                    <span className='flex-1'> {formatDate(album.releaseDate || "")}</span>
                 </li>
                 <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
                     <span className='text-gray5 pr-[10px]'>아티스트</span>

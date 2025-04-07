@@ -79,14 +79,14 @@ const AlbumSec = () => {
                             </p>   
                         </>                     
                     )}
-                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.title}</p>
-                    {/* <div>
-                        <span className='text-gray text-[14px]'>트랙</span>
+                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.track_title}</p>
+                    <div>
+                        <span className='text-gray text-[14px]'>앨범</span>
                         <span className='text-gray text-[13px] font-light flex items-center'>
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
-                            {track.releaseDate}
+                            {track.album_title}
                         </span>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>
