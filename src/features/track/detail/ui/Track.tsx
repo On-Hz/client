@@ -3,7 +3,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import FaceIcon from '@mui/icons-material/Face';
 import { useTrackDetail } from '../api/getTrackDetailApi';
 import { useParams } from 'react-router-dom';
-import { AlbumSkeleton } from './AlbumSkeleton';
+import { AlbumSkeleton } from './TrackSkeleton';
 import { Artist } from '@/shared/model';
 
 const AlbumSec = () => {
@@ -79,12 +79,12 @@ const AlbumSec = () => {
                             </p>   
                         </>                     
                     )}
-                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.track_title}</p>
+                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.title}</p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범</span>
                         <span className='text-gray text-[13px] font-light flex items-center'>
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
-                            {track.album_title}
+                            {track.albumTitle}
                         </span>
                     </div>
                 </div>

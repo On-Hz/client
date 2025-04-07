@@ -1,7 +1,6 @@
 import React from 'react';
 import { TracksSkeleton } from './TracksSkeleton';
 import StarIcon from '@mui/icons-material/Star';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAlbumTracks } from '../api/getAlbumTracksApi';

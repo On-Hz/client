@@ -6,12 +6,9 @@ import { useAuthStore } from "@/shared/stores";
 import { MypageUserInfoSkeleton } from "./MypageUserInfoSkeleton";
 
 export const MypageUserInfo = () => {
-  const user = useAuthStore((state) => state.user);
-  const isInitialized = useAuthStore((state) => state.isInitialized);
-  
-  if (!isInitialized) return <MypageUserInfoSkeleton />;
+  const { user } = useAuthStore();
 
-  if (!user) return null;
+  if (!user) return <MypageUserInfoSkeleton />;
 
   const profileImageUrl = user?.profilePath ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}` : null;
 
