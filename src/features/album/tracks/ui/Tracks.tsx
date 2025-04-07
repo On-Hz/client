@@ -32,14 +32,11 @@ const TrackListSec = () => {
               <span className='text-[14px] pr-5 track-num'>{idx + 1}</span>
               <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'>{track.trackName}</p>
             </div>
-            <div className='flex items-center justify-end w-[150px] hz-item-info'>
-              <button> <PlayCircleIcon /> </button>
-              <div className='pl-10'>
-                <StarIcon className='text-yellow' style={{ width: '18px', height: '18px' }} />
+            <div className='flex items-center justify-end hz-item-info'>
+              <StarIcon className='text-yellow' style={{ width: '18px', height: '18px' }} />
                 <span className='text-gray text-[14px]'> 
                   {track.rating ? `${track.rating} / 5` : "0 / 5"}
                 </span>
-              </div>
             </div>
           </TrackItem>
         ))}
