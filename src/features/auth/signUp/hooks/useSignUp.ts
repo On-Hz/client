@@ -36,7 +36,7 @@ export const useSignUp = () => {
       openAuthModal("login");
       openModal("alertModal", {
         type: "success",
-        message: "On-Hz 오신 것을 환영합니다!"
+        message:"On-Hz 회원가입에 성공하셨습니다."
       });
     },
     onError: (error) => {
