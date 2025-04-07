@@ -21,7 +21,7 @@ export const useUserReviews = (
     options?: { enabled?: boolean }
 ) => {
     return useQuery({
-        queryKey: ["user_reviews", userId, type],
+        queryKey: ["user_review", userId, type],
         queryFn: () => getUserReviewList(userId, type),
         enabled: options?.enabled ?? true,
     });

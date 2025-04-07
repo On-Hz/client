@@ -1,38 +1,80 @@
 import Rating from "@mui/material/Rating"
-import { useEffect, useState } from "react";
-import { fetchUserLikesData } from "../api/getUserLikedReviewsApi";
-import { LikeType } from "../model/types";
+import { useEffect } from "react";
 import { UserLikeSecSkeleton } from "./UserLikesSkeleton";
+import { useNavigate, useParams } from "react-router-dom";
+import { ORDER_BY } from "@/shared/constants";
+import { Review } from "@/shared/model";
+import { useUserLikeReviews } from "../api/getUserLikedReviewsApi";
+import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
+import { useInView } from "react-intersection-observer";
+import { formatDate } from "@/shared/helpers";
+import AlbumSharpIcon from '@mui/icons-material/AlbumSharp';
 
 export const UserLikeSec = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [Likes, setLikes] = useState<LikeType[] | null>(null);
-    
-     useEffect(() => {
-       // API 호출
-       const fetchData = async () => {
-         const { Likes, isLoading } = await fetchUserLikesData();
-         setLikes(Likes); // 데이터 저장
-         setIsLoading(isLoading); // 로딩 상태 설정
-       };
-   
-       fetchData(); // 데이터가져오기
-     }, []);
+    const { userId } = useParams<{ userId: string }>() as { userId: string };
+    const navigate = useNavigate(); 
+    const infiniteMode = true;
 
+    const regularQuery = useUserLikeReviews(userId, {
+        enabled: !infiniteMode
+    });
+
+    const infiniteQuery = useInfiniteScrollQuery<Review>({
+        endpoint: `/api/v1/users/${userId}/likes`,
+        limit: 10,
+        orderBy: ORDER_BY.CREATED_AT,
+        enabled: infiniteMode,
+        queryKeyPrefix: "user_like_review",
+    });
+
+    const likeReviews = infiniteMode
+        ? infiniteQuery.data?.pages.flat() ?? []
+        : regularQuery.data ?? [];
+
+    const isLoading = infiniteMode
+        ? infiniteQuery.isLoading
+        : regularQuery.isLoading;
+
+    const { ref, inView } = useInView({ threshold: 0 });
+    
+    useEffect(() => {
+        if (
+        infiniteMode &&
+        inView &&
+        infiniteQuery.hasNextPage &&
+        !infiniteQuery.isFetchingNextPage
+        ) {
+        infiniteQuery.fetchNextPage();
+        }
+    }, [inView, infiniteMode, infiniteQuery]);  
+    
     return( 
         <div className="">
             {isLoading ? (
                 <UserLikeSecSkeleton />
                 ) : (
                     <div className="flex flex-wrap pt-10 gap-7 hz-like-wrap">
-                        {Likes?.map((like) => (
-                            <div className="like-box relative w-[23%] h-[400px]">
-                                <div className="like-cover rounded-lg h-[200px] w-full overflow-hidden">
-                                    <img src={like.artist.avatar} alt={like.artist.name} className="object-cover w-full h-full"/>
+                        {likeReviews?.map((like) => (
+                            <div className="like-box relative w-[23%] h-[400px]" key={like.id}>
+                                <div className="like-cover rounded-lg relative h-[200px] w-full overflow-hidden">
+                                    <span className="absolute top-2 left-2 z-40 p-2 bg-white text-sm border border-transparent rounded-lg">{like.reviewType}</span>
+                                    {like.entityFilePath ? (
+                                        <img src={like.entityFilePath} alt={like.reviewType} className="object-cover w-full h-full"/>
+                                    ) : (
+                                        <div className="w-full h-full bg-black">
+                                            <AlbumSharpIcon sx={{
+                                                width: '100%',
+                                                height: '100%',
+                                                display: 'block',
+                                                objectFit: 'cover',
+                                                color: '#a1a1a1',
+                                            }}/>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="like-text m-auto absolute bottom-0 left-1/2 translate-x-[-50%] w-[84%] rounded-lg p-5 border border-gray3 bg-white">
-                                    <p className="text-gray5 text-[14px]">{like.creatTime}</p>
-                                    <p className="py-2 text-gray">{like.reviewer}</p>
+                                    <p className="text-gray5 text-[14px]">{formatDate(like.createdAt || "")}</p>
+                                    <p className="py-2 text-gray">{like.entityName}</p>
                                     <div>
                                     <Rating
                                         value={like.rating}
@@ -49,14 +91,21 @@ export const UserLikeSec = () => {
                                         />
                                     </div>
                                     <p className="my-5 text-gray line-clamp-2 min-h-10">
-                                        {like.body}
+                                        {like.content}
                                     </p>
-                                    <button className="underline text-point">리뷰 보기</button>
+                                    <button 
+                                        className="underline text-black hover:text-point"
+                                        onClick={() => navigate(`/review/${like.id}`)}
+                                    >리뷰 보기</button>
                                 </div>
                             </div>
                         ))}
                     </div>
-                )}
+                )
+            }
+            {infiniteMode && infiniteQuery.hasNextPage && (
+                <div ref={ref} style={{ height: "1px" }} />
+            )}
         </div>
     )
 }

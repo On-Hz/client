@@ -26,7 +26,7 @@ export const UserReviews = ({ type }: TabTypeProps) => {
     limit: 5, //테스트 1
     orderBy: ORDER_BY.CREATED_AT,
     enabled: infiniteMode,
-    queryKeyPrefix: "user_reviews",
+    queryKeyPrefix: "user_review",
   });
 
   const reviews = infiniteMode
