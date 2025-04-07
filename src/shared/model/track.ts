@@ -3,12 +3,14 @@ import { Rating } from "./rating";
 
 export interface Track {
   id: number;
-  trackName: string;
-  trackRank: number;
+  title: string;
+  rank: number;
   duration: string;
   coverPath: string;
   albumId: number;
+  albumTitle: string;
   artists: Artist[];
+  releaseDate: string;
   createdAt: string;
   rating?: Rating["averageRating"];
 }

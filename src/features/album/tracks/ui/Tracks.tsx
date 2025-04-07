@@ -30,7 +30,7 @@ const TrackListSec = () => {
             className='cursor-pointer flex items-center justify-between border-gray2 border-b p-[12px]'>
             <div className='flex items-center hz-item-left'>
               <span className='text-[14px] pr-5 track-num'>{idx + 1}</span>
-              <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'>{track.trackName}</p>
+              <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'>{track.title}</p>
             </div>
             <div className='flex items-center justify-end hz-item-info'>
               <StarIcon className='text-yellow' style={{ width: '18px', height: '18px' }} />

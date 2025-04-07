@@ -5,7 +5,7 @@ import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 interface TrackProps {
   id: number;
-  trackName: string;
+  title: string;
   artist?: string;
   coverPath: string;
   duration: string;
@@ -17,7 +17,7 @@ export const TrackListItem = ({
   id,
   coverPath,
   artist,
-  trackName,
+  title,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   duration,
   rating,
@@ -39,7 +39,7 @@ TrackProps) => {
           {coverPath ? (
             <img
               src={`${import.meta.env.VITE_IMAGE_URL}${coverPath}`}
-              alt={trackName}
+              alt={title}
               className="object-cover mr-5 rounded-lg w-14 h-14"
             />
           ) : (
@@ -51,7 +51,7 @@ TrackProps) => {
             </div>
           )}
           <div>
-            <p className="font-semibold">{trackName}</p>
+            <p className="font-semibold">{title}</p>
             <p className="text-sm text-gray-500">{artist}</p>
           </div>
         </div>

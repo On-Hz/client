@@ -43,7 +43,7 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
             <TrackListItem
               key={track.id}
               id={track.id}
-              trackName={track.trackName}
+              title={track.title}
               artist={
                 track.artists?.find((artist) => artist.role === "main")?.name ||
                 ""
