@@ -8,6 +8,7 @@ import React, {
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
+import CloseIcon from '@mui/icons-material/Close';
 import { shallow } from "zustand/shallow";
 import { useSearchHistoryStore } from "@/shared/stores/searchHistoryStore";
 import { useSearchResultsStore } from "@/shared/stores/searchResultsStore";
@@ -114,62 +115,100 @@ export const SearchBar: React.FC = React.memo(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
+  const [isSearchVisible, setSearchVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isNowMobile = window.innerWidth <= 800; //style.css 반응형 기준
+      setIsMobile(isNowMobile);
+  
+      // 800이상일 때 닫기
+      if (!isNowMobile) {
+        setSearchVisible(false);
+      }
+    };
+  
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleMobSearchBtn = () => {
+    if (isMobile) {
+      setSearchVisible((prev) => !prev);
+      //console.log('is',isSearchVisible);
+    }
+  };
 
   return (
     <div ref={wrapperRef} className="relative">
-      <div className="hz-search mr-[24px] px-[12px] bg-gray2 rounded-[5px] w-[360px] h-[40px] text-[14px] flex items-center">
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            handleSearch();
-          }}
-          className="mr-2 cursor-pointer"
-        >
-          <SearchIcon fontSize="small" />
-        </button>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="검색어를 입력해주세요."
-          value={searchSlug}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          onFocus={handleFocus}
-          className="w-full h-full bg-transparent outline-none"
-        />
-        {searchSlug && (
-          <button onClick={handleClear} className="cursor-pointer">
-            <ClearIcon fontSize="small" />
+      <button className={`hz-mob-search`} onClick={toggleMobSearchBtn}>
+        <SearchIcon fontSize="small"/>
+      </button>
+      <div className={`${
+          isSearchVisible ? "hz-search-show" : "hz-search-hide"} 
+          hz-search-box`}>
+        <div className="hz-search  px-[12px] bg-gray2 rounded-[5px] h-[40px] text-[14px] flex">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+            className="mr-2 cursor-pointer"
+          >
+            <SearchIcon fontSize="small" />
           </button>
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            value={searchSlug}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            onFocus={handleFocus}
+            className="w-full h-full bg-transparent outline-none"
+          />
+          {searchSlug && (
+            <button onClick={handleClear} className="cursor-pointer">
+              <ClearIcon fontSize="small" />
+            </button>
+          )}
+        </div>
+        <button
+          className="hz-mob-search-close p-1 border border-gray rounded-md bg-white ml-1"
+          onClick={() => setSearchVisible(false)}
+        >
+          <CloseIcon fontSize="small" />
+        </button>
+        {showDropdown && displayedSearches.length > 0 && (
+          <ul className="hz-search-drop absolute top-[calc(100%+4px)] left-0 bg-white border border-gray3 rounded-[5px] shadow-md py-2 z-50">
+            {displayedSearches.map((item, index) => (
+              <li
+                key={index}
+                className="flex items-center justify-between px-3 py-2 cursor-pointer group hover:bg-gray2"
+                onClick={() => {
+                  setSearchSlug(item);
+                  handleSearch(item);
+                }}
+              >
+                <span className="flex-1 mr-2 overflow-hidden text-ellipsis whitespace-nowrap">
+                  {item}
+                </span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeSearch(item);
+                  }}
+                  className="flex items-center justify-center invisible w-6 h-6 p-1 rounded-full cursor-pointer group-hover:visible hover:bg-gray4"
+                >
+                  <ClearIcon fontSize="small" />
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-      {showDropdown && displayedSearches.length > 0 && (
-        <ul className="absolute top-[calc(100%+4px)] left-0 w-[360px] bg-white border border-gray3 rounded-[5px] shadow-md py-2 z-50">
-          {displayedSearches.map((item, index) => (
-            <li
-              key={index}
-              className="flex items-center justify-between px-3 py-2 cursor-pointer group hover:bg-gray2"
-              onClick={() => {
-                setSearchSlug(item);
-                handleSearch(item);
-              }}
-            >
-              <span className="flex-1 mr-2 overflow-hidden text-ellipsis whitespace-nowrap">
-                {item}
-              </span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeSearch(item);
-                }}
-                className="flex items-center justify-center invisible w-6 h-6 p-1 rounded-full cursor-pointer group-hover:visible hover:bg-gray4"
-              >
-                <ClearIcon fontSize="small" />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 });

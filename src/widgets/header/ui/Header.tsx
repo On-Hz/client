@@ -11,7 +11,6 @@ import Popper from "@mui/material/Popper";
 import { PopperChildrenProps } from "@mui/material/Popper/BasePopper.types";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { useQueryClient } from "@tanstack/react-query";
 import { SearchBar } from "../searchBar/ui/SearchBar";
@@ -58,17 +57,16 @@ export const Header: React.FC = () => {
 
   return (
     <header className="border-b border-gray3 hz-header">
-      <div className="flex items-center justify-between px-[20px] py-5">
+      <div className="flex items-center justify-between px-[20px] py-5 hz-header-inner">
         <Link to="/">
-          <img src={logo} alt="On-Hz" className="w-[80px]" />
+          <img src={logo} alt="On-Hz" className="w-[80px] hz-logo" />
         </Link>
         <div className="hz-menu">
-          <MenuIcon style={{ display: "none" }} className="hz-nav-icon" />
           <nav className="flex items-center hz-nav">
             <SearchBar/>
             {user ? ( //로그인
               <div className="flex items-center ml-4">
-                <p className="text-[20px] pr-4">{user.userName} <span className="text-[15px]">님</span></p>
+                <p className="text-[20px] pr-4 hz-user-name">{user.userName} <span className="text-[15px]">님</span></p>
                 <Button
                   ref={anchorRef}
                   id="composition-button"

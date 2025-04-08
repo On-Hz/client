@@ -1,11 +1,26 @@
+
+.hz-mob-search,
+.hz-mob-search-close {@apply hidden}
+.hz-search-box{@apply flex}
+.hz-search {@apply w-[360px] mr-[24px] flex items-center}
+.hz-search-drop {width:calc(100% - 24px)}
 @media (max-width:800px){ /*max-width 800px*/
     .hz-header .hz-menu {position: relative;}
-    .hz-header .hz-menu nav button:not(.hz-login),
-    .hz-header .hz-search{display: none;}
+    .hz-mob-search{display: block;}
+    .hz-search-box{width: calc(100% - 210px); @apply hidden}
+    .hz-search{@apply w-full m-0 hidden}
+    .hz-search-drop{@apply w-full}
+    .hz-search-box.hz-search-show{@apply flex fixed right-5 top-8 z-50 py-1 bg-white}
+    .hz-search-box.hz-search-show .hz-mob-search-close{@apply block}
+    .hz-search-box.hz-search-hide{display: none;}
+    .hz-search-box.hz-search-hide .hz-mob-search-close{@apply hidden}
+
 }
 
 @media (max-width:500px){ /*max-width 500px*/
-    .hz-header {
-
-    }
+    .hz-header .hz-header-inner{@apply p-4}
+    .hz-header .hz-logo{@apply w-[60px]}
+    .hz-header .hz-user-name{@apply text-[16px]}
+    .hz-search-box{width: calc(100% - 140px);}
+    .hz-search-box.hz-search-show{@apply top-[18px] py-[5px] right-4}
 }
