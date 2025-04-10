@@ -1,7 +1,7 @@
 import logo from "/public/logo_text.svg";
-import { RiKakaoTalkFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
-import { NaverLoginButton } from "@/features/auth/naver/ui/NaverLoginButton";
+import { NaverLoginButton } from "@/features/auth/social/naver/ui/NaverLoginButton";
+import { KakaoLoginButton } from "@/features/auth/social/kakao/ui/KakaoLoginButton";
 
 export function AuthCommon() {
   return (
@@ -11,12 +11,10 @@ export function AuthCommon() {
         <img src={logo} alt="On-Hz" className="w-24 m-auto mb-1" />
       </div>
       {/* 소셜 로그인 버튼들 */}
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-2 items-center">
         <NaverLoginButton />
-        <button className="flex items-center justify-center w-8 h-8 rounded-full bg-yellow text-amber-950">
-          <RiKakaoTalkFill size={"1.8rem"} />
-        </button>
-        <button className="flex items-center justify-center w-8 h-8 bg-white border rounded-full border-gray4">
+        <KakaoLoginButton />
+        <button className="flex items-center justify-center w-[60px] h-[30px] bg-white border rounded-[4px] border-gray4">
           <FcGoogle size={"1.6rem"} />
         </button>
       </div>
