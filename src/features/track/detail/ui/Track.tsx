@@ -67,7 +67,10 @@ const TrackSec = () => {
                     <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.title}</p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범명</span>
-                        <span className='text-gray text-[13px] font-light flex items-center'>
+                        <span 
+                            className='text-gray text-[13px] font-light flex items-center cursor-pointer hover:text-point hover:underline' 
+                            onClick={() => navigate(`/album/${track.albumId}`)}
+                        >
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
                             {track.albumTitle}
                         </span>

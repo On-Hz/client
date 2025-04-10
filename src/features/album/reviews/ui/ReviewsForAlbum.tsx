@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ReviewCardContainer } from "@/features/review"
 import { ReviewCardSkeleton, RoundButton, SubTitle } from "@/shared/ui";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAlbumReviews } from "../api/getAlbumReviewsApi";
 import { Review } from "@/shared/model";
 import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
@@ -62,7 +62,9 @@ const ReviewsForAlbum = () => {
           </p>
         ) : (
           reviews.map((review: Review) => (
-            <ReviewCardContainer key={review.id} review={review} />
+            <Link to={`/review/${review.id}`} key={review.id}>
+                <ReviewCardContainer key={review.id} review={review} />
+            </Link>
           ))
         )}
         {infiniteMode && infiniteQuery.hasNextPage && (
