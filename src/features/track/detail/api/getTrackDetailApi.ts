@@ -10,7 +10,7 @@ const getTrackDetail = async (trackId: string) => {
 
 export const useTrackDetail = (trackId: string) => {
   return useQuery({
-    queryKey: ["track_detail"],
+    queryKey: ["track_detail", trackId],
     queryFn: () => getTrackDetail(trackId), 
     enabled: !!trackId,
   });

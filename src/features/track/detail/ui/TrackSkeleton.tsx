@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from '@mui/material';
 
 
-const AlbumSecSkeleton = () => {
+const TrackSecSkeleton = () => {
     return (
         <div className='w-[700px] hz-left'>
             <div className='flex items-end'>
@@ -33,8 +33,8 @@ const AlbumSecSkeleton = () => {
 }
 
 
-export const AlbumSkeleton: React.FC = () => {
+export const TrackSkeleton: React.FC = () => {
     return (
-        <AlbumSecSkeleton />
+        <TrackSecSkeleton />
     );
   };
