@@ -1,8 +1,7 @@
 import { FC, ReactNode, Suspense } from "react";
-import { QueryParamProvider } from "./WithQueryParam";
 import { BrowserRouter } from "react-router-dom";
 import { LoadingLogo } from "@/shared/ui/loadingLogo/LoadingLogo";
-import ScrollToTop from "./ScrollToTop";
+import ScrollManager from "./ScrollManager";
 
 export const WithRouter: FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -12,7 +11,7 @@ export const WithRouter: FC<{ children: ReactNode }> = ({ children }) => {
         v7_startTransition: true,
       }}
     >
-      <ScrollToTop />
+      <ScrollManager />
       <Suspense
         fallback={
           <div className="flex items-center justify-center w-full h-screen bg-white">
@@ -20,7 +19,7 @@ export const WithRouter: FC<{ children: ReactNode }> = ({ children }) => {
           </div>
         }
       >
-        <QueryParamProvider>{children}</QueryParamProvider>
+        {children}
       </Suspense>
     </BrowserRouter>
   );
