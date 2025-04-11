@@ -19,7 +19,7 @@ export const useArtistLatestReviews = (
   options?: { enabled?: boolean }
 ) => {
   return useQuery({
-    queryKey: ["reviews_artist_home"],
+    queryKey: ["reviews_artist_home", artistId],
     queryFn: () => getArtistLatestReviewList(artistId),
     enabled: options?.enabled ?? true,
   });

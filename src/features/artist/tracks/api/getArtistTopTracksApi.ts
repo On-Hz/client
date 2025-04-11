@@ -19,7 +19,7 @@ export const useArtistTopTracks = (
   options?: { enabled?: boolean }
 ) => {
   return useQuery({
-    queryKey: ["tracks_artist_home"],
+    queryKey: ["tracks_artist_home", artistId],
     queryFn: () => getArtistTopTrackList(artistId),
     enabled: options?.enabled ?? true,
   });

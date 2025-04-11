@@ -19,7 +19,7 @@ export const useArtistTopDiscography = (
   options?: { enabled?: boolean }
 ) => {
   return useQuery({
-    queryKey: ["discography_artist_home"],
+    queryKey: ["discography_artist_home", artistId],
     queryFn: () => getArtistTopDiscographyList(artistId),
     enabled: options?.enabled ?? true,
   });
