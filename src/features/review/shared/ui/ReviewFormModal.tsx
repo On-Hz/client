@@ -12,7 +12,6 @@ interface ReviewFormModalProps {
   initialData?: Partial<ReviewSubmitData>;
   submitReview: (review: ReviewSubmitData) => Promise<any>;
   alertMessage: string;
-  pageType?: string;
 }
 
 type ConfirmOptions = {
@@ -25,11 +24,10 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
   initialData,
   submitReview,
   alertMessage,
-  pageType,
 }) => {
   const { openModal, closeModal } = useModalStore();
   const invalidateRatingInfo = useInvalidateRatingInfo({
-    pageType: pageType || "",
+    pageType: initialData?.reviewType || "",
     entityId: initialData?.entityId?.toString() || "",
   });
   const [reviewModalFlag, setReviewModalFlag] = useState(true);
@@ -77,7 +75,7 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
       openModal("alertModal", {
         type: "success",
         message: alertMessage,
-        onConfirm: () => {
+        closeCallback: () => {
           invalidateRatingInfo();
           closeModal(modalName);
         },

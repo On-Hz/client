@@ -18,7 +18,6 @@ export const CreateReview: React.FC<CreateReviewProps> = ({ data }) => {
       submitReview={createReview}
       alertMessage="리뷰가 작성되었습니다."
       initialData={data}
-      pageType={data?.pageType}
     />
   );
 };
