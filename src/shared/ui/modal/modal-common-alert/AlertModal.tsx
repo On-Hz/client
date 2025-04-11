@@ -36,7 +36,6 @@ export const AlertModal: React.FC = () => {
 
   const handleClose = () => {
     if (closeCallback) {
-      console.log("closeCallback", closeCallback);
       closeCallback();
     }
     closeModal("alertModal");
