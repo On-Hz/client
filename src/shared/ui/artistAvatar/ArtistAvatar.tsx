@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
+import FaceIcon from "@mui/icons-material/Face";
 import "./style.css";
 interface ArtistAvatarProps {
   id: number;
@@ -20,7 +20,7 @@ export const ArtistAvatar = ({ id, profilePath, name }: ArtistAvatarProps) => {
           />
         ) : (
           <div className="p-10 text-center">
-            <FaUser
+            <FaceIcon
               style={{ width: "100%", height: "100%" }}
               className="text-gray2"
             />
