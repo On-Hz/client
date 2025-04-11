@@ -11,6 +11,7 @@ export const WithErrorBoundary: FC<WithErrorBoundaryProps> = ({ children }) => {
   const navigate = useNavigate();
   return (
     <ErrorBoundary
+      key={window.location.pathname}
       FallbackComponent={ErrorPage}
       onReset={() => {
         navigate("/", { replace: true })

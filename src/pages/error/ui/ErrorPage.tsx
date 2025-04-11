@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FallbackProps } from "react-error-boundary";
-import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import logoWithText from "/public/logo_text.svg";
 import logo from "/public/logo.svg";
@@ -10,15 +9,6 @@ export const ErrorPage: React.FC<FallbackProps> = ({
   error,
   resetErrorBoundary,
 }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname !== "/error") {
-      navigate("/error", { replace: true });
-    }
-  }, [location, navigate]);
-  
   // HTTP 상태 코드를 결정 (axios 에러, error.status, 또는 NotFoundError)
   let status: number | null = null;
   if (axios.isAxiosError(error) && error.response) {
