@@ -83,7 +83,7 @@ const RatingSec = () => {
             }
             console.log('click');
           }}
-          text="리뷰 작성"
+          text={ratings?.userRating > -1 ? "리뷰 수정" : "리뷰 작성"}
         />
       </div>
     </div>
