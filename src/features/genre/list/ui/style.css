@@ -1,0 +1,101 @@
+/* 기본 스타일 */
+.hz-genre-img {
+  max-width: 250px;
+  width: 40%;
+  aspect-ratio: 1.5/1;
+}
+
+.hz-genre-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 1300px) {
+  .hz-genre-img {
+    max-width: 220px;
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .hz-genre-img {
+    max-width: 200px;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .hz-genre-img {
+    max-width: 180px;
+    width: 35%;
+  }
+
+  .hz-genre-card h3 {
+    font-size: 1rem;
+  }
+
+  .hz-genre-card p {
+    font-size: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .flex.flex-1.overflow-hidden.border.rounded-lg {
+    flex-direction: column;
+  }
+
+  .hz-genre-img {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 2/1;
+  }
+
+  .hz-genre-card {
+    width: 100%;
+  }
+
+  .hz-genre-card .flex.items-center.justify-between {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hz-genre-card .flex.items-center.justify-between .Rating,
+  .hz-genre-card .flex.items-center.justify-between [name^="album-rating-"] {
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .flex.items-center.justify-center.mr-3 {
+    margin-right: 0.5rem;
+  }
+
+  .hz-genre-card {
+    padding: 0.75rem;
+  }
+
+  .hz-genre-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hz-genre-card p {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .inline-block.px-3.py-1.text-xs {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .flex.flex-wrap.gap-2 {
+    gap: 0.25rem;
+  }
+}

@@ -1,0 +1,128 @@
+/* hz- 접두사를 사용한 배너 반응형 스타일 */
+
+/* 기본 스타일 (큰 화면) */
+.hz-banner-circles-container {
+  display: flex;
+  align-items: center;
+  margin-left: -11rem;
+  margin-right: -11rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.hz-banner-circle {
+  border-radius: 9999px;
+  width: clamp(200px, 22vw, 350px);
+  height: clamp(200px, 22vw, 350px);
+}
+
+.hz-banner-description {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: white;
+  width: 53%;
+  text-align: left;
+  z-index: 2;
+}
+
+.hz-banner-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  font-size: clamp(1rem, 4.5vw, 3rem);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* 1200px 이하에서 레이아웃 변경 시작 */
+@media screen and (max-width: 1200px) {
+  /* 첫 번째 동그라미만 보이게 설정 */
+  .hz-banner-circles-container {
+    justify-content: center;
+  }
+
+  .hz-banner-circles-container > div:nth-child(2),
+  .hz-banner-circles-container > div:nth-child(3) {
+    display: none;
+  }
+
+  .hz-banner-circles-container > div:first-child {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* 설명 텍스트 위치 및 크기 조정 */
+  .hz-banner-description {
+    width: 100% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    font-size: 1rem;
+  }
+
+  /* upperGenre 텍스트를 아래로 이동 */
+  .hz-banner-title {
+    top: auto !important;
+    bottom: 5% !important;
+    font-size: clamp(1rem, 3.5vw, 2.5rem) !important;
+  }
+}
+
+/* 태블릿 크기 조정 */
+@media screen and (max-width: 992px) {
+  /* 동그라미 크기 조정 */
+  .hz-banner-circle {
+    width: clamp(180px, 50vw, 300px) !important;
+    height: clamp(180px, 50vw, 300px) !important;
+  }
+}
+
+/* 모바일 크기 조정 */
+@media screen and (max-width: 768px) {
+  /* stroke 스타일 숨기기 */
+  .hz-banner-stroke {
+    display: none;
+  }
+
+  .hz-banner-description {
+    width: 100% !important;
+    font-size: 1rem;
+  }
+
+  /* upperGenre 크기 및 위치 조정 */
+  .hz-banner-title {
+    font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
+    bottom: 2% !important;
+  }
+}
+
+/* 작은 모바일 화면 */
+@media screen and (max-width: 480px) {
+  /* 동그라미 크기 더 줄이기 */
+  .hz-banner-circle {
+    width: clamp(150px, 70vw, 200px) !important;
+    height: clamp(150px, 70vw, 200px) !important;
+  }
+
+  /* description 텍스트 크기 조정 */
+  .hz-banner-description {
+    font-size: 0.8rem;
+  }
+
+  /* upperGenre 크기 조정 */
+  .hz-banner-title {
+    font-size: 1.5rem !important;
+    bottom: 1% !important;
+  }
+}

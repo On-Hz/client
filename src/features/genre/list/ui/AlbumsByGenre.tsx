@@ -5,6 +5,7 @@ import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import { useAlbumsByGenre } from "../api/getAlbumsByGenreApi";
 import { AlbumsByGenreSkeleton } from "./AlbumsByGenreSkeleton";
 import { formatDate } from "@/shared/helpers";
+import "./style.css";
 
 interface AlbumsByGenreProps {
   genreCode: string;
@@ -26,14 +27,18 @@ export const AlbumsByGenre: React.FC<AlbumsByGenreProps> = ({ genreCode }) => {
           const formattedIndex = (index + 1).toString().padStart(2, "0");
 
           return (
-            <Link to={`/album/${album.id}`} key={album.id} className="relative flex mb-6">
+            <Link
+              to={`/album/${album.id}`}
+              key={album.id}
+              className="relative flex mb-6"
+            >
               <div className="flex items-center justify-center mr-3 text-base font-medium text-point w-9">
                 {formattedIndex}
               </div>
 
               <div className="flex flex-1 overflow-hidden border rounded-lg border-gray5 bg-white transition-all hover:translate-y-[-2px] hover:shadow-md">
                 <div
-                  className="max-w-[250px] w-[40%]"
+                  className="hz-genre-img max-w-[250px] w-[40%]"
                   style={{ aspectRatio: "1.5/1" }}
                 >
                   {album.coverPath ? (
@@ -52,7 +57,7 @@ export const AlbumsByGenre: React.FC<AlbumsByGenreProps> = ({ genreCode }) => {
                   )}
                 </div>
 
-                <div className="relative flex flex-col justify-between flex-1 p-4">
+                <div className="hz-genre-card relative flex flex-col justify-between flex-1 p-4">
                   <div>
                     <p className="mb-2 text-sm text-gray5">
                       {formatDate(album.releaseDate)}
@@ -81,6 +86,7 @@ export const AlbumsByGenre: React.FC<AlbumsByGenreProps> = ({ genreCode }) => {
                     </div>
 
                     <Rating
+                      className="Rating"
                       name={`album-rating-${album.id}`}
                       value={album.rating}
                       readOnly

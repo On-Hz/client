@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { useGenreDetailInfo } from "@/features/genre";
 import { getStrokeStyle } from "@/shared/helpers";
 import { GENRE_COLOR_PALETTES } from "@/shared/constants";
+import "./style.css";
 
 interface GenreBannerProps {
   genreCode: string;
@@ -26,15 +27,15 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
   return (
     <Box
       component="section"
-      className="relative flex items-center justify-center w-full py-10 overflow-hidden"
+      className="hz-banner-container relative flex items-center justify-center w-full py-10 overflow-hidden"
       style={style}
     >
-      <span style={getStrokeStyle(upperGenre || "")}>{upperGenre}</span>
+      <span className="hz-banner-stroke" style={getStrokeStyle(upperGenre || "")}>{upperGenre}</span>
 
-      <Box className="flex items-center space-x-[-11rem] z-10">
+      <Box className="hz-banner-circles-container flex items-center space-x-[-11rem] z-10">
         <div className="relative overflow-hidden" style={{ zIndex: 1 }}>
           <div
-            className="rounded-full"
+            className="hz-banner-circle rounded-full"
             style={{
               backgroundColor: `${colors.lightMuted}`,
               width: "clamp(200px, 22vw, 350px)",
@@ -42,7 +43,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
             }}
           />
           <div
-            className="absolute left-0 px-4 text-sm leading-relaxed text-white top-1/2"
+            className="hz-banner-description absolute left-0 px-4 text-sm leading-relaxed text-white top-1/2"
             style={{
               transform: "translateY(-50%)",
               zIndex: 2,
@@ -56,7 +57,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
 
         <div className="relative" style={{ zIndex: 2 }}>
           <div
-            className="rounded-full"
+            className="hz-banner-circle rounded-full"
             style={{
               backgroundColor: `${colors.muted}`,
               width: "clamp(200px, 22vw, 350px)",
@@ -67,7 +68,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
 
         <div className="relative" style={{ zIndex: 3 }}>
           <div
-            className="flex items-center justify-center overflow-hidden rounded-full"
+            className="hz-banner-circle flex items-center justify-center overflow-hidden rounded-full"
             style={{
               backgroundColor: `${colors.darkMuted}`,
               width: "clamp(200px, 22vw, 350px)",
@@ -78,7 +79,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
       </Box>
 
       <div
-        className="absolute font-bold text-center text-white"
+        className="hz-banner-title absolute font-bold text-center text-white"
         style={{
           top: "50%",
           left: "50%",

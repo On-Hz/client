@@ -42,7 +42,7 @@ export const AlbumCard = ({
       </div>
       <div className="p-5 space-y-1">
         <p className="text-sm font-medium">{title}</p>
-        <p className="text-xs text-gray-500">{artist ? artist : formatDate(releaseDate || "")}</p>
+        <p className="text-xs text-gray-500">{artist ? artist : (releaseDate ? formatDate(releaseDate) : "")}</p>
       </div>
     </Link>
   );

@@ -62,13 +62,9 @@
 
 /* max-width 800px */
 @screen max-800 {
-  #rv-page .hz-cover {
-    @apply w-[200px] h-[200px];
-  }
   #rv-page .hz-title {
     @apply text-[20px];
   }
-
   #rv-page .review-banner {
     @apply flex-col items-center;
   }
@@ -76,6 +72,7 @@
     @apply w-[300px] h-[200px] mb-4;
   }
   #rv-page .hz-cover {
+    @apply w-[200px] h-[200px];
     @apply left-28;
   }
   #rv-page .hz-album {
@@ -87,7 +84,8 @@
 /* max-width 500px */
 @screen max-500 {
   #rv-page .hz-cover {
-    @apply w-[140px] h-[140px];
+    @apply w-[180px] h-[180px];
+    @apply left-32;
   }
   #rv-page .hz-top > div {
     @apply block;
