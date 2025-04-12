@@ -34,11 +34,16 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
   return (
     <ArtistSectionWrapper title={useInfiniteScroll ? "Tracks" : "Top Tracks"}>
       <ul className="space-y-2">
-        {isLoading &&
+        {isLoading ? (
           Array.from({ length: 5 }, (v, i) => (
             <TrackListItemSkeleton key={`search-skeleton-${i}`} />
-          ))}
-        {tracks &&
+          ))
+        ) : tracks.length === 0 ? (
+          <p className="py-12 text-center text-gray text-[16px] w-full">
+            등록된 트랙이 없습니다.
+          </p>
+        ) : (
+          tracks &&
           tracks.map((track) => (
             <TrackListItem
               key={track.id}
@@ -52,7 +57,8 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
               duration={track.duration}
               rating={track.rating}
             />
-          ))}
+          ))
+        )}
         {useInfiniteScroll && hasNextPage && (
           <div ref={ref} style={{ height: "1px" }} />
         )}

@@ -36,19 +36,25 @@ export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {
   return (
     <ArtistSectionWrapper title={"Discography"}>
       <div className="flex flex-wrap gap-4 hz-dscography">
-        {isLoading &&
+        {isLoading ? (
           Array.from({ length: 5 }, (_, i) => (
             <AlbumCardSkeleton key={`search-skeleton-${i}`} />
-          ))}
-        {albums.map((album) => (
-          <AlbumCard
-            key={album.id}
-            id={album.id}
-            title={album.title}
-            coverPath={album.coverPath}
-            releaseDate={album.releaseDate}
-          />
-        ))}
+          ))
+        ) : albums.length === 0 ? (
+          <p className="py-12 text-center text-gray text-[16px] w-full">
+           등록된 앨범이 없습니다.
+          </p>
+        ) : (
+          albums.map((album) => (
+            <AlbumCard
+              key={album.id}
+              id={album.id}
+              title={album.title}
+              coverPath={album.coverPath}
+              releaseDate={album.releaseDate}
+            />
+          ))
+        )}
 
         {useInfiniteScroll && hasNextPage && (
           <div ref={ref} style={{ height: "1px" }} />

@@ -41,7 +41,7 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
   return (
     <ArtistSectionWrapper title={"Reviews"}>
       <div className="hz-review-sec">
-        {isLoading &&
+        {isLoading ? (
           Array.from({ length: 8 }, (_, i) => (
             <div
               className={`${
@@ -51,8 +51,13 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
             >
               <ReviewCardSkeleton key={`search-skeleton-${i}`} />
             </div>
-          ))}
-        {reviews &&
+          ))
+        ) : reviews.length === 0 ? (
+            <p className="py-12 text-center text-gray text-[16px] w-full">
+              작성된 리뷰가 없습니다.
+            </p>
+        ) : (
+          reviews &&
           reviews.map((review) => (
             <Link
               to={`/review/${review.id}`}
@@ -66,7 +71,8 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
                 hasEllipsis={!useInfiniteScroll}
               />
             </Link>
-          ))}
+          ))
+        )}
         {useInfiniteScroll && hasNextPage && (
           <div ref={ref} style={{ height: "1px" }} />
         )}
