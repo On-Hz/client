@@ -31,7 +31,7 @@ export const ReviewBanner: React.FC<ReviewBannerProps> = ({
   return (
     <section className="review-banner">
       <div className="flex items-center hz-top">
-        <div className="hz-container mb-10">
+        <div className="hz-container">
           <div className="hz-cover">
             <div className="absolute w-20 h-20 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full top-1/2 left-1/2" />
           </div>
