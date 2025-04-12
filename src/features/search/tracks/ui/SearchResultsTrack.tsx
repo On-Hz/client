@@ -47,6 +47,7 @@ export const SearchResultsTrack = ({
               }
               coverPath={track.coverPath}
               duration={track.duration}
+              rating={track.rating}
             />
           ))}
         {!hasShowMoreTab && hasNextPage && (

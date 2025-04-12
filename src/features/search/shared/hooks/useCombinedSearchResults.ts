@@ -27,7 +27,7 @@ export const useCombinedSearchResults = <T extends { id: number }>({
     orderBy: ORDER_BY.CREATED_AT,
     additionalParams: { keyword: searchSlug, type },
     enabled: !hasShowMoreTab,
-    queryKeyPrefix: `${type}s_search`,
+    queryKeyPrefix: `${type}s_search_${searchSlug}`,
   });
 
   const data: T[] = hasShowMoreTab

@@ -30,7 +30,7 @@ export const SearchResultsAlbum = ({
       linkTo="album"
       hasShowMoreTab={hasShowMoreTab}
     >
-      <div className="flex justify-center gap-5 pb-4 space-x-4">
+      <div className="flex flex-wrap gap-7 pb-4 justify-between">
         {isLoading &&
           Array.from({ length: 5 }, (v, i) => (
             <AlbumCardSkeleton key={`search-skeleton-${i}`} />
