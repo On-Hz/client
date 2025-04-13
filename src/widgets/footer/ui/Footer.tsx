@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "/public/logo_white_text.svg";
 
 export const Footer = () => {
@@ -6,18 +7,18 @@ export const Footer = () => {
       <div className="px-[24px] py-[32px]">
         <img src={logo} alt="On-Hz" width="80px" className="mr-[15px]" />
         <div className="flex items-end">
-          <a
-            href=""
+          <Link
+            to="/terms"
             className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors"
           >
             서비스 이용약관 |
-          </a>
-          <a
-            href=""
+          </Link>
+          <Link
+            to="/privacy"
             className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors"
           >
             개인정보 처리방침 |
-          </a>
+          </Link>
           <a
             href=""
             className="text-gray5 text-[12px] mr-[4px] transform hover:text-gray2 transition-colors"

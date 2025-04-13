@@ -30,6 +30,7 @@ export default {
   },
   plugins: [
     require('@tailwindcss/line-clamp'), //말줄임
+    require('@tailwindcss/typography')
   ],
 }
 

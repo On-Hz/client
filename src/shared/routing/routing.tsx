@@ -73,6 +73,12 @@ const pages = {
   genre: lazy(() =>
     import("@/pages/genre").then((m) => ({ default: m.GenrePage }))
   ),
+  privacy: lazy(() =>
+    import("@/pages/legal/privacy").then((m) => ({ default: m.PrivacyPage }))
+  ),
+  terms: lazy(() =>
+    import("@/pages/legal/terms").then((m) => ({ default: m.TermsPage }))
+  ),
 };
 
 export const Routing: React.FC = () => {
@@ -107,6 +113,8 @@ export const Routing: React.FC = () => {
 
       <Route path="/review/:reviewId" element={<pages.review />} />
       <Route path="/genre/:genreCode" element={<pages.genre />} />
+      <Route path="/privacy" element={<pages.privacy />} />
+      <Route path="/terms" element={<pages.terms />} />
       <Route path="/naver-callback" element={<NaverCallback />} />
       <Route path="/kakao-callback" element={<KakaoCallback />} />
       <Route path="*" element={<NotFoundRoute />} />
