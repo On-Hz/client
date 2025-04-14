@@ -9,3 +9,4 @@ export { formatDate } from "./formatDateHelper";
 export { extractEntityDetails } from "./extractEntityDetailsHelper";
 export { getReviewModalOptions } from "./getReviewModalOptions";
 export { isReviewQuery } from "./isReviewQuery";
+export { formatDuration } from "./formatDurationHelper";

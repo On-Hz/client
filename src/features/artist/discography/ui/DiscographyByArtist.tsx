@@ -28,7 +28,7 @@ export const DiscographyByArtist = ({ useInfiniteScroll }: sectionProps) => {
     infiniteQueryParams: {
       endpoint: `/api/v1/artists/${artistId}/albums`,
       limit: 5,
-      orderBy: ORDER_BY.CREATED_AT,
+      orderBy: ORDER_BY.RELEASE_DATE,
       queryKeyPrefix: "discography_artist",
     },
   });

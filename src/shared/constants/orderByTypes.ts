@@ -1,7 +1,8 @@
 export const ORDER_BY = {
   CREATED_AT: "createdAt",
   AVERAGE_RATING: "averageRating",
-  RATING_COUNT: "ratingCount"
+  RATING_COUNT: "ratingCount",
+  RELEASE_DATE: "releaseDate",
 } as const;
 
 export const SORT_ORDER = {
@@ -9,4 +10,4 @@ export const SORT_ORDER = {
   DESC: "-",
 } as const;
 
-export type OrderByType = typeof ORDER_BY[keyof typeof ORDER_BY];
+export type OrderByType = (typeof ORDER_BY)[keyof typeof ORDER_BY];

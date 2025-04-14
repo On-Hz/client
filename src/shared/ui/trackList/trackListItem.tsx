@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-// import { IconButton } from "@mui/material";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
+import StarIcon from "@mui/icons-material/Star";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { formatDuration } from "@/shared/helpers";
 
 interface TrackProps {
   id: number;
   title: string;
   artist?: string;
   coverPath: string;
-  duration: string;
+  duration: number;
   rating?: number;
-  // setAnchorEl?: (element: HTMLElement | null) => void;
+
 }
 
 export const TrackListItem = ({
@@ -18,16 +18,11 @@ export const TrackListItem = ({
   coverPath,
   artist,
   title,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   duration,
   rating,
-}: // setAnchorEl,
+}:
 TrackProps) => {
-  // const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   if (setAnchorEl) {
-  //     setAnchorEl(event.currentTarget);
-  //   }
-  // };
+
 
   return (
     <li key={id}>
@@ -57,12 +52,15 @@ TrackProps) => {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* <IconButton onClick={handleMenuClick} size="small">
-              <MoreVertIcon />
-            </IconButton> */}
+          <span className="text-sm text-gray-600">{formatDuration(duration)}</span>
           <div className="flex items-center">
-            <span className="text-xl text-yellow-400">★</span>
-            <span className="ml-1 text-sm text-gray-600">{rating} / 5</span>
+            <StarIcon
+              className="text-yellow"
+              style={{ width: "22px", height: "22px" }}
+            />
+            <span className="ml-1 text-sm text-gray-600">
+              {rating ? `${rating} / 5` : "0 / 5"}
+            </span>
           </div>
         </div>
       </Link>

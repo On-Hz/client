@@ -24,7 +24,7 @@ export const ArtistBanner = () => {
   }
 
   return (
-    <div className="grid relative w-full h-[450px] bg-point hz-artist-banner">
+    <div className="grid relative w-full h-[450px] hz-artist-banner">
       {/* 3열 그리드로 하나의 이미지를 각각 배경으로 */}
       <div
         className="grid h-full grid-cols-3 hz-artist-banner-img"
@@ -67,7 +67,7 @@ export const ArtistBanner = () => {
             <div className="text-[40px] pb-1">{ratingInfo?.averageRating}</div>
             <p className="text-base">평균 평점</p>
           </div>
-          <div className="w-px bg-white h-14"></div>
+          <div className="w-px bg-white h-16"></div>
           <ArtistRatingButton
             entityId={artistInfo.id}
             title={artistInfo.name}

@@ -5,7 +5,7 @@ export interface Track {
   id: number;
   title: string;
   rank: number;
-  duration: string;
+  duration: number;
   coverPath: string;
   albumId: number;
   albumTitle: string;
