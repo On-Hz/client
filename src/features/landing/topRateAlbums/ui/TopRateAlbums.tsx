@@ -52,7 +52,7 @@ const AlbumItem: React.FC = () => {
 
 export const TopRateAlbums: React.FC = () => {
   return (
-    <section className="px-4 py-8 max-800:py-0">
+    <section className="px-4 py-8 max-800:p-0">
       <h2 className="mb-4 text-2xl font-bold hz-landing-title">인기 앨범</h2>
       <AlbumItem />
     </section>

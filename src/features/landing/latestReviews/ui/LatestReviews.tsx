@@ -16,7 +16,7 @@ const renderReviewPage = (reviews: Review[]) => (
       <Link
         to={`/review/${review.id}`}
         key={review.id}
-        className="flex flex-col bg-white border rounded p-7 border-gray5"
+        className="flex flex-col bg-white border rounded p-7 border-gray5 w-[410px]  max-800:w-[280px] max-800:p-4"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center w-56">
@@ -55,7 +55,7 @@ const renderReviewPage = (reviews: Review[]) => (
               />
             </div>
           )}
-          <div className="flex flex-col justify-between h-24 w-60">
+          <div className="flex flex-col justify-between h-24 w-full flex-1">
             <p className="h-auto overflow-hidden text-sm text-gray-600 line-clamp-3">
               {review.content}
             </p>
