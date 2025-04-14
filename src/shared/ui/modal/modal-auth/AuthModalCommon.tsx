@@ -1,7 +1,5 @@
+import { SocialLoginButton } from "@/features/auth/social/ui/socialLoginButton";
 import logo from "/public/logo_text.svg";
-import { FcGoogle } from "react-icons/fc";
-import { NaverLoginButton } from "@/features/auth/social/naver/ui/NaverLoginButton";
-import { KakaoLoginButton } from "@/features/auth/social/kakao/ui/KakaoLoginButton";
 
 export function AuthCommon() {
   return (
@@ -12,11 +10,9 @@ export function AuthCommon() {
       </div>
       {/* 소셜 로그인 버튼들 */}
       <div className="flex justify-center gap-2 items-center">
-        <NaverLoginButton />
-        <KakaoLoginButton />
-        <button className="flex items-center justify-center w-[60px] h-[30px] bg-white border rounded-[4px] border-gray4">
-          <FcGoogle size={"1.6rem"} />
-        </button>
+        <SocialLoginButton provider="naver" />
+        <SocialLoginButton provider="kakao" />
+        <SocialLoginButton provider="google" />
       </div>
     </div>
   );

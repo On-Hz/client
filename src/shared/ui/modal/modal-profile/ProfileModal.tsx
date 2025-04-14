@@ -52,28 +52,30 @@ export const ProfileModal: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const errorMessage = validateProfileChange(form.userName, form.password, form.confirm);
-    setValidationError(errorMessage); // 유효성 검사 에러
-
-    const result = await nicknameCheck(form.userName);
-
-    if ("available" in result) {
-      if (!result.available) {
+    const errorMessage = !user?.social
+      ? validateProfileChange(form.userName, form.password, form.confirm)
+      : null;
+  
+    setValidationError(errorMessage);
+    if (errorMessage) return;
+  
+    //현재 닉네임과 다를 경우만
+    if (form.userName !== user?.userName) {
+      const result = await nicknameCheck(form.userName);
+      if ("available" in result && !result.available) {
         setValidationError("이미 사용 중인 닉네임입니다.");
         return;
       }
-    
-      setValidationError(null);
     }
-
-
-    if (!errorMessage) {
-      const params: UpdateProfileParams = {
-        user_name: form.userName,
-        ...(form.password ? { new_password: form.password } : {}),
-      };
-      mutate(params);
-    }
+  
+    setValidationError(null);
+  
+    const params: UpdateProfileParams = {
+      user_name: form.userName,
+      ...(form.password ? { new_password: form.password } : {}),
+    };
+  
+    mutate(params);
   };
 
   const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -140,22 +142,26 @@ export const ProfileModal: React.FC = () => {
             value={form.email}
             disabled
           />
-          <InputBox
-            name="password"
-            type="password"
-            placeholder="변경할 비밀번호를 입력하세요."
-            width="100%"
-            value={form.password}
-            onChange={handleChange}
-          />
-          <InputBox
-            name="confirm"
-            type="password"
-            placeholder="비밀번호 확인"
-            width="100%"
-            value={form.confirm}
-            onChange={handleChange}
-          />
+          {!user.social && (
+            <>
+              <InputBox
+                name="password"
+                type="password"
+                placeholder="변경할 비밀번호를 입력하세요."
+                width="100%"
+                value={form.password}
+                onChange={handleChange}
+              />
+              <InputBox
+                name="confirm"
+                type="password"
+                placeholder="비밀번호 확인"
+                width="100%"
+                value={form.confirm}
+                onChange={handleChange}
+              />
+            </>
+          )}
         </div>
         {(validationError) && (
           <p className="text-red text-sm text-center mb-4">

@@ -2,8 +2,7 @@ import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { NotFoundRoute } from "./NotFoundRoute";
-import NaverCallback from "@/features/auth/social/naver/ui/NaverCallback";
-import KakaoCallback from "@/features/auth/social/kakao/ui/KakaoCallback";
+import OAuthCallback from "@/features/auth/social/ui/OAuthCallback";
 
 //Lazy 로딩을 위한 페이지 매핑 (객체화)
 const pages = {
@@ -115,8 +114,8 @@ export const Routing: React.FC = () => {
       <Route path="/genre/:genreCode" element={<pages.genre />} />
       <Route path="/privacy" element={<pages.privacy />} />
       <Route path="/terms" element={<pages.terms />} />
-      <Route path="/naver-callback" element={<NaverCallback />} />
-      <Route path="/kakao-callback" element={<KakaoCallback />} />
+      <Route path="/naver-callback" element={<OAuthCallback />} />
+      <Route path="/kakao-callback" element={<OAuthCallback />} />
       <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );
