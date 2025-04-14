@@ -22,6 +22,7 @@
 @screen max-500 { /*max-width 500px*/
     #sg-page .hz-left .hz-cover{@apply w-[140px] h-[140px]}
     #sg-page .hz-left > div{@apply block}
+    #sg-page .hz-ab-info{@apply p-0 mt-9}
     #sg-page .hz-right ul{@apply p-5}
     #sg-page .hz-right p {@apply text-[15px]}
     #sg-page .hz-right .hz-rating-text {@apply text-[12px]}
