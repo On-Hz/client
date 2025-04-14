@@ -8,7 +8,7 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   const top = (window.innerHeight - height) / 2;
 
   const authUrl = `${import.meta.env.VITE_API_URL}/oauth2/authorization/${provider}`;
-  console.log('authUrl',authUrl);
+  console.log('소셜 authUrl :',authUrl);
 
   const popup = window.open(
     authUrl,
