@@ -32,7 +32,7 @@ const AlbumSec = () => {
                 {/* 앨범, 아티스트 정보 */}
                 <div className='pl-[18px] hz-ab-info flex-1 min-w-0'>
                     <div className="flex items-center flex-wrap">
-                        {album.artists.filter((artist: Artist) => artist.role === "main")
+                        {album.artists.filter((artist: Artist) => artist.role === "Main")
                         .map((artist: Artist) => (
                             <span
                                 key={artist.id}

@@ -21,7 +21,7 @@ export const AlbumsByGenre: React.FC<AlbumsByGenreProps> = ({ genreCode }) => {
       {AlbumList &&
         AlbumList.map((album, index) => {
           const mainArtist = album.artists.find(
-            (artist: any) => artist.role === "main"
+            (artist: any) => artist.role === "Main"
           );
 
           const formattedIndex = (index + 1).toString().padStart(2, "0");

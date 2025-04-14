@@ -23,7 +23,7 @@ export const extractEntityDetails = (
     imagePath = album.coverPath;
     releaseDate = formatDate(album.releaseDate);
     mainArtist =
-      album.artists.find((artist) => artist.role === "main")?.name || "";
+      album.artists.find((artist) => artist.role === "Main")?.name || "";
   } else if (reviewType === REVIEW_TYPES.ARTIST) {
     const artist = entityInfo as Artist;
     title = artist.name;
@@ -35,7 +35,7 @@ export const extractEntityDetails = (
     imagePath = track.coverPath;
     releaseDate = formatDate(track.releaseDate);
     mainArtist =
-      track.artists.find((artist) => artist.role === "main")?.name || "";
+      track.artists.find((artist) => artist.role === "Main")?.name || "";
   } else {
     title = "Unknown";
   }

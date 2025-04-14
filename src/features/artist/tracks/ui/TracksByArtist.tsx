@@ -50,7 +50,7 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
               id={track.id}
               title={track.title}
               artist={
-                track.artists?.find((artist) => artist.role === "main")?.name ||
+                track.artists?.find((artist) => artist.role === "Main")?.name ||
                 ""
               }
               coverPath={track.coverPath}

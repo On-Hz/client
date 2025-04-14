@@ -14,7 +14,7 @@ const AlbumItem: React.FC = () => {
       {data &&
         data.map((album: any, index: number) => {
           const mainArtist = album.artists.find(
-            (artist: any) => artist.role === "main"
+            (artist: any) => artist.role === "Main"
           );
           return (
             <Link
