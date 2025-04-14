@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ReviewBannerSkeleton } from "./ReviewBannerSkeleton";
 import { useDetailEntityInfo } from "@/shared/api";
 import { extractEntityDetails } from "@/shared/helpers";
@@ -31,7 +32,7 @@ export const ReviewBanner: React.FC<ReviewBannerProps> = ({
   return (
     <section className="review-banner">
       <div className="flex items-center hz-top">
-        <div className="hz-container">
+        <Link to={`/${reviewType.toLowerCase()}/${entityId}`} className="hz-container">
           <div className="hz-cover">
             <div className="absolute w-20 h-20 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full top-1/2 left-1/2" />
           </div>
@@ -47,7 +48,7 @@ export const ReviewBanner: React.FC<ReviewBannerProps> = ({
               </div>
             )}
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* 오른쪽 텍스트 영역 */}
