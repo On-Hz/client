@@ -17,7 +17,7 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   );
 
   if (!popup || popup.closed || typeof popup.closed === "undefined") {
-    //console.log("팝업 차단?");
+    console.log("팝업 차단?");
     return;
   }
 

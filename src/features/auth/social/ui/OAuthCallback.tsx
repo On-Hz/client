@@ -4,7 +4,7 @@ const OAuthCallback = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const redirect = urlParams.get("redirect");
-
+    console.log('redirect',redirect)
     if (redirect) {
       window.location.href = redirect;
     } else {
