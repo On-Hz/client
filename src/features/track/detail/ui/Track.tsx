@@ -12,7 +12,7 @@ const TrackSec = () => {
     const navigate = useNavigate(); 
     
     if (isLoading) return <TrackSkeleton />;
-    const coverPath = track?.coverPath ? `${import.meta.env.VITE_IMAGE_URL}${track.coverPath}` : null;
+    const coverPath = track?.coverPath ? track.coverPath : null;
 
     return (
         <div className='w-[700px] hz-left'>
@@ -39,7 +39,7 @@ const TrackSec = () => {
                             >
                                 {artist.profilePath ? (
                                 <img
-                                    src={`${import.meta.env.VITE_IMAGE_URL}${artist.profilePath}`}
+                                    src={artist.profilePath}
                                     alt={artist.name}
                                     className="w-full h-full object-cover"
                                 />

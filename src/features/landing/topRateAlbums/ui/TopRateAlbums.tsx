@@ -31,7 +31,7 @@ const AlbumItem: React.FC = () => {
               </div>
               {album.coverPath ? (
                 <img
-                  src={`${import.meta.env.VITE_IMAGE_URL}${album.coverPath}`}
+                  src={album.coverPath}
                   alt={album.title}
                   className="object-cover w-full rounded-lg aspect-square"
                 />

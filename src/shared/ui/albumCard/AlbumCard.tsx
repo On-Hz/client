@@ -27,7 +27,7 @@ export const AlbumCard = ({
       <div className="overflow-hidden rounded-lg rounded-b-none rounded-bl-none aspect-square">        
         {coverPath ? (
           <img
-            src={`${import.meta.env.VITE_IMAGE_URL}${coverPath}`}
+            src={coverPath}
             alt={title}
             className="object-cover w-full aspect-square"
           />

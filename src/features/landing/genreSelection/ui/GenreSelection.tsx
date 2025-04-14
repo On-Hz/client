@@ -10,7 +10,7 @@ const renderGenrePage = (GenreList: Genre[]) => (
         key={item.id}
         id={item.id}
         title={item.code}
-        coverPath={item.imagePath}
+        coverPath={`${import.meta.env.VITE_IMAGE_URL}${item.imagePath}`}
         isDifferentType={true}
       />
     ))}

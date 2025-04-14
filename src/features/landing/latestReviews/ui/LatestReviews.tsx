@@ -43,7 +43,7 @@ const renderReviewPage = (reviews: Review[]) => (
         <div className="flex items-start gap-4 mt-5">
           {review.entityFilePath ? (
             <img
-              src={`${import.meta.env.VITE_IMAGE_URL}${review.entityFilePath}`}
+              src={review.entityFilePath}
               alt={review.entityId.toString()}
               className="object-cover w-24 rounded aspect-square"
             />

@@ -13,7 +13,7 @@ const AlbumSec = () => {
     const navigate = useNavigate(); 
 
     if (isLoading) return <AlbumSkeleton />;
-    const coverPath = album?.cover ? `${import.meta.env.VITE_IMAGE_URL}${album.cover}` : null;
+    const coverPath = album?.coverPath ? album.coverPath : null;
 
     return (
         <div className='w-[700px] hz-left'>
@@ -22,7 +22,7 @@ const AlbumSec = () => {
                 <div className='hz-cover flex items-center justify-center rounded-[10px] w-[324px] h-[324px] overflow-hidden bg-gray3'>
                     {coverPath ? (
                         <img
-                            src={album.cover}
+                            src={album.coverPath}
                             alt={album.title}
                         />
                     ) : (
@@ -40,7 +40,7 @@ const AlbumSec = () => {
                             >
                                 {artist.profilePath ? (
                                 <img
-                                    src={`${import.meta.env.VITE_IMAGE_URL}${artist.profilePath}`}
+                                    src={artist.profilePath}
                                     alt={artist.name}
                                     className="w-full h-full object-cover"
                                 />

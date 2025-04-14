@@ -38,7 +38,7 @@ TrackProps) => {
         <div className="flex items-center flex-1 min-w-0">
           {coverPath ? (
             <img
-              src={`${import.meta.env.VITE_IMAGE_URL}${coverPath}`}
+              src={coverPath}
               alt={title}
               className="object-cover mr-5 rounded-lg w-14 h-14"
             />
