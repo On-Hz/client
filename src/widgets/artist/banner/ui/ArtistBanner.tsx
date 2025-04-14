@@ -24,7 +24,7 @@ export const ArtistBanner = () => {
   }
 
   return (
-    <div className="grid relative w-full h-[450px] hz-artist-banner">
+    <div className="grid relative w-full h-[450px] bg-gray5 hz-artist-banner cursor-default">
       {/* 3열 그리드로 하나의 이미지를 각각 배경으로 */}
       <div
         className="grid h-full grid-cols-3 hz-artist-banner-img"
