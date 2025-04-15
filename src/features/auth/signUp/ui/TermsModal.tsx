@@ -77,8 +77,8 @@ export const TermsModal: React.FC<TermsModalProps> = ({ onComplete, onClose }) =
   return (
     <>
       <ModalLayout open={true} onClose={onClose} showCloseButton={true}>
-        <div className="p-6 w-[340px] bg-white rounded max-500:w-full">
-          <h2 className="mb-2 text-lg font-bold">
+        <div className="p-6 w-[340px] bg-white rounded max-500:w-[260px] max-500:p-0 max-500:pt-5">
+          <h2 className="mb-2 text-lg font-bold max-500:text-[16px]">
             약관에 동의하시면 가입이 완료됩니다
           </h2>
           <div className="mt-4 space-y-3 text-sm mb-9">

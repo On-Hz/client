@@ -17,7 +17,7 @@ export const LegalContents: React.FC<LegalCodeProps> = ({ type }) => {
   const { data, isLoading } = useCommonCode<CodeItem[]>(type);
 
   return (
-    <div className="prose max-w-none">
+    <div className="prose max-w-none prose-sm ">
       {isLoading || !data || data.length === 0 ? null : (
         <ReactMarkdown>{data[0].name}</ReactMarkdown>
       )}

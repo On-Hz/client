@@ -17,7 +17,7 @@ export const ModalLayout: React.FC<ModalLayoutProps> = ({
 }: ModalLayoutProps) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-[28px] pt-[25px] pb-[40px] pl-[25px] pr-[25px]">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-[28px] pt-[25px] pb-[40px] pl-[25px] pr-[25px] max-500:px-5">
         {showCloseButton && (
           <button
             onClick={onClose}
