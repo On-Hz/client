@@ -20,7 +20,7 @@
     .hz-landing-title{@apply text-[22px]}
     .hz-artist-banner .hz-banner-title{ @apply text-[50px]}
     .hz-artist-banner-img{@apply grid-cols-1}
-    .hz-artist-banner-img div:not(.hz-center-img){@apply hidden w-0 h-0}
+    .hz-artist-banner-img div:not(.hz-mob-artist-img){@apply hidden w-0 h-0}
 }
 @media (max-width:500px){ 
     .hz-landing-title{@apply text-[18px]}

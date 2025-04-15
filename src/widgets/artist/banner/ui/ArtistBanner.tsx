@@ -32,14 +32,14 @@ export const ArtistBanner = () => {
       >
         {/* 왼쪽 (어둡게) */}
         <div
-          className="bg-black bg-center bg-cover bg-opacity-60 bg-blend-overlay"
+          className="bg-black bg-center bg-cover bg-opacity-60 bg-blend-overlay hz-mob-artist-img"
           style={{
             backgroundImage: `url(${artistInfo?.profilePath})`,
           }}
         ></div>
         {/* 중앙 (밝게) */}
         <div
-          className="bg-center bg-cover hz-center-img"
+          className="bg-center bg-cover"
           style={{
             backgroundImage: `url(${artistInfo?.profilePath})`,
           }}
