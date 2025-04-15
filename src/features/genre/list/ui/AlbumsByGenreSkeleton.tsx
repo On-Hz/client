@@ -3,13 +3,13 @@ import { Skeleton } from "@mui/material";
 
 export const AlbumsByGenreSkeleton: React.FC = () => {
   return (
-    <div className="p-6 mt-5 bg-gray-100">
+    <div className="py-6 px-16 mt-5 bg-gray-100">
       {[...Array(5)].map((_, index) => {
         const formattedIndex = (index + 1).toString().padStart(2, "0");
 
         return (
           <div key={index} className="relative flex mb-6">
-            <div className="flex items-center justify-center mr-3 text-base font-medium text-point w-9">
+            <div className="absolute top-5 left-5 z-40 text-base font-medium text-point w-9">
               {formattedIndex}
             </div>
 

@@ -2,35 +2,27 @@ export const getStrokeStyle = (
   upperGenre: string,
 ): React.CSSProperties => {
   const length = upperGenre.length;
+  const hasSpace = upperGenre.includes(" ");
+  console.log('ddd',upperGenre)
+  let left = "-3%";
+  
 
-  // 기본값
-  let fontSize = "clamp(3rem, 12vw, 13rem)";
-  let letterSpacing = "0.1em";
-  let transform = "translate(-47%, -55%)";
-
-  // 글자 길이가 5 이하일 경우(짧은 단어)
-  if (length <= 5) {
-    fontSize = "clamp(3rem, 14vw, 20rem)";
+  if (length === 4) {
+    left = "4%"
+  }
+  if (length === 6) {
+    left = "6%"
+  }
+  if (length > 6 && hasSpace) { //띄워쓰기 포함 7글자 이상
+    left = "10%"
   }
 
-  // 글자 길이에 따른 세부 조정
-  if (length === 3) {
-    letterSpacing = "0.5em";
-    transform = "translate(-40%, -55%)";
-  } else if (length <= 4) {
-    letterSpacing = "0.3em";
-    transform = "translate(-46%, -55%)";
+  if (length > 6 && !hasSpace) { //띄워쓰기 제외 7글자 이상
+    left = "20%"
   }
+
 
   return {
-    position: "absolute",
-    top: "55%",
-    left: "50%",
-    transform,
-    fontSize,
-    letterSpacing,
-    WebkitTextStroke: "3px #fff",
-    color: "transparent",
-    zIndex: 0,
+    left
   };
 };

@@ -1,101 +1,41 @@
-/* 기본 스타일 */
-.hz-genre-img {
-  max-width: 250px;
-  width: 40%;
-  aspect-ratio: 1.5/1;
+
+@screen max-1300 { 
+ 
 }
 
-.hz-genre-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  position: relative;
-  overflow: hidden;
+@screen max-1200 { 
+  .hz-genere-item {@apply overflow-hidden}
+  .hz-genere-item .hz-genere-item-box{@apply block h-full}
+  .hz-genere-ranking{@apply bg-white rounded-none}
+ 
+  .hz-genre-img{width: 100%;position: absolute;left: 0;top:0;bottom: 0;}
+  .hz-genre-card{background-color: rgba(0,0,0, .3);display: flex; width: 100%;height:100%; padding:66px 20px 40px;z-index: 1;}
+  /* .hz-genre-card{display:flex; width: 100%;padding:66px 20px 40px; position: absolute;left: 0;top:0;bottom: 0;z-index: 30;background-color: rgba(0,0,0, .3);} */
+  .hz-genre-card-date,
+  .hz-genre-card-title,
+  .hz-genre-card-name {@apply text-white}
+  .hz-genre-img{width: 100%; max-width: none; aspect-ratio: auto !important;}
 }
+@media screen and (max-width: 900px) {
+  .hz-genre-wrap{@apply block}
+  .hz-genere-item{width: 100% !important;height: 400px; display: block;}
+  .hz-genere-ranking{@apply left-5 top-5}
+  .hz-genre-card-date{@apply mt-5}
 
-/* 반응형 스타일 */
-@media screen and (max-width: 1300px) {
-  .hz-genre-img {
-    max-width: 220px;
-    width: 35%;
-  }
 }
-
-@media screen and (max-width: 1200px) {
-  .hz-genre-img {
-    max-width: 200px;
-    width: 30%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .hz-genre-img {
-    max-width: 180px;
-    width: 35%;
-  }
-
-  .hz-genre-card h3 {
-    font-size: 1rem;
-  }
-
-  .hz-genre-card p {
-    font-size: 0.875rem;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .flex.flex-1.overflow-hidden.border.rounded-lg {
-    flex-direction: column;
-  }
-
-  .hz-genre-img {
-    max-width: 100%;
-    width: 100%;
-    aspect-ratio: 2/1;
-  }
-
-  .hz-genre-card {
-    width: 100%;
-  }
-
-  .hz-genre-card .flex.items-center.justify-between {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
+@screen max-800 {
   .hz-genre-card .flex.items-center.justify-between .Rating,
   .hz-genre-card .flex.items-center.justify-between [name^="album-rating-"] {
     margin-top: 0.5rem;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .flex.items-center.justify-center.mr-3 {
-    margin-right: 0.5rem;
-  }
-
-  .hz-genre-card {
-    padding: 0.75rem;
-  }
-
-  .hz-genre-card h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .hz-genre-card p {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .inline-block.px-3.py-1.text-xs {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.7rem;
-  }
-
-  .flex.flex-wrap.gap-2 {
-    gap: 0.25rem;
-  }
+@screen max-500 { 
+  .hz-genre-wrap{@apply px-5}
+  .hz-genere-ranking{@apply text-[15px] left-auto right-4 w-[40px]}
+  .hz-genre-card{@apply py-0}
+  .hz-genre-card-date{@apply mt-0 pt-5}
+  .hz-genre-card-title{text-shadow:2px 0px 3px rgba(0,0,0,.6); width:70%; font-size:25px;}
+  .hz-genre-card-name{text-shadow:2px 0px 3px rgba(0,0,0,.6);font-size:18px;}
+  .hz-genre-tag-box{@apply flex-col-reverse gap-4 items-start mt-0 pb-7}
 }

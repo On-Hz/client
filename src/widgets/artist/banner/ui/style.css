@@ -4,10 +4,10 @@
 .hz-artist-banner .hz-banner-rating button svg{@apply w-[42px] h-[42px]}
 
 
-@media (max-width:1200px){
+@screen max-1200 { 
 
 }
-@media (max-width:1000px){
+@screen max-1000 { 
     .hz-artist-banner{@apply h-[400px]}
     .hz-artist-banner .hz-banner-title{ @apply text-[65px]}
     .hz-artist-banner .hz-banner-rating{@apply gap-5}
@@ -16,13 +16,13 @@
     .hz-artist-banner .hz-banner-rating button svg{@apply w-[28px] h-[28px]}
 
 }
-@media (max-width:800px){ 
+@screen max-800 { 
     .hz-landing-title{@apply text-[22px]}
     .hz-artist-banner .hz-banner-title{ @apply text-[50px]}
     .hz-artist-banner-img{@apply grid-cols-1}
     .hz-artist-banner-img div:not(.hz-mob-artist-img){@apply hidden w-0 h-0}
 }
-@media (max-width:500px){ 
+@screen max-500 { 
     .hz-landing-title{@apply text-[18px]}
     .hz-artist-banner .hz-banner-title{ @apply text-[35px]}
     .hz-artist-banner .hz-banner-rating p{@apply text-[14px]}

@@ -4,7 +4,7 @@
 .hz-search-box{@apply flex}
 .hz-search {@apply w-[360px] mr-[24px] flex items-center}
 .hz-search-drop {width:calc(100% - 24px)}
-@media (max-width:800px){ /*max-width 800px*/
+@screen max-800 { /*max-width 800px*/
     .hz-header .hz-menu {position: relative;}
     .hz-mob-search{display: block;}
     .hz-search-box{width: calc(100% - 210px); @apply hidden}
@@ -17,7 +17,7 @@
 
 }
 
-@media (max-width:500px){ /*max-width 500px*/
+@screen max-500 {  /*max-width 500px*/
     .hz-header .hz-header-inner{@apply p-4}
     .hz-header .hz-logo{@apply w-[60px]}
     .hz-header .hz-user-name{@apply text-[16px]}

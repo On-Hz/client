@@ -6,6 +6,7 @@ import {
   SearchResultsTrack,
   useFetchSearchLanding,
 } from "@/features/search";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 export const SearchHome: React.FC = () => {
   const { searchSlug } = useParams<{ searchSlug: string }>();
@@ -14,7 +15,9 @@ export const SearchHome: React.FC = () => {
   const noResults =
     tracks.length === 0 && artists.length === 0 && albums.length === 0;
   if (!isLoading && noResults) {
-    return <div>검색 결과가 없습니다.</div>;
+    return <div className="min-h-[600px] flex items-center justify-center text-[20px] max-500:min-h-[400px] max-500:text-[16px]">
+      <ManageSearchIcon fontSize="large"/> 검색 결과가 없습니다.
+      </div>;
   }
 
   return (
