@@ -21,7 +21,9 @@
     input:disabled{ @apply bg-transparent}
     img{ @apply max-w-[100%]}
     main { @apply py-[40px] px-[80px] min-h-[500px]}
-  
+    body.no-main-padding main {
+      @apply p-0;
+    }
     @screen max-1200 { /*max-width 1200px*/
       main {
           @apply px-[40px]
@@ -34,6 +36,7 @@
         }
     }
     @screen max-800 { /*max-width 800px*/
+      main {@apply py-[40px]}
       body{@apply text-[13px]}
     }
 }

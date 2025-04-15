@@ -30,7 +30,7 @@ export const SearchResultsArtist = ({
       linkTo="artist"
       hasShowMoreTab={hasShowMoreTab}
     >
-      <div className="flex flex-wrap gap-7 justify-between">
+      <div className="flex flex-wrap sch-pg-art">
         {isLoading &&
           Array.from({ length: 5 }, (_, i) => (
             <ArtistAvatarSkeleton key={`search-skeleton-${i}`} />

@@ -55,7 +55,7 @@ export const ArtistBanner = () => {
 
       {/* 콘텐츠 (하단 정렬) */}
       <div
-        className="flex flex-col justify-end h-full px-8 pb-4 text-white hz-artist-banner-text"
+        className="flex flex-col justify-end h-full px-20 pb-4 text-white hz-artist-banner-text max-800:px-5"
         style={{ gridColumn: "1 / -1", gridRow: "1 / -1" }}
       >
         <h1 className="mb-6 font-bold text-left text-8xl hz-banner-title">

@@ -45,20 +45,19 @@ TrackProps) => {
               />
             </div>
           )}
-          <div>
+          <div className="flex-1 min-w-0">
             <p className="font-semibold">{title}</p>
             <p className="text-sm text-gray-500">{artist}</p>
           </div>
         </div>
-
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 text-sm text-gray-600 track-right-item max-500:flex-col max-500:items-end">
           <span className="text-sm text-gray-600">{formatDuration(duration)}</span>
           <div className="flex items-center">
             <StarIcon
               className="text-yellow"
-              style={{ width: "22px", height: "22px" }}
+              style={{ width: "20px", height: "20px" }}
             />
-            <span className="ml-1 text-sm text-gray-600">
+            <span className="ml-[2px] text-sm text-gray-600">
               {rating ? `${rating} / 5` : "0 / 5"}
             </span>
           </div>

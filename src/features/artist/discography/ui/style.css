@@ -11,5 +11,5 @@
     .hz-dscography .hz-album-item{@apply w-[30.7%]}
 }
 @media (max-width:500px){ 
-    .hz-dscography .hz-album-item{@apply w-[47.5%]}
+    .hz-dscography .hz-album-item{@apply w-[46.5%]}
 }

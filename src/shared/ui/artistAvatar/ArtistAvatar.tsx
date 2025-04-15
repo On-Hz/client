@@ -10,8 +10,8 @@ interface ArtistAvatarProps {
 
 export const ArtistAvatar = ({ id, profilePath, name }: ArtistAvatarProps) => {
   return (
-    <Link to={`/artist/${id}`} key={id} className="text-center">
-      <div className="mb-2 overflow-hidden rounded-full hz-artist-item bg-gray3">
+    <Link to={`/artist/${id}`} key={id} className="hz-artist-avatar text-center">
+      <div className="overflow-hidden rounded-full hz-artist-item bg-gray3 m-auto mb-2">
         {profilePath ? (
           <img
             src={profilePath}

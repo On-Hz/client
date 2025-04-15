@@ -20,7 +20,7 @@ export const SearchTabs: React.FC = () => {
   if (!hasAnyResults || isLoading) return null;
 
   return (
-    <nav className="flex items-center space-x-1">
+    <nav className="flex items-center space-x-1 mx-auto max-w-7xl hz-search-tab">
       {/* 전체 */}
       <NavLink to={`/search/${searchSlug}`} end>
         {({ isActive }) => <TabButton text="전체" isActive={isActive} />}

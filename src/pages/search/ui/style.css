@@ -1,0 +1,33 @@
+/*검색페이지*/
+
+.sch-pg-art .hz-artist-avatar{@apply w-[20%]}
+.sch-pg-album .hz-album-item{width: calc(20% - 13px);}
+
+@screen max-1300 { /*max-width 1300px*/
+    .sch-pg-art .hz-artist-avatar{@apply w-[20%]}
+    .sch-pg-art .hz-artist-item{@apply w-[180px] h-[180px]}
+
+}
+
+@screen max-1200 { /*max-width 1200px*/
+    .sch-pg-art .hz-artist-item{@apply w-[150px] h-[150px]}
+}
+
+@screen max-1000 { /*max-width 1000px*/
+    .sch-pg-art .hz-artist-avatar{@apply w-[33%] mb-3}
+    .sch-pg-album .hz-album-item{width: calc(33% - 13px);}
+}
+
+@screen max-800 { 
+    .sch-pg-art .hz-artist-avatar{@apply w-[50%]}
+    .sch-pg-art .hz-artist-item{@apply w-[120px] h-[120px]}
+    .sch-pg-album .hz-album-item{width: calc(50% - 13px);}
+    .hz-search-tab{@apply justify-between}
+    .hz-search-tab a{@apply flex-1}
+    .hz-search-tab a button{@apply w-full}
+}
+
+@screen max-500 {
+    .sch-pg-art .hz-artist-item{@apply w-[120px] h-[120px]}
+}
+
