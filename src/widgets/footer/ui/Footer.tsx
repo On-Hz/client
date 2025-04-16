@@ -39,7 +39,7 @@ export const Footer = () => {
           <p className="text-gray5 text-[12px] mr-[4px]">On-Hz |</p>
           <p className="text-gray5 text-[12px] mr-[4px]">대표 웹얼라</p>
         </address>
-        <p className="text-gray5 text-[12px]">사업자등록번호 : 210-23-02087</p>
+        <p className="text-gray5 text-[12px]">사업자등록번호 : 310-23-02087</p>
         <p className="pt-[20px] text-gray5 text-[12px]">
           © 2025 by On-Hz, Inc. All rights reserved.
         </p>
