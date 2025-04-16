@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { useSearchTopResults } from "../api/getSearchTopResults";
 import { useInfiniteScroll } from "@/shared/hooks";
 import { ORDER_BY } from "@/shared/constants";
 
@@ -17,9 +16,6 @@ export const useCombinedSearchResults = <T extends { id: number }>({
   hasShowMoreTab,
   initialData,
 }: UseCombinedSearchResultsProps<T>) => {
-  const regularQuery = useSearchTopResults<T>(searchSlug, type, {
-    enabled: hasShowMoreTab && !initialData,
-  });
 
   const infiniteQuery = useInfiniteScroll<T>({
     endpoint: "/api/v1/search",
@@ -31,13 +27,11 @@ export const useCombinedSearchResults = <T extends { id: number }>({
   });
 
   const data: T[] = hasShowMoreTab
-    ? initialData ?? regularQuery.data ?? []
+    ? initialData ?? []
     : infiniteQuery.data?.pages.flat() ?? [];
 
-  const isLoading = hasShowMoreTab
-    ? initialData
-      ? false
-      : regularQuery.isLoading
+  const isLoading = hasShowMoreTab && initialData
+    ? false
     : infiniteQuery.isLoading;
 
   const { ref, inView } = useInView({ threshold: 0 });

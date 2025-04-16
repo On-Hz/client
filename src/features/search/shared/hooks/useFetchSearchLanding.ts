@@ -12,6 +12,7 @@ export const useFetchSearchLanding = (searchSlug: string | undefined) => {
         setResults: state.setResults,
         setLoading: state.setLoading,
         clearResults: state.clearResults,
+        results: state.results,
       }),
       shallow
     );
@@ -34,14 +35,16 @@ export const useFetchSearchLanding = (searchSlug: string | undefined) => {
 
   const loading =
     !!searchSlug &&
-    (trackQuery.isLoading || artistQuery.isLoading || albumQuery.isLoading);
+    (searchSlug === currentKeyword
+      ? false
+      : trackQuery.isLoading || artistQuery.isLoading || albumQuery.isLoading);
 
   useEffect(() => {
     setLoading(loading);
   }, [loading, setLoading]);
 
   useEffect(() => {
-    if (searchSlug && !loading) {
+    if (searchSlug && !loading && searchSlug !== currentKeyword) {
       setResults({
         tracks: trackQuery.data || [],
         artists: artistQuery.data || [],
@@ -50,6 +53,7 @@ export const useFetchSearchLanding = (searchSlug: string | undefined) => {
     }
   }, [
     searchSlug,
+    currentKeyword,
     loading,
     trackQuery.data,
     artistQuery.data,

@@ -8,7 +8,7 @@ import React, {
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import { shallow } from "zustand/shallow";
 import { useSearchHistoryStore } from "@/shared/stores/searchHistoryStore";
 import { useSearchResultsStore } from "@/shared/stores/searchResultsStore";
@@ -49,15 +49,12 @@ export const SearchBar: React.FC = React.memo(() => {
     if (location.pathname.startsWith("/search")) {
       const parts = window.location.pathname.split("/");
       const keyword = parts[2] ? decodeURIComponent(parts[2]) : "";
-      if (keyword && keyword !== currentKeyword) {
-        setCurrentKeyword(keyword);
-        setSearchSlug(keyword);
-      }
-    } else{
+      setCurrentKeyword(keyword);
+      setSearchSlug(keyword);
+    } else {
       clearResults();
       setSearchSlug("");
     }
-
   }, [location.pathname, clearResults, currentKeyword, setCurrentKeyword]);
 
   const displayedSearches = useMemo(
@@ -92,8 +89,7 @@ export const SearchBar: React.FC = React.memo(() => {
 
   const handleClear = useCallback(() => {
     setSearchSlug("");
-    setCurrentKeyword("");
-  }, [setCurrentKeyword]);
+  }, []);
 
   const handleFocus = useCallback(() => {
     setShowDropdown(true);
@@ -115,7 +111,7 @@ export const SearchBar: React.FC = React.memo(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
+
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
 
@@ -123,13 +119,13 @@ export const SearchBar: React.FC = React.memo(() => {
     const handleResize = () => {
       const isNowMobile = window.innerWidth <= 800; //style.css 반응형 기준
       setIsMobile(isNowMobile);
-  
+
       // 800이상일 때 닫기
       if (!isNowMobile) {
         setSearchVisible(false);
       }
     };
-  
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -137,18 +133,18 @@ export const SearchBar: React.FC = React.memo(() => {
   const toggleMobSearchBtn = () => {
     if (isMobile) {
       setSearchVisible((prev) => !prev);
-      //console.log('is',isSearchVisible);
     }
   };
 
   return (
     <div ref={wrapperRef} className="relative">
       <button className={`hz-mob-search`} onClick={toggleMobSearchBtn}>
-        <SearchIcon fontSize="small"/>
+        <SearchIcon fontSize="small" />
       </button>
-      <div className={`${
-          isSearchVisible ? "hz-search-show" : "hz-search-hide"} 
-          hz-search-box`}>
+      <div
+        className={`${isSearchVisible ? "hz-search-show" : "hz-search-hide"} 
+          hz-search-box`}
+      >
         <div className="hz-search  px-[12px] bg-gray2 rounded-[5px] h-[40px] text-[14px] flex">
           <button
             onClick={(e) => {

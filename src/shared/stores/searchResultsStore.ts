@@ -33,6 +33,7 @@ export const useSearchResultsStore = createWithEqualityFn(
       setLoading: (loading: boolean) => set({ isLoading: loading }),
       clearResults: () =>
         set({
+          isLoading: true,
           currentKeyword: "",
           results: { tracks: [], artists: [], albums: [] },
         }),
