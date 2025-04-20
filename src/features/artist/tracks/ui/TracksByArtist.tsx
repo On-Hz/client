@@ -26,7 +26,7 @@ export const TracksByArtist = ({ useInfiniteScroll }: sectionProps) => {
     infiniteQueryParams: {
       endpoint: `/api/v1/artists/${artistId}/tracks`,
       limit: 5,
-      orderBy: ORDER_BY.CREATED_AT,
+      orderBy: ORDER_BY.RELEASE_DATE,
       queryKeyPrefix: "tracks_artist",
     },
   });
