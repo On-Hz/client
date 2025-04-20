@@ -1,5 +1,4 @@
-import { syncAuth } from "@/shared/helpers/syncAuth";
-import { useAuthModalStore, useModalStore } from "@/shared/stores";
+import { useAuthStore, useAuthModalStore, useModalStore } from "@/shared/stores";
 
 export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   const width = 600;
@@ -31,7 +30,8 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
     if (!accessToken || !refreshToken || !user) return;
 
     console.log(`${provider} 로그인 성공`, user);
-    syncAuth(accessToken, refreshToken, user, deviceId);
+    useAuthStore.getState().setAuth(accessToken, refreshToken, deviceId);
+    useAuthStore.getState().setUserProfile(user);
 
     useAuthModalStore.getState().closeAuthModal();
     useModalStore.getState().openModal("alertModal", {

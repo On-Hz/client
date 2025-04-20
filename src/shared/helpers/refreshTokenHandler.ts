@@ -1,5 +1,4 @@
 import { requestRefreshToken } from "@/shared/api/refreshTokenApi";
-import { syncAuth } from "./syncAuth";
 import { getAuthRefreshToken, getDeviceId } from "../stores/authCookie";
 import { useAuthStore } from "../stores";
 
@@ -16,8 +15,7 @@ export const refreshAccessToken = async (): Promise<string | null> => {
       refreshToken: newRefreshToken,
       deviceId: newDeviceId,
     } = res;
-
-    syncAuth(newToken, newRefreshToken, newDeviceId);
+    useAuthStore.getState().setAuth(newToken, newRefreshToken, newDeviceId)
 
     return newToken;
 
