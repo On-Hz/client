@@ -13,7 +13,6 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   const authUrl = `${
     import.meta.env.VITE_API_URL
   }/oauth2/authorization/${provider}`;
-  console.log("소셜 authUrl :", authUrl);
 
   const popup = window.open(
     authUrl,
@@ -22,7 +21,6 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   );
 
   if (!popup || popup.closed || typeof popup.closed === "undefined") {
-    console.log("팝업 차단?");
     return;
   }
 
@@ -33,14 +31,11 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
     if (event.data.type !== "oauth2Success") return;
 
     const { accessToken, refreshToken, deviceId, user } = event.data;
-    console.log("e.data : ", accessToken, refreshToken, deviceId, user);
     if (!accessToken || !refreshToken || !user) return;
-
-    console.log(`${provider} 로그인 성공`, user);
+    
     useAuthStore.getState().setAuth(accessToken, refreshToken, deviceId);
-    console.log("setAuth");
     useAuthStore.getState().setUserProfile(user);
-    console.log("setUserProfile");
+
     useAuthModalStore.getState().closeAuthModal();
     useModalStore.getState().openModal("alertModal", {
       type: "success",
