@@ -55,14 +55,15 @@ axiosInstance.interceptors.request.use(
 
 // ---------------------- 응답 인터셉터 + 토큰 재발급 ----------------------
 let isRefreshing = false;
-let refreshQueue: ((token: string) => void)[] = [];
+type QueueCb = (token: string | null, error?: any) => void;
+let refreshQueue: QueueCb[] = [];
 
-const addToQueue = (cb: (token: string) => void) => {
+const addToQueue = (cb: QueueCb) => {
   refreshQueue.push(cb);
 };
 
-const processQueue = (token: string) => {
-  refreshQueue.forEach((cb) => cb(token));
+const processQueue = (token: string | null, error?: any) => {
+  refreshQueue.forEach(cb => cb(token, error));
   refreshQueue = [];
 };
 
@@ -75,41 +76,35 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    // console.log("🔴 status:", error.response?.status);
-    // console.log("🔴 error.response.data:", error.response?.data);
-    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
-    
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    const origReq = error.config as any;
+    if (error.response?.status === 401 && !origReq._retry) {
+      origReq._retry = true;
 
       if (isRefreshing) {
-        return new Promise((resolve) => {
-          addToQueue((newToken: string) => {
-            if (originalRequest.headers instanceof AxiosHeaders) {
-              originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
-            }
-            resolve(axiosInstance(originalRequest));
+        return new Promise((resolve, reject) => {
+          addToQueue((token, err) => {
+            if (err) return reject(err);
+            origReq.headers.Authorization = `Bearer ${token}`;
+            resolve(axiosInstance(origReq));
           });
         });
       }
 
       isRefreshing = true;
-
-      const newToken = await refreshAccessToken();
-      
-      if (newToken) {
-        processQueue(newToken);
-
-        if (originalRequest.headers instanceof AxiosHeaders) {
-          originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
-        }
-
-        return axiosInstance(originalRequest);
-      }else {
-        return Promise.reject("토큰 갱신 실패");
+      try {
+        const newToken = await refreshAccessToken();
+        axiosInstance.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+        processQueue(newToken, null);
+        origReq.headers.Authorization = `Bearer ${newToken}`;
+        return axiosInstance(origReq);
+      } catch (err) {
+        processQueue(null, err);
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
       }
     }
     const message = (error.response?.data as any)?.message || error.message || "알 수 없는 오류입니다.";
-    return Promise.reject({ message });
+    return Promise.reject({ ...error.response?.data,message });
   }
 );

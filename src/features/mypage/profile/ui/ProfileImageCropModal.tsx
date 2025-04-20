@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFile }) => {
-  const { setAuth, token, refreshToken, deviceId } = useAuthStore();
+  const { setUserProfile } = useAuthStore();
   const { openModal } = useModalStore();
 
   const {
@@ -45,7 +45,7 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
     try {
       const updatedUser = await updateUserProfileImage(croppedFile);
 
-      setAuth(token, refreshToken, updatedUser, deviceId || "");
+      setUserProfile(updatedUser);
 
       openModal("alertModal", {
         type: "success",
@@ -77,7 +77,7 @@ export const ProfileImageCropModal: React.FC<Props> = ({ open, onClose, imageFil
       )}
       </div>
 
-      <div className="mt-4 flex justify-between">
+      <div className="flex justify-between mt-4">
         <Button text="취소" onClick={onClose} />
         <Button text="등록" onClick={handleUpload} />
       </div>
