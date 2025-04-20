@@ -98,6 +98,8 @@ export const Header: React.FC = () => {
                   placement="bottom-start"
                   transition
                   disablePortal
+                  sx={{
+                    zIndex: 1000}}
                 >
                   {(props: PopperChildrenProps) => (
                     <Grow
