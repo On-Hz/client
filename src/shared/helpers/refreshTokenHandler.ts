@@ -1,14 +1,13 @@
 import { requestRefreshToken } from "@/shared/api/refreshTokenApi";
 import { syncAuth } from "./syncAuth";
-import { getAuthRefreshToken, getAuthUser, getDeviceId } from "../stores/authCookie";
+import { getAuthRefreshToken, getDeviceId } from "../stores/authCookie";
 import { useAuthStore } from "../stores";
 
 export const refreshAccessToken = async (): Promise<string | null> => {
   const refreshToken = getAuthRefreshToken();
   const deviceId = getDeviceId();
-  const existingUser = getAuthUser();
 
-  if (!refreshToken || !deviceId || !existingUser) return null;
+  if (!refreshToken || !deviceId) return null;
 
   try {
     const res = await requestRefreshToken(refreshToken, deviceId);
@@ -18,7 +17,7 @@ export const refreshAccessToken = async (): Promise<string | null> => {
       deviceId: newDeviceId,
     } = res;
 
-    syncAuth(newToken, newRefreshToken, existingUser, newDeviceId);
+    syncAuth(newToken, newRefreshToken, newDeviceId);
 
     return newToken;
 
