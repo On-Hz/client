@@ -1,4 +1,3 @@
-import { useAuthModalStore } from "@/shared/stores/authModalStore"; 
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useModalStore } from "@/shared/stores";
@@ -9,18 +8,18 @@ interface SignupVariables {
   email: string;
   password: string;
 }
-
-export const useSignUp = () => {
-  const { openAuthModal } = useAuthModalStore();
+interface UseSignUpOptions {
+  onSuccess?: () => void
+}
+export const useSignUp = (options?: UseSignUpOptions) => {
   const { openModal } = useModalStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const mutation = useMutation<AuthResult, Error, SignupVariables>({
-    mutationFn: async ({email, password }) => {
+    mutationFn: async ({ email, password }) => {
       const result = await signUp(email, password);
- 
-      if (result && "error" in result) { 
-        //console.error("useSignUp - 에러 발생:", result.error);
+
+      if (result && "error" in result) {
         setErrorMessage(result.error); //서버 에러메세지
         return result; //에러페이지 x
       }
@@ -32,15 +31,15 @@ export const useSignUp = () => {
       if (data && "error" in data) {
         return; // 에러가 있으면 성공 처리 안함
       }
-
-      openAuthModal("login");
       openModal("alertModal", {
         type: "success",
-        message:"On-Hz 회원가입에 성공하셨습니다."
+        message: "On-Hz 회원가입에 성공하셨습니다.",
+        closeCallback: () => {
+          options?.onSuccess?.();
+        }
       });
     },
     onError: (error) => {
-      //console.error("useSignUp - 네트워크 에러:", error.message);
       setErrorMessage(error.message);
     },
   });

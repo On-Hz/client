@@ -4,8 +4,7 @@ import { deleteUserAccount } from "../api/deleteUserAccountApi";
 
 export const useDeleteUserAccount = () => {
   const { user, logout } = useAuthStore();
-  const { openModal } = useModalStore();
-
+  const { openModal, closeModal } = useModalStore();
 
   return useMutation({
     mutationFn: () => deleteUserAccount(user!.id),
@@ -14,6 +13,9 @@ export const useDeleteUserAccount = () => {
       openModal("alertModal", {
         type: "success",
         message: "회원 탈퇴가 완료되었습니다.",
+        closeCallback: () => {
+          closeModal("profileModal");
+        },
       });
     },
     onError: (error: any) => {
@@ -21,6 +23,6 @@ export const useDeleteUserAccount = () => {
         type: "error",
         message: error.message || "회원 탈퇴 중 문제가 발생했습니다.",
       });
-    }
+    },
   });
 };

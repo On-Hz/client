@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { TermsModal } from "./TermsModal";
 import { validateAuth } from "@/shared/validation/authSchema";
-import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import { emailCheck } from "../api/validateUserEmailCheckApi";
 import { useSignUp } from "../hooks/useSignUp";
 
@@ -12,8 +12,13 @@ interface SignupFormProps {
 
 export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
-  const { mutate, errorMessage } = useSignUp();
-  const [form, setForm] = useState({email: "", password: "" });
+  const { mutate, errorMessage } = useSignUp({
+    onSuccess: () => {
+      setIsTermsOpen(false);
+      switchMode();
+    },
+  });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,22 +32,21 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
 
   const onSubmit = async () => {
     const error = validateAuth(form.email, form.password);
-    setValidationError(error);    
+    setValidationError(error);
 
     if (error) return;
 
     const result = await emailCheck(form.email);
-  
+
     if ("available" in result) {
       if (!result.available) {
         setValidationError("이미 사용 중인 이메일입니다.");
         return;
       }
-    
+
       setValidationError(null);
       setIsTermsOpen(true);
     }
-
   };
 
   return (
@@ -65,18 +69,21 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
         />
       </div>
       {(validationError || errorMessage) && (
-        <p className="text-red text-sm text-center mb-4">
+        <p className="mb-4 text-sm text-center text-red">
           <ReportProblemIcon /> {validationError || errorMessage}
         </p>
       )}
-      
+
       <div className="mb-6">
         <ModalButton text="회원가입" width="100%" onClick={onSubmit} />
       </div>
 
       <p className="text-sm text-center">
         이미 계정이 있으신가요?{" "}
-        <span className="font-bold cursor-pointer text-point" onClick={switchMode}>
+        <span
+          className="font-bold cursor-pointer text-point"
+          onClick={switchMode}
+        >
           로그인
         </span>
       </p>

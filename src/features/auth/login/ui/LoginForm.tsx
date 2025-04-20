@@ -15,17 +15,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
   
   // 입력값 변경
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log(`변경됨:`, e.target.value);
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   //로그인
   const onSubmit = () => {
-  // console.log("로그인 버튼");
-  // console.log("입력값:", form); 
   const errorMessage = validateAuth(form.email, form.password);
     setValidationError(errorMessage); // 유효성 검사 에러
-
     if (!errorMessage) {
       mutate(form); 
     }
@@ -51,7 +47,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
         />
       </div>
       {(validationError || errorMessage) && (
-        <p className="text-red text-sm text-center mb-4">
+        <p className="mb-4 text-sm text-center text-red">
           <ReportProblemIcon /> {validationError || errorMessage}
         </p>
       )}

@@ -79,7 +79,6 @@ export const ProfileModal: React.FC = () => {
   };
 
   const handleDeleteAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("dddd");
     e.preventDefault();
     openModal("alertModal", {
       type: "warning",
@@ -164,7 +163,7 @@ export const ProfileModal: React.FC = () => {
           )}
         </div>
         {(validationError) && (
-          <p className="text-red text-sm text-center mb-4">
+          <p className="mb-4 text-sm text-center text-red">
             <ReportProblemIcon /> {validationError}
           </p>
         )}
