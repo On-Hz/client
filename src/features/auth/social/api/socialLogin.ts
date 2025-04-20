@@ -27,12 +27,14 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
     if (event.data.type !== "oauth2Success") return;
 
     const { accessToken, refreshToken, deviceId, user } = event.data;
+    console.log("e.data : ", accessToken, refreshToken, deviceId, user)
     if (!accessToken || !refreshToken || !user) return;
 
     console.log(`${provider} 로그인 성공`, user);
     useAuthStore.getState().setAuth(accessToken, refreshToken, deviceId);
+    console.log('setAuth')
     useAuthStore.getState().setUserProfile(user);
-
+    console.log('setUserProfile')
     useAuthModalStore.getState().closeAuthModal();
     useModalStore.getState().openModal("alertModal", {
       type: "success",
