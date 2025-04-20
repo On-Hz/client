@@ -1,4 +1,8 @@
-import { useAuthStore, useAuthModalStore, useModalStore } from "@/shared/stores";
+import {
+  useAuthStore,
+  useAuthModalStore,
+  useModalStore,
+} from "@/shared/stores";
 
 export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   const width = 600;
@@ -6,8 +10,10 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   const left = (window.innerWidth - width) / 2;
   const top = (window.innerHeight - height) / 2;
 
-  const authUrl = `${import.meta.env.VITE_API_URL}/oauth2/authorization/${provider}`;
-  console.log('소셜 authUrl :',authUrl);
+  const authUrl = `${
+    import.meta.env.VITE_API_URL
+  }/oauth2/authorization/${provider}`;
+  console.log("소셜 authUrl :", authUrl);
 
   const popup = window.open(
     authUrl,
@@ -21,24 +27,24 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
   }
 
   const receiveMessage = (event: MessageEvent) => {
-    // 보안 체크: 서버 도메인도 허용 (로컬테스트를 위해 필요)
-    const allowedOrigins = ["http://localhost:5173", "https://www.onhz.kr"];
+    const raw = import.meta.env.VITE_ALLOWED_ORIGINS || "";
+    const allowedOrigins = raw.split(",").map((s: any) => s.trim());
     if (!allowedOrigins.includes(event.origin)) return;
     if (event.data.type !== "oauth2Success") return;
 
     const { accessToken, refreshToken, deviceId, user } = event.data;
-    console.log("e.data : ", accessToken, refreshToken, deviceId, user)
+    console.log("e.data : ", accessToken, refreshToken, deviceId, user);
     if (!accessToken || !refreshToken || !user) return;
 
     console.log(`${provider} 로그인 성공`, user);
     useAuthStore.getState().setAuth(accessToken, refreshToken, deviceId);
-    console.log('setAuth')
+    console.log("setAuth");
     useAuthStore.getState().setUserProfile(user);
-    console.log('setUserProfile')
+    console.log("setUserProfile");
     useAuthModalStore.getState().closeAuthModal();
     useModalStore.getState().openModal("alertModal", {
       type: "success",
-      message: "On-Hz 오신 것을 환영합니다!"
+      message: "On-Hz 오신 것을 환영합니다!",
     });
 
     window.removeEventListener("message", receiveMessage);
