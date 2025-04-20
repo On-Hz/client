@@ -22,7 +22,7 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
 
   const receiveMessage = (event: MessageEvent) => {
     // 보안 체크: 서버 도메인도 허용 (로컬테스트를 위해 필요)
-    const allowedOrigins = ["http://localhost:5173", `${import.meta.env.VITE_API_URL}`];
+    const allowedOrigins = ["http://localhost:5173", "https://www.onhz.kr"];
     if (!allowedOrigins.includes(event.origin)) return;
     if (event.data.type !== "oauth2Success") return;
 

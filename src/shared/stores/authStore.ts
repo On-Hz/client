@@ -36,7 +36,7 @@ export const useAuthStore = create<AuthState>()(
       deviceId: getDeviceId(),
       isInitialized: !!getAuthToken(),
       setAuth: (token, refreshToken, deviceId) => {
-        set({ token, refreshToken,deviceId, isInitialized: true });
+        set({ token, refreshToken, deviceId, isInitialized: true });
         setAuthCookie(token, refreshToken, deviceId);
       },
       setUserProfile: (user) => {
