@@ -67,7 +67,7 @@ const RatingSec = () => {
             const userRating = ratings?.userRating;
             const entityId = album.id;
             const title = album.title;
-            const reviewId = userRating > -1 ? ratings?.userReviewId : undefined;
+            const reviewId = userRating >= 0 ? ratings?.userReviewId : undefined;
 
             const reviewModalOptions = getReviewModalOptions({
               reviewType,
@@ -81,9 +81,8 @@ const RatingSec = () => {
               const { reviewModalName, modalOptions } = reviewModalOptions;
               openModalWithAuthCheck(reviewModalName, modalOptions);
             }
-            console.log('click');
           }}
-          text={ratings?.userRating > -1 ? "리뷰 수정" : "리뷰 작성"}
+          text={ratings?.userRating >= 0 ? "리뷰 수정" : "리뷰 작성"}
         />
       </div>
     </div>

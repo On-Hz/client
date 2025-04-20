@@ -26,7 +26,7 @@ export function getReviewModalOptions(props: ReviewModalProps) {
   if (!entityId || !title) {
     return false;
   }
-  if (userRating > -1 && reviewId) {
+  if (userRating >= 0 && reviewId) {
     return {
       reviewModalName: "updateReviewModal",
       modalOptions: {

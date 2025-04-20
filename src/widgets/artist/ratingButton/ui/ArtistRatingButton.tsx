@@ -38,7 +38,7 @@ export const ArtistRatingButton: React.FC<ArtistRatingButtonProps> = ({
           }
         }}
       >
-        {userRating > -1 ? (
+        {userRating >= 0 ? (
           <div className="relative group">
             <div className="text-[40px] group-hover:hidden">{userRating}</div>
             <div className="hidden group-hover:block">

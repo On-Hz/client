@@ -67,11 +67,11 @@ export const ArtistBanner = () => {
             <div className="text-[40px] pb-1">{ratingInfo?.averageRating}</div>
             <p className="text-base">평균 평점</p>
           </div>
-          <div className="w-px bg-white h-16"></div>
+          <div className="w-px h-16 bg-white"></div>
           <ArtistRatingButton
             entityId={artistInfo.id}
             title={artistInfo.name}
-            userRating={ratingInfo?.userRating || -1}
+            userRating={ratingInfo?.userRating ?? -1}
             reviewId={ratingInfo?.userReviewId}
           />
         </div>
