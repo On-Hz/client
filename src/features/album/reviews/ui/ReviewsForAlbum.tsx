@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ReviewCardContainer } from "@/features/review"
 import { ReviewCardSkeleton, RoundButton, SubTitle } from "@/shared/ui";
 import { Link, useParams } from "react-router-dom";
-import { useAlbumReviews } from "../api/getAlbumReviewsApi";
 import { Review } from "@/shared/model";
 import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
 import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
@@ -10,40 +9,28 @@ import { useInView } from "react-intersection-observer";
 
 const ReviewsForAlbum = () => {
   const { albumId } = useParams<{ albumId: string }>() as { albumId: string };
-  const infiniteMode = true;
 
-  const regularQuery = useAlbumReviews(albumId, {
-    enabled: !infiniteMode,
-  });
-
-  const infiniteQuery = useInfiniteScrollQuery<Review>({
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteScrollQuery<Review>({
     endpoint: `/api/v1/reviews/${REVIEW_TYPES.ALBUM}/${albumId}`,
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,
-    enabled: infiniteMode,
+    enabled: !!albumId,
     queryKeyPrefix: "album_review"
   });
 
-  const reviews = infiniteMode
-    ? infiniteQuery.data?.pages.flat() ?? []
-    : regularQuery.data ?? [];
-
-  const isLoading = infiniteMode
-    ? infiniteQuery.isLoading
-    : regularQuery.isLoading;
+  const reviews = data?.pages.flat() ?? [];
 
   const { ref, inView } = useInView({ threshold: 0 });
   
   useEffect(() => {
     if (
-      infiniteMode &&
       inView &&
-      infiniteQuery.hasNextPage &&
-      !infiniteQuery.isFetchingNextPage
+      hasNextPage &&
+      !isFetchingNextPage
     ) {
-      infiniteQuery.fetchNextPage();
+      fetchNextPage();
     }
-  }, [inView, infiniteMode, infiniteQuery]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div>
@@ -67,7 +54,7 @@ const ReviewsForAlbum = () => {
             </Link>
           ))
         )}
-        {infiniteMode && infiniteQuery.hasNextPage && (
+        {hasNextPage && (
           <div ref={ref} style={{ height: "1px" }} />
         )}
       </div>
