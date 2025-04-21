@@ -11,6 +11,12 @@ export const validateAuth = (email: string, password: string): string | null => 
     return result.success ? null : result.error.errors[0].message;
 };
 
+export const validateEmailOnly = (email: string): string | null => {
+  const result = authSchema.pick({ email: true }).safeParse({ email });
+  return result.success ? null : result.error.errors[0].message;
+};
+
+
 
 //유저정보 변경
 export const profileChangeSchema = z
