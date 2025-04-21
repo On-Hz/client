@@ -20,7 +20,8 @@
 @screen max-500 {  /*max-width 500px*/
     .hz-header .hz-header-inner{@apply p-4}
     .hz-header .hz-logo{@apply w-[60px]}
-    .hz-header .hz-user-name{@apply text-[16px]}
+    .hz-header .hz-user-name{@apply text-[14px] pr-2}
+    #composition-button{@apply w-[30px] h-[30px] mr-0}
     .hz-search-box{width: calc(100% - 140px);}
     .hz-search-box.hz-search-show{@apply top-[18px] py-[5px] right-4}
 }

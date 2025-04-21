@@ -21,7 +21,7 @@ export const validateEmailOnly = (email: string): string | null => {
 //유저정보 변경
 export const profileChangeSchema = z
   .object({
-    userName: z.string().min(1, "닉네임을 입력해주세요."),
+    userName: z.string().min(1, "닉네임을 입력해주세요.").max(15, "닉네임은 15자 이하로 입력해주세요."),
     password: z.string().optional(),
     confirm: z.string().optional(),
   })

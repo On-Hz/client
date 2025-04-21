@@ -33,7 +33,7 @@ export const ReviewCard = ({
       }
     >
       <div className="flex items-start justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center w-full">
           <span className="w-[64px] h-[64px] rounded-[50%] overflow-hidden border border-gray3">
             {userProfilePath ? (
               <img src={userProfilePath} alt="" className="w-full h-full" />
@@ -44,7 +44,7 @@ export const ReviewCard = ({
               />
             )}
           </span>
-          <p className="font-bold text-gray pl-[12px]">{userName}</p>
+          <p className="font-bold text-gray pl-[12px] flex-1 break-all hz-review-name">{userName}</p>
         </div>
         {reviewActionButtons}
       </div>

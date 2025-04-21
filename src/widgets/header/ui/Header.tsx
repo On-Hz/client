@@ -66,7 +66,10 @@ export const Header: React.FC = () => {
             <SearchBar/>
             {user ? ( //로그인
               <div className="flex items-center ml-4">
-                <p className="text-[20px] pr-4 hz-user-name">{user.userName} <span className="text-[15px]">님</span></p>
+                <p className="text-[20px] pr-4 hz-user-name flex items-center">
+                  <b className="font-normal block">{user.userName}</b>
+                  <span className="text-[15px]">님</span>
+                </p>
                 <Button
                   ref={anchorRef}
                   id="composition-button"

@@ -1,5 +1,7 @@
 .hz-review-sec{@apply flex gap-4 flex-wrap}
-.hz-review-sec-item{@apply w-[23.7%]}
+.hz-review-sec-item{@apply w-[23.7%] relative}
+.hz-review-sec-item .hz-review-name{@apply pt-1}
+.hz-review-info-btn{@apply absolute top-2 right-2 z-40 text-[12px]}
 
 @screen max-1300 { /*max-width 1300px*/
     .hz-review-sec-item{@apply w-[32.2%]}
