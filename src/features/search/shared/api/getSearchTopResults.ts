@@ -1,6 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/shared/api";
+import { Track, Artist, Album } from "@/shared/model";
 import { ORDER_BY, LowerCaseReviewType } from "@/shared/constants";
+
+interface CombinedResults {
+  tracks: Track[];
+  artists: Artist[];
+  albums: Album[];
+}
 
 const getSearchTopResults = async <T>(
   keyword: string,
@@ -20,14 +27,24 @@ const getSearchTopResults = async <T>(
   return response.data;
 };
 
-export const useSearchTopResults = <T>(
-  keyword: string,
-  type: LowerCaseReviewType,
-  options?: { enabled?: boolean }
-) => {
-  return useQuery<T[], Error>({
-    queryKey: [`${type}s_search_home`, keyword],
-    queryFn: () => getSearchTopResults<T>(keyword, type),
-    enabled: options?.enabled ?? true,
+export function useCombinedSearch(keyword: string) {
+  const queryClient = useQueryClient();
+  const queryKey = ["search_landing", keyword] as const;
+  const hasCache = Boolean(queryClient.getQueryData<CombinedResults>(queryKey));
+
+  return useQuery<CombinedResults, Error>({
+    queryKey,
+    queryFn: async () => {
+      if (!keyword) {
+        return { tracks: [], artists: [], albums: [] };
+      }
+      const [tracks, artists, albums] = await Promise.all([
+        getSearchTopResults<Track>(keyword, "track"),
+        getSearchTopResults<Artist>(keyword, "artist"),
+        getSearchTopResults<Album>(keyword, "album"),
+      ]);
+      return { tracks, artists, albums };
+    },
+    enabled: Boolean(keyword) && !hasCache,
   });
-};
+}

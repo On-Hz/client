@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteScroll } from "@/shared/hooks";
+import { decodeSlug } from "@/shared/helpers";
 import { ORDER_BY } from "@/shared/constants";
 
 interface UseCombinedSearchResultsProps<T> {
@@ -16,23 +17,21 @@ export const useCombinedSearchResults = <T extends { id: number }>({
   hasShowMoreTab,
   initialData,
 }: UseCombinedSearchResultsProps<T>) => {
-
   const infiniteQuery = useInfiniteScroll<T>({
     endpoint: "/api/v1/search",
     limit: 5,
     orderBy: ORDER_BY.CREATED_AT,
-    additionalParams: { keyword: searchSlug, type },
-    enabled: !hasShowMoreTab,
-    queryKeyPrefix: `${type}s_search_${searchSlug}`,
+    additionalParams: { keyword: decodeSlug(searchSlug), type },
+    enabled: !hasShowMoreTab && Boolean(decodeSlug(searchSlug)),
+    queryKeyPrefix: `${type}s_search_${decodeSlug(searchSlug)}`,
   });
 
   const data: T[] = hasShowMoreTab
     ? initialData ?? []
     : infiniteQuery.data?.pages.flat() ?? [];
 
-  const isLoading = hasShowMoreTab && initialData
-    ? false
-    : infiniteQuery.isLoading;
+  const isLoading =
+    hasShowMoreTab && initialData ? false : infiniteQuery.isLoading;
 
   const { ref, inView } = useInView({ threshold: 0 });
 

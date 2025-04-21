@@ -5,19 +5,21 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import CloseIcon from "@mui/icons-material/Close";
 import { shallow } from "zustand/shallow";
-import { useSearchHistoryStore } from "@/shared/stores/searchHistoryStore";
-import { useSearchResultsStore } from "@/shared/stores/searchResultsStore";
+import { useSearchHistoryStore, useSearchResultsStore } from "@/shared/stores";
+import { encodeSlug, parseSlug } from "@/shared/helpers";
 
 export const SearchBar: React.FC = React.memo(() => {
   const [searchSlug, setSearchSlug] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const match = useMatch("/search/:slug/*");
+  const rawSlug = match?.params.slug ?? "";
+  const didRedirect = useRef(false);
 
   const { recentSearches, addSearch, removeSearch } = useSearchHistoryStore(
     (state) => ({
@@ -27,14 +29,6 @@ export const SearchBar: React.FC = React.memo(() => {
     }),
     shallow
   );
-  const { currentKeyword, setCurrentKeyword } = useSearchResultsStore(
-    (state) => ({
-      currentKeyword: state.currentKeyword,
-      setCurrentKeyword: state.setCurrentKeyword,
-    }),
-    shallow
-  );
-
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,16 +40,20 @@ export const SearchBar: React.FC = React.memo(() => {
   );
 
   useEffect(() => {
-    if (location.pathname.startsWith("/search")) {
-      const parts = window.location.pathname.split("/");
-      const keyword = parts[2] ? decodeURIComponent(parts[2]) : "";
-      setCurrentKeyword(keyword);
-      setSearchSlug(keyword);
-    } else {
+    if (!rawSlug) {
       clearResults();
       setSearchSlug("");
+      return;
     }
-  }, [location.pathname, clearResults, currentKeyword, setCurrentKeyword]);
+    const { keyword, redirectTo } = parseSlug(rawSlug);
+    if (redirectTo && !didRedirect.current) {
+      didRedirect.current = true;
+      navigate(redirectTo, { replace: true });
+      return;
+    }
+    setSearchSlug(keyword);
+    addSearch(keyword);
+  }, [navigate, clearResults, addSearch, rawSlug]);
 
   const displayedSearches = useMemo(
     () => recentSearches.slice(0, 5),
@@ -66,15 +64,12 @@ export const SearchBar: React.FC = React.memo(() => {
     (keyword?: string) => {
       const query = (keyword ?? searchSlug).trim();
       if (!query) return;
-      if (query !== currentKeyword) {
-        setCurrentKeyword(query);
-        addSearch(query);
-      }
-      navigate(`/search/${encodeURIComponent(query)}`);
+      const searhcURISlug = encodeSlug(query);
+      navigate(`/search/${searhcURISlug}`);
       setShowDropdown(false);
       inputRef.current?.blur();
     },
-    [searchSlug, currentKeyword, setCurrentKeyword, addSearch, navigate]
+    [searchSlug, navigate]
   );
 
   const handleKeyDown = useCallback(
@@ -172,7 +167,7 @@ export const SearchBar: React.FC = React.memo(() => {
           )}
         </div>
         <button
-          className="hz-mob-search-close p-1 border border-gray rounded-md bg-white ml-1"
+          className="p-1 ml-1 bg-white border rounded-md hz-mob-search-close border-gray"
           onClick={() => setSearchVisible(false)}
         >
           <CloseIcon fontSize="small" />
@@ -184,7 +179,6 @@ export const SearchBar: React.FC = React.memo(() => {
                 key={index}
                 className="flex items-center justify-between px-3 py-2 cursor-pointer group hover:bg-gray2"
                 onClick={() => {
-                  setSearchSlug(item);
                   handleSearch(item);
                 }}
               >

@@ -11,10 +11,7 @@ interface SearchResults {
 interface SearchResultsStore {
   currentKeyword: string;
   results: SearchResults;
-  isLoading: boolean;
-  setResults: (results: SearchResults) => void;
-  setCurrentKeyword: (keyword: string) => void;
-  setLoading: (loading: boolean) => void;
+  setResults: (results: SearchResults, keyword: string) => void;
   clearResults: () => void;
 }
 
@@ -23,20 +20,19 @@ export const useSearchResultsStore = createWithEqualityFn(
     (set) => ({
       currentKeyword: "",
       results: { tracks: [], artists: [], albums: [] },
-      isLoading: false,
-      setResults: (results) => set({ results }),
-      setCurrentKeyword: (keyword: string) =>
-        set((state) => {
-          if (state.currentKeyword === keyword) return {};
-          return { currentKeyword: keyword };
-        }),
-      setLoading: (loading: boolean) => set({ isLoading: loading }),
-      clearResults: () =>
+      setResults: (results: SearchResults, keyword) =>
+        set((state) => ({
+          results,
+          ...(state.currentKeyword !== keyword
+            ? { currentKeyword: keyword }
+            : {}),
+        })),
+      clearResults: () => {
         set({
-          isLoading: true,
           currentKeyword: "",
           results: { tracks: [], artists: [], albums: [] },
-        }),
+        });
+      },
     }),
     {
       name: "search-results",
