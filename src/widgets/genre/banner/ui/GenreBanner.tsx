@@ -14,6 +14,9 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
   const upperGenre = genreInfo?.code.toUpperCase();
 
   const colors = GENRE_COLOR_PALETTES[genreCode];
+  if (!colors) {
+    return null;
+  }
   const style = {
     background: `
       radial-gradient(circle at 20% 20%, ${colors.darkMuted}, transparent 60%),
@@ -27,7 +30,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
   return (
     <Box
       component="section"
-      className="hz-banner-container relative flex items-center justify-center w-full py-16 overflow-hidden"
+      className="relative flex items-center justify-center w-full py-16 overflow-hidden hz-banner-container"
       style={style}
     >
       <span className="hz-banner-stroke" style={{
@@ -59,7 +62,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
       style={getStrokeStyle(upperGenre || "")}>
         <div className="relative overflow-hidden" style={{ zIndex: 1 }}>
           <div
-            className="hz-banner-circle rounded-full"
+            className="rounded-full hz-banner-circle"
             style={{
               backgroundColor: `${colors.lightMuted}`,
               width: "clamp(280px, 22vw, 350px)",
@@ -71,7 +74,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
 
         <div className="relative" style={{ zIndex: 2 }}>
           <div
-            className="hz-banner-circle rounded-full"
+            className="rounded-full hz-banner-circle"
             style={{
               backgroundColor: `${colors.muted}`,
               width: "clamp(280px, 22vw, 350px)",
@@ -83,7 +86,7 @@ export const GenreBanner: React.FC<GenreBannerProps> = ({ genreCode }) => {
 
         <div className="relative" style={{ zIndex: 3 }}>
           <div
-            className="hz-banner-circle flex items-center justify-center overflow-hidden rounded-full"
+            className="flex items-center justify-center overflow-hidden rounded-full hz-banner-circle"
             style={{
               backgroundColor: `${colors.darkMuted}`,
               width: "clamp(280px, 22vw, 350px)",
