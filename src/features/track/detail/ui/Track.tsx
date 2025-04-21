@@ -64,7 +64,13 @@ const TrackSec = () => {
                             </span>
                         ))}
                     </div>  
-                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{track.title}</p>
+                    <p
+                        className={`mt-[37px] mb-[17px] font-bold text-black hz-title ${
+                        track.title.length >= 25 ? "hz-title-len-max" : "hz-title-len-default"
+                    }`}
+                    >
+                        {track.title}
+                    </p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범명</span>
                         <span 

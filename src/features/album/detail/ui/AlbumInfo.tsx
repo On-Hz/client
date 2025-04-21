@@ -2,7 +2,7 @@ import React from 'react';
 import { AlbumInfoSkeleton } from './AlbumInfoSkeleton';
 import { useParams } from 'react-router-dom';
 import { useAlbumDetail } from '../api/getAlbumDetailApi';
-import { Artist } from '@/shared/model';
+import { Artist, Genre } from '@/shared/model';
 import { formatDate } from '@/shared/helpers';
 const InformationSec = () => {
 
@@ -29,13 +29,20 @@ const InformationSec = () => {
                         ))}
                     </div>
                 </li>
-                <li className='border-b border-gray4 py-[14px] text-[14px] flex justify-between'>
-                    <span className='text-gray5 pr-[10px]'>장르</span>
-                    <span className='flex-1'>{album.genres?.[0]?.code ?? ""}</span>
-                </li>
                 <li className='py-[14px] text-[14px] flex justify-between'>
-                    <span className='text-gray5 pr-[10px]'>길이</span>
-                    <span className='flex-1'>{album.createdAt}</span>
+                    <span className="text-gray5 pr-[10px]">장르</span>
+                    <div className="flex-1">
+                        {album.genres && album.genres.length > 0 ? (
+                            album.genres.map((genre: Genre, index: number) => (
+                            <span key={genre.code}>
+                                {genre.code}
+                                {index !== album.genres.length - 1 && ", "}
+                            </span>
+                            ))
+                        ) : (
+                            <span className="text-gray">장르에 대한 정보가 없습니다.</span>
+                        )}
+                    </div>
                 </li>
             </ul>
         </div>

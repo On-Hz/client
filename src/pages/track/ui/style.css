@@ -1,3 +1,5 @@
+#sg-page .hz-left .hz-title-len-default{@apply text-[36px]}
+#sg-page .hz-left .hz-title-len-max{@apply text-[20px]}
 
 @screen max-1300 { /*max-width 1300px*/
     #sg-page .hz-right ul{gap:10px;}
@@ -5,23 +7,25 @@
 
 @screen max-1200 { /*max-width 1200px*/
     #sg-page .hz-top{@apply block}
+    #sg-page .hz-left{@apply w-auto}
     #sg-page .hz-right{@apply p-0 my-[40px] w-full}
     #sg-page .hz-right ul{@apply gap-8}
 }
 
 @screen max-1000 { /*max-width 1000px*/
-    #sg-page .hz-left{@apply w-auto}
 }
 
 @screen max-800 { /*max-width 800px*/
     #sg-page .hz-left .hz-cover{@apply w-[200px] h-[200px]}
-    #sg-page .hz-left .hz-title{@apply text-[20px]}
+    #sg-page .hz-left .hz-title-len-default{@apply text-[20px]}
+    #sg-page .hz-left .hz-title-len-max{@apply text-[14px]}
     #sg-page .hz-item-left{@apply w-auto}
 }
 
 @screen max-500 { /*max-width 500px*/
     #sg-page .hz-left .hz-cover{@apply w-[140px] h-[140px]}
     #sg-page .hz-left > div{@apply block}
+    #sg-page .hz-left .hz-title-len-max{@apply text-[12px]}
     #sg-page .hz-ab-info{@apply p-0 mt-9}
     #sg-page .hz-right ul{@apply p-5}
     #sg-page .hz-right p {@apply text-[15px]}

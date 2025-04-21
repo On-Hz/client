@@ -27,9 +27,9 @@ const TrackListSec = () => {
             key={track.id}
             onClick={() => navigate(`/track/${track.id}`)}
             className='cursor-pointer flex items-center justify-between border-gray2 border-b p-[12px]'>
-            <div className='flex items-center hz-item-left'>
+            <div className='flex items-center hz-item-left flex-1 min-w-0'>
               <span className='text-[14px] pr-5 track-num'>{idx + 1}</span>
-              <p className='hz-track-title overflow-hidden w-[90%] whitespace-nowrap text-ellipsis'>{track.title}</p>
+              <p className='hz-track-title overflow-hidden w-[90%]'>{track.title}</p>
             </div>
             <div className='flex items-center justify-end hz-item-info'>
               <StarIcon className='text-yellow' style={{ width: '18px', height: '18px' }} />

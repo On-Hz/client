@@ -10,7 +10,6 @@
 
     #ab-page .hz-bottom .hz-track{@apply w-auto flex-1 min-w-0}
     #ab-page .hz-bottom .hz-track .hz-list{@apply w-auto}
-    #ab-page .hz-bottom .hz-item-left{@apply flex-1 min-w-0}
     #ab-page .hz-bottom .hz-info{@apply flex-none w-[300px]}
 }
 
