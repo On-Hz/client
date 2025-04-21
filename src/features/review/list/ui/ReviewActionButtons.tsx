@@ -50,7 +50,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
   };
 
   return (
-    <div className="flex gap-2 hz-review-info-btn">
+    <div className="flex gap-2 absolute top-2 right-2 z-40 text-[12px]">
       <Button text="수정" onClick={handleUpdateReview} />
       <Button text="삭제" onClick={handleDeleteReview} />
     </div>

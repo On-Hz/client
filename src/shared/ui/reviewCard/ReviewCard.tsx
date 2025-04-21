@@ -28,12 +28,12 @@ export const ReviewCard = ({
     <div
       className={
         hasBorder
-          ? "mb-[24px] px-[24px] py-[18px] bg-white"
-          : "mb-[24px] px-[24px] py-[18px] bg-white border-gray3 border rounded-[8px] cursor-pointer transform hover:border-gray transition-colors"
+          ? "mb-[24px] px-[24px] py-[18px] bg-white relative"
+          : "mb-[24px] px-[24px] py-[18px] bg-white relative border-gray3 border rounded-[8px] cursor-pointer transform hover:border-gray transition-colors"
       }
     >
       <div className="flex items-start justify-between">
-        <div className="flex items-center w-full">
+        <div className="flex items-center w-full flex-1">
           <span className="w-[64px] h-[64px] rounded-[50%] overflow-hidden border border-gray3">
             {userProfilePath ? (
               <img src={userProfilePath} alt="" className="w-full h-full" />
@@ -44,7 +44,7 @@ export const ReviewCard = ({
               />
             )}
           </span>
-          <p className="font-bold text-gray pl-[12px] flex-1 break-all hz-review-name">{userName}</p>
+          <p className="font-bold text-gray pl-[12px] mt-2 flex-1 break-all hz-review-name">{userName}</p>
         </div>
         {reviewActionButtons}
       </div>
