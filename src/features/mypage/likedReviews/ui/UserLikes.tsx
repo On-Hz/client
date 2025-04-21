@@ -52,6 +52,8 @@ export const UserLikeSec = () => {
         <div className="">
             {isLoading ? (
                 <UserLikeSecSkeleton />
+                ) : likeReviews.length === 0 ? (
+                    <p className="py-28 text-center">좋아요한 항목이 없습니다.</p>
                 ) : (
                     <div className="flex flex-wrap pt-10 gap-7 hz-like-wrap">
                         {likeReviews?.map((like) => (

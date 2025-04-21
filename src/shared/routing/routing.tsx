@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { NotFoundRoute } from "./NotFoundRoute";
 import OAuthCallback from "@/features/auth/social/ui/OAuthCallback";
@@ -101,14 +101,15 @@ export const Routing: React.FC = () => {
       <Route path="/track/:trackId" element={<pages.track />} />
 
       <Route element={<PrivateRoute />}>
-        <Route path="/mypage/:userId/*" element={<pages.mypage />}>
-          <Route index element={<pages.mypageAlbum />} />
-          <Route path="album" element={<pages.mypageAlbum />} />
-          <Route path="track" element={<pages.mypageTrack />} />
-          <Route path="artist" element={<pages.mypageArtist />} />
-          <Route path="like" element={<pages.mypageLike />} />
-        </Route>
+      <Route path="/mypage/:userId/*" element={<pages.mypage />}>
+        <Route index element={<Navigate to="album" replace />} />
+        <Route path="album" element={<pages.mypageAlbum />} />
+        <Route path="track" element={<pages.mypageTrack />} />
+        <Route path="artist" element={<pages.mypageArtist />} />
+        <Route path="like" element={<pages.mypageLike />} />
       </Route>
+    </Route>
+
 
       <Route path="/review/:reviewId" element={<pages.review />} />
       <Route path="/genre/:genreCode" element={<pages.genre />} />
