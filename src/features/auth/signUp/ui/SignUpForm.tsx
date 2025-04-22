@@ -91,6 +91,7 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
  
     if (result.success) {
       setEmailSuccessMessage(result.message);
+      setValidationError(null);
       setIsVerified(true); // 인증 성공 상태 저장
       reset(); // 타이머 종료
     } else {
@@ -204,24 +205,15 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
         />
       </div>
 
-      {/* 0421 (추후 에러메세지 수정 예정) */}
-
-      {/* 인증 중 발생한 에러 (인증번호 틀림 등) */}
-      {validationError && isRunning && !isVerified && (
+      {/* validationError*/}
+      {validationError && (
         <p className="mb-4 text-sm text-center text-red">
-            <ReportProblemIcon className="mr-1" />
-            {validationError}
-          </p>
+          <ReportProblemIcon className="mr-1" />
+          {validationError}
+        </p>
       )}
 
-      {/* 일반 유효성 검증 에러 (이메일/비밀번호 미입력 등) */}
-      {validationError && !isRunning && !isVerified && (
-        <p className="mb-4 text-sm text-center text-red">
-            <ReportProblemIcon className="mr-1" />
-            {validationError}
-          </p>
-      )}
-      {/* 서버응답 에러 */}
+      {/* 서버응답 에러 (회원가입 실패 등) */}
       {errorMessage && (
         <p className="mb-4 text-sm text-center text-red">
           <ReportProblemIcon className="mr-1" />
