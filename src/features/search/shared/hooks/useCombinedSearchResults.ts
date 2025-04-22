@@ -20,7 +20,7 @@ export const useCombinedSearchResults = <T extends { id: number }>({
   const infiniteQuery = useInfiniteScroll<T>({
     endpoint: "/api/v1/search",
     limit: 5,
-    orderBy: ORDER_BY.CREATED_AT,
+    orderBy: type === "artist" ? ORDER_BY.SCORE : ORDER_BY.CREATED_AT,
     additionalParams: { keyword: decodeSlug(searchSlug), type },
     enabled: !hasShowMoreTab && Boolean(decodeSlug(searchSlug)),
     queryKeyPrefix: `${type}s_search_${decodeSlug(searchSlug)}`,

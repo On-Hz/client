@@ -12,8 +12,8 @@ interface CombinedResults {
 const getSearchTopResults = async <T>(
   keyword: string,
   type: LowerCaseReviewType,
-  limit: number = 5,
-  orderBy: string = ORDER_BY.CREATED_AT
+  orderBy: string = ORDER_BY.CREATED_AT,
+  limit: number = 5
 ): Promise<T[]> => {
   const url = "/api/v1/search";
   const response = await axiosInstance.get<T[]>(url, {
@@ -40,7 +40,7 @@ export function useCombinedSearch(keyword: string) {
       }
       const [tracks, artists, albums] = await Promise.all([
         getSearchTopResults<Track>(keyword, "track"),
-        getSearchTopResults<Artist>(keyword, "artist"),
+        getSearchTopResults<Artist>(keyword, "artist", ORDER_BY.SCORE),
         getSearchTopResults<Album>(keyword, "album"),
       ]);
       return { tracks, artists, albums };

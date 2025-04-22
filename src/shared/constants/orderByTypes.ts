@@ -3,6 +3,7 @@ export const ORDER_BY = {
   AVERAGE_RATING: "averageRating",
   RATING_COUNT: "ratingCount",
   RELEASE_DATE: "releaseDate",
+  SCORE: "score"
 } as const;
 
 export const SORT_ORDER = {
