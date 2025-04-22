@@ -35,7 +35,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   return (
     <ModalLayout open={open} onClose={onClose} showCloseButton>
       <div className="py-[25px] px-[40px] w-[550px] max-500:w-[300px] max-500:p-0">
-        <p className="text-[36px] pb-6 font-semibold max-500:text-[30px]">
+        <p className="text-[25px] pb-6 font-semibold max-500:text-[20px] max-500:pt-5">
           {title}
         </p>
         <Tooltip

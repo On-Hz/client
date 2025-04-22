@@ -67,7 +67,7 @@ export const ReviewCard = ({
       <div
         className={
           hasEllipsis
-            ? "overflow-hidden line-clamp-4 h-[95px] review-text-box"
+            ? "overflow-hidden line-clamp-4 h-[95px] review-text-box whitespace-pre-wrap"
             : "min-h-[70px] whitespace-pre-wrap" //line-clamp-4 h-[95px] => 4줄의 높이를 지정. (카드 높이가 동일하도록)
         }
       >

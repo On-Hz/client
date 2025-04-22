@@ -10,7 +10,7 @@ import { emailVerification } from "../api/emailVerificationApi";
 import { emailVerificationVerify } from "../api/emailVerificationVerifyApi";
 
 interface SignupFormProps {
-  switchMode: () => void;
+  switchMode: (mode: "login" | "signup" | "findPassword") => void;
 }
 
 export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
@@ -18,7 +18,7 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
   const { mutate, errorMessage } = useSignUp({
     onSuccess: () => {
       setIsTermsOpen(false);
-      switchMode();
+      switchMode("login");
     },
   });
   const [form, setForm] = useState({ email: "", password: "" });
@@ -229,7 +229,7 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
         이미 계정이 있으신가요?{" "}
         <span
           className="font-bold cursor-pointer text-point"
-          onClick={switchMode}
+          onClick={() => switchMode("login")}
         >
           로그인
         </span>

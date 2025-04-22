@@ -1,3 +1,5 @@
+#ab-page .hz-left .hz-title-len-default{@apply text-[35px]}
+#ab-page .hz-left .hz-title-len-max{@apply text-[20px]}
 
 @screen max-1300 { /*max-width 1300px*/
     #ab-page .hz-right ul{gap:10px;}
@@ -21,7 +23,8 @@
 
 @screen max-800 { /*max-width 800px*/
     #ab-page .hz-left .hz-cover{@apply w-[200px] h-[200px]}
-    #ab-page .hz-left .hz-title{@apply text-[20px]}
+    #ab-page .hz-left .hz-title-len-default{@apply text-[20px]}
+    #ab-page .hz-left .hz-title-len-max{@apply text-[14px]}
     #ab-page .hz-track-title{@apply w-[80%]}
     #ab-page .hz-item-left{@apply w-auto}
 }
@@ -29,6 +32,7 @@
 @screen max-500 { /*max-width 500px*/
     #ab-page .hz-left .hz-cover{@apply w-[140px] h-[140px]}
     #ab-page .hz-left > div{@apply block}
+    #ab-page .hz-left .hz-title-len-max{@apply text-[12px]}
     #ab-page .hz-ab-info{@apply p-0 mt-9}
     #ab-page .hz-right ul{@apply p-5}
     #ab-page .hz-right p {@apply text-[15px]}
