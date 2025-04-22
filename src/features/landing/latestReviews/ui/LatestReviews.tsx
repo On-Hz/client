@@ -56,7 +56,7 @@ const renderReviewPage = (reviews: Review[]) => (
             </div>
           )}
           <div className="flex flex-col justify-between h-24 w-full flex-1">
-            <p className="h-auto overflow-hidden text-sm text-gray-600 line-clamp-3">
+            <p className="h-auto overflow-hidden text-sm text-gray-600 line-clamp-3 whitespace-pre-line">
               {review.content}
             </p>
             <div className="flex justify-end">
