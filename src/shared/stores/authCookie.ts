@@ -72,7 +72,6 @@ export const setUserCookie = (user: User | null) => {
 };
 
 export const removeAuthCookie = () => {
-  console.log('removeAuthCookie')
   cookies.remove("token", { path: "/" });
   cookies.remove("refresh-token", { path: "/" });
   cookies.remove("device-id", { path: "/" });

@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
 
   //로그아웃
   const handleLogout = () => {
-    performLogout(queryClient, "logout");
+    performLogout(queryClient);
     authChannel.postMessage({ type: "LOGOUT" });
     setOpen(false);
   };

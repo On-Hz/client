@@ -1,4 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
+import { axiosInstance } from "@/shared/api";
 import { useModalStore, useAuthStore } from "@/shared/stores";
 import { isReviewQuery } from "@/shared/helpers";
 import { User } from "@/shared/model";
@@ -7,16 +8,16 @@ import { User } from "@/shared/model";
  * @param queryClient  React‑Query 클라이언트 인스턴스
  * @param keepModals   로그아웃 후에도 닫지 않을 모달 이름 배열
  */
-export function performLogout(
+export async function performLogout(
   queryClient: QueryClient,
-  type: "logout" | "removeAuth" = "logout",
   keepModals: string[] = ["alertModal", "authInfoModal"]
 ) {
-  if (type === "logout") {
-    useAuthStore.getState().logout();
-  } else if (type === "removeAuth") {
-    useAuthStore.getState().removeAuth();
+  if (useAuthStore.getState()?.user?.social) {
+    await axiosInstance
+      .post("/api/v1/auth/logout", null, { withCredentials: true })
+      .catch((error: any) => console.warn("서버 로그아웃 실패:", error));
   }
+  useAuthStore.getState().removeAuth();
   useModalStore.getState().closeAllExcept(keepModals);
 
   invalidateSpecificQueries(queryClient);

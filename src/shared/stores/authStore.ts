@@ -30,7 +30,6 @@ export interface AuthState {
     deviceId: string
   ) => void;
   setUserProfile: (user: User) => void;
-  logout: () => void;
   removeAuth: () => void;
 }
 
@@ -76,7 +75,7 @@ export function scheduleRefreshExpire(refreshToken: string) {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set,get) => ({
+    (set) => ({
       token: getAuthToken(),
       refreshToken: getAuthRefreshToken(),
       user: getAuthUser(),
@@ -97,20 +96,9 @@ export const useAuthStore = create<AuthState>()(
         set({ user });
         setUserCookie(user);
       },
-      logout: async () => {
-        const isSocial = getAuthUser()?.social;
-        if (isSocial && getDeviceId()) {
-          try {
-            await axiosInstance.post("/api/v1/auth/logout", null, {
-              withCredentials: true,
-            });
-          } catch (error) {
-            console.warn("서버 로그아웃 실패:", error);
-          }
-        }
-        get().removeAuth()
-      },
       removeAuth: () => {
+        delete axiosInstance.defaults.headers.common["Authorization"];
+        removeAuthCookie();
         clearAllTimers();
         set({
           token: null,
@@ -120,9 +108,8 @@ export const useAuthStore = create<AuthState>()(
           isInitialized: false,
           sessionExpired: false,
         });
-        removeAuthCookie();
         sessionStorage.removeItem("auth-storage");
-      }
+      },
     }),
     {
       name: "auth-storage",
