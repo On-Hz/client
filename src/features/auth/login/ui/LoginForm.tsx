@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { InputBox, ModalButton } from "@/shared/ui";
 import { useLogin } from "../hooks/useLogin";
 import { validateAuth } from "@/shared/validation/authSchema";
@@ -9,7 +10,8 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
-  const { mutate, errorMessage } = useLogin(); 
+  const queryClient = useQueryClient();
+  const { mutate, errorMessage } = useLogin(queryClient); 
   const [form, setForm] = useState({ email: "", password: "" });
   const [validationError, setValidationError] = useState<string | null>(null);
   

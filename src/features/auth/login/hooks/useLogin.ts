@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { useAuthStore } from "@/shared/stores/authStore";
-import { useAuthModalStore } from "@/shared/stores/authModalStore";
+import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useAuthModalStore } from "@/shared/stores";
+import { authChannel, performLogin } from "@/shared/helpers";
 import { login } from "../api/loginApi";
 import { AuthResult } from "../../model/types";
-import { useMutation } from "@tanstack/react-query";
 
 interface LoginVariables {
   email: string;
   password: string;
 }
 
-export const useLogin = () => {
-  const { setAuth, setUserProfile } = useAuthStore();
+export const useLogin = (queryClient:QueryClient) => {
   const { closeAuthModal } = useAuthModalStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -22,9 +21,8 @@ export const useLogin = () => {
         setErrorMessage(data.error);
         return;
       }
-
-      setAuth(data.accessToken, data.refreshToken, data.deviceId);
-      setUserProfile(data.user);
+      performLogin(queryClient, data);
+      authChannel.postMessage({ type: "LOGIN" });
       closeAuthModal();
     },
     onError: (error) => {

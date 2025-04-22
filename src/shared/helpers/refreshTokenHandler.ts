@@ -18,10 +18,8 @@ export const refreshAccessToken = async (): Promise<string | null> => {
     useAuthStore.getState().setAuth(newToken, newRefreshToken, newDeviceId)
 
     return newToken;
-
-  } catch (err) {
-    console.error('err 실패',err);
-    useAuthStore.getState().logout();
+  } catch {
+    useAuthStore.getState().setSessionExpired(true);
     return null;
   }
 };

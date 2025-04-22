@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "/public/logo_text.svg";
+import { useQueryClient } from "@tanstack/react-query";
 import { useAuthModalStore, useAuthStore } from "@/shared/stores";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
@@ -11,9 +12,9 @@ import Popper from "@mui/material/Popper";
 import { PopperChildrenProps } from "@mui/material/Popper/BasePopper.types";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import "./style.css";
-import { useQueryClient } from "@tanstack/react-query";
 import { SearchBar } from "../searchBar/ui/SearchBar";
+import { authChannel, performLogout } from "@/shared/helpers";
+import "./style.css";
 
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
@@ -28,7 +29,11 @@ export const Header: React.FC = () => {
 
   //사용자 메뉴 닫기
   const closeUserMenu = (event?: MouseEvent | TouchEvent) => {
-    if (event && anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+    if (
+      event &&
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as Node)
+    ) {
       return;
     }
     setOpen(false);
@@ -37,7 +42,8 @@ export const Header: React.FC = () => {
   //로그아웃
   const handleLogout = () => {
     logout();
-    queryClient.clear(); 
+    authChannel.postMessage({ type: "LOGOUT" });
+    performLogout(queryClient);
     setOpen(false);
   };
 
@@ -45,15 +51,17 @@ export const Header: React.FC = () => {
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      if (anchorRef.current) { //`null` 체크 후 `focus()` 실행
+      if (anchorRef.current) {
+        //`null` 체크 후 `focus()` 실행
         anchorRef.current.focus();
       }
     }
     prevOpen.current = open;
   }, [open]);
 
-  const profileImageUrl = user?.profilePath ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}` : null;
-  
+  const profileImageUrl = user?.profilePath
+    ? `${import.meta.env.VITE_IMAGE_URL}${user.profilePath}`
+    : null;
 
   return (
     <header className="border-b border-gray3 hz-header">
@@ -63,11 +71,11 @@ export const Header: React.FC = () => {
         </Link>
         <div className="hz-menu">
           <nav className="flex items-center hz-nav">
-            <SearchBar/>
+            <SearchBar />
             {user ? ( //로그인
               <div className="flex items-center ml-4">
                 <p className="text-[20px] pr-4 hz-user-name flex items-center">
-                  <b className="font-normal block">{user.userName}</b>
+                  <b className="block font-normal">{user.userName}</b>
                   <span className="text-[15px]">님</span>
                 </p>
                 <Button
@@ -84,14 +92,21 @@ export const Header: React.FC = () => {
                     border: "1px solid #d9d9d9",
                     borderRadius: "50%",
                     marginRight: "4px",
-                    padding:"0",
-                    overflow:"hidden"
+                    padding: "0",
+                    overflow: "hidden",
                   }}
                 >
                   {profileImageUrl ? (
-                    <img src={profileImageUrl} alt={user.userName} style={{ width: "100%", height: "auto" }} />
+                    <img
+                      src={profileImageUrl}
+                      alt={user.userName}
+                      style={{ width: "100%", height: "auto" }}
+                    />
                   ) : (
-                    <PersonIcon style={{ width: "100%", height: "100%" }} className="text-gray3" />
+                    <PersonIcon
+                      style={{ width: "100%", height: "100%" }}
+                      className="text-gray3"
+                    />
                   )}
                 </Button>
                 <Popper
@@ -102,7 +117,8 @@ export const Header: React.FC = () => {
                   transition
                   disablePortal
                   sx={{
-                    zIndex: 1000}}
+                    zIndex: 1000,
+                  }}
                 >
                   {(props: PopperChildrenProps) => (
                     <Grow

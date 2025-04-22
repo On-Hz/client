@@ -1,10 +1,11 @@
-import {
-  useAuthStore,
-  useAuthModalStore,
-  useModalStore,
-} from "@/shared/stores";
+import { useAuthModalStore, useModalStore } from "@/shared/stores";
+import { authChannel, performLogin } from "@/shared/helpers";
+import { QueryClient } from "@tanstack/react-query";
 
-export const socialLogin = (provider: "naver" | "kakao" | "google") => {
+export const socialLogin = (
+  provider: "naver" | "kakao" | "google",
+  queryClient: QueryClient
+) => {
   const width = 600;
   const height = 600;
   const left = (window.innerWidth - width) / 2;
@@ -30,11 +31,11 @@ export const socialLogin = (provider: "naver" | "kakao" | "google") => {
     if (!allowedOrigins.includes(event.origin)) return;
     if (event.data.type !== "oauth2Success") return;
 
-    const { accessToken, refreshToken, deviceId, user } = event.data;
+    const { accessToken, refreshToken, user } = event.data;
     if (!accessToken || !refreshToken || !user) return;
-    
-    useAuthStore.getState().setAuth(accessToken, refreshToken, deviceId);
-    useAuthStore.getState().setUserProfile(user);
+
+    performLogin(queryClient, event.data);
+    authChannel.postMessage({ type: "LOGIN" });
 
     useAuthModalStore.getState().closeAuthModal();
     useModalStore.getState().openModal("alertModal", {

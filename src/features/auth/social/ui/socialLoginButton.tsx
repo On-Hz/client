@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { SiNaver } from "react-icons/si";
 import { socialLogin } from "../api/socialLogin";
 import { FcGoogle } from "react-icons/fc";
@@ -7,7 +8,8 @@ interface SocialLoginButtonProps {
 }
 
 export const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({ provider }) => {
-  const handleLogin = () => socialLogin(provider);
+  const queryClient = useQueryClient();
+  const handleLogin = () => socialLogin(provider, queryClient);
 
   if (provider === "naver") {
     return (

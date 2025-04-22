@@ -11,3 +11,7 @@ export { getReviewModalOptions } from "./getReviewModalOptions";
 export { isReviewQuery } from "./isReviewQuery";
 export { formatDuration } from "./formatDurationHelper";
 export { encodeSlug, decodeSlug, parseSlug } from "./searchSlugEncoder";
+export { ensureAuthToken } from "./ensureAuthToken";
+export { refreshAccessToken } from "./refreshTokenHandler";
+export { authChannel } from "./broadcastChannel";
+export { performLogout, performLogin } from "./syncLoginLogout";
