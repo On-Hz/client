@@ -65,7 +65,13 @@ const AlbumSec = () => {
                             </span>
                         ))}
                     </div>  
-                    <p className='mt-[37px] mb-[17px] text-[36px] font-bold text-black hz-title'>{album.title}</p>
+                    <p
+                        className={`mt-[37px] mb-[17px] font-bold text-black hz-title ${
+                        album.title.length >= 25 ? "hz-title-len-max" : "hz-title-len-default"
+                    }`}
+                    >
+                        {album.title}
+                    </p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범</span>
                         <span className='text-gray text-[13px] font-light flex items-center'>
