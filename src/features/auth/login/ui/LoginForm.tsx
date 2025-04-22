@@ -5,7 +5,7 @@ import { validateAuth } from "@/shared/validation/authSchema";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 interface LoginFormProps {
-  switchMode: () => void;
+  switchMode: (mode: "login" | "signup" | "findPassword") => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
@@ -55,13 +55,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ switchMode }) => {
         <ModalButton text="로그인" width="100%" onClick={onSubmit}/>
       </div>
       <div className="flex justify-center mb-4">
-        <p className="text-xs text-point">비밀번호를 잊어버리셨나요?</p>
+        <p
+          className="text-xs text-point cursor-pointer"
+          onClick={() => switchMode("findPassword")}
+        >비밀번호를 잊어버리셨나요?</p>
       </div>
       <p className="text-sm text-center">
         계정이 없으신가요?{" "}
         <span
           className="font-extrabold cursor-pointer text-point"
-          onClick={switchMode}
+          onClick={() => switchMode("signup")}
         >
           회원가입
         </span>
