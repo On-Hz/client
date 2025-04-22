@@ -36,7 +36,6 @@ axiosInstance.interceptors.request.use(
         headers.set("Device-Id", deviceId);
       }
       config.headers = headers;
-      console.log('headers ', headers)
       return config;
     } catch (err) {
       useAuthStore.getState().setSessionExpired(true);

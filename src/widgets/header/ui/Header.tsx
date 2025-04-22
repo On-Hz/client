@@ -19,7 +19,7 @@ import "./style.css";
 export const Header: React.FC = () => {
   const { openAuthModal } = useAuthModalStore();
   const [open, setOpen] = React.useState(false);
-  const { user, logout } = useAuthStore();
+  const { user } = useAuthStore();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -41,9 +41,8 @@ export const Header: React.FC = () => {
 
   //로그아웃
   const handleLogout = () => {
-    logout();
+    performLogout(queryClient, "logout");
     authChannel.postMessage({ type: "LOGOUT" });
-    performLogout(queryClient);
     setOpen(false);
   };
 

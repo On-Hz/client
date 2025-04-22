@@ -60,8 +60,7 @@ export const WithAuthInitializer: React.FC<{ children: React.ReactNode }> = ({
         type: "info",
         message: "세션이 만료되어 자동으로 로그아웃되었습니다.",
       });
-      performLogout(queryClient);
-      logout();
+      performLogout(queryClient, "logout");
     }
     prevExpiredRef.current = sessionExpired;
   }, [sessionExpired, logout, openModal, queryClient]);
@@ -86,8 +85,7 @@ export const WithAuthInitializer: React.FC<{ children: React.ReactNode }> = ({
           type: "info",
           message: "다른 탭에서 로그아웃되었습니다.",
         });
-        performLogout(queryClient);
-        removeAuth();
+        performLogout(queryClient, "removeAuth");
       }
     };
     authChannel.addEventListener("message", handler);

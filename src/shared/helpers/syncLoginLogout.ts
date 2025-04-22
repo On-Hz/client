@@ -9,11 +9,16 @@ import { User } from "@/shared/model";
  */
 export function performLogout(
   queryClient: QueryClient,
+  type: "logout" | "removeAuth" = "logout",
   keepModals: string[] = ["alertModal", "authInfoModal"]
 ) {
-  // 1) 모달 스토어: 특정 모달만 제외하고 모두 닫기
+  if (type === "logout") {
+    useAuthStore.getState().logout();
+  } else if (type === "removeAuth") {
+    useAuthStore.getState().removeAuth();
+  }
   useModalStore.getState().closeAllExcept(keepModals);
-  // 2) react‑query: 유저 종속 쿼리(invalidate → 재요청)
+
   invalidateSpecificQueries(queryClient);
 }
 
