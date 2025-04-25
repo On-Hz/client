@@ -29,7 +29,7 @@ export const GenreSelection: React.FC = () => {
   const { data, isLoading } = useGenreSelection();
   return (
     <CarouselSection
-      title="장르 별 인기 앨범"
+      title="장르별 인기 앨범"
       items={data || []}
       renderPage={renderGenrePage}
       isLoading={isLoading}

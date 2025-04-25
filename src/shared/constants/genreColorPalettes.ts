@@ -7,7 +7,7 @@ export interface GenreColorPalette {
   vibrant: string; // 눈에 띄는 포인트 색상
 }
 export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
-  blues: {
+  Blues: {
     darkMuted: "#0A1F44",
     darkVibrant: "#13294B",
     lightMuted: "#3C5A99",
@@ -15,7 +15,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#1C3B73",
     vibrant: "#3F7ED6",
   },
-  jazz: {
+  Jazz: {
     darkMuted: "#4A2C2A",
     darkVibrant: "#8B3E2F",
     lightMuted: "#D2A679",
@@ -31,7 +31,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#78909C",
     vibrant: "#B0BEC5",
   },
-  electronic: {
+  Electronic: {
     darkMuted: "#0D0C1D",
     darkVibrant: "#1F4068",
     lightMuted: "#2A2D43",
@@ -39,7 +39,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#00E0FF",
     vibrant: "#0FF0B3",
   },
-  "hip hop": {
+  "Hip Hop": {
     darkMuted: "#1A1A1A",
     darkVibrant: "#2A2A2A",
     lightMuted: "#3A3A3A",
@@ -47,7 +47,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#D4AF37",
     vibrant: "#FFB400",
   },
-  kpop: {
+  Kpop: {
     darkMuted: "#C1121F",
     darkVibrant: "#FF6B6B",
     lightMuted: "#FFB6B9",
@@ -55,7 +55,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#7FDBFF",
     vibrant: "#39CCCC",
   },
-  pop: {
+  Pop: {
     darkMuted: "#880E4F",
     darkVibrant: "#C51162",
     lightMuted: "#F48FB1",
@@ -63,7 +63,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#FFB300",
     vibrant: "#FF5252",
   },
-  rock: {
+  Rock: {
     darkMuted: "#1B1B1B",
     darkVibrant: "#2E2E2E",
     lightMuted: "#4A4A4A",
@@ -71,7 +71,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#A6192E",
     vibrant: "#E63946",
   },
-  indie: {
+  Indie: {
     darkMuted: "#5A4E57",
     darkVibrant: "#A67873",
     lightMuted: "#D8B4A6",
@@ -79,7 +79,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#B48E7D",
     vibrant: "#D46A6A",
   },
-  acoustic: {
+  Acoustic: {
     darkMuted: "#4E342E",
     darkVibrant: "#6D4C41",
     lightMuted: "#A1887F",
@@ -87,7 +87,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#8D6E63",
     vibrant: "#A1887F",
   },
-  rnb: {
+  "R&B": {
     darkMuted: "#4A1C40",
     darkVibrant: "#7B2B63",
     lightMuted: "#A35D7B",
@@ -95,7 +95,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#8E5572",
     vibrant: "#D45D79",
   },
-  chill: {
+  Chill: {
     darkMuted: "#4A403A",
     darkVibrant: "#7C6B64",
     lightMuted: "#BFA8A0",
@@ -103,7 +103,7 @@ export const GENRE_COLOR_PALETTES: Record<string, GenreColorPalette> = {
     muted: "#A18F88",
     vibrant: "#C9A79A",
   },
-  ballad: {
+  Ballad: {
     darkMuted: "#5C3D2E",
     darkVibrant: "#8D5B4C",
     lightMuted: "#C19A6B",
