@@ -4,15 +4,24 @@ import { z } from "zod";
 export const authSchema = z.object({
     email: z.string().min(1, "이메일을 입력해주세요.").email("올바른 이메일 형식이 아닙니다."),
     password: z.string().min(4, "비밀번호는 최소 4자 이상이어야 합니다."),
+    userName: z.string().min(1, "닉네임을 입력해주세요."),
 });
 
 export const validateAuth = (email: string, password: string): string | null => {
-    const result = authSchema.safeParse({ email, password });
-    return result.success ? null : result.error.errors[0].message;
+  const schema = authSchema.pick({ email: true, password: true });
+  const result = schema.safeParse({ email, password });
+  return result.success ? null : result.error.errors[0].message;
 };
 
 export const validateEmailOnly = (email: string): string | null => {
-  const result = authSchema.pick({ email: true }).safeParse({ email });
+  const schema = authSchema.pick({ email: true });
+  const result = schema.safeParse({ email });
+  return result.success ? null : result.error.errors[0].message;
+};
+
+export const validateUserInfo = (email: string, userName: string): string | null => {
+  const schema = authSchema.pick({ email: true, userName: true });
+  const result = schema.safeParse({ email, userName });
   return result.success ? null : result.error.errors[0].message;
 };
 
