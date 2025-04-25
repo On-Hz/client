@@ -9,7 +9,6 @@ export const signUp = async (email: string, password: string): Promise<AuthResul
         });
         return response.data; //JWT 토큰 반환
     } catch (error: any) {
-        // console.log('signUp 에러:'+error.message)
         return { error: error.message};  //서버 메세지
     }
 };

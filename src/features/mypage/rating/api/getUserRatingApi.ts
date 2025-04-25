@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 const getUserRating = async (userId: string) => {
   const url = `/api/v1/users/${userId}/ratings`;
   const response = await axiosInstance.get(url);
-  console.log('getUserRating',response.data);
   return response.data;
 };
 

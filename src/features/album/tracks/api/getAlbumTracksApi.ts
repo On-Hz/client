@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 const getAlbumTracks = async (albumId: string) => {
   const url = `/api/v1/albums/${albumId}/tracks`;
   const response = await axiosInstance.get(url);
-  console.log('getAlbumTracks',response.data);
   return response.data;
 };
 

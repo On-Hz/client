@@ -27,7 +27,6 @@ export const useSignUp = (options?: UseSignUpOptions) => {
       return result; // 성공 시 반환
     },
     onSuccess: (data) => {
-      //console.log('data',data);
       if (data && "error" in data) {
         return; // 에러가 있으면 성공 처리 안함
       }

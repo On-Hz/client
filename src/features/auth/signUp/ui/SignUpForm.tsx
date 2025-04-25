@@ -82,8 +82,6 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
     }
   
     const result = await emailVerificationVerify(form.email, emailCode);
-    console.log("이메일 인증확인",result);
-
     if ("error" in result) {
       setValidationError(result.error);
       return;
@@ -152,7 +150,7 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
         </div>
         
         {emailSuccessMessage && isRunning && (
-          <p className="mb-2 text-sm text-green-600 text-left">{emailSuccessMessage}</p>
+          <p className="mb-2 text-sm text-left text-green-600">{emailSuccessMessage}</p>
         )}
 
 
@@ -177,18 +175,18 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
               </button>
             </div>
 
-            <p className="text-xs text-gray-500 text-right mt-1 text-red">
+            <p className="mt-1 text-xs text-right text-gray-500 text-red">
               남은 시간: {minutes}:{seconds}
             </p>
           </>
         )}
 
         {isVerified && (
-          <p className="text-xs text-green-600 mt-1">이메일 인증이 완료되었습니다.</p>
+          <p className="mt-1 text-xs text-green-600">이메일 인증이 완료되었습니다.</p>
         )}
 
         {!isVerified && !isRunning && timeLeft === 0 && emailSuccessMessage && (
-          <p className="text-xs text-red mt-1">
+          <p className="mt-1 text-xs text-red">
             인증 시간이 만료되었습니다. 다시 시도해주세요.
           </p>
         )}
