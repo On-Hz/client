@@ -1,15 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore, useModalStore } from "@/shared/stores";
 import { deleteUserAccount } from "../api/deleteUserAccountApi";
+import { performLogout } from "@/shared/helpers";
 
 export const useDeleteUserAccount = () => {
-  const { user, logout } = useAuthStore();
+  const { user } = useAuthStore();
+  const queryClient = useQueryClient();
   const { openModal, closeModal } = useModalStore();
 
   return useMutation({
     mutationFn: () => deleteUserAccount(user!.id),
     onSuccess: () => {
-      logout();
+      performLogout(queryClient);
       openModal("alertModal", {
         type: "success",
         message: "회원 탈퇴가 완료되었습니다.",
