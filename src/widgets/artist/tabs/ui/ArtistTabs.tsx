@@ -17,16 +17,6 @@ export const ArtistTabs = () => {
           </NavLink>
         </li>
 
-        {/* Discography */}
-        <li>
-          <NavLink
-            to={`/artist/${artistId}/discography`}
-            className={({ isActive }) => getNavLinkClass(isActive)}
-          >
-            앨범
-          </NavLink>
-        </li>
-
         {/* Reviews */}
         <li>
           <NavLink
@@ -34,6 +24,16 @@ export const ArtistTabs = () => {
             className={({ isActive }) => getNavLinkClass(isActive)}
           >
             리뷰
+          </NavLink>
+        </li>
+
+        {/* Discography */}
+        <li>
+          <NavLink
+            to={`/artist/${artistId}/discography`}
+            className={({ isActive }) => getNavLinkClass(isActive)}
+          >
+            앨범
           </NavLink>
         </li>
 
