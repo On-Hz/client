@@ -22,34 +22,19 @@ const InformationSec = () => {
                 <li className="border-b border-gray4 py-[14px] text-[14px] flex justify-between">
                     <span className="text-gray5 pr-[10px]">아티스트</span>
                     <div className="flex-1">
-                    {album.artists?.filter((a: Artist) => a.role === "Main" || a.role === "And").length > 0
-                        ? album.artists
-                            .filter((a: Artist) => a.role === "Main" || a.role === "And")
-                            .map((a: Artist, i: number, arr: Artist[]) => (
-                                <span key={a.id}>
-                                {a.name}
-                                {i !== arr.length - 1 && ", "}
-                                </span>
-                            ))
-                        : <span className="text-gray">정보가 없습니다.</span>
-                    }
-                    </div>
-                </li>
-                {/* 피쳐링 */}
-                <li className="border-b border-gray4 py-[14px] text-[14px] flex justify-between">
-                    <span className="text-gray5 pr-[10px]">피쳐링</span>
-                    <div className="flex-1">
-                        {album.artists?.filter((a: Artist) => a.role === "Feat").length > 0
-                        ? album.artists
-                            .filter((a: Artist) => a.role === "Feat")
-                            .map((a: Artist, i: number, arr: Artist[]) => (
-                                <span key={a.id}>
-                                {a.name}
-                                {i !== arr.length - 1 && ", "}
-                                </span>
-                            ))
-                        : <span className="text-gray">정보가 없습니다.</span>
-                        }
+                        {album.artists && album.artists.length > 0 ? (
+                        [...new Set([
+                            ...album.artists.filter((a: Artist) => a.role === "Main"),
+                            ...album.artists.filter((a: Artist) => a.role !== "Main")
+                        ])].map((a, i, arr) => (
+                            <span key={a.id}>
+                            {a.name}
+                            {i < arr.length - 1 && <span className="px-1">,</span>}
+                            </span>
+                        ))
+                        ) : (
+                        <span className="text-gray">정보가 없습니다.</span>
+                        )}
                     </div>
                 </li>
                 {/* 장르 */}

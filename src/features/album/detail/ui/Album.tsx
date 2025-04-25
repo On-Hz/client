@@ -54,17 +54,23 @@ const AlbumSec = () => {
                         ))}
                     </div>
                     <div className="text-gray text-[14px] pl-[5px] mt-3 flex flex-wrap">
-                        {album.artists.map((artist: Artist, idx: number) => (
-                            <span
-                                key={artist.id}
-                                className="cursor-pointer hover:underline hover:text-point"
-                                onClick={() => navigate(`/artist/${artist.id}`)}
-                            >
-                            {artist.name}
-                            {idx < album.artists.length - 1 && <span className="px-1">,</span>}
-                            </span>
-                        ))}
-                    </div>  
+                    {[...new Set([
+                        ...album.artists.filter((a: Artist) => a.role === "Main"),
+                        ...album.artists.filter((a: Artist) => a.role !== "Main"),
+                    ])].map((artist: Artist, idx, arr) => (
+                        <span
+                        key={artist.id}
+                        
+                        className={`cursor-pointer hover:underline hover:text-point ${
+                          artist.role === "Main" ? "text-point" : ""
+                        }`}
+                        onClick={() => navigate(`/artist/${artist.id}`)}
+                        >
+                        {artist.name}
+                        {idx < arr.length - 1 && <span className="px-1">,</span>}
+                        </span>
+                    ))}
+                    </div>
                     <p
                         className={`mt-[37px] mb-[17px] font-bold text-black hz-title ${
                         album.title.length >= 25 ? "hz-title-len-max" : "hz-title-len-default"
@@ -74,7 +80,7 @@ const AlbumSec = () => {
                     </p>
                     <div>
                         <span className='text-gray text-[14px]'>앨범</span>
-                        <span className='text-gray text-[13px] font-light flex items-center'>
+                        <span className='text-gray text-[13px] flex items-center'>
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
                             {formatDate(album.releaseDate || "")}
                         </span>

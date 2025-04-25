@@ -53,14 +53,20 @@ const TrackSec = () => {
                         ))}
                     </div>
                     <div className="text-gray text-[14px] pl-[5px] mt-3 flex flex-wrap">
-                        {track.artists.map((artist: Artist, idx: number) => (
+                        {[...new Set([
+                            ...track.artists.filter((a: Artist) => a.role === "Main"),
+                            ...track.artists.filter((a: Artist) => a.role !== "Main"),
+                        ])].map((artist: Artist, idx, arr) => (
                             <span
-                                key={artist.id}
-                                className="cursor-pointer hover:underline hover:text-point"
-                                onClick={() => navigate(`/artist/${artist.id}`)}
+                            key={artist.id}
+                            
+                            className={`cursor-pointer hover:underline hover:text-point ${
+                                artist.role === "Main" ? "text-point" : ""
+                            }`}
+                            onClick={() => navigate(`/artist/${artist.id}`)}
                             >
                             {artist.name}
-                            {idx < track.artists.length - 1 && <span className="px-1">,</span>}
+                            {idx < arr.length - 1 && <span className="px-1">,</span>}
                             </span>
                         ))}
                     </div>  
@@ -74,7 +80,7 @@ const TrackSec = () => {
                     <div>
                         <span className='text-gray text-[14px]'>앨범명</span>
                         <span 
-                            className='text-gray text-[13px] font-light flex items-center cursor-pointer hover:text-point hover:underline' 
+                            className='text-gray text-[13px] flex items-center cursor-pointer hover:text-point hover:underline' 
                             onClick={() => navigate(`/album/${track.albumId}`)}
                         >
                             <i className='w-[5px] h-[5px] bg-gray5 rounded-[50%] mr-[4px]'></i>
