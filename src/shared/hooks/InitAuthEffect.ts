@@ -10,7 +10,6 @@ export const InitAuthEffect = () => {
     const accessToken = getAuthToken();
 
     if (accessToken == null) {
-      // console.log("initAuth");
       initAuth();
     }
   }, [location.pathname]);

@@ -12,7 +12,6 @@ const getUserLikeReviewList = async (userId: string) => {
         orderBy: ORDER_BY.CREATED_AT,
       },
     });
-    console.log('getUserLikeReviewList',response.data);
     return response.data;
 };
   

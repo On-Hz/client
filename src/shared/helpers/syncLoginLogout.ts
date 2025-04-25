@@ -25,15 +25,14 @@ export async function performLogout(
 
 export interface AuthPayload {
   accessToken: string;
-  refreshToken: string;
   deviceId: string;
   user?: User;
 }
 
 export function performLogin(queryClient: QueryClient, payload: AuthPayload) {
-  const { accessToken, refreshToken, deviceId, user } = payload;
+  const { accessToken, deviceId, user } = payload;
   const authStore = useAuthStore.getState();
-  authStore.setAuth(accessToken, refreshToken, deviceId);
+  authStore.setAuth(accessToken, deviceId);
 
   if (user) {
     authStore.setUserProfile(user);

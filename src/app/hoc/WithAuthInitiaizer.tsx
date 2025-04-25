@@ -6,7 +6,6 @@ import { useAuthStore, useModalStore } from "@/shared/stores";
 import {
   getAuthUser,
   getAuthToken,
-  getAuthRefreshToken,
   getDeviceId,
 } from "@/shared/stores/authCookie";
 import {
@@ -41,11 +40,10 @@ export const WithAuthInitializer: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
     const token = getAuthToken();
-    const refreshToken = getAuthRefreshToken();
     const deviceId = getDeviceId();
-    if (token && refreshToken && deviceId) {
-      performLogin(queryClient, { accessToken: token, refreshToken, deviceId });
-    } else if (refreshToken) {
+    if (token && deviceId) {
+      performLogin(queryClient, { accessToken: token, deviceId });
+    } else if (token) {
       (async () => {
         await refreshAccessToken();
       })();
@@ -68,13 +66,11 @@ export const WithAuthInitializer: React.FC<{ children: React.ReactNode }> = ({
     const handler = (ev: MessageEvent<{ type: string }>) => {
       if (ev.data.type === "LOGIN" && !isInitialized) {
         const token = getAuthToken();
-        const refreshToken = getAuthRefreshToken();
         const deviceId = getDeviceId();
         const user = getAuthUser();
-        if (token && refreshToken && deviceId && user) {
+        if (token && deviceId && user) {
           performLogin(queryClient, {
             accessToken: token,
-            refreshToken,
             deviceId,
             user,
           });

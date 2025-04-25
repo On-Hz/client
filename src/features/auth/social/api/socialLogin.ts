@@ -31,8 +31,8 @@ export const socialLogin = (
     if (!allowedOrigins.includes(event.origin)) return;
     if (event.data.type !== "oauth2Success") return;
 
-    const { accessToken, refreshToken, user } = event.data;
-    if (!accessToken || !refreshToken || !user) return;
+    const { accessToken, user } = event.data;
+    if (!accessToken || !user) return;
 
     performLogin(queryClient, event.data);
     authChannel.postMessage({ type: "LOGIN" });

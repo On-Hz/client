@@ -8,7 +8,6 @@ import {
   getDeviceId,
   setAuthCookie,
   removeAuthCookie,
-  getAuthRefreshToken,
   setUserCookie,
 } from "./authCookie";
 import { refreshAccessToken } from "../helpers";
@@ -18,7 +17,6 @@ interface JwtPayload {
 }
 export interface AuthState {
   token: string | null;
-  refreshToken: string | null;
   user: User | null;
   deviceId: string | null;
   isInitialized: boolean;
@@ -26,7 +24,6 @@ export interface AuthState {
   setSessionExpired: (v: boolean) => void;
   setAuth: (
     token: string | null,
-    refreshToken: string | null,
     deviceId: string
   ) => void;
   setUserProfile: (user: User) => void;
@@ -34,16 +31,11 @@ export interface AuthState {
 }
 
 let accessRefreshTimer: number | null = null;
-let refreshExpireTimer: number | null = null;
 
 function clearAllTimers() {
   if (accessRefreshTimer !== null) {
     clearTimeout(accessRefreshTimer);
     accessRefreshTimer = null;
-  }
-  if (refreshExpireTimer !== null) {
-    clearTimeout(refreshExpireTimer);
-    refreshExpireTimer = null;
   }
 }
 
@@ -59,38 +51,23 @@ export function scheduleAccessRefresh(accessToken: string) {
   }
 }
 
-/** 리프레시 토큰 만료 시점에 세션 만료 플래그 예약 */
-export function scheduleRefreshExpire(refreshToken: string) {
-  const { exp } = jwtDecode<JwtPayload>(refreshToken);
-  const expiresAt = exp * 1000;
-  const msLeft = expiresAt - Date.now();
-  if (msLeft > 0) {
-    refreshExpireTimer = window.setTimeout(() => {
-      useAuthStore.getState().setSessionExpired(true);
-    }, msLeft);
-  } else {
-    useAuthStore.getState().setSessionExpired(true);
-  }
-}
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       token: getAuthToken(),
-      refreshToken: getAuthRefreshToken(),
       user: getAuthUser(),
       deviceId: getDeviceId(),
       isInitialized: !!getAuthToken(),
       sessionExpired: false,
       setSessionExpired: (v) => set({ sessionExpired: v }),
-      setAuth: (token, refreshToken, deviceId) => {
-        set({ token, refreshToken, deviceId, isInitialized: true });
-        setAuthCookie(token, refreshToken, deviceId);
+      setAuth: (token, deviceId) => {
+        set({ token, deviceId, isInitialized: true });
+        setAuthCookie(token, deviceId);
 
         clearAllTimers();
 
         scheduleAccessRefresh(token!);
-        scheduleRefreshExpire(refreshToken!);
       },
       setUserProfile: (user) => {
         set({ user });
@@ -102,7 +79,6 @@ export const useAuthStore = create<AuthState>()(
         clearAllTimers();
         set({
           token: null,
-          refreshToken: null,
           user: null,
           deviceId: null,
           isInitialized: false,

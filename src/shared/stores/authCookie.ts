@@ -5,8 +5,6 @@ const cookies = new Cookies();
 const isSecure = window.location.protocol === "https:"; //개발환경 false
 
 export const getAuthToken = (): string | null => cookies.get("token") || null;
-export const getAuthRefreshToken = (): string | null =>
-  cookies.get("refresh-token") || null;
 export const getDeviceId = (): string | null =>
   cookies.get("device-id") || null;
 export const getAuthUser = (): User | null => {
@@ -27,32 +25,20 @@ export const getAuthUser = (): User | null => {
   return null;
 };
 
-export const setAuthCookie = (
-  token: string | null,
-  refreshToken: string | null,
-  deviceId: string
-) => {
-  if (token && refreshToken) {
+export const setAuthCookie = (token: string | null, deviceId: string) => {
+  if (token && deviceId) {
     cookies.set("token", token, {
       path: "/",
       maxAge: 3600,
       sameSite: "lax",
       secure: isSecure,
     });
-    cookies.set("refresh-token", refreshToken, {
+    cookies.set("device-id", deviceId, {
       path: "/",
-      maxAge: 14 * 24 * 3600,
+      maxAge: 3600,
       sameSite: "lax",
       secure: isSecure,
     });
-    if (deviceId) {
-      cookies.set("device-id", deviceId, {
-        path: "/",
-        maxAge: 3600,
-        sameSite: "lax",
-        secure: isSecure,
-      });
-    }
   } else {
     removeAuthCookie();
   }
@@ -73,7 +59,6 @@ export const setUserCookie = (user: User | null) => {
 
 export const removeAuthCookie = () => {
   cookies.remove("token", { path: "/" });
-  cookies.remove("refresh-token", { path: "/" });
   cookies.remove("device-id", { path: "/" });
   removeAuthUserCookie();
 };
