@@ -12,6 +12,18 @@ import { useAuthStore } from "../stores";
 export const axiosInstance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
+  paramsSerializer: params => {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value === null || value === undefined) return;
+
+      searchParams.append(
+        key,
+        typeof value === "string" ? encodeURIComponent(value) : value
+      );
+    });
+    return searchParams.toString();
+  },
 });
 
 // --------------------- 요청 인터셉터 ---------------------
