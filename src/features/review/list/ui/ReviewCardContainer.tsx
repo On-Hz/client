@@ -8,12 +8,14 @@ interface ReviewCardContainerProps {
   review: Review;
   hasBorder?: boolean;
   hasEllipsis?: boolean;
+  isDetailPage?: boolean;
 }
 
 export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
   review,
   hasBorder,
   hasEllipsis,
+  isDetailPage,
 }) => {
   const { user } = useAuthStore();
   
@@ -28,6 +30,7 @@ export const ReviewCardContainer: React.FC<ReviewCardContainerProps> = ({
       createdAt={review.createdAt}
       hasBorder={hasBorder}
       hasEllipsis={hasEllipsis}
+      isDetailPage={isDetailPage}
       reviewActionButtons={
         user && review.user.id === user.id ? (
           <ReviewActionButtons

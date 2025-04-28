@@ -1,6 +1,7 @@
 import Rating from "@mui/material/Rating";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { formatDate } from "@/shared/helpers";
+import { ReviewContent } from "./ReviewContent";
 interface ReviewProps {
   userName: string;
   userProfilePath?: string | null;
@@ -8,6 +9,7 @@ interface ReviewProps {
   rating: number;
   hasEllipsis?: boolean;
   hasBorder?: boolean;
+  isDetailPage?: boolean;
   createdAt?: string;
   reviewActionButtons?: React.ReactNode;
   reviewLikeButton: React.ReactNode;
@@ -20,6 +22,7 @@ export const ReviewCard = ({
   rating,
   hasEllipsis,
   hasBorder,
+  isDetailPage,
   createdAt,
   reviewActionButtons,
   reviewLikeButton,
@@ -28,8 +31,8 @@ export const ReviewCard = ({
     <div
       className={
         hasBorder
-          ? "mb-[24px] px-[24px] py-[18px] bg-white relative"
-          : "mb-[24px] px-[24px] py-[18px] bg-white relative border-gray3 border rounded-[8px] cursor-pointer transform hover:border-gray transition-colors"
+          ? "mb-[24px] px-[24px] py-[18px] bg-white relative max-500:px-[15px]"
+          : "mb-[24px] px-[24px] py-[18px] bg-white relative border-gray3 border rounded-[8px] cursor-pointer transform hover:border-gray transition-colors max-500:px-[15px]"
       }
     >
       <div className="flex items-start justify-between">
@@ -64,15 +67,7 @@ export const ReviewCard = ({
         />
       </div>
       <div className="pb-5 text-gray">{formatDate(createdAt || "")}</div>
-      <div
-        className={
-          hasEllipsis
-            ? "overflow-hidden line-clamp-4 h-[95px] review-text-box whitespace-pre-wrap"
-            : "min-h-[70px] whitespace-pre-wrap" //line-clamp-4 h-[95px] => 4줄의 높이를 지정. (카드 높이가 동일하도록)
-        }
-      >
-        {content}
-      </div>
+      <ReviewContent content={content} hasEllipsis={hasEllipsis} isDetailPage={isDetailPage}/>
       <div className="pt-[15px] flex">{reviewLikeButton}</div>
     </div>
   );

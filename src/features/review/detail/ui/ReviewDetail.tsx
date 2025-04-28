@@ -14,6 +14,6 @@ export const ReviewDetail: React.FC<ReviewDetailProps> = ({
   return isLoading || !review ? (
     <ReviewCardSkeleton />
   ) : (
-    <ReviewCardContainer review={review} hasBorder={true} />
+    <ReviewCardContainer review={review} hasBorder={true} isDetailPage={true} />
   );
 };
