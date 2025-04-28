@@ -21,13 +21,13 @@ const InformationSec = () => {
                 {/* 아티스트 */}
                 <li className="border-b border-gray4 py-[14px] text-[14px] flex justify-between">
                     <span className="text-gray5 pr-[10px]">아티스트</span>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                         {album.artists && album.artists.length > 0 ? (
                         [...new Set([
                             ...album.artists.filter((a: Artist) => a.role === "Main"),
                             ...album.artists.filter((a: Artist) => a.role !== "Main")
                         ])].map((a, i, arr) => (
-                            <span key={a.id}>
+                            <span key={a.id} className='inline-block'>
                             {a.name}
                             {i < arr.length - 1 && <span className="px-1">,</span>}
                             </span>
