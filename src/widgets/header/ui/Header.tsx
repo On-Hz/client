@@ -23,6 +23,19 @@ export const Header: React.FC = () => {
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   //사용자 메뉴
   const toggleUserMenu = () => setOpen((prev) => !prev);
@@ -63,8 +76,12 @@ export const Header: React.FC = () => {
     : null;
 
   return (
-    <header className="border-b border-gray3 hz-header">
-      <div className="flex items-center justify-between px-[20px] py-5 hz-header-inner">
+    <header
+    className={`fixed top-0 left-0 w-full z-[8000] px-[20px] border-b bg-white transition-[padding] duration-100 ease-in-out border-gray3 hz-header max-500:px-4 ${ 
+      isScrolled ? "shadow-md py-2 hz-header-sc" : "py-5 max-500:py-4"
+    }`}
+    >
+      <div className="flex items-center justify-between hz-header-inner">
         <Link to="/">
           <img src={logo} alt="On-Hz" className="w-[80px] hz-logo" />
         </Link>

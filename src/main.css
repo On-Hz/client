@@ -20,7 +20,7 @@
     }
     input:disabled{ @apply bg-transparent}
     img{ @apply max-w-[100%]}
-    main { @apply py-[40px] px-[80px] min-h-[650px]}
+    main { @apply pt-[145px] pb-[40px] px-[80px] min-h-[650px]}
     body.no-main-padding main {
       @apply p-0;
     }
@@ -32,17 +32,17 @@
 
     @screen max-1000 { /*max-width 1000px*/
       main {
-          @apply py-[60px] px-[20px]
+          @apply pb-[60px] px-[20px]
         }
     }
 
     @screen max-800 { /*max-width 800px*/
-      main {@apply py-[40px]}
+      main {@apply pb-[40px]}
       body{@apply text-[13px]}
     }
 
     @screen max-500 { /*max-width 500px*/
-      main {@apply min-h-[400px]}
+      main {@apply pt-[120px] min-h-[400px]}
       body{@apply text-[13px]}
     }
 }

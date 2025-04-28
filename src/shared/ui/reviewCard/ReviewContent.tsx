@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
@@ -10,9 +10,35 @@ interface ReviewContentProps {
 
 export const ReviewContent: React.FC<ReviewContentProps> = ({ content, hasEllipsis, isDetailPage }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const hasMore = content.length > 270; //기본 270
+  const [hasMore, setHasMore] = useState(false);
+  
   const toggleExpand = () => setIsExpanded((prev) => !prev);
+
+  useEffect(() => {
+    const updateHasMore = () => {
+      const width = window.innerWidth;
+      let limit = 400;
+
+      if (width < 600) { //모바일
+        limit = 60;
+      } else if (width >= 600 && width < 800) { //모바일 ~ 태블릿
+        limit = 150;
+      } else if (width >= 800 && width < 1200) {//태블릿
+        limit = 200;
+      } else {//피시
+        limit = 400;
+      }
+
+      setHasMore(content.length > limit);
+    };
+
+    updateHasMore(); // 초기 체크
+    window.addEventListener("resize", updateHasMore); // 브라우저 크기 반응형 
+
+    return () => {
+      window.removeEventListener("resize", updateHasMore);
+    };
+  }, [content]);
 
   return (
     <div className="flex items-start">
@@ -20,8 +46,8 @@ export const ReviewContent: React.FC<ReviewContentProps> = ({ content, hasEllips
             className={
             hasEllipsis
                 ? "overflow-hidden line-clamp-4 h-[95px] review-text-box whitespace-pre-wrap flex-1"
-                : `min-h-[70px] whitespace-pre-wrap review-text-box flex-1 max-800:min-h-[60px] ${
-                    hasMore && !isExpanded && !isDetailPage ? "overflow-hidden line-clamp-3" : ""
+                : ` max-h-[50px] whitespace-pre-wrap review-text-box flex-1 border border-blue max-800:max-h-[42px] ${
+                    hasMore && !isExpanded && !isDetailPage ? "overflow-hidden min-h-0 border-red border" : "border-blue-600 max-h-none max-800:max-h-none"
                 }`
             }
         >
