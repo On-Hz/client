@@ -201,23 +201,25 @@ export const SignUpForm: React.FC<SignupFormProps> = ({ switchMode }) => {
           value={form.password}
           onChange={handleChange}
         />
+
+
+        {/* validationError*/}
+        {validationError && (
+          <p className="mb-4 text-sm text-center text-red">
+            <ReportProblemIcon className="mr-1" />
+            {validationError}
+          </p>
+        )}
+
+        {/* 서버응답 에러 (회원가입 실패 등) */}
+        {errorMessage && (
+          <p className="mb-4 text-sm text-center text-red">
+            <ReportProblemIcon className="mr-1" />
+            {errorMessage}
+          </p>
+        )}
+
       </div>
-
-      {/* validationError*/}
-      {validationError && (
-        <p className="mb-4 text-sm text-center text-red">
-          <ReportProblemIcon className="mr-1" />
-          {validationError}
-        </p>
-      )}
-
-      {/* 서버응답 에러 (회원가입 실패 등) */}
-      {errorMessage && (
-        <p className="mb-4 text-sm text-center text-red">
-          <ReportProblemIcon className="mr-1" />
-          {errorMessage}
-        </p>
-      )}
 
       <div className="mb-6">
         <ModalButton text="회원가입" width="100%" onClick={onSubmit} />
