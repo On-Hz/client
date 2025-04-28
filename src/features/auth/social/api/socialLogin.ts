@@ -4,17 +4,13 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const socialLogin = (
   provider: "naver" | "kakao" | "google",
-  queryClient: QueryClient
-) => {
+  queryClient: QueryClient) => {
   const width = 600;
   const height = 600;
   const left = (window.innerWidth - width) / 2;
   const top = (window.innerHeight - height) / 2;
 
-  const authUrl = `${
-    import.meta.env.VITE_API_URL
-  }/oauth2/authorization/${provider}`;
-
+  const authUrl = `${import.meta.env.VITE_API_URL}/oauth2/authorization/${provider}`;
   const popup = window.open(
     authUrl,
     `${provider} Login`,
@@ -29,19 +25,27 @@ export const socialLogin = (
     const raw = import.meta.env.VITE_ALLOWED_ORIGINS || "";
     const allowedOrigins = raw.split(",").map((s: any) => s.trim());
     if (!allowedOrigins.includes(event.origin)) return;
-    if (event.data.type !== "oauth2Success") return;
 
-    const { accessToken, user } = event.data;
-    if (!accessToken || !user) return;
+    const { type, accessToken, user, error } = event.data;
 
-    performLogin(queryClient, event.data);
-    authChannel.postMessage({ type: "LOGIN" });
+    if (type === "oauth2Success") {
+      if (!accessToken || !user) return;
 
-    useAuthModalStore.getState().closeAuthModal();
-    useModalStore.getState().openModal("alertModal", {
-      type: "success",
-      message: "On-Hz 오신 것을 환영합니다!",
-    });
+      performLogin(queryClient, event.data);
+      authChannel.postMessage({ type: "LOGIN" });
+      useAuthModalStore.getState().closeAuthModal();
+      useModalStore.getState().openModal("alertModal", {
+        type: "success",
+        message: "On-Hz 오신 것을 환영합니다!",
+      });
+    }
+
+    if (type === "oauth2Error") {
+      useModalStore.getState().openModal("alertModal", {
+        type: "info",
+        message: error.message,
+      });
+    }
 
     window.removeEventListener("message", receiveMessage);
   };

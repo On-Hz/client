@@ -117,6 +117,7 @@ export const Routing: React.FC = () => {
       <Route path="/terms" element={<pages.terms />} />
       <Route path="/naver-callback" element={<OAuthCallback />} />
       <Route path="/kakao-callback" element={<OAuthCallback />} />
+      <Route path="/google-callback" element={<OAuthCallback />} />
       <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );

@@ -8,7 +8,6 @@ export const login = async (email: string, password: string): Promise<AuthResult
       );
       return response.data;
   } catch (error: any) {
-      //console.error("login 실패:", error.message);
       return { error: error.message }; //서버 메세지
   }
 };
