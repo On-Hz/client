@@ -46,8 +46,8 @@ export const ReviewContent: React.FC<ReviewContentProps> = ({ content, hasEllips
             className={
             hasEllipsis
                 ? "overflow-hidden line-clamp-4 h-[95px] review-text-box whitespace-pre-wrap flex-1"
-                : ` max-h-[50px] whitespace-pre-wrap review-text-box flex-1 border border-blue max-800:max-h-[42px] ${
-                    hasMore && !isExpanded && !isDetailPage ? "overflow-hidden min-h-0 border-red border" : "border-blue-600 max-h-none max-800:max-h-none"
+                : ` max-h-[50px] whitespace-pre-wrap review-text-box flex-1 max-800:max-h-[42px] ${
+                    hasMore && !isExpanded && !isDetailPage ? "overflow-hidden min-h-0" : "max-h-none max-800:max-h-none"
                 }`
             }
         >
