@@ -1,43 +1,51 @@
-import React, { useEffect } from "react";
-import { ReviewCardContainer } from "@/features/review"
-import { ReviewCardSkeleton, RoundButton, SubTitle } from "@/shared/ui";
+import React, { useEffect, useState } from "react";
+import { ReviewCardContainer } from "@/features/review";
+import { ReviewCardSkeleton, RoundDropdown, SubTitle } from "@/shared/ui";
 import { Link, useParams } from "react-router-dom";
 import { Review } from "@/shared/model";
 import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
 import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
 import { useInView } from "react-intersection-observer";
 
+const SORT_OPTIONS = [
+  { label: "작성순", value: ORDER_BY.CREATED_AT },
+  { label: "별점순", value: ORDER_BY.RATING },
+  { label: "좋아요순", value: ORDER_BY.LIKE_COUNT },
+];
+
 const ReviewsForAlbum = () => {
   const { albumId } = useParams<{ albumId: string }>() as { albumId: string };
+  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT);
 
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteScrollQuery<Review>({
-    endpoint: `/api/v1/reviews/${REVIEW_TYPES.ALBUM}/${albumId}`,
-    limit: 5,
-    orderBy: ORDER_BY.CREATED_AT,
-    enabled: !!albumId,
-    queryKeyPrefix: "album_review"
-  });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useInfiniteScrollQuery<Review>({
+      endpoint: `/api/v1/reviews/${REVIEW_TYPES.ALBUM}/${albumId}`,
+      limit: 5,
+      orderBy,
+      enabled: !!albumId,
+      queryKeyPrefix: `album_${orderBy}_review`,
+    });
 
   const reviews = data?.pages.flat() ?? [];
-
   const { ref, inView } = useInView({ threshold: 0 });
-  
+
   useEffect(() => {
-    if (
-      inView &&
-      hasNextPage &&
-      !isFetchingNextPage
-    ) {
+    if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div>
-      <div className="flex justify-between pb-[20px]">
-        <SubTitle text="리뷰"></SubTitle>
-        <RoundButton text="정렬" />
+      <div className="flex justify-between pb-[20px] items-center">
+        <SubTitle text="리뷰" />
+        <RoundDropdown
+          value={orderBy}
+          options={SORT_OPTIONS}
+          onChange={(value) => setOrderBy(value)}
+        />
       </div>
+
       <div>
         {isLoading ? (
           Array.from({ length: 5 }).map((_, idx) => (
@@ -50,13 +58,11 @@ const ReviewsForAlbum = () => {
         ) : (
           reviews.map((review: Review) => (
             <Link to={`/review/${review.id}`} key={review.id}>
-                <ReviewCardContainer key={review.id} review={review} />
+              <ReviewCardContainer review={review} />
             </Link>
           ))
         )}
-        {hasNextPage && (
-          <div ref={ref} style={{ height: "1px" }} />
-        )}
+        {hasNextPage && <div ref={ref} style={{ height: "1px" }} />}
       </div>
     </div>
   );

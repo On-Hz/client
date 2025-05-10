@@ -11,7 +11,7 @@ export { ModalButton } from "./modal/modal-button/ModalButton";
 export { ReviewModal } from "./modal/modal-review/ReviewModal";
 export { ReviewCard } from "./reviewCard/ReviewCard";
 export { ReviewCardSkeleton } from "./reviewCard/ReviewCardSkeleton";
-export { RoundButton } from "./roundButton/RoundButton";
+export { RoundDropdown } from "./roundDropdown/RoundDropdown";
 export { SubTitle } from "./subTitle/SubTitle";
 export { TabButton } from "./tabButton/TabButton";
 export { TrackListItem } from "./trackList/trackListItem";

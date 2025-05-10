@@ -1,7 +1,9 @@
 export const ORDER_BY = {
   CREATED_AT: "createdAt",
   AVERAGE_RATING: "averageRating",
+  RATING: "rating",
   RATING_COUNT: "ratingCount",
+  LIKE_COUNT: "likeCount",
   RELEASE_DATE: "releaseDate",
   SCORE: "score"
 } as const;
