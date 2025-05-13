@@ -190,7 +190,7 @@ export const SearchBar: React.FC = React.memo(() => {
                     e.stopPropagation();
                     removeSearch(item);
                   }}
-                  className="flex items-center justify-center invisible w-6 h-6 p-1 rounded-full cursor-pointer group-hover:visible hover:bg-gray4"
+                  className="flex items-center justify-center invisible w-6 h-6 p-1 rounded-full cursor-pointer group-hover:visible hover:bg-gray4 max-500:visible"
                 >
                   <ClearIcon fontSize="small" />
                 </button>

@@ -16,21 +16,21 @@ export const ReviewSubmitConfirmModal: React.FC<ReviewSubmitConfirmModalProps> =
 }) => {
   return (
     <ModalLayout open={true} onClose={onCancel} showCloseButton>
-      <h2 className="mb-4 text-xl font-bold">알림</h2>
-      <div className="py-[20px] px-[30px] w-[400px]">
+      <h2 className="mb-4 text-xl font-bold max-500:text-[18px]">알림</h2>
+      <div className="py-[20px] px-[30px] w-[400px] max-500:w-[250px] max-500:px-[15px] max-500:pb-0">
         {children}
-        <div className="flex justify-center mt-10 space-x-4">
+        <div className="flex justify-center mt-10 space-x-2">
           {type === "rating" ? (
             <>
               <button
                 onClick={onConfirm!}
-                className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px]"
+                className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px] max-500:py-[5px]"
               >
                 예
               </button>
               <button
                 onClick={onCancel}
-                className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px]"
+                className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px] max-500:py-[5px]"
               >
                 아니오
               </button>
@@ -38,7 +38,7 @@ export const ReviewSubmitConfirmModal: React.FC<ReviewSubmitConfirmModalProps> =
           ) : (
             <button
               onClick={onCancel}
-              className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px]"
+              className="w-16 bg-point text-white border rounded-[5px] text-[14px] py-[10px] px-[12px] max-500:py-[5px]"
             >
               닫기
             </button>
