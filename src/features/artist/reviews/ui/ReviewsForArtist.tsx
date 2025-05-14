@@ -1,14 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { ArtistSectionWrapper } from "@/widgets/artist";
 import { ReviewCardContainer } from "@/features/review";
-import { ReviewCardSkeleton } from "@/shared/ui";
-import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
+import { ReviewCardSkeleton, RoundDropdown } from "@/shared/ui";
+import { ORDER_BY, REVIEW_TYPES, REVIEW_SORT_OPTIONS } from "@/shared/constants";
 import { Review } from "@/shared/model";
 import { sectionProps } from "../../config/sectionProps";
 import { useArtistLatestReviews } from "../api/getArtistLatestReviewsApi";
 import { useCombinedArtistData } from "../../shared/hooks/useCombindeArtistData";
 
 import "./style.css";
+import { useState } from "react";
 
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
@@ -16,6 +17,8 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
   const { artistId } = useParams<{ artistId: string }>() as {
     artistId: string;
   };
+  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT);
+  
 
   const regularQuery = useArtistLatestReviews(artistId, {
     enabled: !useInfiniteScroll,
@@ -33,13 +36,20 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
     infiniteQueryParams: {
       endpoint: `/api/v1/reviews/${REVIEW_TYPES.ARTIST}/${artistId}`,
       limit: 5,
-      orderBy: ORDER_BY.CREATED_AT,
-      queryKeyPrefix: "reviews_artist",
+      orderBy,
+      queryKeyPrefix: `reviews_${orderBy}_artist`,
     },
   });
 
   return (
     <ArtistSectionWrapper title={"Reviews"}>
+      <div className="flex justify-end pb-3">
+        <RoundDropdown
+          value={orderBy}
+          options={REVIEW_SORT_OPTIONS}
+          onChange={(value) => setOrderBy(value)}
+        />
+      </div>
       <div className="hz-review-sec">
         {isLoading ? (
           Array.from({ length: 8 }, (_, i) => (

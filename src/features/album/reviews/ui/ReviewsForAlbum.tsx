@@ -4,14 +4,9 @@ import { ReviewCardSkeleton, RoundDropdown, SubTitle } from "@/shared/ui";
 import { Link, useParams } from "react-router-dom";
 import { Review } from "@/shared/model";
 import { useInfiniteScroll as useInfiniteScrollQuery } from "@/shared/hooks";
-import { ORDER_BY, REVIEW_TYPES } from "@/shared/constants";
+import { ORDER_BY, REVIEW_TYPES, REVIEW_SORT_OPTIONS } from "@/shared/constants";
 import { useInView } from "react-intersection-observer";
 
-const SORT_OPTIONS = [
-  { label: "작성순", value: ORDER_BY.CREATED_AT },
-  { label: "별점순", value: ORDER_BY.RATING },
-  { label: "좋아요순", value: ORDER_BY.LIKE_COUNT },
-];
 
 const ReviewsForAlbum = () => {
   const { albumId } = useParams<{ albumId: string }>() as { albumId: string };
@@ -41,7 +36,7 @@ const ReviewsForAlbum = () => {
         <SubTitle text="리뷰" />
         <RoundDropdown
           value={orderBy}
-          options={SORT_OPTIONS}
+          options={REVIEW_SORT_OPTIONS}
           onChange={(value) => setOrderBy(value)}
         />
       </div>

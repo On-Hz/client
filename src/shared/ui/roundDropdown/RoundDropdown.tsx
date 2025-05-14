@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 interface RoundDropdownProps {
@@ -12,22 +12,50 @@ export const RoundDropdown: React.FC<RoundDropdownProps> = ({
   options,
   onChange,
 }) => {
-  return (
-    <div className="relative inline-block">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none border border-point rounded-[100px] bg-white text-point px-[24px] py-[8px] cursor-pointer
-                   max-500:h-[40px] pr-[40px] w-full"
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value} className="text-black">
-            {option.label}
-          </option>
-        ))}
-      </select>
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-      <ArrowDropDownIcon className="absolute right-[16px] top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 text-point" />
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selected = options.find((opt) => opt.value === value)?.label ?? "정렬";
+
+  return (
+    <div ref={dropdownRef} className="relative w-fit">
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex items-center gap-1 py-[6px] border border-gray rounded-full bg-white text-black w-[125px] justify-center
+                   hover:border-point hover:text-point transition-colors max-500:h-[40px] max-500:w-[100px]"
+      >
+        {selected}
+        <ArrowDropDownIcon className="" />
+      </button>
+
+      {isOpen && (
+        <ul className="absolute right-0 mt-2 w-full bg-white border border-gray rounded-xl shadow z-10">
+          {options.map(({ label, value: optionValue }) => (
+            <li
+              key={optionValue}
+              onClick={() => {
+                onChange(optionValue);
+                setIsOpen(false);
+              }}
+              className={`px-4 py-2 text-[15px] cursor-pointer hover:text-point max-500:text-[13px] ${
+                value === optionValue ? "text-point" : ""
+              }`}
+            >
+              {label}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
