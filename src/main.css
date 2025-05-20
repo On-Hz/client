@@ -22,7 +22,7 @@
     img{ @apply max-w-[100%]}
     main { @apply pt-[145px] pb-[40px] px-[80px] min-h-[650px]}
     body.no-main-padding main {
-      @apply p-0;
+      @apply pb-0 px-0 pt-[104px];
     }
     @screen max-1200 { /*max-width 1200px*/
       main {
@@ -43,6 +43,7 @@
 
     @screen max-500 { /*max-width 500px*/
       main {@apply pt-[120px] min-h-[400px]}
+      body.no-main-padding main {@apply pt-[80px]}
       body{@apply text-[13px]}
     }
 }
