@@ -1,7 +1,8 @@
 import { ORDER_BY } from "./orderByTypes";
 
 export const REVIEW_SORT_OPTIONS = [
-  { label: "작성순", value: ORDER_BY.CREATED_AT },
+  { label: "최신순", value: ORDER_BY.CREATED_AT_DESC },
+  { label: "오래된순", value: ORDER_BY.CREATED_AT_ASC },
   { label: "별점순", value: ORDER_BY.RATING },
   { label: "좋아요순", value: ORDER_BY.LIKE_COUNT },
 ];

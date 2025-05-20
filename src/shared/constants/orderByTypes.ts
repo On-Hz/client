@@ -1,5 +1,6 @@
 export const ORDER_BY = {
-  CREATED_AT: "createdAt",
+  CREATED_AT_DESC: "createdAt",
+  CREATED_AT_ASC: "-createdAt",
   AVERAGE_RATING: "averageRating",
   RATING: "rating",
   RATING_COUNT: "ratingCount",
