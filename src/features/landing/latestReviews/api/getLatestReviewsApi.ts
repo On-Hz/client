@@ -8,7 +8,7 @@ const getLatestReviews = async () => {
   const response = await axiosInstance.get<Review[]>(url, {
     params: {
       limit: 12,
-      orderBy: ORDER_BY.CREATED_AT,
+      orderBy: ORDER_BY.CREATED_AT_DESC,
     },
   });
   return response.data;

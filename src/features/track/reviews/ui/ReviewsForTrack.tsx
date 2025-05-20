@@ -9,7 +9,7 @@ import { useInView } from "react-intersection-observer";
 
 const ReviewsForTrack = () => {
   const { trackId } = useParams<{ trackId: string }>() as { trackId: string };
-  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT);
+  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT_DESC);
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteScrollQuery<Review>({

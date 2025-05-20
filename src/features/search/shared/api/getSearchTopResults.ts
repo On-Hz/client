@@ -12,7 +12,7 @@ interface CombinedResults {
 const getSearchTopResults = async <T>(
   keyword: string,
   type: LowerCaseReviewType,
-  orderBy: string = ORDER_BY.CREATED_AT,
+  orderBy: string = ORDER_BY.CREATED_AT_DESC,
   limit: number = 5
 ): Promise<T[]> => {
   const url = "/api/v1/search";

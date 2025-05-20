@@ -9,7 +9,7 @@ const getUserReviewList = async (userId: string, type: ReviewType) => {
     const response = await axiosInstance.get<Review[]>(url, {
       params: {
         limit: 5,
-        orderBy: ORDER_BY.CREATED_AT,
+        orderBy: ORDER_BY.CREATED_AT_DESC,
       },
     });
     return response.data;

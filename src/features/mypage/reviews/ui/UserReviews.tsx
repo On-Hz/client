@@ -24,7 +24,7 @@ export const UserReviews = ({ type }: TabTypeProps) => {
   const infiniteQuery = useInfiniteScrollQuery<Review>({
     endpoint: `/api/v1/users/${userId}/reviews/${type}`,
     limit: 5, //테스트 1
-    orderBy: ORDER_BY.CREATED_AT,
+    orderBy: ORDER_BY.CREATED_AT_DESC,
     enabled: infiniteMode,
     queryKeyPrefix: "user_review",
   });

@@ -18,7 +18,7 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
   const { artistId } = useParams<{ artistId: string }>() as {
     artistId: string;
   };
-  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT);
+  const [orderBy, setOrderBy] = useState<string>(ORDER_BY.CREATED_AT_DESC);
   
 
   const regularQuery = useArtistLatestReviews(artistId, {

@@ -22,7 +22,7 @@ export const UserLikeSec = () => {
     const infiniteQuery = useInfiniteScrollQuery<Review>({
         endpoint: `/api/v1/users/${userId}/likes`,
         limit: 10,
-        orderBy: ORDER_BY.CREATED_AT,
+        orderBy: ORDER_BY.CREATED_AT_DESC,
         enabled: infiniteMode,
         queryKeyPrefix: "user_like_review",
     });
