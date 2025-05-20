@@ -2,9 +2,11 @@ export const ORDER_BY = {
   CREATED_AT_DESC: "createdAt",
   CREATED_AT_ASC: "-createdAt",
   AVERAGE_RATING: "averageRating",
-  RATING: "rating",
+  RATING_AT_DESC: "rating",
+  RATING_AT_ASC: "-rating",
   RATING_COUNT: "ratingCount",
-  LIKE_COUNT: "likeCount",
+  LIKE_COUNT_AT_DESC: "likeCount",
+  LIKE_COUNT_AT_ASC: "-likeCount",
   RELEASE_DATE: "releaseDate",
   SCORE: "score"
 } as const;

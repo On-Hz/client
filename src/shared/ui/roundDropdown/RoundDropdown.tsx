@@ -31,8 +31,8 @@ export const RoundDropdown: React.FC<RoundDropdownProps> = ({
     <div ref={dropdownRef} className="relative w-fit">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex items-center gap-1 py-[6px] border border-gray rounded-full bg-white text-black w-[125px] justify-center
-                   hover:border-point hover:text-point transition-colors max-500:h-[40px] max-500:w-[100px]"
+        className="flex items-center gap-1 py-[6px] border border-gray rounded-full bg-white text-black w-[140px] justify-center
+                   hover:border-point hover:text-point transition-colors max-500:h-[40px] max-500:w-[120px]"
       >
         {selected}
         <ArrowDropDownIcon className="" />
