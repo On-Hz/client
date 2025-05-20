@@ -10,7 +10,7 @@ export const ArtistHome: React.FC = () => {
     <>
       <TracksByArtist useInfiniteScroll={false} />
       <DiscographyByArtist useInfiniteScroll={false} />
-      <ReviewsForArtist useInfiniteScroll={false} />
+      <ReviewsForArtist useInfiniteScroll={false} sortDropdown={false} />
     </>
   );
 };

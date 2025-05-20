@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export const ReviewsForArtist: React.FC<sectionProps> = ({
   useInfiniteScroll,
+  sortDropdown,
 }: sectionProps) => {
   const { artistId } = useParams<{ artistId: string }>() as {
     artistId: string;
@@ -43,13 +44,15 @@ export const ReviewsForArtist: React.FC<sectionProps> = ({
 
   return (
     <ArtistSectionWrapper title={"Reviews"}>
-      <div className="flex justify-end pb-3">
-        <RoundDropdown
-          value={orderBy}
-          options={REVIEW_SORT_OPTIONS}
-          onChange={(value) => setOrderBy(value)}
-        />
-      </div>
+      {sortDropdown && (
+        <div className="flex justify-end pb-3">
+          <RoundDropdown
+            value={orderBy}
+            options={REVIEW_SORT_OPTIONS}
+            onChange={(value) => setOrderBy(value)}
+          />
+        </div>
+      )}
       <div className="hz-review-sec">
         {isLoading ? (
           Array.from({ length: 8 }, (_, i) => (
