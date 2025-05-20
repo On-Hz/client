@@ -26,7 +26,7 @@ export const deleteReview = async (
 export const useDeleteReview = (): UseMutationResult<
   void,
   AxiosError,
-  { reviewType: ReviewType; entityId: number; reviewId: number }
+  { reviewType: ReviewType; entityId: number; reviewId: number, userId: string}
 > => {
   const { openModal } = useModalStore();
   const { pageType, entityId } = usePageInfo();
@@ -38,7 +38,7 @@ export const useDeleteReview = (): UseMutationResult<
   return useMutation<
     void,
     AxiosError,
-    { reviewType: ReviewType; entityId: number; reviewId: number }
+    { reviewType: ReviewType; entityId: number; reviewId: number, userId: string }
   >({
     mutationFn: ({ reviewType, entityId, reviewId }) =>
       deleteReview(reviewType, entityId, reviewId),
@@ -48,6 +48,9 @@ export const useDeleteReview = (): UseMutationResult<
         message: "리뷰가 삭제되었습니다.",
       });
       invalidateRatingInfo();
+      queryClient.invalidateQueries({
+        queryKey: ["user_ratings", variables.userId]
+      });
       const segments = location.pathname.split("/").filter(Boolean);
       if (segments.length === 2 && segments[0] === "review") {
         navigate(

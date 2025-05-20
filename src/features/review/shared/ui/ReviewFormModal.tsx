@@ -6,6 +6,7 @@ import { ReviewSubmitConfirmModal } from "./ReviewSubmitConfirmModal";
 import { useSubmitReview } from "../hooks/useSubmitReview";
 import { useInvalidateRatingInfo } from "../hooks/useInvalidateRatingInfo";
 import { ReviewSubmitData } from "../model/reviewSubmitSchema";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ReviewFormModalProps {
   modalName: string;
@@ -69,6 +70,9 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
     title: initialData?.title || "",
   });
 
+  const queryClient = useQueryClient();
+  const userId = initialData?.userId;
+
   const mutation = useSubmitReview(submitReview, {
     onSuccessCallback: () => {
       setReviewModalFlag(false);
@@ -77,6 +81,9 @@ export const ReviewFormModal: React.FC<ReviewFormModalProps> = ({
         message: alertMessage,
         closeCallback: () => {
           invalidateRatingInfo();
+          queryClient.invalidateQueries({
+            queryKey: ["user_ratings", userId]
+          });
           closeModal(modalName);
         },
       });

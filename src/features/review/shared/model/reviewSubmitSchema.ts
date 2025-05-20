@@ -16,6 +16,7 @@ export const reviewSubmitSchema = z.object({
   entityId: z.number().optional(),
   reviewId: z.number().optional(),
   title: z.string().optional(),
+  userId: z.string().optional()
 });
 
 export type ReviewSubmitData = z.infer<typeof reviewSubmitSchema>;

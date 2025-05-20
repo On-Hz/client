@@ -66,13 +66,6 @@ export const UserRatingBox = () => {
           <p className="pt-[4px]">평균 평점</p>
         </div>
       </div>
-      {/* <div className="text-center">
-        <StarIcon
-          className="text-yellow hz-star-icon"
-          style={{ width: "30px", height: "30px" }}
-        />
-        <p className="pt-[4px]">내 별점</p>
-      </div> */}
       {ratingData && (
         <div className="hz-ra-box w-[450px] mt-6 border border-gray4 rounded-[10px] p-1">
         <div style={{ width: "100%", height: "100px" }}>

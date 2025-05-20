@@ -10,6 +10,7 @@ interface ReviewActionButtonsProps {
   reviewType: ReviewType;
   reviewId: number;
   entityId: number;
+  userId?: string;
   title: string;
 }
 
@@ -17,6 +18,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
   reviewType,
   reviewId,
   entityId,
+  userId,
   title,
 }) => {
   const { openModal } = useModalStore();
@@ -33,6 +35,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
           reviewId,
           title,
           pageType,
+          userId,
         });
       },
     });
@@ -44,7 +47,7 @@ export const ReviewActionButtons: React.FC<ReviewActionButtonsProps> = ({
       type: "warning",
       message: "해당 리뷰를 삭제하시겠습니까?",
       onConfirm: () => {
-        deleteReviewMutate({ reviewType, entityId, reviewId });
+        deleteReviewMutate({ reviewType, entityId, reviewId, userId: userId! });
       },
     });
   };

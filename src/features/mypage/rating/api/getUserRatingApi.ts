@@ -9,7 +9,7 @@ const getUserRating = async (userId: string) => {
 
 export const useUserRating = (userId: string) => {
   return useQuery({
-    queryKey: ["user_ratings"],
+    queryKey: ["user_ratings", userId],
     queryFn: () => getUserRating(userId), 
     enabled: !!userId,
   });

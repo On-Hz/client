@@ -7,6 +7,7 @@ interface UpdateReviewProps {
     title: string;
     reviewId?: number;
     pageType?: string;
+    userId?: string;
   };
 }
 

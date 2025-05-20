@@ -60,7 +60,7 @@ export const UserReviews = ({ type }: TabTypeProps) => {
         <p className="py-28 text-center">작성된 리뷰가 없습니다.</p>
       ) : (
         reviews.map((review: Review) => (
-          <ReviewCardContainer key={review.id} review={review} />
+          <ReviewCardContainer key={review.id} review={review} userId={userId}/>
         ))
       )}
 
