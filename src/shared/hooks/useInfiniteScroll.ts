@@ -48,9 +48,10 @@ export function useInfiniteScroll<T extends { id: number }>({
     getNextPageParam: (lastPage) => {
       if (lastPage && lastPage.length > 0) {
         const lastItem = lastPage[lastPage.length - 1];
+        const key = orderBy.replace("-", "");
         return {
           lastId: lastItem.id,
-          lastOrderValue: (lastItem as any)[orderBy],
+          lastOrderValue: (lastItem as any)[key],
         };
       }
       return undefined;
