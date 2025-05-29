@@ -3,9 +3,9 @@ set -e  # 오류 발생 시 스크립트 종료
 
 # --- 환경 변수 설정 ---
 REMOTE_USER="onhz"
-REMOTE_SERVER="220.116.96.179"
+REMOTE_SERVER="220.93.50.45"
 REMOTE_PORT="4342"
-REMOTE_PATH="/Users/onhz/workspace/client_docker/app"
+REMOTE_PATH="/Users/onhz/workspace/onhz/dockers/client_docker/app"
 
 # 기본 SSH 키 경로 (예: id_rsa)
 SSH_KEY="$HOME/.ssh/id_rsa"
