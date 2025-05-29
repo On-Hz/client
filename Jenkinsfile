@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
           steps {
-            checkout scm
+            git credentialsId: 'frontend_credential', branch: 'main', url: 'https://github.com/On-Hz/client.git'
           }
         }
         stage('Install Dependencies') {
