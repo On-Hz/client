@@ -10,7 +10,7 @@
 
 > yarn install (npm install X)
 > yarn dev (개발 모드 실행)
-> git push 전에 yarn run lint 로 typescript error 수정하기! (배포 시 빌드 안될 가능성 있음)
+> git push 전에 yarn run build 로 typescript error 수정하기! (배포 시 빌드 안될 가능성 있음)
 
 ## 배포 방법
 - git push 시 젠킨스를 통해 배포됨.
